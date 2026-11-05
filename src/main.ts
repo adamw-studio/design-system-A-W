@@ -1,5 +1,6 @@
 import "./styles/index.css";
 import { renderPrimitives } from "./pages/primitives";
+import { renderTokens } from "./pages/tokens";
 
 type Route = "colors" | "primitives" | "tokens" | "typography" | "buttons";
 
@@ -18,7 +19,12 @@ const pages: Record<Route, Page> = {
       "The raw color palette. Components should use semantic tokens, which point to these values. Click a swatch to copy its CSS variable.",
     render: renderPrimitives,
   },
-  tokens: { title: "Tokens", description: "Add a short description..." },
+  tokens: {
+    title: "Tokens",
+    description:
+      "Semantic color tokens give each primitive a purpose, with a value for light and dark mode. Use these in components. Click a row to copy its CSS variable.",
+    render: renderTokens,
+  },
   typography: { title: "Typography", description: "Add a short description..." },
   buttons: { title: "Buttons", description: "Add a short description..." },
 };

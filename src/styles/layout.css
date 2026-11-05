@@ -167,6 +167,9 @@ img {
 
 /* Content panel */
 .panel {
+  /* Containing block for absolutely positioned children (e.g. .visually-hidden
+     status regions), so they can't extend the document's scroll height. */
+  position: relative;
   flex: 1;
   min-width: 0;
   margin: var(--layout-gutter) var(--layout-gutter) var(--layout-gutter) 0;

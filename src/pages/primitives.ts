@@ -1,4 +1,6 @@
 import variables from "../../tokens/figma-variables.json";
+import { primitiveName, PRIMITIVE_PREFIX as PREFIX } from "../../scripts/token-names.mjs";
+import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
 import "../styles/pages/primitives.css";
 
 type Mode = "light" | "dark";
@@ -10,7 +12,6 @@ interface Swatch {
   values: Record<Mode, string>;
 }
 
-const PREFIX = "🎨/";
 /** Neutrals first, then the chromatic scales in their Figma order. */
 const NEUTRALS = ["grey", "black", "white"];
 /** Scales whose steps are opacities rather than solid colors. */
@@ -29,7 +30,7 @@ function readSwatches(): Map<string, Swatch[]> {
     scales.get(scale)!.push({
       scale,
       step,
-      cssVar: `--color-${scale}-${step}`,
+      cssVar: primitiveName(name),
       values: { light: String(vals[light]), dark: String(vals[dark]) },
     });
   }
@@ -80,8 +81,7 @@ export function renderPrimitives(body: HTMLElement, actions: HTMLElement) {
 
   // --- Palette card -------------------------------------------------------
   const palette = el("div", "palette");
-  const status = el("span", "visually-hidden");
-  status.setAttribute("role", "status");
+  const status = createStatusRegion();
 
   const valueLabels: { swatch: Swatch; isAlpha: boolean; value: HTMLElement; button: HTMLButtonElement }[] = [];
 
@@ -134,26 +134,8 @@ export function renderPrimitives(body: HTMLElement, actions: HTMLElement) {
     }
   }
 
-  const resetTimers = new WeakMap<HTMLElement, number>();
   async function copy(swatch: Swatch, stepLabel: HTMLElement) {
-    const text = `var(${swatch.cssVar})`;
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      status.textContent = `Couldn't copy ${text}`;
-      return;
-    }
-    status.textContent = `Copied ${text}`;
-    stepLabel.textContent = "Copied";
-    stepLabel.classList.add("is-copied");
-    window.clearTimeout(resetTimers.get(stepLabel));
-    resetTimers.set(
-      stepLabel,
-      window.setTimeout(() => {
-        stepLabel.textContent = swatch.step;
-        stepLabel.classList.remove("is-copied");
-      }, 1200),
-    );
+    if (await copyToClipboard(`var(${swatch.cssVar})`, status)) flashLabel(stepLabel, "Copied", swatch.step);
   }
 
   setMode(mode);
