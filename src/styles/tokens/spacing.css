@@ -1,0 +1,16 @@
+/*
+ * Spacing and radius tokens.
+ * Source: Figma variables Spacers/spacer-*. Radii are taken from the layout
+ * frames until they exist as variables in Figma.
+ */
+:root {
+  /* Spacers/spacer-* */
+  --space-2: 4px;
+  --space-3: 8px;
+  /* Not variables in Figma yet (hard-coded padding in the layout frames). */
+  --space-4: 12px;
+  --space-5: 20px;
+
+  --radius-md: 8px;
+  --radius-lg: 10px;
+}

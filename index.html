@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/icons/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+    />
+    <title>Design System – A/W</title>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar__header">
+          <a href="#colors" class="sidebar__logo" aria-label="A/W Design System home">
+            <img src="/icons/logo.svg" width="24" height="24" alt="" />
+          </a>
+        </div>
+
+        <nav class="nav" aria-label="Design system">
+          <div class="nav__group" data-expanded="true">
+            <div class="nav__item nav__item--parent" data-route="colors">
+              <a href="#colors" class="nav__link text-body-large">Colors</a>
+              <button
+                type="button"
+                class="nav__toggle"
+                aria-expanded="true"
+                aria-controls="nav-colors"
+                aria-label="Toggle Colors section"
+              >
+                <img src="/icons/nav-arrow-down.svg" width="16" height="16" alt="" />
+              </button>
+            </div>
+            <ul class="nav__sublist" id="nav-colors">
+              <li>
+                <a href="#primitives" class="nav__item nav__link text-body-large" data-route="primitives">Primitives</a>
+              </li>
+              <li>
+                <a href="#tokens" class="nav__item nav__link text-body-large" data-route="tokens">Tokens</a>
+              </li>
+            </ul>
+          </div>
+          <a href="#typography" class="nav__item nav__link text-body-large" data-route="typography">Typography</a>
+          <a href="#buttons" class="nav__item nav__link text-body-large" data-route="buttons">Buttons</a>
+        </nav>
+      </aside>
+
+      <main class="panel">
+        <div class="page">
+          <header class="page__header">
+            <h1 class="page__title text-heading-large" id="page-title">Colors</h1>
+          </header>
+          <p class="page__description text-body-large" id="page-description">Add a short description...</p>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

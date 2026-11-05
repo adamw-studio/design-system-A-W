@@ -1,0 +1,23 @@
+/*
+ * Semantic color tokens.
+ * Source: Figma "Design System - Web" variables (✦/bg, ✦/text, ✦/border, ✦/icon).
+ * Values are inlined for now; once the primitives collection is imported,
+ * these should reference primitive tokens (e.g. var(--color-gray-100)).
+ */
+:root {
+  /* ✦/bg/default/* */
+  --color-bg-default: #ffffff;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-hover: #e6e6e6;
+
+  /* ✦/border/default/* */
+  --color-border-default: #e6e6e6;
+
+  /* ✦/text/default/* */
+  --color-text-default: rgb(0 0 0 / 0.9);
+  --color-text-secondary: rgb(0 0 0 / 0.5);
+
+  /* ✦/icon/default/* */
+  --color-icon-default: rgb(0 0 0 / 0.9);
+  --color-icon-secondary: rgb(0 0 0 / 0.5);
+}

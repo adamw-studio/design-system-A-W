@@ -1,0 +1,51 @@
+import "./styles/index.css";
+
+type Route = "colors" | "primitives" | "tokens" | "typography" | "buttons";
+
+const pages: Record<Route, { title: string; description: string }> = {
+  colors: { title: "Colors", description: "Add a short description..." },
+  primitives: { title: "Primitives", description: "Add a short description..." },
+  tokens: { title: "Tokens", description: "Add a short description..." },
+  typography: { title: "Typography", description: "Add a short description..." },
+  buttons: { title: "Buttons", description: "Add a short description..." },
+};
+
+const DEFAULT_ROUTE: Route = "colors";
+
+const titleEl = document.querySelector<HTMLElement>("#page-title")!;
+const descriptionEl = document.querySelector<HTMLElement>("#page-description")!;
+const navItems = document.querySelectorAll<HTMLElement>(".nav__item[data-route]");
+
+function currentRoute(): Route {
+  const hash = window.location.hash.slice(1);
+  return hash in pages ? (hash as Route) : DEFAULT_ROUTE;
+}
+
+function render() {
+  const route = currentRoute();
+  const page = pages[route];
+
+  titleEl.textContent = page.title;
+  descriptionEl.textContent = page.description;
+  document.title = `${page.title} – Design System A/W`;
+
+  navItems.forEach((item) => {
+    const isActive = item.dataset.route === route;
+    item.classList.toggle("is-active", isActive);
+    const link = item.matches("a") ? item : item.querySelector("a");
+    if (isActive) link?.setAttribute("aria-current", "page");
+    else link?.removeAttribute("aria-current");
+  });
+}
+
+document.querySelectorAll<HTMLButtonElement>(".nav__toggle").forEach((toggle) => {
+  toggle.addEventListener("click", () => {
+    const group = toggle.closest<HTMLElement>(".nav__group");
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    if (group) group.dataset.expanded = String(!expanded);
+  });
+});
+
+window.addEventListener("hashchange", render);
+render();

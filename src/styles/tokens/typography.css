@@ -1,0 +1,44 @@
+/*
+ * Typography tokens.
+ * Source: Figma variables heading/large/*, body/large/*, font/weight/*.
+ * Letter spacing is converted from Figma percentages to em
+ * (-1.7% → -0.017em, -0.25% → -0.0025em).
+ */
+:root {
+  --font-family-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* font/weight/* */
+  --font-weight-default: 450;
+  --font-weight-strong: 550;
+
+  /* heading/large */
+  --heading-large-font-family: var(--font-family-sans);
+  --heading-large-font-size: 24px;
+  --heading-large-line-height: 32px;
+  --heading-large-font-weight: var(--font-weight-strong);
+  --heading-large-letter-spacing: -0.017em;
+
+  /* body/large */
+  --body-large-font-family: var(--font-family-sans);
+  --body-large-font-size: 13px;
+  --body-large-line-height: 22px;
+  --body-large-font-weight: var(--font-weight-default);
+  --body-large-letter-spacing: -0.0025em;
+}
+
+/* Text style utilities, one per Figma text style. */
+.text-heading-large {
+  font-family: var(--heading-large-font-family);
+  font-size: var(--heading-large-font-size);
+  line-height: var(--heading-large-line-height);
+  font-weight: var(--heading-large-font-weight);
+  letter-spacing: var(--heading-large-letter-spacing);
+}
+
+.text-body-large {
+  font-family: var(--body-large-font-family);
+  font-size: var(--body-large-font-size);
+  line-height: var(--body-large-line-height);
+  font-weight: var(--body-large-font-weight);
+  letter-spacing: var(--body-large-letter-spacing);
+}
