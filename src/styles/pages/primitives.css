@@ -1,0 +1,142 @@
+/* Color Primitives page */
+
+/* Light / Dark segmented control */
+.segmented {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--layout-radius-item);
+}
+
+.segmented__option {
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-medium);
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.segmented__option:hover {
+  color: var(--color-text-secondary-hover);
+}
+
+.segmented__option[aria-pressed="true"] {
+  background: var(--color-bg-default);
+  color: var(--color-text-default);
+  box-shadow: 0 0 0 1px var(--color-border-default), 0 1px 2px var(--color-black-100);
+}
+
+/* Palette card — carries its own data-theme so it can preview dark mode
+   while the rest of the page stays light. */
+.palette {
+  --swatch-outline: var(--color-black-100);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  background: var(--color-bg-default);
+  color: var(--color-text-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-large);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.palette[data-theme="dark"] {
+  --swatch-outline: var(--color-white-200);
+}
+
+/* Scale */
+.scale__header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.scale__name {
+  margin: 0;
+}
+
+.scale__note {
+  color: var(--color-text-tertiary);
+}
+
+.scale__swatches {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+/* Checkerboards behind transparent scales so the opacity is visible. */
+.scale[data-backdrop="light"] {
+  --swatch-backdrop: repeating-conic-gradient(var(--color-grey-200) 0 25%, var(--color-white-1000) 0 50%) 0 0 / 8px 8px;
+}
+
+.scale[data-backdrop="dark"] {
+  --swatch-backdrop: repeating-conic-gradient(var(--color-grey-800) 0 25%, var(--color-grey-1000) 0 50%) 0 0 / 8px 8px;
+}
+
+/* Swatch */
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.swatch:focus-visible {
+  outline: none;
+}
+
+.swatch__chip {
+  display: block;
+  height: 40px;
+  margin-bottom: var(--space-1);
+  border-radius: var(--radius-medium);
+  background: linear-gradient(var(--swatch), var(--swatch)), var(--swatch-backdrop, none);
+  box-shadow: inset 0 0 0 1px var(--swatch-outline);
+  transition: box-shadow 120ms ease;
+}
+
+.swatch:hover .swatch__chip,
+.swatch:focus-visible .swatch__chip {
+  box-shadow:
+    inset 0 0 0 1px var(--swatch-outline),
+    0 0 0 2px var(--color-bg-default),
+    0 0 0 3px var(--color-border-strong);
+}
+
+.swatch__step {
+  color: var(--color-text-default);
+}
+
+.swatch__step.is-copied {
+  color: var(--color-text-success);
+}
+
+.swatch__value {
+  font-family: var(--font-family-mono);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+  font-weight: var(--font-weight-default);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .scale__swatches {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    row-gap: var(--space-4);
+  }
+}

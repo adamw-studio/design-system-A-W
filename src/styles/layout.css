@@ -1,3 +1,17 @@
+/*
+ * Layout-only constants. These come from hard-coded values in the Figma
+ * layout frame ("Design System - Web", node 281:279), not from variables,
+ * so they live here instead of in the generated token files.
+ */
+:root {
+  --layout-sidebar-width: 292px;
+  --layout-gutter: 12px;
+  --layout-sidebar-header-gap: 20px;
+  --layout-radius-item: 8px;
+  --layout-radius-panel: 10px;
+  --layout-content-width: 580px;
+}
+
 *,
 *::before,
 *::after {
@@ -13,20 +27,35 @@ body {
 body {
   background: var(--color-bg-secondary);
   color: var(--color-text-default);
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-default);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
+h2,
 p,
-ul {
+ul,
+ol {
   margin: 0;
 }
 
-ul {
+ul,
+ol {
   padding: 0;
   list-style: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 img {
@@ -46,14 +75,14 @@ img {
 
 /* Sidebar */
 .sidebar {
-  flex: 0 0 292px;
-  width: 292px;
+  flex: 0 0 var(--layout-sidebar-width);
+  width: var(--layout-sidebar-width);
 }
 
 .sidebar__header {
   display: flex;
   align-items: center;
-  padding: var(--space-4) var(--space-4) var(--space-5);
+  padding: var(--layout-gutter) var(--layout-gutter) var(--layout-sidebar-header-gap);
 }
 
 .sidebar__logo {
@@ -71,7 +100,7 @@ img {
 }
 
 .nav {
-  padding: 0 var(--space-4);
+  padding: 0 var(--layout-gutter);
 }
 
 .nav__sublist li {
@@ -85,7 +114,7 @@ img {
 .nav__item {
   display: flex;
   align-items: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--layout-radius-item);
   color: var(--color-text-secondary);
 }
 
@@ -103,7 +132,7 @@ img {
   display: block;
   padding: var(--space-2) var(--space-3);
   text-decoration: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--layout-radius-item);
   white-space: nowrap;
 }
 
@@ -140,23 +169,29 @@ img {
 .panel {
   flex: 1;
   min-width: 0;
-  margin: var(--space-4) var(--space-4) var(--space-4) 0;
-  height: calc(100vh - 2 * var(--space-4));
+  margin: var(--layout-gutter) var(--layout-gutter) var(--layout-gutter) 0;
+  height: calc(100vh - 2 * var(--layout-gutter));
   overflow: auto;
   background: var(--color-bg-default);
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
+  border-radius: var(--layout-radius-panel);
 }
 
 .page {
-  width: min(580px, 100% - 2 * var(--space-5));
+  width: min(var(--layout-content-width), 100% - 2 * var(--space-5));
   margin: 0 auto;
-  padding-top: 42px;
+  padding: 42px 0 var(--space-7);
 }
 
 .page__header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.page__actions:empty {
+  display: none;
 }
 
 .page__title {
@@ -179,7 +214,7 @@ img {
   }
 
   .panel {
-    margin: 0 var(--space-4) var(--space-4);
+    margin: 0 var(--layout-gutter) var(--layout-gutter);
     height: auto;
     min-height: 60vh;
   }

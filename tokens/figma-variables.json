@@ -1,0 +1,1153 @@
+{
+  "Colors": {
+    "modes": [
+      "Light",
+      "Dark"
+    ],
+    "vars": {
+      "✦/bg/default/default": [
+        {
+          "alias": "🎨/white/1000"
+        },
+        {
+          "alias": "🎨/grey/1000"
+        }
+      ],
+      "✦/bg/default/secondary": [
+        {
+          "alias": "🎨/grey/100"
+        },
+        {
+          "alias": "🎨/grey/900"
+        }
+      ],
+      "✦/bg/default/hover": [
+        {
+          "alias": "🎨/grey/200"
+        },
+        {
+          "alias": "🎨/grey/800"
+        }
+      ],
+      "✦/bg/default/pressed": [
+        {
+          "alias": "🎨/grey/100"
+        },
+        {
+          "alias": "🎨/grey/800"
+        }
+      ],
+      "✦/bg/default/tertiary": [
+        {
+          "alias": "🎨/grey/200"
+        },
+        {
+          "alias": "🎨/grey/900"
+        }
+      ],
+      "✦/bg/default/inverse": [
+        {
+          "alias": "🎨/grey/1000"
+        },
+        {
+          "alias": "🎨/grey/100"
+        }
+      ],
+      "✦/bg/default/inverse-hover": [
+        {
+          "alias": "🎨/grey/900"
+        },
+        {
+          "alias": "🎨/grey/300"
+        }
+      ],
+      "✦/bg/disabled/default": [
+        {
+          "alias": "🎨/grey/300"
+        },
+        {
+          "alias": "🎨/grey/500"
+        }
+      ],
+      "✦/bg/disabled/secondary": [
+        {
+          "alias": "🎨/grey/400"
+        },
+        {
+          "alias": "🎨/grey/400"
+        }
+      ],
+      "✦/bg/danger/default": [
+        {
+          "alias": "🎨/red/500"
+        },
+        {
+          "alias": "🎨/red/500"
+        }
+      ],
+      "✦/bg/danger/hover": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/600"
+        }
+      ],
+      "✦/bg/danger/pressed": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/600"
+        }
+      ],
+      "✦/bg/danger/secondary": [
+        {
+          "alias": "🎨/red/700"
+        },
+        {
+          "alias": "🎨/red/700"
+        }
+      ],
+      "✦/bg/danger/tertiary": [
+        {
+          "alias": "🎨/red/200"
+        },
+        {
+          "alias": "🎨/red/900"
+        }
+      ],
+      "✦/bg/success/default": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/500"
+        }
+      ],
+      "✦/bg/success/hover": [
+        {
+          "alias": "🎨/green/500"
+        },
+        {
+          "alias": "🎨/green/600"
+        }
+      ],
+      "✦/bg/success/pressed": [
+        {
+          "alias": "🎨/green/500"
+        },
+        {
+          "alias": "🎨/green/600"
+        }
+      ],
+      "✦/bg/success/secondary": [
+        {
+          "alias": "🎨/green/700"
+        },
+        {
+          "alias": "🎨/green/700"
+        }
+      ],
+      "✦/bg/success/tertiary": [
+        {
+          "alias": "🎨/green/200"
+        },
+        {
+          "alias": "🎨/green/900"
+        }
+      ],
+      "✦/bg/warning/default": [
+        {
+          "alias": "🎨/yellow/500"
+        },
+        {
+          "alias": "🎨/yellow/500"
+        }
+      ],
+      "✦/bg/warning/hover": [
+        {
+          "alias": "🎨/yellow/500"
+        },
+        {
+          "alias": "🎨/yellow/600"
+        }
+      ],
+      "✦/bg/warning/pressed": [
+        {
+          "alias": "🎨/yellow/600"
+        },
+        {
+          "alias": "🎨/yellow/600"
+        }
+      ],
+      "✦/bg/warning/secondary": [
+        {
+          "alias": "🎨/yellow/700"
+        },
+        {
+          "alias": "🎨/yellow/700"
+        }
+      ],
+      "✦/bg/warning/tertiary": [
+        {
+          "alias": "🎨/yellow/200"
+        },
+        {
+          "alias": "🎨/yellow/900"
+        }
+      ],
+      "✦/text/default/default": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/text/default/hover": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/text/default/secondary": [
+        {
+          "alias": "🎨/black/500"
+        },
+        {
+          "alias": "🎨/white/500"
+        }
+      ],
+      "✦/text/default/secondary-hover": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/text/default/tertiary": [
+        {
+          "alias": "🎨/black/400"
+        },
+        {
+          "alias": "🎨/white/400"
+        }
+      ],
+      "✦/text/default/tertiary-hover": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/text/default/inverse": [
+        {
+          "alias": "🎨/white/1000"
+        },
+        {
+          "alias": "🎨/black/800"
+        }
+      ],
+      "✦/text/danger/default": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/400"
+        }
+      ],
+      "✦/text/danger/hover": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/400"
+        }
+      ],
+      "✦/text/danger/secondary": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/400"
+        }
+      ],
+      "✦/text/danger/ondanger": [
+        {
+          "alias": "🎨/white/1000"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/text/danger/ondanger-secondary": [
+        {
+          "alias": "🎨/white/600"
+        },
+        {
+          "alias": "🎨/white/600"
+        }
+      ],
+      "✦/text/danger/ondanger-tertiary": [
+        {
+          "alias": "🎨/white/400"
+        },
+        {
+          "alias": "🎨/white/400"
+        }
+      ],
+      "✦/text/warning/onwarning": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/black/800"
+        }
+      ],
+      "✦/text/warning/onwarning-secondary": [
+        {
+          "alias": "🎨/black/500"
+        },
+        {
+          "alias": "🎨/black/500"
+        }
+      ],
+      "✦/text/warning/onwarning-tertiary": [
+        {
+          "alias": "🎨/black/400"
+        },
+        {
+          "alias": "🎨/black/400"
+        }
+      ],
+      "✦/text/warning/default": [
+        {
+          "alias": "🎨/yellow/1000"
+        },
+        {
+          "alias": "🎨/yellow/400"
+        }
+      ],
+      "✦/text/warning/secondary": [
+        {
+          "alias": "🎨/yellow/1000"
+        },
+        {
+          "alias": "🎨/yellow/400"
+        }
+      ],
+      "✦/text/warning/tertiary": [
+        {
+          "alias": "🎨/yellow/1000"
+        },
+        {
+          "alias": "🎨/yellow/400"
+        }
+      ],
+      "✦/text/success/onwarning": [
+        {
+          "alias": "🎨/white/1000"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/text/success/onwarning-secondary": [
+        {
+          "alias": "🎨/white/600"
+        },
+        {
+          "alias": "🎨/white/600"
+        }
+      ],
+      "✦/text/success/onwarning-tertiary": [
+        {
+          "alias": "🎨/white/400"
+        },
+        {
+          "alias": "🎨/white/400"
+        }
+      ],
+      "✦/text/success/default": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/400"
+        }
+      ],
+      "✦/text/success/secondary": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/400"
+        }
+      ],
+      "✦/text/success/tertiary": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/400"
+        }
+      ],
+      "✦/icon/default/default": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/icon/default/hover": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/icon/default/secondary": [
+        {
+          "alias": "🎨/black/500"
+        },
+        {
+          "alias": "🎨/white/500"
+        }
+      ],
+      "✦/icon/default/secondary-hover": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/icon/default/tertiary": [
+        {
+          "alias": "🎨/black/400"
+        },
+        {
+          "alias": "🎨/white/400"
+        }
+      ],
+      "✦/icon/default/tertiary-hover": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/icon/default/inverse": [
+        {
+          "alias": "🎨/white/1000"
+        },
+        {
+          "alias": "🎨/black/800"
+        }
+      ],
+      "✦/icon/danger/default": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/400"
+        }
+      ],
+      "✦/icon/danger/hover": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/400"
+        }
+      ],
+      "✦/icon/danger/secondary": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/400"
+        }
+      ],
+      "✦/icon/danger/ondanger": [
+        {
+          "alias": "🎨/white/1000"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/icon/danger/ondanger-secondary": [
+        {
+          "alias": "🎨/white/600"
+        },
+        {
+          "alias": "🎨/white/600"
+        }
+      ],
+      "✦/icon/danger/ondanger-tertiary": [
+        {
+          "alias": "🎨/white/400"
+        },
+        {
+          "alias": "🎨/white/400"
+        }
+      ],
+      "✦/icon/warning/onwarning": [
+        {
+          "alias": "🎨/black/800"
+        },
+        {
+          "alias": "🎨/black/800"
+        }
+      ],
+      "✦/icon/warning/onwarning-secondary": [
+        {
+          "alias": "🎨/black/500"
+        },
+        {
+          "alias": "🎨/black/500"
+        }
+      ],
+      "✦/icon/warning/onwarning-tertiary": [
+        {
+          "alias": "🎨/black/400"
+        },
+        {
+          "alias": "🎨/black/400"
+        }
+      ],
+      "✦/icon/warning/default": [
+        {
+          "alias": "🎨/yellow/1000"
+        },
+        {
+          "alias": "🎨/yellow/400"
+        }
+      ],
+      "✦/icon/warning/secondary": [
+        {
+          "alias": "🎨/yellow/1000"
+        },
+        {
+          "alias": "🎨/yellow/400"
+        }
+      ],
+      "✦/icon/warning/tertiary": [
+        {
+          "alias": "🎨/yellow/1000"
+        },
+        {
+          "alias": "🎨/yellow/400"
+        }
+      ],
+      "✦/icon/success/onwarning": [
+        {
+          "alias": "🎨/white/1000"
+        },
+        {
+          "alias": "🎨/white/1000"
+        }
+      ],
+      "✦/icon/success/onwarning-secondary": [
+        {
+          "alias": "🎨/white/600"
+        },
+        {
+          "alias": "🎨/white/600"
+        }
+      ],
+      "✦/icon/success/onwarning-tertiary": [
+        {
+          "alias": "🎨/white/400"
+        },
+        {
+          "alias": "🎨/white/400"
+        }
+      ],
+      "✦/icon/success/default": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/400"
+        }
+      ],
+      "✦/icon/success/secondary": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/400"
+        }
+      ],
+      "✦/icon/success/tertiary": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/400"
+        }
+      ],
+      "✦/border/default/default": [
+        {
+          "alias": "🎨/grey/200"
+        },
+        {
+          "alias": "🎨/grey/600"
+        }
+      ],
+      "✦/border/default/strong": [
+        {
+          "alias": "🎨/grey/800"
+        },
+        {
+          "alias": "🎨/white/800"
+        }
+      ],
+      "✦/border/danger/default": [
+        {
+          "alias": "🎨/red/300"
+        },
+        {
+          "alias": "🎨/red/700"
+        }
+      ],
+      "✦/border/danger/strong": [
+        {
+          "alias": "🎨/red/600"
+        },
+        {
+          "alias": "🎨/red/400"
+        }
+      ],
+      "✦/border/warning/default": [
+        {
+          "alias": "🎨/yellow/300"
+        },
+        {
+          "alias": "🎨/yellow/900"
+        }
+      ],
+      "✦/border/warning/strong": [
+        {
+          "alias": "🎨/yellow/1000"
+        },
+        {
+          "alias": "🎨/yellow/400"
+        }
+      ],
+      "✦/border/success/default": [
+        {
+          "alias": "🎨/green/300"
+        },
+        {
+          "alias": "🎨/green/700"
+        }
+      ],
+      "✦/border/success/strong": [
+        {
+          "alias": "🎨/green/600"
+        },
+        {
+          "alias": "🎨/green/400"
+        }
+      ],
+      "🎨/black/100": [
+        "#0000000d",
+        "#0000000d"
+      ],
+      "🎨/black/200": [
+        "#0000001a",
+        "#0000001a"
+      ],
+      "🎨/black/300": [
+        "#00000033",
+        "#00000033"
+      ],
+      "🎨/black/400": [
+        "#0000004d",
+        "#0000004d"
+      ],
+      "🎨/black/500": [
+        "#00000080",
+        "#00000080"
+      ],
+      "🎨/black/600": [
+        "#000000cc",
+        "#000000cc"
+      ],
+      "🎨/black/700": [
+        "#000000d9",
+        "#000000d9"
+      ],
+      "🎨/black/800": [
+        "#000000e5",
+        "#000000e5"
+      ],
+      "🎨/black/900": [
+        "#000000f2",
+        "#000000f2"
+      ],
+      "🎨/black/1000": [
+        "#000000",
+        "#000000"
+      ],
+      "🎨/white/100": [
+        "#ffffff0d",
+        "#ffffff0d"
+      ],
+      "🎨/white/200": [
+        "#ffffff1a",
+        "#ffffff1a"
+      ],
+      "🎨/white/300": [
+        "#ffffff33",
+        "#ffffff33"
+      ],
+      "🎨/white/400": [
+        "#ffffff66",
+        "#ffffff66"
+      ],
+      "🎨/white/500": [
+        "#ffffffb2",
+        "#ffffffb2"
+      ],
+      "🎨/white/600": [
+        "#ffffffcc",
+        "#ffffffcc"
+      ],
+      "🎨/white/700": [
+        "#ffffffd9",
+        "#ffffffd9"
+      ],
+      "🎨/white/800": [
+        "#ffffffe5",
+        "#ffffffe5"
+      ],
+      "🎨/white/900": [
+        "#fffffff2",
+        "#fffffff2"
+      ],
+      "🎨/white/1000": [
+        "#ffffff",
+        "#ffffff"
+      ],
+      "🎨/red/100": [
+        "#fff5f5",
+        "#fee7e7"
+      ],
+      "🎨/red/200": [
+        "#ffe2e0",
+        "#fccdca"
+      ],
+      "🎨/red/300": [
+        "#ffc7c2",
+        "#fbbcb6"
+      ],
+      "🎨/red/400": [
+        "#ffafa3",
+        "#fca397"
+      ],
+      "🎨/red/500": [
+        "#f24822",
+        "#e03e1a"
+      ],
+      "🎨/red/600": [
+        "#dc3412",
+        "#c4381c"
+      ],
+      "🎨/red/700": [
+        "#bd2915",
+        "#963323"
+      ],
+      "🎨/red/800": [
+        "#9f1f18",
+        "#7c2622"
+      ],
+      "🎨/red/900": [
+        "#771208",
+        "#54211c"
+      ],
+      "🎨/red/1000": [
+        "#660e0b",
+        "#311817"
+      ],
+      "🎨/orange/100": [
+        "#fff4e5",
+        "#ffedd7"
+      ],
+      "🎨/orange/200": [
+        "#ffe0c2",
+        "#fdd9b4"
+      ],
+      "🎨/orange/300": [
+        "#fcd19c",
+        "#fcc67f"
+      ],
+      "🎨/orange/400": [
+        "#ffc470",
+        "#fcb34a"
+      ],
+      "🎨/orange/500": [
+        "#ffa629",
+        "#de7d02"
+      ],
+      "🎨/orange/600": [
+        "#fc9e24",
+        "#c86f04"
+      ],
+      "🎨/orange/700": [
+        "#f79722",
+        "#ad5f05"
+      ],
+      "🎨/orange/800": [
+        "#dd7c0e",
+        "#985306"
+      ],
+      "🎨/orange/900": [
+        "#ce7012",
+        "#673806"
+      ],
+      "🎨/orange/1000": [
+        "#8a480f",
+        "#371d06"
+      ],
+      "🎨/green/100": [
+        "#ebffee",
+        "#ddfde2"
+      ],
+      "🎨/green/200": [
+        "#cff7d3",
+        "#beefc2"
+      ],
+      "🎨/green/300": [
+        "#aff4c6",
+        "#a1e8b9"
+      ],
+      "🎨/green/400": [
+        "#85e0a3",
+        "#79d297"
+      ],
+      "🎨/green/500": [
+        "#14ae5c",
+        "#198f51"
+      ],
+      "🎨/green/600": [
+        "#009951",
+        "#078348"
+      ],
+      "🎨/green/700": [
+        "#008043",
+        "#0a5c35"
+      ],
+      "🎨/green/800": [
+        "#036838",
+        "#0a4c2d"
+      ],
+      "🎨/green/900": [
+        "#024626",
+        "#082618"
+      ],
+      "🎨/green/1000": [
+        "#083a23",
+        "#0b1e15"
+      ],
+      "🎨/yellow/100": [
+        "#fffbeb",
+        "#fdf7dd"
+      ],
+      "🎨/yellow/200": [
+        "#fff1c2",
+        "#fbe8ad"
+      ],
+      "🎨/yellow/300": [
+        "#ffe8a3",
+        "#f9df90"
+      ],
+      "🎨/yellow/400": [
+        "#ffd966",
+        "#ffcd29"
+      ],
+      "🎨/yellow/500": [
+        "#ffcd29",
+        "#f3c11b"
+      ],
+      "🎨/yellow/600": [
+        "#ffc21a",
+        "#f2b50d"
+      ],
+      "🎨/yellow/700": [
+        "#fab815",
+        "#e4a711"
+      ],
+      "🎨/yellow/800": [
+        "#eba611",
+        "#c58011"
+      ],
+      "🎨/yellow/900": [
+        "#dd940e",
+        "#925711"
+      ],
+      "🎨/yellow/1000": [
+        "#b86200",
+        "#71440f"
+      ],
+      "🎨/grey/100": [
+        "#f5f5f5",
+        "#f5f5f5"
+      ],
+      "🎨/grey/200": [
+        "#e6e6e6",
+        "#e6e6e6"
+      ],
+      "🎨/grey/300": [
+        "#d9d9d9",
+        "#d9d9d9"
+      ],
+      "🎨/grey/400": [
+        "#b3b3b3",
+        "#b3b3b3"
+      ],
+      "🎨/grey/500": [
+        "#757575",
+        "#757575"
+      ],
+      "🎨/grey/600": [
+        "#444444",
+        "#444444"
+      ],
+      "🎨/grey/700": [
+        "#383838",
+        "#383838"
+      ],
+      "🎨/grey/800": [
+        "#2c2c2c",
+        "#2c2c2c"
+      ],
+      "🎨/grey/900": [
+        "#1e1e1e",
+        "#1e1e1e"
+      ],
+      "🎨/grey/1000": [
+        "#111111",
+        "#111111"
+      ]
+    }
+  },
+  "Typography": {
+    "modes": [
+      "Value"
+    ],
+    "vars": {
+      "font/family/display": [
+        "Inter"
+      ],
+      "font/family/default": [
+        "Inter"
+      ],
+      "font/family/mono": [
+        "Roboto Mono"
+      ],
+      "font/weight/default": [
+        450
+      ],
+      "font/weight/medium": [
+        450
+      ],
+      "font/weight/strong": [
+        550
+      ],
+      "font/weight/heavy": [
+        550
+      ],
+      "body/large/strong/fontFamily": [
+        {
+          "alias": "font/family/default"
+        }
+      ],
+      "body/large/strong/fontSize": [
+        13
+      ],
+      "body/large/strong/fontWeight": [
+        {
+          "alias": "font/weight/strong"
+        }
+      ],
+      "body/large/strong/lineHeight": [
+        22
+      ],
+      "body/large/strong/letterSpacing": [
+        -0.25
+      ],
+      "body/medium/strong/fontFamily": [
+        {
+          "alias": "font/family/default"
+        }
+      ],
+      "body/medium/strong/fontSize": [
+        11
+      ],
+      "body/medium/strong/fontWeight": [
+        {
+          "alias": "font/weight/strong"
+        }
+      ],
+      "body/medium/strong/lineHeight": [
+        16
+      ],
+      "body/medium/strong/letterSpacing": [
+        0.5
+      ],
+      "body/small/strong/fontFamily": [
+        {
+          "alias": "font/family/default"
+        }
+      ],
+      "body/small/strong/fontSize": [
+        9
+      ],
+      "body/small/strong/fontWeight": [
+        {
+          "alias": "font/weight/strong"
+        }
+      ],
+      "body/small/strong/lineHeight": [
+        14
+      ],
+      "body/small/strong/letterSpacing": [
+        0.5
+      ],
+      "heading/display/fontFamily": [
+        {
+          "alias": "font/family/display"
+        }
+      ],
+      "heading/display/fontSize": [
+        48
+      ],
+      "heading/display/fontWeight": [
+        {
+          "alias": "font/weight/heavy"
+        }
+      ],
+      "heading/display/lineHeight": [
+        56
+      ],
+      "heading/display/letterSpacing": [
+        -3
+      ],
+      "heading/large/fontFamily": [
+        {
+          "alias": "font/family/default"
+        }
+      ],
+      "heading/large/fontSize": [
+        24
+      ],
+      "heading/large/fontWeight": [
+        {
+          "alias": "font/weight/heavy"
+        }
+      ],
+      "heading/large/lineHeight": [
+        32
+      ],
+      "heading/large/letterSpacing": [
+        -1.7000000476837158
+      ],
+      "heading/medium/fontFamily": [
+        {
+          "alias": "font/family/default"
+        }
+      ],
+      "heading/medium/fontSize": [
+        15
+      ],
+      "heading/medium/fontWeight": [
+        {
+          "alias": "font/weight/heavy"
+        }
+      ],
+      "heading/medium/lineHeight": [
+        25
+      ],
+      "heading/medium/letterSpacing": [
+        -0.5
+      ],
+      "heading/small/fontFamily": [
+        {
+          "alias": "font/family/default"
+        }
+      ],
+      "heading/small/fontSize": [
+        13
+      ],
+      "heading/small/fontWeight": [
+        {
+          "alias": "font/weight/heavy"
+        }
+      ],
+      "heading/small/lineHeight": [
+        22
+      ],
+      "heading/small/letterSpacing": [
+        -0.25
+      ]
+    }
+  },
+  "Sizing": {
+    "modes": [
+      "Mode 1"
+    ],
+    "vars": {
+      "Spacers/spacer-1": [
+        2
+      ],
+      "Spacers/spacer-2": [
+        4
+      ],
+      "Spacers/spacer-3": [
+        8
+      ],
+      "Spacers/spacer-4": [
+        16
+      ],
+      "Spacers/spacer-5": [
+        24
+      ],
+      "Spacers/spacer-6": [
+        32
+      ],
+      "Spacers/spacer-7": [
+        40
+      ],
+      "Spacers/spacer-0": [
+        0
+      ],
+      "Radius/radius-small": [
+        2
+      ],
+      "Radius/radius-medium": [
+        6
+      ],
+      "Radius/radius-large": [
+        13
+      ],
+      "Radius/radius-none": [
+        0
+      ],
+      "Radius/radius-full": [
+        9999
+      ]
+    }
+  }
+}
