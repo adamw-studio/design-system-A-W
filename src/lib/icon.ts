@@ -7,7 +7,9 @@
  * instead (href="/icons/iconoir.svg#icon-bell") works, but Chrome pays
  * ~12ms per icon for it — 11s to paint the Icons page.
  */
-export const ICON_SPRITE = "/icons/iconoir.svg";
+import { publicUrl } from "./url";
+
+export const ICON_SPRITE = publicUrl("icons/iconoir.svg");
 const ID_PREFIX = "icon-";
 
 export type IconSize = 32 | 24 | 20 | 16 | 12;

@@ -268,6 +268,6 @@ Rules:
 
 ## Files
 
-- [Color tokens (W3C design tokens JSON: primitives + semantic, light/dark, usage rules)](/tokens/colors.json)
-- [Typography tokens (W3C design tokens JSON, with usage rules)](/tokens/typography.json)
+- [Color tokens (W3C design tokens JSON: primitives + semantic, light/dark, usage rules)](tokens/colors.json)
+- [Typography tokens (W3C design tokens JSON, with usage rules)](tokens/typography.json)
 - [Figma variables export (source of truth)](https://github.com/adamw-studio/design-system-A-W/blob/main/tokens/figma-variables.json)

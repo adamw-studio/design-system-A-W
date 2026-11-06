@@ -41,7 +41,7 @@ Read `public/llms.txt` for the full, current token tables. The essentials:
 - Match the category to the property: `--color-bg-*` backgrounds, `--color-text-*` text, `--color-icon-*` icons, `--color-border-*` borders.
 - Groups: `default` (neutral UI), `disabled`, `danger`, `warning`, `success`. Variants: `-hover`, `-pressed`, `-secondary`, `-tertiary`, `-inverse`, `-strong`.
 - Text/icons on a colored fill use the `on*` tokens, e.g. `--color-text-danger-ondanger` on `--color-bg-danger`.
-- Dark mode is automatic inside `[data-theme="dark"]`; don't write separate dark styles.
+- Dark mode is automatic inside `[data-theme="dark"]`; don't write separate dark styles. The site sets it on `<html>` from the sidebar switch (`src/lib/theme.ts`, saved in `localStorage`, defaulting to the system setting; an inline script in `index.html` applies it before first paint). Images with baked-in colors won't follow the theme — use sprite icons or a `mask` filled with a token instead.
 
 **Spacing / radius** — `var(--space-0)`…`var(--space-7)` and `var(--radius-*)`. Layout-only constants live in `src/styles/layout.css` as `--layout-*`.
 
@@ -49,7 +49,13 @@ Read `public/llms.txt` for the full, current token tables. The essentials:
 
 **Buttons** — `<button class="button button--primary" type="button">` (variants `primary`, `secondary`, `tertiary`, `danger`, `success`), from `src/styles/components/button.css`. States (hover, pressed, focus, disabled) are built in; when to use each variant is in `tokens/button-rules.json` and `public/llms.txt`. Icon-only actions use `<button class="icon-button" aria-label="…">` from `src/styles/components/icon-button.css`. Don't restyle buttons per page.
 
+**Switch** — `<button class="switch" type="button" role="switch" aria-checked="false" aria-label="…"><span class="switch__knob"></span></button>` from `src/styles/components/switch.css` (Figma Foundation, Switch 44:71). It takes effect immediately; toggle `aria-checked` in code.
+
 **Motion** — Figma has no motion variables; the site's easing, durations and press scales live in `src/styles/motion.css` as `--motion-*`. Use `--motion-ease-out` for anything responding to the user, plain `ease` for color changes, keep UI transitions under 300ms, transition specific properties (never `all`), wrap hover effects in `@media (hover: hover) and (pointer: fine)`, give pressable elements an `:active` state, and drop movement (keep fades) under `prefers-reduced-motion`.
+
+## Deploy
+
+Pushing to `main` deploys to GitHub Pages (`.github/workflows/deploy.yml`). Pages serves the site from `/<repo>/`, so the build gets `BASE_PATH`; never hard-code root paths like `"/icons/…"` in TypeScript — use `publicUrl()` from `src/lib/url.ts` (Vite rewrites paths in `index.html` and CSS itself).
 
 ## Commands
 
