@@ -1,0 +1,38 @@
+{
+  "$comment": "When to use each button variant. The component itself is src/styles/components/button.css, built from Figma \"Foundation – UI 2\" (Buttons, node 18:3529; component set 23:5203). Shown on the Buttons page and published to public/llms.txt by `npm run tokens`.",
+  "intro": "Buttons let users initiate an action, acknowledge something, make a choice, or navigate. By default, our buttons are 24px tall, come in two styles (primary and secondary), and can optionally include an icon in front and in back.",
+  "rules": [
+    "Use a <button class=\"button button--<variant>\"> for actions and an <a class=\"button button--<variant>\"> for navigation; never style a <div> as a button.",
+    "Use one primary button per view or panel; pair it with secondary buttons for the other actions.",
+    "Disable with the disabled attribute on <button> or aria-disabled=\"true\" on links; every variant then shares the same disabled look.",
+    "Write labels as short verbs (Save, Delete, Continue), not \"OK\" or \"Click here\".",
+    "Icons are 16px <span class=\"button__icon\" style=\"--icon: url(…)\"> before or after the label; they take the label's color. Icon-only buttons need an aria-label."
+  ],
+  "variants": [
+    {
+      "variant": "primary",
+      "label": "Primary",
+      "usage": "The main action in a view, e.g. Save or Continue. Use one per view or panel."
+    },
+    {
+      "variant": "secondary",
+      "label": "Secondary",
+      "usage": "Supporting actions next to a primary button, e.g. Cancel or Back."
+    },
+    {
+      "variant": "tertiary",
+      "label": "Tertiary",
+      "usage": "Low-emphasis actions in toolbars, lists and dense UI, where a fill would add noise."
+    },
+    {
+      "variant": "danger",
+      "label": "Danger",
+      "usage": "Destructive actions that can't easily be undone, e.g. Delete. Confirm before acting."
+    },
+    {
+      "variant": "success",
+      "label": "Success",
+      "usage": "Positive, confirming actions, e.g. Approve or Publish."
+    }
+  ]
+}

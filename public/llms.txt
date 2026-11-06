@@ -150,6 +150,30 @@ Raw color scales from 100 (lightest) to 1000 (darkest). black and white are tran
 
 `--radius-full`: 9999px · `--radius-large`: 13px · `--radius-medium`: 6px · `--radius-none`: 0px · `--radius-small`: 2px · `--space-0`: 0px · `--space-1`: 2px · `--space-2`: 4px · `--space-3`: 8px · `--space-4`: 16px · `--space-5`: 24px · `--space-6`: 32px · `--space-7`: 40px
 
+## Components
+
+### Button
+
+Buttons let users initiate an action, acknowledge something, make a choice, or navigate. By default, our buttons are 24px tall, come in two styles (primary and secondary), and can optionally include an icon in front and in back.
+
+Markup: `<button class="button button--<variant>" type="button">Label</button>` (styles: src/styles/components/button.css). Hover, pressed, focus and disabled states are built in.
+
+| Class | When to use |
+| --- | --- |
+| `.button--primary` | The main action in a view, e.g. Save or Continue. Use one per view or panel. |
+| `.button--secondary` | Supporting actions next to a primary button, e.g. Cancel or Back. |
+| `.button--tertiary` | Low-emphasis actions in toolbars, lists and dense UI, where a fill would add noise. |
+| `.button--danger` | Destructive actions that can't easily be undone, e.g. Delete. Confirm before acting. |
+| `.button--success` | Positive, confirming actions, e.g. Approve or Publish. |
+
+Rules:
+
+- Use a <button class="button button--<variant>"> for actions and an <a class="button button--<variant>"> for navigation; never style a <div> as a button.
+- Use one primary button per view or panel; pair it with secondary buttons for the other actions.
+- Disable with the disabled attribute on <button> or aria-disabled="true" on links; every variant then shares the same disabled look.
+- Write labels as short verbs (Save, Delete, Continue), not "OK" or "Click here".
+- Icons are 16px <span class="button__icon" style="--icon: url(…)"> before or after the label; they take the label's color. Icon-only buttons need an aria-label.
+
 ## Files
 
 - [Color tokens (W3C design tokens JSON: primitives + semantic, light/dark, usage rules)](/tokens/colors.json)

@@ -3,3 +3,4 @@
 @import "./tokens/sizing.css";
 @import "./motion.css";
 @import "./layout.css";
+@import "./components/button.css";

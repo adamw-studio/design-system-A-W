@@ -6,14 +6,12 @@ export function agentLinks(files: { label: string; href: string; note: string }[
   const footer = document.createElement("p");
   footer.className = "agent-links text-body-medium";
   footer.append("For AI agents and tools: ");
-  files.forEach((file, i) => {
-    if (i) footer.append(" · ");
+  for (const file of files) {
     const link = document.createElement("a");
     link.href = file.href;
     link.textContent = file.label;
-    footer.append(link, ` (${file.note})`);
-  });
-  footer.append(" · ");
+    footer.append(link, ` (${file.note}) · `);
+  }
   const llms = document.createElement("a");
   llms.href = "/llms.txt";
   llms.textContent = "llms.txt";

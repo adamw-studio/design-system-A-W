@@ -1,0 +1,136 @@
+/*
+ * Button — Figma "Foundation – UI 2", Buttons (node 18:3529),
+ * component set 23:5203: variants Primary, Secondary, Tertiary, Danger,
+ * Success × states Default, Hover, Disabled, with optional 16px icons
+ * before and after the label.
+ *
+ *   <button class="button button--secondary" type="button">Cancel</button>
+ *
+ * Usage rules: tokens/button-rules.json (also on the Buttons page and in
+ * /llms.txt). Colors and type come from tokens only.
+ */
+
+.button {
+  /* Per-variant colors (set by the modifiers below). Primary is the default,
+     matching the component set's default variant. */
+  --button-bg: var(--color-bg-inverse);
+  --button-bg-hover: var(--color-bg-inverse-hover);
+  --button-bg-pressed: var(--button-bg-hover);
+  --button-fg: var(--color-text-inverse);
+  /* Figma "Icon Shell": 16px icon. */
+  --button-icon-size: 16px;
+
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  /* 4px + 16px line height + 4px = Figma's 24px height. */
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-medium);
+  background: var(--button-bg);
+  color: var(--button-fg);
+
+  /* Figma: body/medium/regular (= .text-body-medium). */
+  font-family: var(--body-medium-strong-font-family);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--body-medium-strong-letter-spacing);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--motion-hover) ease,
+    color var(--motion-hover) ease,
+    transform var(--motion-press) var(--motion-ease-out);
+}
+
+/* Variants ------------------------------------------------------------------ */
+
+.button--primary {
+  --button-bg: var(--color-bg-inverse);
+  --button-bg-hover: var(--color-bg-inverse-hover);
+  --button-fg: var(--color-text-inverse);
+}
+
+.button--secondary {
+  --button-bg: var(--color-bg-secondary);
+  --button-bg-hover: var(--color-bg-hover);
+  /* --color-bg-pressed equals --color-bg-secondary in light mode, so a
+     pressed secondary button keeps the hover fill (plus the press scale). */
+  --button-bg-pressed: var(--color-bg-hover);
+  --button-fg: var(--color-text-default);
+}
+
+/* Figma gives Tertiary no fill in any state. */
+.button--tertiary {
+  --button-bg: transparent;
+  --button-bg-hover: transparent;
+  --button-fg: var(--color-text-default);
+}
+
+.button--danger {
+  --button-bg: var(--color-bg-danger);
+  --button-bg-hover: var(--color-bg-danger-hover);
+  --button-bg-pressed: var(--color-bg-danger-pressed);
+  --button-fg: var(--color-text-danger-ondanger);
+}
+
+.button--success {
+  --button-bg: var(--color-bg-success);
+  --button-bg-hover: var(--color-bg-success-hover);
+  --button-bg-pressed: var(--color-bg-success-pressed);
+  /* The on-success text token (named "onwarning" in the Figma export). */
+  --button-fg: var(--color-text-success-onwarning);
+}
+
+/* States -------------------------------------------------------------------- */
+
+/* data-state="hover" pins the hover look for documentation (Buttons page). */
+.button[data-state="hover"] {
+  background: var(--button-bg-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background: var(--button-bg-hover);
+  }
+}
+
+.button:active {
+  background: var(--button-bg-pressed);
+  transform: scale(var(--motion-press-scale));
+}
+
+/* Figma: no fill, label in ✦/bg/disabled/secondary (there is no text
+   disabled token). Shared by every variant. */
+.button:disabled,
+.button[aria-disabled="true"] {
+  background: transparent;
+  color: var(--color-bg-disabled-secondary);
+  cursor: default;
+  transform: none;
+}
+
+/* Links can't be disabled natively; stop them navigating. */
+.button[aria-disabled="true"] {
+  pointer-events: none;
+}
+
+/* Icons --------------------------------------------------------------------- */
+
+/* The icon file is used as a mask so it takes the label's color on every
+   variant: <span class="button__icon" style="--icon: url(/icons/x.svg)">. */
+.button__icon {
+  flex: none;
+  width: var(--button-icon-size);
+  height: var(--button-icon-size);
+  background-color: currentColor;
+  mask: var(--icon) center / contain no-repeat;
+}
