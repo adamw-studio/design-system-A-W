@@ -11,6 +11,7 @@ import variables from "../../tokens/figma-variables.json";
 import rules from "../../tokens/typography-rules.json";
 import { typographyStyles, type TypographyStyle } from "../../scripts/typography.mjs";
 import { copyToClipboard, createStatusRegion } from "../lib/copy";
+import { agentLinks, TYPOGRAPHY_TOKENS_FILE } from "../lib/agent-links";
 import "../styles/pages/typography.css";
 
 export const typographyIntro = rules.intro;
@@ -77,24 +78,16 @@ export function renderTypography(body: HTMLElement) {
   for (const [style, variants] of groups) {
     const section = el("section", "type-style");
     section.id = `type-${style.replace("/", "-")}`;
-    const heading = el("h2", "type-style__name", style);
+    const heading = el("h2", "type-style__name text-heading-medium", style);
     heading.id = `${section.id}-title`;
     section.setAttribute("aria-labelledby", heading.id);
 
     const specimens = el("div", "type-style__specimens");
     specimens.append(...variants.map((v) => specimen(v, status)));
 
-    section.append(heading, el("p", "type-style__usage", variants[0].usage), specimens);
+    section.append(heading, el("p", "type-style__usage text-body-large", variants[0].usage), specimens);
     list.append(section);
   }
 
-  const agents = el("p", "type-agents text-body-medium");
-  agents.append(
-    "For AI agents and tools: ",
-    Object.assign(el("a", "", "typography.json"), { href: "/tokens/typography.json" }),
-    " (design tokens with usage rules) · ",
-    Object.assign(el("a", "", "llms.txt"), { href: "/llms.txt" }),
-  );
-
-  body.append(list, agents, status);
+  body.append(list, agentLinks([TYPOGRAPHY_TOKENS_FILE]), status);
 }

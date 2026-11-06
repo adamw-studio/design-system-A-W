@@ -10,6 +10,14 @@
   --layout-radius-item: 8px;
   --layout-radius-panel: 10px;
   --layout-content-width: 580px;
+  /* Content column: title starts 42px below the panel top. */
+  --layout-content-top: 42px;
+  /* Pages: gap from the description to a token list (Figma 27–28px). */
+  --layout-list-offset: 28px;
+  /* Token rows: inner padding ("padding-6" in the Web file). */
+  --layout-row-padding: 6px;
+  /* Readable width for usage notes next to specimens. */
+  --layout-description-width: 420px;
 }
 
 *,
@@ -24,10 +32,16 @@ body {
   height: 100%;
 }
 
+/* Every page defaults to the system's Body Large style, so text without a
+   .text-* class still renders in the design system (not the browser's 16px). */
 body {
   background: var(--color-bg-secondary);
   color: var(--color-text-default);
-  font-family: var(--font-family-default);
+  font-family: var(--body-large-strong-font-family);
+  font-size: var(--body-large-strong-font-size);
+  line-height: var(--body-large-strong-line-height);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--body-large-strong-letter-spacing);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -87,7 +101,7 @@ img {
 
 .sidebar__logo {
   display: block;
-  border-radius: 4px;
+  border-radius: var(--radius-small);
 }
 
 /* Nav */
@@ -96,7 +110,7 @@ img {
 .nav__sublist {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-1);
 }
 
 .nav {
@@ -153,7 +167,7 @@ img {
   padding: 0;
   border: 0;
   background: none;
-  border-radius: 4px;
+  border-radius: var(--radius-small);
   cursor: pointer;
 }
 
@@ -183,7 +197,7 @@ img {
 .page {
   width: min(var(--layout-content-width), 100% - 2 * var(--space-5));
   margin: 0 auto;
-  padding: 42px 0 var(--space-7);
+  padding: var(--layout-content-top) 0 var(--space-7);
 }
 
 .page__header {
@@ -221,4 +235,20 @@ img {
     height: auto;
     min-height: 60vh;
   }
+}
+
+/* Footer linking the machine-readable token files (src/lib/agent-links.ts) */
+.agent-links {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-default);
+  color: var(--color-text-tertiary);
+}
+
+.agent-links a {
+  color: var(--color-text-secondary);
+}
+
+.agent-links a:hover {
+  color: var(--color-text-default);
 }

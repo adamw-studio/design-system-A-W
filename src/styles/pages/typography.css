@@ -1,7 +1,8 @@
 /*
  * Typography page — Figma "Foundation – UI 2", node 6:182.
- * The "_doc.description/*" text styles are documentation-only (not tokens),
- * so they are defined here rather than in the token CSS.
+ * The frame's documentation-only text styles (_doc.description/*) are
+ * replaced with system styles: names use .text-heading-medium and usage
+ * notes .text-body-large (classes set in src/pages/typography.ts).
  */
 
 .type-styles {
@@ -15,25 +16,13 @@
   scroll-margin-top: var(--space-5);
 }
 
-/* _doc.description/heading — 18/32, strong, +1% */
 .type-style__name {
   margin: 0;
-  font-family: var(--heading-medium-font-family);
-  font-size: 18px;
-  line-height: 32px;
-  font-weight: var(--heading-medium-font-weight);
-  letter-spacing: 0.01em;
   color: var(--color-text-default);
 }
 
-/* _doc.description/body — 13/22, regular, −0.5% */
 .type-style__usage {
-  max-width: 420px;
-  font-family: var(--heading-medium-font-family);
-  font-size: var(--heading-small-font-size);
-  line-height: 22px;
-  font-weight: var(--font-weight-default);
-  letter-spacing: -0.005em;
+  max-width: var(--layout-description-width);
   color: var(--color-text-secondary);
 }
 
@@ -113,17 +102,6 @@
 
 .type-specimen__class.is-copied {
   color: var(--color-text-success);
-}
-
-.type-agents {
-  margin-top: var(--space-7);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-default);
-  color: var(--color-text-tertiary);
-}
-
-.type-agents a {
-  color: var(--color-text-secondary);
 }
 
 @media (max-width: 640px) {

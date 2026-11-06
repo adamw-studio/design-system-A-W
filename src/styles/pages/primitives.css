@@ -6,8 +6,7 @@
 .primitive-list {
   display: flex;
   flex-direction: column;
-  /* Figma: list starts 28px below the description. */
-  margin-top: 28px;
+  margin-top: var(--layout-list-offset);
 }
 
 .primitive-row {
@@ -15,7 +14,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  padding: var(--space-3) 6px;
+  padding: var(--space-3) var(--layout-row-padding);
 }
 
 .primitive-row__name {

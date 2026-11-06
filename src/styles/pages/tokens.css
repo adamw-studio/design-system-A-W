@@ -6,8 +6,7 @@
 .token-list {
   display: flex;
   flex-direction: column;
-  /* Figma: list starts 27px below the description. */
-  margin-top: 27px;
+  margin-top: var(--layout-list-offset);
 }
 
 .token-row {
@@ -16,7 +15,7 @@
   justify-content: space-between;
   gap: var(--space-4);
   width: 100%;
-  padding: 6px;
+  padding: var(--layout-row-padding);
   border: 0;
   border-radius: var(--layout-radius-item);
   background: none;

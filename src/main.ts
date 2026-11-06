@@ -3,7 +3,10 @@ import { renderPrimitives } from "./pages/primitives";
 import { renderTokens } from "./pages/tokens";
 import { renderTypography, typographyIntro } from "./pages/typography";
 
-type Route = "colors" | "primitives" | "tokens" | "typography" | "buttons";
+type Route = "primitives" | "tokens" | "typography" | "buttons";
+
+/** Section links that open their first page (Colors → Primitives). */
+const REDIRECTS: Record<string, Route> = { colors: "primitives" };
 
 interface Page {
   title: string;
@@ -13,7 +16,6 @@ interface Page {
 }
 
 const pages: Record<Route, Page> = {
-  colors: { title: "Colors", description: "Add a short description..." },
   primitives: {
     title: "Primitives",
     description:
@@ -34,7 +36,7 @@ const pages: Record<Route, Page> = {
   buttons: { title: "Buttons", description: "Add a short description..." },
 };
 
-const DEFAULT_ROUTE: Route = "colors";
+const DEFAULT_ROUTE: Route = "primitives";
 
 const titleEl = document.querySelector<HTMLElement>("#page-title")!;
 const descriptionEl = document.querySelector<HTMLElement>("#page-description")!;
@@ -44,7 +46,12 @@ const navItems = document.querySelectorAll<HTMLElement>(".nav__item[data-route]"
 
 function currentRoute(): Route {
   const hash = window.location.hash.slice(1);
-  return hash in pages ? (hash as Route) : DEFAULT_ROUTE;
+  if (hash in pages) return hash as Route;
+  // Unknown or section hashes: show the right page and fix the URL without
+  // adding a history entry.
+  const route = REDIRECTS[hash] ?? DEFAULT_ROUTE;
+  history.replaceState(null, "", `#${route}`);
+  return route;
 }
 
 function render() {
@@ -68,6 +75,15 @@ function render() {
     else link?.removeAttribute("aria-current");
   });
 }
+
+// Clicking a section (e.g. Colors) opens its first page; make sure the
+// section is expanded so the highlighted page is visible.
+document.querySelectorAll<HTMLElement>(".nav__group").forEach((group) => {
+  group.querySelector(".nav__item--parent .nav__link")?.addEventListener("click", () => {
+    group.dataset.expanded = "true";
+    group.querySelector(".nav__toggle")?.setAttribute("aria-expanded", "true");
+  });
+});
 
 document.querySelectorAll<HTMLButtonElement>(".nav__toggle").forEach((toggle) => {
   toggle.addEventListener("click", () => {
