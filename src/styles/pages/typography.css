@@ -55,7 +55,10 @@
   color: var(--color-text-default);
   text-align: center;
   cursor: pointer;
-  transition: border-color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color var(--motion-hover) ease,
+    transform var(--motion-press) var(--motion-ease-out);
 }
 
 /* Grid background (Figma "BG": 16px tile at 10% opacity). */
@@ -69,8 +72,15 @@
   pointer-events: none;
 }
 
-.type-specimen__card:hover {
+@media (hover: hover) and (pointer: fine) {
+  .type-specimen__card:hover {
+    border-color: var(--color-border-strong);
+  }
+}
+
+.type-specimen__card:active {
   border-color: var(--color-border-strong);
+  transform: scale(var(--motion-press-scale-wide));
 }
 
 .type-specimen__sample {
@@ -98,6 +108,7 @@
 .type-specimen__class {
   font: inherit;
   color: var(--color-text-secondary);
+  transition: color var(--motion-fast) ease;
 }
 
 .type-specimen__class.is-copied {

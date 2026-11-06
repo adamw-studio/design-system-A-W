@@ -10,7 +10,7 @@
 import variables from "../../tokens/figma-variables.json";
 import rules from "../../tokens/typography-rules.json";
 import { typographyStyles, type TypographyStyle } from "../../scripts/typography.mjs";
-import { copyToClipboard, createStatusRegion } from "../lib/copy";
+import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
 import { agentLinks, TYPOGRAPHY_TOKENS_FILE } from "../lib/agent-links";
 import "../styles/pages/typography.css";
 
@@ -47,16 +47,9 @@ function specimen(style: TypographyStyle, status: HTMLElement) {
   );
   meta.append(cls, values);
 
-  let timer = 0;
   card.addEventListener("click", async () => {
     if (!(await copyToClipboard(style.className, status))) return;
-    cls.textContent = `Copied ${style.className}`;
-    cls.classList.add("is-copied");
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => {
-      cls.textContent = `.${style.className}`;
-      cls.classList.remove("is-copied");
-    }, 1200);
+    flashLabel(cls, `Copied ${style.className}`, `.${style.className}`);
   });
 
   wrap.append(card, meta);

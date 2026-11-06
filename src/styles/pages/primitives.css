@@ -21,6 +21,7 @@
   margin: 0;
   color: var(--color-text-default);
   white-space: nowrap;
+  transition: color var(--motion-fast) ease;
 }
 
 .primitive-row__name.is-copied {
@@ -48,13 +49,38 @@
   border: 0;
   background: var(--swatch);
   cursor: pointer;
-  transition: transform 120ms ease, box-shadow 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--motion-fast) var(--motion-ease-out),
+    box-shadow var(--motion-fast) var(--motion-ease-out);
 }
 
-.primitive-swatch:hover,
+/* Lifted swatch: shared by hover (pointer devices only) and keyboard focus. */
 .primitive-swatch:focus-visible {
   z-index: 1;
   transform: scale(1.3);
   outline: none;
   box-shadow: 0 0 0 1px var(--color-bg-default), 0 0 0 2px var(--color-border-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primitive-swatch:hover {
+    z-index: 1;
+    transform: scale(1.3);
+    box-shadow: 0 0 0 1px var(--color-bg-default), 0 0 0 2px var(--color-border-strong);
+  }
+}
+
+/* Press: settle back a little so the click is felt. */
+.primitive-swatch:active {
+  z-index: 1;
+  transform: scale(1.15);
+  transition-duration: var(--motion-press);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primitive-swatch,
+  .primitive-swatch:active {
+    transition-property: box-shadow;
+  }
 }

@@ -23,10 +23,21 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--motion-hover) ease,
+    transform var(--motion-press) var(--motion-ease-out);
 }
 
-.token-row:hover {
-  background: var(--color-bg-hover);
+@media (hover: hover) and (pointer: fine) {
+  .token-row:hover {
+    background: var(--color-bg-hover);
+  }
+}
+
+.token-row:active {
+  background: var(--color-bg-pressed);
+  transform: scale(var(--motion-press-scale-wide));
 }
 
 .token-row:focus-visible {
@@ -61,13 +72,31 @@
   text-overflow: ellipsis;
 }
 
+/* "Copied" confirmation: always laid out (so the row never reflows) and
+   revealed with a short blur-in; it leaves faster than it arrives. */
 .token-row__copied {
-  display: none;
   color: var(--color-text-success);
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateX(calc(-1 * var(--space-2)));
+  transition:
+    opacity 150ms ease,
+    filter 150ms ease,
+    transform 150ms ease;
 }
 
 .token-row.is-copied .token-row__copied {
-  display: inline;
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--motion-ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .token-row__copied {
+    transform: none;
+  }
 }
 
 /* Dark, Light — 20px, 4px apart. */

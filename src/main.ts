@@ -54,6 +54,27 @@ function currentRoute(): Route {
   return route;
 }
 
+/**
+ * Fades the new page in: title, description, then the first rows of the
+ * page's list, 40ms apart (styles/motion.css caps the stagger at 8 steps,
+ * so long lists like Tokens don't keep the page waiting).
+ */
+function playEnter() {
+  const [list, ...rest] = Array.from(bodyEl.children) as HTMLElement[];
+  const items = [
+    titleEl.parentElement!,
+    descriptionEl,
+    ...(list?.children.length ? (Array.from(list.children) as HTMLElement[]) : list ? [list] : []),
+    ...rest,
+  ];
+  items.forEach((item, i) => {
+    item.classList.remove("motion-enter");
+    item.style.setProperty("--i", String(i));
+  });
+  void bodyEl.offsetWidth; // restart the animation on reused elements
+  items.forEach((item) => item.classList.add("motion-enter"));
+}
+
 function render() {
   const route = currentRoute();
   const page = pages[route];
@@ -66,6 +87,7 @@ function render() {
   actionsEl.replaceChildren();
   page.render?.(bodyEl, actionsEl);
   document.querySelector(".panel")?.scrollTo(0, 0);
+  playEnter();
 
   navItems.forEach((item) => {
     const isActive = item.dataset.route === route;

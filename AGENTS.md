@@ -42,6 +42,8 @@ Read `public/llms.txt` for the full, current token tables. The essentials:
 
 **Spacing / radius** — `var(--space-0)`…`var(--space-7)` and `var(--radius-*)`. Layout-only constants live in `src/styles/layout.css` as `--layout-*`.
 
+**Motion** — Figma has no motion variables; the site's easing, durations and press scales live in `src/styles/motion.css` as `--motion-*`. Use `--motion-ease-out` for anything responding to the user, plain `ease` for color changes, keep UI transitions under 300ms, transition specific properties (never `all`), wrap hover effects in `@media (hover: hover) and (pointer: fine)`, give pressable elements an `:active` state, and drop movement (keep fades) under `prefers-reduced-motion`.
+
 ## Commands
 
 ```bash
