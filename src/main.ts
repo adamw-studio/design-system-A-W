@@ -5,6 +5,7 @@ import { renderTypography, typographyIntro } from "./pages/typography";
 import { buttonsIntro, iconButtonsIntro, renderButtons, renderIconButtons } from "./pages/buttons";
 import { iconsIntro, renderIcons } from "./pages/icons";
 import { loadIconSprite } from "./lib/icon";
+import { initThemeSwitch } from "./lib/theme";
 
 type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons";
 
@@ -134,5 +135,6 @@ document.querySelectorAll<HTMLButtonElement>(".nav__toggle").forEach((toggle) =>
 });
 
 loadIconSprite();
+initThemeSwitch(document.querySelector<HTMLButtonElement>("#theme-switch")!);
 window.addEventListener("hashchange", render);
 render();

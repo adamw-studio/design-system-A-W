@@ -10,6 +10,7 @@ import variables from "../../tokens/figma-variables.json";
 import colorRules from "../../tokens/color-rules.json";
 import { colorTokens } from "../../scripts/colors.mjs";
 import { copyToClipboard, createStatusRegion } from "../lib/copy";
+import { icon } from "../lib/icon";
 import { agentLinks, COLOR_TOKENS_FILE } from "../lib/agent-links";
 import "../styles/pages/tokens.css";
 
@@ -73,15 +74,12 @@ export function renderTokens(body: HTMLElement) {
     row.dataset.token = token.cssVar;
 
     const lead = el("span", "token-row__lead");
-    const icon = el("img", "token-row__icon");
-    icon.src = "/icons/single-tap-gesture.svg";
-    icon.width = 16;
-    icon.height = 16;
-    icon.alt = "";
+    const tapIcon = icon("single-tap-gesture", 16);
+    tapIcon.classList.add("token-row__icon");
     const name = el("span", "token-row__name text-body-large");
     name.append(el("span", "token-row__prefix", token.prefix), el("span", "token-row__rest", token.name));
     const copied = el("span", "token-row__copied text-body-large", "Copied");
-    lead.append(icon, name, copied);
+    lead.append(tapIcon, name, copied);
 
     const swatches = el("span", "token-row__swatches");
     for (const mode of SWATCH_MODES) {

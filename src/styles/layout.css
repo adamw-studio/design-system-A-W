@@ -96,10 +96,29 @@ img {
   min-height: 100vh;
 }
 
-/* Sidebar */
+/* Sidebar: header, nav, and a footer pinned to the bottom (theme switch). */
 .sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
   flex: 0 0 var(--layout-sidebar-width);
+  flex-direction: column;
   width: var(--layout-sidebar-width);
+  height: 100vh;
+}
+
+.sidebar .nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Figma 293:1522: 20px above, 12px on the other sides — mirrors the header. */
+.sidebar__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--layout-sidebar-header-gap) var(--layout-gutter) var(--layout-gutter);
 }
 
 .sidebar__header {
@@ -111,6 +130,15 @@ img {
 .sidebar__logo {
   display: block;
   border-radius: var(--radius-small);
+}
+
+/* The logo file is a mask so it follows the theme (black at 90% = icon/default). */
+.sidebar__logo-mark {
+  display: block;
+  width: var(--space-5);
+  height: var(--space-5);
+  background-color: var(--color-icon-default);
+  mask: url("/icons/logo.svg") center / contain no-repeat;
 }
 
 /* Nav */
@@ -236,11 +264,12 @@ img {
   transform: scale(var(--motion-press-scale));
 }
 
-.nav__toggle img {
+.nav__toggle .icon {
+  color: var(--color-icon-secondary);
   transition: transform var(--motion-fast) var(--motion-ease-out);
 }
 
-.nav__toggle[aria-expanded="false"] img {
+.nav__toggle[aria-expanded="false"] .icon {
   transform: rotate(-90deg);
 }
 
@@ -294,8 +323,10 @@ img {
   }
 
   .sidebar {
+    position: static;
     flex-basis: auto;
     width: 100%;
+    height: auto;
   }
 
   .panel {
@@ -327,4 +358,12 @@ img {
     color: var(--color-text-default);
     text-decoration-color: currentColor;
   }
+}
+
+/* Theme switch (src/lib/theme.ts): while the colors swap, pause transitions
+   so the whole page changes in one frame — except the switch's own motion. */
+.is-theme-switching *:not(.switch, .switch__knob),
+.is-theme-switching *::before,
+.is-theme-switching *::after {
+  transition: none !important;
 }

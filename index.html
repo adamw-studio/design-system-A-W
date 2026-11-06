@@ -15,13 +15,23 @@
     <link rel="alternate" type="application/design-tokens+json" href="/tokens/colors.json" title="Color design tokens" />
     <link rel="alternate" type="application/design-tokens+json" href="/tokens/typography.json" title="Typography design tokens" />
     <title>Design System – A/W</title>
+    <!-- Apply the saved (or system) theme before first paint; see src/lib/theme.ts. -->
+    <script>
+      try {
+        var theme = localStorage.getItem("aw-theme");
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div class="app">
       <aside class="sidebar">
         <div class="sidebar__header">
           <a href="#primitives" class="sidebar__logo" aria-label="A/W Design System home">
-            <img src="/icons/logo.svg" width="24" height="24" alt="" />
+            <span class="sidebar__logo-mark" aria-hidden="true"></span>
           </a>
         </div>
 
@@ -36,7 +46,7 @@
                 aria-controls="nav-colors"
                 aria-label="Toggle Colors section"
               >
-                <img src="/icons/nav-arrow-down.svg" width="16" height="16" alt="" />
+                <svg class="icon icon--16" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
               </button>
             </div>
             <div class="nav__collapse" id="nav-colors">
@@ -62,7 +72,7 @@
                 aria-controls="nav-buttons"
                 aria-label="Toggle Buttons section"
               >
-                <img src="/icons/nav-arrow-down.svg" width="16" height="16" alt="" />
+                <svg class="icon icon--16" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
               </button>
             </div>
             <div class="nav__collapse" id="nav-buttons">
@@ -77,6 +87,21 @@
             </div>
           </div>
         </nav>
+
+        <!-- Figma "Design System - Web", node 293:1522 -->
+        <div class="sidebar__footer">
+          <button
+            type="button"
+            class="switch"
+            role="switch"
+            aria-checked="false"
+            aria-label="Dark theme"
+            title="Dark theme"
+            id="theme-switch"
+          >
+            <span class="switch__knob"></span>
+          </button>
+        </div>
       </aside>
 
       <main class="panel">
