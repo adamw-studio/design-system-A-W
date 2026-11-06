@@ -7,11 +7,8 @@ type Route = "colors" | "primitives" | "tokens" | "typography" | "buttons";
 interface Page {
   title: string;
   description: string;
-  /**
-   * Optional page body; receives the content area and the header actions slot.
-   * May return a cleanup function, called before the next page renders.
-   */
-  render?: (body: HTMLElement, actions: HTMLElement) => void | (() => void);
+  /** Optional page body; receives the content area and the header actions slot. */
+  render?: (body: HTMLElement, actions: HTMLElement) => void;
 }
 
 const pages: Record<Route, Page> = {
@@ -19,7 +16,7 @@ const pages: Record<Route, Page> = {
   primitives: {
     title: "Primitives",
     description:
-      "The raw color palette. Components should use semantic tokens, which point to these values. Grid is the quick reference — click to copy. Specimens let you explore each family and open any shade.",
+      "The raw color palette. Components should use semantic tokens, which point to these values. Click a swatch to copy its CSS variable.",
     render: renderPrimitives,
   },
   tokens: {
@@ -45,8 +42,6 @@ function currentRoute(): Route {
   return hash in pages ? (hash as Route) : DEFAULT_ROUTE;
 }
 
-let cleanup: (() => void) | undefined;
-
 function render() {
   const route = currentRoute();
   const page = pages[route];
@@ -55,10 +50,9 @@ function render() {
   descriptionEl.textContent = page.description;
   document.title = `${page.title} – Design System A/W`;
 
-  cleanup?.();
   bodyEl.replaceChildren();
   actionsEl.replaceChildren();
-  cleanup = page.render?.(bodyEl, actionsEl) || undefined;
+  page.render?.(bodyEl, actionsEl);
   document.querySelector(".panel")?.scrollTo(0, 0);
 
   navItems.forEach((item) => {
