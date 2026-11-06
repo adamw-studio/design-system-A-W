@@ -10,6 +10,8 @@ A Vite + TypeScript site that documents the A/W design system. Every design toke
 - `tokens/typography-rules.json` — when to use each text style. Edit this to change typography guidance.
 - `tokens/color-rules.json` — color rules, plus the wording each semantic token's description is built from (category + group + variant).
 - `tokens/button-rules.json` — when to use each button variant (shown on the Buttons page and in `llms.txt`).
+- `tokens/tag-rules.json` — when to use each Tag variant (Tags page and `llms.txt`).
+- `tokens/switch-rules.json` — when and how to use the Switch (Switch page and `llms.txt`).
 - `tokens/icons.json` — the icon catalog from Figma (Iconography), with Iconoir names, sizes and rules. Icons come from the [Iconoir](https://iconoir.com) package (`node_modules/iconoir`, a devDependency).
 - `npm run tokens` (`scripts/build-tokens.mjs`) generates, from those files:
   - `src/styles/tokens/{color,typography,sizing}.css` — CSS custom properties and `.text-*` classes
@@ -49,7 +51,9 @@ Read `public/llms.txt` for the full, current token tables. The essentials:
 
 **Buttons** — `<button class="button button--primary" type="button">` (variants `primary`, `secondary`, `tertiary`, `danger`, `success`), from `src/styles/components/button.css`. States (hover, pressed, focus, disabled) are built in; when to use each variant is in `tokens/button-rules.json` and `public/llms.txt`. Icon-only actions use `<button class="icon-button" aria-label="…">` from `src/styles/components/icon-button.css`. Don't restyle buttons per page.
 
-**Switch** — `<button class="switch" type="button" role="switch" aria-checked="false" aria-label="…"><span class="switch__knob"></span></button>` from `src/styles/components/switch.css` (Figma Foundation, Switch 44:71). It takes effect immediately; toggle `aria-checked` in code.
+**Switch** — `<button class="switch" type="button" role="switch" aria-checked="false" aria-label="…"><span class="switch__knob"></span></button>` from `src/styles/components/switch.css` (Figma Foundation, Switch 44:71). It takes effect immediately; toggle `aria-checked` in code. Rules: `tokens/switch-rules.json`.
+
+**Tags** — `<span class="tag tag--success">Paid</span>` (variants `default`, `inverted`, `danger`, `success`, `warning`; add `tag--outline` for Figma's Strong=False) from `src/styles/components/tag.css`. Rules: `tokens/tag-rules.json`.
 
 **Motion** — Figma has no motion variables; the site's easing, durations and press scales live in `src/styles/motion.css` as `--motion-*`. Use `--motion-ease-out` for anything responding to the user, plain `ease` for color changes, keep UI transitions under 300ms, transition specific properties (never `all`), wrap hover effects in `@media (hover: hover) and (pointer: fine)`, give pressable elements an `:active` state, and drop movement (keep fades) under `prefers-reduced-motion`.
 

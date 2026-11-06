@@ -1,0 +1,98 @@
+/*
+ * Tag — Figma "Foundation – UI 2", Tags (node 45:14), component set 45:81:
+ * variants Default, Inverted, Danger, Success, Warning × Strong true/false,
+ * with an optional 12px icon before the label.
+ *
+ *   <span class="tag tag--success">Paid</span>               Strong (filled)
+ *   <span class="tag tag--success tag--outline">Paid</span>  Strong=False
+ *
+ * Usage rules: tokens/tag-rules.json. Colors and type come from tokens only.
+ */
+
+.tag {
+  /* Per-variant colors (set by the modifiers below). Default is the
+     component set's default variant. */
+  --tag-bg: var(--color-bg-secondary);
+  --tag-fg: var(--color-text-default);
+  --tag-border: var(--color-border-default);
+
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  /* Figma: 16px tall = the body/medium line height, in both styles. */
+  height: var(--body-medium-strong-line-height);
+  padding: 0 var(--space-2);
+  overflow: hidden;
+  border-radius: var(--radius-medium);
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+
+  /* Figma: body/medium/regular (= .text-body-medium). */
+  font-family: var(--body-medium-strong-font-family);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--body-medium-strong-letter-spacing);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Strong (filled) ------------------------------------------------------------ */
+
+.tag--inverted {
+  --tag-bg: var(--color-bg-inverse);
+  --tag-fg: var(--color-text-inverse);
+}
+
+.tag--danger {
+  --tag-bg: var(--color-bg-danger);
+  --tag-fg: var(--color-text-danger-ondanger);
+  --tag-border: var(--color-border-danger);
+}
+
+.tag--success {
+  --tag-bg: var(--color-bg-success);
+  /* The on-success text token (named "onwarning" in the Figma export). */
+  --tag-fg: var(--color-text-success-onwarning);
+  --tag-border: var(--color-border-success);
+}
+
+.tag--warning {
+  --tag-bg: var(--color-bg-warning);
+  --tag-fg: var(--color-text-warning-onwarning);
+  --tag-border: var(--color-border-warning);
+}
+
+/* Outline (Figma Strong=False) ------------------------------------------------
+   No fill, a 1px border and colored text. Inverted's outline is the same as
+   Default's. */
+
+.tag--outline {
+  --tag-bg: transparent;
+  --tag-fg: var(--color-text-default);
+
+  border: 1px solid var(--tag-border);
+}
+
+.tag--inverted.tag--outline {
+  --tag-border: var(--color-border-default);
+}
+
+.tag--danger.tag--outline {
+  --tag-fg: var(--color-text-danger);
+}
+
+.tag--success.tag--outline {
+  --tag-fg: var(--color-text-success);
+}
+
+.tag--warning.tag--outline {
+  --tag-fg: var(--color-text-warning);
+}
+
+/* Optional icon: a 12px Icon Shell (icon.css) in the label's color. */
+.tag .icon {
+  --icon-size: 12px;
+}

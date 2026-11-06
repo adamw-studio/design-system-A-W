@@ -4,10 +4,12 @@ import { renderTokens } from "./pages/tokens";
 import { renderTypography, typographyIntro } from "./pages/typography";
 import { buttonsIntro, iconButtonsIntro, renderButtons, renderIconButtons } from "./pages/buttons";
 import { iconsIntro, renderIcons } from "./pages/icons";
+import { renderSwitch, switchIntro } from "./pages/switch";
+import { renderTags, tagsIntro } from "./pages/tags";
 import { loadIconSprite } from "./lib/icon";
 import { initThemeSwitch } from "./lib/theme";
 
-type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons";
+type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons" | "switch" | "tags";
 
 /** Section links that open their first page (Colors → Primitives). */
 const REDIRECTS: Record<string, Route> = { colors: "primitives" };
@@ -51,6 +53,16 @@ const pages: Record<Route, Page> = {
     title: "Icon Button",
     description: iconButtonsIntro,
     render: renderIconButtons,
+  },
+  switch: {
+    title: "Switch",
+    description: switchIntro,
+    render: renderSwitch,
+  },
+  tags: {
+    title: "Tags",
+    description: tagsIntro,
+    render: renderTags,
   },
 };
 

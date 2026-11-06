@@ -27,6 +27,8 @@
   --layout-icon-preview-height: 128px;
   /* Icon Shell set (Figma 28:1006): 14px between the sizes. */
   --layout-icon-shell-gap: 14px;
+  /* Switch set (Figma 44:71): 11px between Off and On. */
+  --layout-switch-gap: 11px;
 }
 
 *,

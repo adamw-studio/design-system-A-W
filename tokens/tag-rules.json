@@ -1,0 +1,39 @@
+{
+  "$comment": "When to use each Tag variant. The component is src/styles/components/tag.css, built from Figma \"Foundation – UI 2\" (Tags, node 45:14; component set 45:81). Shown on the Tags page and published to public/llms.txt by `npm run tokens`.",
+  "intro": "Tags label an item with a short status, category or count. They are 16px tall, come in five colors, and can be strong (filled) or outlined, with an optional 12px icon in front.",
+  "variants": [
+    {
+      "variant": "default",
+      "label": "Default",
+      "usage": "Neutral metadata: categories, versions, counts."
+    },
+    {
+      "variant": "inverted",
+      "label": "Inverted",
+      "usage": "A neutral label that has to stand out, e.g. New or Beta."
+    },
+    {
+      "variant": "danger",
+      "label": "Danger",
+      "usage": "Errors and blocked states, e.g. Failed, Overdue, Blocked."
+    },
+    {
+      "variant": "success",
+      "label": "Success",
+      "usage": "Positive or finished states, e.g. Done, Active, Paid."
+    },
+    {
+      "variant": "warning",
+      "label": "Warning",
+      "usage": "Needs attention but isn't broken, e.g. Pending, Expiring, Draft."
+    }
+  ],
+  "rules": [
+    "Use <span class=\"tag tag--<variant>\">Label</span>; add tag--outline for the outlined style (Figma Strong=False).",
+    "Use a strong tag for the one status that matters most in a row or card, and outlined tags when several sit together, so they don't compete.",
+    "Keep labels to one or two words. Tags don't wrap or truncate.",
+    "Don't rely on color alone: the label itself must say the status.",
+    "Tags aren't interactive. For an action, use a Button.",
+    "An optional icon goes before the label: <svg class=\"icon\" aria-hidden=\"true\"><use href=\"#icon-<name>\"></use></svg>. The tag sizes it to 12px and it takes the label's color."
+  ]
+}

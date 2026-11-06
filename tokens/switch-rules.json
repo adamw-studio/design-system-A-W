@@ -1,0 +1,24 @@
+{
+  "$comment": "When and how to use the Switch. The component is src/styles/components/switch.css, built from Figma \"Foundation – UI 2\" (Switch page 42:20, component set 44:71). Shown on the Switch page and published to public/llms.txt by `npm run tokens`.",
+  "intro": "Represent a physical toggle to turn a setting “on” or “off”. Unlike checkboxes, toggling a switch takes immediate effect without a need for additional confirmation steps (“save”).",
+  "states": [
+    {
+      "state": "off",
+      "label": "Off",
+      "usage": "Knob on the left over a --color-bg-hover track. aria-checked=\"false\"."
+    },
+    {
+      "state": "on",
+      "label": "On",
+      "usage": "Knob slides right over a --color-bg-inverse track. aria-checked=\"true\"."
+    }
+  ],
+  "rules": [
+    "Use <button class=\"switch\" type=\"button\" role=\"switch\" aria-checked=\"false\"> with <span class=\"switch__knob\"></span> inside, and flip aria-checked in code — the styles follow it.",
+    "Use a switch only for settings that apply immediately (theme, notifications). If the change waits for Save or Submit, use a checkbox.",
+    "Every switch needs a name: a visible label linked with aria-labelledby, or an aria-label when the context makes it obvious.",
+    "Name the setting, not the action: “Dark theme”, not “Turn dark theme on”. Don't add On/Off text next to the switch.",
+    "In a settings row, put the label first and the switch at the end of the row.",
+    "Disable with the disabled attribute."
+  ]
+}

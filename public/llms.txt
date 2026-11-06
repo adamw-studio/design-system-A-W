@@ -266,6 +266,49 @@ Rules:
 - Use only icons whose meaning is clear without a label; otherwise use a Button with an icon and text.
 - For on/off actions (e.g. Bold, Pin), toggle aria-pressed; the Active fill then shows the on state.
 
+### Switch
+
+Represent a physical toggle to turn a setting “on” or “off”. Unlike checkboxes, toggling a switch takes immediate effect without a need for additional confirmation steps (“save”).
+
+Markup: `<button class="switch" type="button" role="switch" aria-checked="false" aria-label="…"><span class="switch__knob"></span></button>` (styles: src/styles/components/switch.css).
+
+| State | Look |
+| --- | --- |
+| Off | Knob on the left over a --color-bg-hover track. aria-checked="false". |
+| On | Knob slides right over a --color-bg-inverse track. aria-checked="true". |
+
+Rules:
+
+- Use <button class="switch" type="button" role="switch" aria-checked="false"> with <span class="switch__knob"></span> inside, and flip aria-checked in code — the styles follow it.
+- Use a switch only for settings that apply immediately (theme, notifications). If the change waits for Save or Submit, use a checkbox.
+- Every switch needs a name: a visible label linked with aria-labelledby, or an aria-label when the context makes it obvious.
+- Name the setting, not the action: “Dark theme”, not “Turn dark theme on”. Don't add On/Off text next to the switch.
+- In a settings row, put the label first and the switch at the end of the row.
+- Disable with the disabled attribute.
+
+### Tag
+
+Tags label an item with a short status, category or count. They are 16px tall, come in five colors, and can be strong (filled) or outlined, with an optional 12px icon in front.
+
+Markup: `<span class="tag tag--<variant>">Label</span>`, outlined with `tag--outline` (styles: src/styles/components/tag.css).
+
+| Class | When to use |
+| --- | --- |
+| `.tag--default` | Neutral metadata: categories, versions, counts. |
+| `.tag--inverted` | A neutral label that has to stand out, e.g. New or Beta. |
+| `.tag--danger` | Errors and blocked states, e.g. Failed, Overdue, Blocked. |
+| `.tag--success` | Positive or finished states, e.g. Done, Active, Paid. |
+| `.tag--warning` | Needs attention but isn't broken, e.g. Pending, Expiring, Draft. |
+
+Rules:
+
+- Use <span class="tag tag--<variant>">Label</span>; add tag--outline for the outlined style (Figma Strong=False).
+- Use a strong tag for the one status that matters most in a row or card, and outlined tags when several sit together, so they don't compete.
+- Keep labels to one or two words. Tags don't wrap or truncate.
+- Don't rely on color alone: the label itself must say the status.
+- Tags aren't interactive. For an action, use a Button.
+- An optional icon goes before the label: <svg class="icon" aria-hidden="true"><use href="#icon-<name>"></use></svg>. The tag sizes it to 12px and it takes the label's color.
+
 ## Files
 
 - [Color tokens (W3C design tokens JSON: primitives + semantic, light/dark, usage rules)](tokens/colors.json)

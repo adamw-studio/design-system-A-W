@@ -1,0 +1,44 @@
+/*
+ * Tags page — Figma "Foundation – UI 2", node 45:14. Shared panel, section
+ * and list styles: src/styles/docs.css.
+ */
+
+/* Tag set (45:81): strong column, outline column; rows 8px apart. */
+.tag-preview {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: var(--space-5);
+  row-gap: var(--space-3);
+  justify-items: start;
+}
+
+/* Bare button around each preview tag so it can be clicked to copy. */
+.tag-preview__item {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-medium);
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--motion-press) var(--motion-ease-out);
+}
+
+.tag-preview__item:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+/* Variant list: strong and outline side by side, on the first text line. */
+.tag-sample {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--body-large-strong-line-height);
+}
+
+.tag-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
