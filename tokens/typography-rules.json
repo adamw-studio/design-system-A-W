@@ -1,0 +1,52 @@
+{
+  "$comment": "Usage rules for each Figma text style. Values (size, weight, line height…) come from figma-variables.json; this file only says when to use what. Shown on the Typography page and published to public/tokens/typography.json and public/llms.txt by `npm run tokens`.",
+  "intro": "Type tokens for body text and headings, organised around t-shirt sizes — large, medium, small — to make it easy to build multiple levels of hierarchy.",
+  "rules": [
+    "Always set text with a .text-* class (or its CSS variables). Never hard-code font-size, font-weight, line-height or letter-spacing.",
+    "Use headings for hierarchy and body styles for content; don't use a heading style just to make text bigger.",
+    "Use the strong variant of a body style for emphasis within the same size, not a heading style.",
+    "Display is reserved for onboarding and heavily branded moments — at most one per view.",
+    "Pair type with semantic text color tokens (e.g. --color-text-default, --color-text-secondary), never primitives."
+  ],
+  "styles": [
+    {
+      "style": "heading/display",
+      "label": "Display",
+      "usage": "To create continuity with our logged-out marketing views, we sparingly use Inter for onboarding and other heavily branded moments.",
+      "sample": "Large display size for expressive moments and important announcements"
+    },
+    {
+      "style": "heading/large",
+      "label": "Large heading",
+      "usage": "Our largest heading size, reserved for elements like the primary page title within large views."
+    },
+    {
+      "style": "heading/medium",
+      "label": "Medium heading",
+      "usage": "Section headings within a page or large panel."
+    },
+    {
+      "style": "heading/small",
+      "label": "Small heading",
+      "usage": "Headings for compact areas like cards, panels and grouped lists."
+    },
+    {
+      "style": "body/large",
+      "label": "Body Large",
+      "usage": "Our largest body text size, usually saved for elements like multiline text.",
+      "variants": ["regular", "strong"]
+    },
+    {
+      "style": "body/medium",
+      "label": "Body Medium",
+      "usage": "Our default text size for the majority of UI elements in the editor, such as inputs and buttons.",
+      "variants": ["regular", "strong"]
+    },
+    {
+      "style": "body/small",
+      "label": "Body Small",
+      "usage": "Our smallest text size, primarily used by small UI elements like avatars and badges.",
+      "variants": ["regular", "strong"]
+    }
+  ]
+}

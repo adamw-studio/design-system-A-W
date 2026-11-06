@@ -1,0 +1,143 @@
+/*
+ * Typography page — Figma "Foundation – UI 2", node 6:182.
+ * The "_doc.description/*" text styles are documentation-only (not tokens),
+ * so they are defined here rather than in the token CSS.
+ */
+
+.type-styles {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-7) + var(--space-4));
+  margin-top: var(--space-7);
+}
+
+.type-style {
+  scroll-margin-top: var(--space-5);
+}
+
+/* _doc.description/heading — 18/32, strong, +1% */
+.type-style__name {
+  margin: 0;
+  font-family: var(--heading-medium-font-family);
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: var(--heading-medium-font-weight);
+  letter-spacing: 0.01em;
+  color: var(--color-text-default);
+}
+
+/* _doc.description/body — 13/22, regular, −0.5% */
+.type-style__usage {
+  max-width: 420px;
+  font-family: var(--heading-medium-font-family);
+  font-size: var(--heading-small-font-size);
+  line-height: 22px;
+  font-weight: var(--font-weight-default);
+  letter-spacing: -0.005em;
+  color: var(--color-text-secondary);
+}
+
+.type-style__specimens {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+/* Specimen card ------------------------------------------------------------ */
+
+.type-specimen {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+}
+
+.type-specimen__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 122px;
+  padding: var(--space-5);
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-large);
+  background: var(--color-bg-default);
+  color: var(--color-text-default);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 120ms ease;
+}
+
+/* Grid background (Figma "BG": 16px tile at 10% opacity). */
+.type-specimen__card::before {
+  content: "";
+  position: absolute;
+  inset: -1px -8px -10px -1px;
+  border: 1px solid var(--color-text-secondary);
+  background: url("/images/type-grid.png") top left / 16px 16px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.type-specimen__card:hover {
+  border-color: var(--color-border-strong);
+}
+
+.type-specimen__sample {
+  position: relative;
+}
+
+.type-specimen--display .type-specimen__card {
+  justify-content: flex-start;
+  min-height: 240px;
+  padding: var(--space-5) var(--space-7);
+  text-align: left;
+}
+
+/* Spec line under each card */
+.type-specimen__meta {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-3);
+  font-family: var(--font-family-mono);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+  color: var(--color-text-tertiary);
+}
+
+.type-specimen__class {
+  font: inherit;
+  color: var(--color-text-secondary);
+}
+
+.type-specimen__class.is-copied {
+  color: var(--color-text-success);
+}
+
+.type-agents {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-default);
+  color: var(--color-text-tertiary);
+}
+
+.type-agents a {
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 640px) {
+  .type-style__specimens {
+    flex-direction: column;
+  }
+
+  .type-specimen--display .type-specimen__card {
+    min-height: 0;
+    padding: var(--space-5);
+  }
+
+  .type-specimen--display .type-specimen__sample {
+    font-size: var(--heading-large-font-size);
+    line-height: var(--heading-large-line-height);
+  }
+}

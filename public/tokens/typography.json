@@ -1,0 +1,274 @@
+{
+  "$description": "A/W Design System typography. Generated from Figma (Foundation – UI 2) by scripts/build-tokens.mjs. Apply a style with its CSS class (see $extensions['design.aw']) or its CSS variables.",
+  "$extensions": {
+    "design.aw": {
+      "rules": [
+        "Always set text with a .text-* class (or its CSS variables). Never hard-code font-size, font-weight, line-height or letter-spacing.",
+        "Use headings for hierarchy and body styles for content; don't use a heading style just to make text bigger.",
+        "Use the strong variant of a body style for emphasis within the same size, not a heading style.",
+        "Display is reserved for onboarding and heavily branded moments — at most one per view.",
+        "Pair type with semantic text color tokens (e.g. --color-text-default, --color-text-secondary), never primitives."
+      ]
+    }
+  },
+  "heading": {
+    "display": {
+      "$type": "typography",
+      "$description": "To create continuity with our logged-out marketing views, we sparingly use Inter for onboarding and other heavily branded moments.",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontSize": "48px",
+        "fontWeight": 550,
+        "lineHeight": "56px",
+        "letterSpacing": "-0.03em"
+      },
+      "$extensions": {
+        "design.aw": {
+          "label": "Display",
+          "cssClass": ".text-heading-display",
+          "cssVariables": {
+            "fontFamily": "--heading-display-font-family",
+            "fontSize": "--heading-display-font-size",
+            "lineHeight": "--heading-display-line-height",
+            "fontWeight": "--heading-display-font-weight",
+            "letterSpacing": "--heading-display-letter-spacing"
+          },
+          "figmaStyle": "heading/display"
+        }
+      }
+    },
+    "large": {
+      "$type": "typography",
+      "$description": "Our largest heading size, reserved for elements like the primary page title within large views.",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontSize": "24px",
+        "fontWeight": 550,
+        "lineHeight": "32px",
+        "letterSpacing": "-0.017em"
+      },
+      "$extensions": {
+        "design.aw": {
+          "label": "Large heading",
+          "cssClass": ".text-heading-large",
+          "cssVariables": {
+            "fontFamily": "--heading-large-font-family",
+            "fontSize": "--heading-large-font-size",
+            "lineHeight": "--heading-large-line-height",
+            "fontWeight": "--heading-large-font-weight",
+            "letterSpacing": "--heading-large-letter-spacing"
+          },
+          "figmaStyle": "heading/large"
+        }
+      }
+    },
+    "medium": {
+      "$type": "typography",
+      "$description": "Section headings within a page or large panel.",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontSize": "15px",
+        "fontWeight": 550,
+        "lineHeight": "25px",
+        "letterSpacing": "-0.005em"
+      },
+      "$extensions": {
+        "design.aw": {
+          "label": "Medium heading",
+          "cssClass": ".text-heading-medium",
+          "cssVariables": {
+            "fontFamily": "--heading-medium-font-family",
+            "fontSize": "--heading-medium-font-size",
+            "lineHeight": "--heading-medium-line-height",
+            "fontWeight": "--heading-medium-font-weight",
+            "letterSpacing": "--heading-medium-letter-spacing"
+          },
+          "figmaStyle": "heading/medium"
+        }
+      }
+    },
+    "small": {
+      "$type": "typography",
+      "$description": "Headings for compact areas like cards, panels and grouped lists.",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontSize": "13px",
+        "fontWeight": 550,
+        "lineHeight": "22px",
+        "letterSpacing": "-0.0025em"
+      },
+      "$extensions": {
+        "design.aw": {
+          "label": "Small heading",
+          "cssClass": ".text-heading-small",
+          "cssVariables": {
+            "fontFamily": "--heading-small-font-family",
+            "fontSize": "--heading-small-font-size",
+            "lineHeight": "--heading-small-line-height",
+            "fontWeight": "--heading-small-font-weight",
+            "letterSpacing": "--heading-small-letter-spacing"
+          },
+          "figmaStyle": "heading/small"
+        }
+      }
+    }
+  },
+  "body": {
+    "large": {
+      "regular": {
+        "$type": "typography",
+        "$description": "Our largest body text size, usually saved for elements like multiline text.",
+        "$value": {
+          "fontFamily": "Inter",
+          "fontSize": "13px",
+          "fontWeight": 450,
+          "lineHeight": "22px",
+          "letterSpacing": "-0.0025em"
+        },
+        "$extensions": {
+          "design.aw": {
+            "label": "Body Large",
+            "cssClass": ".text-body-large",
+            "cssVariables": {
+              "fontFamily": "--body-large-strong-font-family",
+              "fontSize": "--body-large-strong-font-size",
+              "lineHeight": "--body-large-strong-line-height",
+              "fontWeight": "--font-weight-default",
+              "letterSpacing": "--body-large-strong-letter-spacing"
+            },
+            "figmaStyle": "body/large/regular"
+          }
+        }
+      },
+      "strong": {
+        "$type": "typography",
+        "$description": "Our largest body text size, usually saved for elements like multiline text.",
+        "$value": {
+          "fontFamily": "Inter",
+          "fontSize": "13px",
+          "fontWeight": 550,
+          "lineHeight": "22px",
+          "letterSpacing": "-0.0025em"
+        },
+        "$extensions": {
+          "design.aw": {
+            "label": "Body Large Strong",
+            "cssClass": ".text-body-large-strong",
+            "cssVariables": {
+              "fontFamily": "--body-large-strong-font-family",
+              "fontSize": "--body-large-strong-font-size",
+              "lineHeight": "--body-large-strong-line-height",
+              "fontWeight": "--body-large-strong-font-weight",
+              "letterSpacing": "--body-large-strong-letter-spacing"
+            },
+            "figmaStyle": "body/large/strong"
+          }
+        }
+      }
+    },
+    "medium": {
+      "regular": {
+        "$type": "typography",
+        "$description": "Our default text size for the majority of UI elements in the editor, such as inputs and buttons.",
+        "$value": {
+          "fontFamily": "Inter",
+          "fontSize": "11px",
+          "fontWeight": 450,
+          "lineHeight": "16px",
+          "letterSpacing": "0.005em"
+        },
+        "$extensions": {
+          "design.aw": {
+            "label": "Body Medium",
+            "cssClass": ".text-body-medium",
+            "cssVariables": {
+              "fontFamily": "--body-medium-strong-font-family",
+              "fontSize": "--body-medium-strong-font-size",
+              "lineHeight": "--body-medium-strong-line-height",
+              "fontWeight": "--font-weight-default",
+              "letterSpacing": "--body-medium-strong-letter-spacing"
+            },
+            "figmaStyle": "body/medium/regular"
+          }
+        }
+      },
+      "strong": {
+        "$type": "typography",
+        "$description": "Our default text size for the majority of UI elements in the editor, such as inputs and buttons.",
+        "$value": {
+          "fontFamily": "Inter",
+          "fontSize": "11px",
+          "fontWeight": 550,
+          "lineHeight": "16px",
+          "letterSpacing": "0.005em"
+        },
+        "$extensions": {
+          "design.aw": {
+            "label": "Body Medium Strong",
+            "cssClass": ".text-body-medium-strong",
+            "cssVariables": {
+              "fontFamily": "--body-medium-strong-font-family",
+              "fontSize": "--body-medium-strong-font-size",
+              "lineHeight": "--body-medium-strong-line-height",
+              "fontWeight": "--body-medium-strong-font-weight",
+              "letterSpacing": "--body-medium-strong-letter-spacing"
+            },
+            "figmaStyle": "body/medium/strong"
+          }
+        }
+      }
+    },
+    "small": {
+      "regular": {
+        "$type": "typography",
+        "$description": "Our smallest text size, primarily used by small UI elements like avatars and badges.",
+        "$value": {
+          "fontFamily": "Inter",
+          "fontSize": "9px",
+          "fontWeight": 450,
+          "lineHeight": "14px",
+          "letterSpacing": "0.005em"
+        },
+        "$extensions": {
+          "design.aw": {
+            "label": "Body Small",
+            "cssClass": ".text-body-small",
+            "cssVariables": {
+              "fontFamily": "--body-small-strong-font-family",
+              "fontSize": "--body-small-strong-font-size",
+              "lineHeight": "--body-small-strong-line-height",
+              "fontWeight": "--font-weight-default",
+              "letterSpacing": "--body-small-strong-letter-spacing"
+            },
+            "figmaStyle": "body/small/regular"
+          }
+        }
+      },
+      "strong": {
+        "$type": "typography",
+        "$description": "Our smallest text size, primarily used by small UI elements like avatars and badges.",
+        "$value": {
+          "fontFamily": "Inter",
+          "fontSize": "9px",
+          "fontWeight": 550,
+          "lineHeight": "14px",
+          "letterSpacing": "0.005em"
+        },
+        "$extensions": {
+          "design.aw": {
+            "label": "Body Small Strong",
+            "cssClass": ".text-body-small-strong",
+            "cssVariables": {
+              "fontFamily": "--body-small-strong-font-family",
+              "fontSize": "--body-small-strong-font-size",
+              "lineHeight": "--body-small-strong-line-height",
+              "fontWeight": "--body-small-strong-font-weight",
+              "letterSpacing": "--body-small-strong-letter-spacing"
+            },
+            "figmaStyle": "body/small/strong"
+          }
+        }
+      }
+    }
+  }
+}

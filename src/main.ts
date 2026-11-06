@@ -1,6 +1,7 @@
 import "./styles/index.css";
 import { renderPrimitives } from "./pages/primitives";
 import { renderTokens } from "./pages/tokens";
+import { renderTypography, typographyIntro } from "./pages/typography";
 
 type Route = "colors" | "primitives" | "tokens" | "typography" | "buttons";
 
@@ -25,7 +26,11 @@ const pages: Record<Route, Page> = {
       "Semantic color tokens give each primitive a purpose, with a value for light and dark mode. Use these in components. Click a row to copy its CSS variable.",
     render: renderTokens,
   },
-  typography: { title: "Typography", description: "Add a short description..." },
+  typography: {
+    title: "Typography",
+    description: typographyIntro,
+    render: renderTypography,
+  },
   buttons: { title: "Buttons", description: "Add a short description..." },
 };
 
