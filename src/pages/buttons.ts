@@ -4,8 +4,11 @@
  * a grid of variants (columns) × states (rows). Below it, the site adds
  * per-variant usage, icon examples and usage rules.
  *
- * The button itself is src/styles/components/button.css; usage rules come
- * from tokens/button-rules.json, which also feeds public/llms.txt.
+ * Icon Buttons page — Figma node 23:5380: the same layout with the Icon
+ * Button set (23:5345) in the panel, one state per column.
+ *
+ * Components: src/styles/components/{button,icon-button}.css. Usage rules
+ * come from tokens/button-rules.json, which also feeds public/llms.txt.
  */
 import rules from "../../tokens/button-rules.json";
 import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
@@ -13,9 +16,11 @@ import { agentLinks } from "../lib/agent-links";
 import "../styles/pages/buttons.css";
 
 export const buttonsIntro = rules.intro;
+export const iconButtonsIntro = rules.iconButton.intro;
 
 type Variant = (typeof rules.variants)[number];
 type State = "default" | "hover" | "disabled";
+type IconState = (typeof rules.iconButton.states)[number];
 
 /** Figma column order. Danger and Success sit after a wider gap and have no
     disabled state in the component set. */
@@ -133,6 +138,98 @@ function iconExamples() {
   );
   wrap.append(row, code);
   return wrap;
+}
+
+function iconButton(label: string, state: string = "default") {
+  const btn = el("button", "icon-button");
+  btn.type = "button";
+  btn.setAttribute("aria-label", label);
+  btn.title = label;
+  if (state === "hover" || state === "active") btn.dataset.state = state;
+  if (state === "disabled") btn.disabled = true;
+  const icon = el("span", "icon-button__icon");
+  icon.style.setProperty("--icon", `url("${ICON}")`);
+  icon.setAttribute("aria-hidden", "true");
+  btn.append(icon);
+  return btn;
+}
+
+/** Figma frame "Light" (23:5389): the four states in a row. */
+function iconPreview(status: HTMLElement) {
+  const panel = el("div", "button-preview");
+  const row = el("div", "icon-button-preview");
+  row.setAttribute("role", "group");
+  row.setAttribute("aria-label", "Icon button states");
+
+  const hint = el("p", "button-preview__hint text-body-medium");
+  const hintText = "Click an icon button to copy its class.";
+  hint.textContent = hintText;
+
+  for (const state of rules.iconButton.states) {
+    const btn = iconButton(`Notifications (${state.label.toLowerCase()})`, state.state);
+    btn.addEventListener("click", async () => {
+      if (await copyToClipboard("icon-button", status)) flashLabel(hint, 'Copied class="icon-button"', hintText);
+    });
+    row.append(btn);
+  }
+
+  panel.append(row);
+  return [panel, hint];
+}
+
+function iconStateRow(state: IconState) {
+  const row = el("li", "button-variant");
+  const sample = el("div", "button-variant__sample");
+  sample.append(iconButton(`Notifications (${state.label.toLowerCase()})`, state.state));
+  const text = el("div", "button-variant__text");
+  text.append(
+    el("p", "button-variant__name text-body-large-strong", state.label),
+    el("p", "button-variant__usage text-body-large", state.usage),
+  );
+  row.append(sample, text);
+  return row;
+}
+
+/** A live toggle so the Active state can be tried, not just seen. */
+function toggleExample() {
+  const wrap = el("div", "button-icons");
+  const btn = iconButton("Mute notifications");
+  btn.setAttribute("aria-pressed", "false");
+  const label = el("span", "icon-button-toggle__label text-body-medium", "aria-pressed=\"false\"");
+  btn.addEventListener("click", () => {
+    const on = btn.getAttribute("aria-pressed") !== "true";
+    btn.setAttribute("aria-pressed", String(on));
+    label.textContent = `aria-pressed="${on}"`;
+  });
+  wrap.append(btn, label);
+  return wrap;
+}
+
+export function renderIconButtons(body: HTMLElement) {
+  const status = createStatusRegion();
+
+  const states = section("States");
+  const list = el("ul", "button-variants");
+  list.append(...rules.iconButton.states.map(iconStateRow));
+  states.append(list);
+
+  const toggle = section("Toggles", "For on/off actions, set aria-pressed. The Active fill then stays on while the toggle is on. Try it:");
+  const code = el("pre", "button-code");
+  code.append(
+    el(
+      "code",
+      undefined,
+      `<button class="icon-button" type="button" aria-label="Mute notifications" aria-pressed="false">\n  <span class="icon-button__icon" style="--icon: url(/icons/app-notification.svg)" aria-hidden="true"></span>\n</button>`,
+    ),
+  );
+  toggle.append(toggleExample(), code);
+
+  const usage = section("Usage");
+  const ruleList = el("ul", "button-rules text-body-large");
+  ruleList.append(...rules.iconButton.rules.map((r) => el("li", undefined, r)));
+  usage.append(ruleList);
+
+  body.append(...iconPreview(status), states, toggle, usage, agentLinks([]), status);
 }
 
 export function renderButtons(body: HTMLElement) {

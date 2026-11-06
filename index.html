@@ -51,7 +51,30 @@
             </div>
           </div>
           <a href="#typography" class="nav__item nav__link text-body-large" data-route="typography">Typography</a>
-          <a href="#buttons" class="nav__item nav__link text-body-large" data-route="buttons">Buttons</a>
+          <div class="nav__group" data-expanded="true">
+            <div class="nav__item nav__item--parent">
+              <a href="#buttons" class="nav__link text-body-large">Buttons</a>
+              <button
+                type="button"
+                class="nav__toggle"
+                aria-expanded="true"
+                aria-controls="nav-buttons"
+                aria-label="Toggle Buttons section"
+              >
+                <img src="/icons/nav-arrow-down.svg" width="16" height="16" alt="" />
+              </button>
+            </div>
+            <div class="nav__collapse" id="nav-buttons">
+              <ul class="nav__sublist">
+                <li>
+                  <a href="#buttons" class="nav__item nav__link text-body-large" data-route="buttons">Buttons</a>
+                </li>
+                <li>
+                  <a href="#icon-buttons" class="nav__item nav__link text-body-large" data-route="icon-buttons">Icon Buttons</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </nav>
       </aside>
 

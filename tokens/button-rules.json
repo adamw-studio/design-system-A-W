@@ -1,5 +1,5 @@
 {
-  "$comment": "When to use each button variant. The component itself is src/styles/components/button.css, built from Figma \"Foundation – UI 2\" (Buttons, node 18:3529; component set 23:5203). Shown on the Buttons page and published to public/llms.txt by `npm run tokens`.",
+  "$comment": "When to use each button variant. The component itself is src/styles/components/button.css, built from Figma \"Foundation – UI 2\" (Buttons, node 18:3529; component set 23:5203). Also covers Icon Button (node 23:5380; component set 23:5345, src/styles/components/icon-button.css) under \"iconButton\". Shown on the Buttons and Icon Buttons pages and published to public/llms.txt by `npm run tokens`.",
   "intro": "Buttons let users initiate an action, acknowledge something, make a choice, or navigate. By default, our buttons are 24px tall, come in two styles (primary and secondary), and can optionally include an icon in front and in back.",
   "rules": [
     "Use a <button class=\"button button--<variant>\"> for actions and an <a class=\"button button--<variant>\"> for navigation; never style a <div> as a button.",
@@ -34,5 +34,36 @@
       "label": "Success",
       "usage": "Positive, confirming actions, e.g. Approve or Publish."
     }
-  ]
+  ],
+  "iconButton": {
+    "intro": "Icon buttons trigger an action with an icon alone, for compact toolbars and actions repeated on every row. They are 24px square, have no fill until hovered, and show an active fill while pressed or switched on.",
+    "states": [
+      {
+        "state": "default",
+        "label": "Default",
+        "usage": "No fill; the icon uses --color-icon-default."
+      },
+      {
+        "state": "hover",
+        "label": "Hover",
+        "usage": "--color-bg-hover fill under the pointer."
+      },
+      {
+        "state": "active",
+        "label": "Active",
+        "usage": "--color-bg-pressed fill while pressed, or while a toggle is on (aria-pressed=\"true\")."
+      },
+      {
+        "state": "disabled",
+        "label": "Disabled",
+        "usage": "No fill and a dimmed icon; set the disabled attribute."
+      }
+    ],
+    "rules": [
+      "Use <button class=\"icon-button\" type=\"button\"> with one 16px <span class=\"icon-button__icon\" style=\"--icon: url(…)\" aria-hidden=\"true\">.",
+      "Always give it an aria-label (and a matching title for a tooltip) — the icon alone has no accessible name.",
+      "Use only icons whose meaning is clear without a label; otherwise use a Button with an icon and text.",
+      "For on/off actions (e.g. Bold, Pin), toggle aria-pressed; the Active fill then shows the on state."
+    ]
+  }
 }

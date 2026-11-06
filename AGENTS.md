@@ -43,7 +43,7 @@ Read `public/llms.txt` for the full, current token tables. The essentials:
 
 **Spacing / radius** — `var(--space-0)`…`var(--space-7)` and `var(--radius-*)`. Layout-only constants live in `src/styles/layout.css` as `--layout-*`.
 
-**Buttons** — `<button class="button button--primary" type="button">` (variants `primary`, `secondary`, `tertiary`, `danger`, `success`), from `src/styles/components/button.css`. States (hover, pressed, focus, disabled) are built in; when to use each variant is in `tokens/button-rules.json` and `public/llms.txt`. Don't restyle buttons per page.
+**Buttons** — `<button class="button button--primary" type="button">` (variants `primary`, `secondary`, `tertiary`, `danger`, `success`), from `src/styles/components/button.css`. States (hover, pressed, focus, disabled) are built in; when to use each variant is in `tokens/button-rules.json` and `public/llms.txt`. Icon-only actions use `<button class="icon-button" aria-label="…">` from `src/styles/components/icon-button.css`. Don't restyle buttons per page.
 
 **Motion** — Figma has no motion variables; the site's easing, durations and press scales live in `src/styles/motion.css` as `--motion-*`. Use `--motion-ease-out` for anything responding to the user, plain `ease` for color changes, keep UI transitions under 300ms, transition specific properties (never `all`), wrap hover effects in `@media (hover: hover) and (pointer: fine)`, give pressable elements an `:active` state, and drop movement (keep fades) under `prefers-reduced-motion`.
 

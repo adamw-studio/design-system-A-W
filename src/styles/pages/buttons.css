@@ -1,8 +1,8 @@
 /*
- * Buttons page — Figma "Foundation – UI 2", node 18:3529. The preview panel
- * is the frame "Light" (18:5092); the grid inside follows the component
- * set's spacing (23:5203): 24px between columns, a double gap before Danger,
- * 32px between rows.
+ * Buttons and Icon Buttons pages — Figma "Foundation – UI 2", nodes 18:3529
+ * and 23:5380. The preview panel is the frame "Light" (18:5092 / 23:5389);
+ * the Buttons grid follows the component set's spacing (23:5203): 24px
+ * between columns, a double gap before Danger, 32px between rows.
  */
 
 .button-preview {
@@ -34,6 +34,12 @@
 
 .button-preview__hint.is-copied {
   color: var(--color-text-success);
+}
+
+/* Icon Button panel (Figma 23:5345): states in a row, 10px apart. */
+.icon-button-preview {
+  display: flex;
+  gap: var(--layout-icon-button-gap);
 }
 
 /* Sections ------------------------------------------------------------------ */
@@ -112,6 +118,12 @@
   border-radius: var(--radius-medium);
   background: var(--color-bg-secondary);
   color: var(--color-text-secondary);
+}
+
+.icon-button-toggle__label {
+  align-self: center;
+  font-family: var(--font-family-mono);
+  color: var(--color-text-tertiary);
 }
 
 /* Usage rules --------------------------------------------------------------- */

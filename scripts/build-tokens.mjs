@@ -333,6 +333,20 @@ Rules:
 
 ${buttonRules.rules.map((r) => `- ${r}`).join("\n")}
 
+### Icon button
+
+${buttonRules.iconButton.intro}
+
+Markup: \`<button class="icon-button" type="button" aria-label="…"><span class="icon-button__icon" style="--icon: url(…)" aria-hidden="true"></span></button>\` (styles: src/styles/components/icon-button.css).
+
+| State | Look |
+| --- | --- |
+${buttonRules.iconButton.states.map((s) => `| ${s.label} | ${s.usage} |`).join("\n")}
+
+Rules:
+
+${buttonRules.iconButton.rules.map((r) => `- ${r}`).join("\n")}
+
 ## Files
 
 - [Color tokens (W3C design tokens JSON: primitives + semantic, light/dark, usage rules)](/tokens/colors.json)

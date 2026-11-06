@@ -18,6 +18,8 @@
   --layout-row-padding: 6px;
   /* Readable width for usage notes next to specimens. */
   --layout-description-width: 420px;
+  /* Icon Button page: gap between the states in the preview (Figma 23:5345). */
+  --layout-icon-button-gap: 10px;
 }
 
 *,

@@ -2,9 +2,9 @@ import "./styles/index.css";
 import { renderPrimitives } from "./pages/primitives";
 import { renderTokens } from "./pages/tokens";
 import { renderTypography, typographyIntro } from "./pages/typography";
-import { buttonsIntro, renderButtons } from "./pages/buttons";
+import { buttonsIntro, iconButtonsIntro, renderButtons, renderIconButtons } from "./pages/buttons";
 
-type Route = "primitives" | "tokens" | "typography" | "buttons";
+type Route = "primitives" | "tokens" | "typography" | "buttons" | "icon-buttons";
 
 /** Section links that open their first page (Colors → Primitives). */
 const REDIRECTS: Record<string, Route> = { colors: "primitives" };
@@ -38,6 +38,11 @@ const pages: Record<Route, Page> = {
     title: "Buttons",
     description: buttonsIntro,
     render: renderButtons,
+  },
+  "icon-buttons": {
+    title: "Icon Button",
+    description: iconButtonsIntro,
+    render: renderIconButtons,
   },
 };
 
