@@ -1,46 +1,22 @@
-/* Semantic Tokens page */
-
-.tokens {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  margin-top: var(--space-5);
-}
-
-.token-category__title {
-  margin-bottom: var(--space-3);
-}
-
-/* Shared columns for the header and every row. */
-.token-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 120px 120px;
-  align-items: center;
-  column-gap: var(--space-4);
-  padding: var(--space-2) var(--space-3);
-}
-
-.token-head {
-  padding-bottom: var(--space-2);
-  border-bottom: 1px solid var(--color-border-default);
-  color: var(--color-text-tertiary);
-}
-
-.token-group__title {
-  margin: var(--space-4) 0 var(--space-1);
-  padding: 0 var(--space-3);
-  color: var(--color-text-secondary);
-}
+/*
+ * Semantic Tokens page — Figma "Design System - Web", node 289:1313
+ * ("_Token/Token" rows).
+ */
 
 .token-list {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  /* Figma: list starts 27px below the description. */
+  margin-top: 27px;
 }
 
-/* Row — same hover treatment as the sidebar nav items. */
 .token-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
   width: 100%;
+  padding: 6px;
   border: 0;
   border-radius: var(--layout-radius-item);
   background: none;
@@ -58,96 +34,55 @@
   outline-offset: 0;
 }
 
-.token-row__name {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.token-row__path {
-  color: var(--color-text-default);
-}
-
-.token-row__var,
-.token-row__alias {
-  overflow: hidden;
-  font-family: var(--font-family-mono);
-  font-size: var(--body-medium-strong-font-size);
-  line-height: var(--body-medium-strong-line-height);
-  font-weight: var(--font-weight-default);
-  color: var(--color-text-secondary);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.token-row__var.is-copied {
-  color: var(--color-text-success);
-}
-
-.token-row__value {
+.token-row__lead {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   min-width: 0;
 }
 
-/* Preview tile, rendered in its own theme (data-theme="light" | "dark"). */
-.token-preview {
-  --tile-outline: var(--color-black-100);
-
-  display: grid;
+.token-row__icon {
   flex: 0 0 auto;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-medium);
-  background: var(--surface, var(--color-bg-default));
-  box-shadow: inset 0 0 0 1px var(--tile-outline);
-  color: var(--token);
-  font-family: var(--font-family-default);
-  font-size: var(--body-medium-strong-font-size);
-  font-weight: var(--font-weight-strong);
-  line-height: 1;
 }
 
-.token-preview[data-theme="dark"] {
-  --tile-outline: var(--color-white-200);
+.token-row__name {
+  display: flex;
+  min-width: 0;
+  white-space: nowrap;
 }
 
-.token-preview[data-kind="bg"] {
-  background: var(--token);
+.token-row__prefix {
+  color: var(--color-text-default);
 }
 
-.token-preview[data-kind="border"] {
-  box-shadow: inset 0 0 0 1.5px var(--token);
+/* Figma binds the name to ✦/bg/disabled/default. */
+.token-row__rest {
+  overflow: hidden;
+  color: var(--color-bg-disabled);
+  text-overflow: ellipsis;
 }
 
-@media (max-width: 640px) {
-  .token-grid {
-    grid-template-columns: minmax(0, 1fr) 28px 28px;
-    column-gap: var(--space-3);
-  }
+.token-row__copied {
+  display: none;
+  color: var(--color-text-success);
+}
 
-  .token-head span:not(:first-child) {
-    font-size: 0;
-  }
+.token-row.is-copied .token-row__copied {
+  display: inline;
+}
 
-  .token-head span:nth-child(2)::after {
-    content: "L";
-    font-size: var(--body-medium-strong-font-size);
-  }
+/* Dark, Light — 20px, 4px apart. */
+.token-row__swatches {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--space-2);
+}
 
-  .token-head span:nth-child(3)::after {
-    content: "D";
-    font-size: var(--body-medium-strong-font-size);
-  }
-
-  .token-row__alias {
-    display: none;
-  }
-
-  .token-row__var {
-    white-space: normal;
-    overflow-wrap: anywhere;
-  }
+.token-swatch {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(var(--token), var(--token)), var(--color-bg-default);
+  /* Hairline so values matching the page (e.g. white) stay visible. */
+  box-shadow: inset 0 0 0 1px var(--color-black-100);
 }
