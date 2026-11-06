@@ -9,6 +9,7 @@
 import variables from "../../tokens/figma-variables.json";
 import { primitiveName, PRIMITIVE_PREFIX } from "../../scripts/token-names.mjs";
 import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
+import { agentLinks, COLOR_TOKENS_FILE } from "../lib/agent-links";
 import "../styles/pages/primitives.css";
 
 interface Shade {
@@ -65,6 +66,7 @@ export function renderPrimitives(body: HTMLElement) {
       const item = el("li");
       const swatch = el("button", "primitive-swatch");
       swatch.type = "button";
+      swatch.dataset.token = shade.cssVar;
       swatch.style.setProperty("--swatch", `var(${shade.cssVar})`);
       swatch.title = `${shade.family}/${shade.step} · ${shade.hex}`;
       swatch.setAttribute("aria-label", `${shade.family} ${shade.step}, ${shade.hex}. Copy var(${shade.cssVar})`);
@@ -81,5 +83,5 @@ export function renderPrimitives(body: HTMLElement) {
     list.append(row);
   }
 
-  body.append(list, status);
+  body.append(list, agentLinks([COLOR_TOKENS_FILE]), status);
 }

@@ -7,8 +7,10 @@
  * generated CSS variables.
  */
 import variables from "../../tokens/figma-variables.json";
-import { PRIMITIVE_PREFIX, SEMANTIC_PREFIX, semanticName } from "../../scripts/token-names.mjs";
+import colorRules from "../../tokens/color-rules.json";
+import { colorTokens } from "../../scripts/colors.mjs";
 import { copyToClipboard, createStatusRegion } from "../lib/copy";
+import { agentLinks, COLOR_TOKENS_FILE } from "../lib/agent-links";
 import "../styles/pages/tokens.css";
 
 type Mode = "light" | "dark";
@@ -24,34 +26,24 @@ interface Token {
   cssVar: string; // "--color-icon-secondary"
   prefix: string; // "icon-"
   name: string; // "secondary"
+  description: string; // when to use it (tokens/color-rules.json)
   values: Record<Mode, ModeValue>;
 }
 
+/** Semantic tokens from the shared source used for colors.json / llms.txt. */
 function readTokens(): Token[] {
-  const { modes, vars } = variables.Colors as { modes: string[]; vars: Record<string, unknown[]> };
-  const index: Record<Mode, number> = { light: modes.indexOf("Light"), dark: modes.indexOf("Dark") };
-
-  const resolve = (name: string, mode: Mode): ModeValue => {
-    const raw = vars[name][index[mode]] as { alias?: string } | string;
-    if (typeof raw === "object" && raw.alias) {
-      return { alias: raw.alias.replace(PRIMITIVE_PREFIX, ""), hex: resolve(raw.alias, mode).hex };
-    }
-    return { alias: name.replace(PRIMITIVE_PREFIX, ""), hex: String(raw) };
-  };
-
-  return Object.keys(vars)
-    .filter((name) => name.startsWith(SEMANTIC_PREFIX))
-    .map((name) => {
-      const cssVar = semanticName(name);
-      const short = cssVar.replace("--color-", ""); // "icon-secondary"
-      const dash = short.indexOf("-");
-      return {
-        cssVar,
-        prefix: short.slice(0, dash + 1),
-        name: short.slice(dash + 1),
-        values: { light: resolve(name, "light"), dark: resolve(name, "dark") },
-      };
-    });
+  return colorTokens(variables, colorRules).semantic.map((t) => {
+    const short = t.cssVariable.replace("--color-", ""); // "icon-secondary"
+    const dash = short.indexOf("-");
+    const value = (mode: Mode): ModeValue => ({ alias: t.aliases[mode] ?? t.values[mode], hex: t.values[mode] });
+    return {
+      cssVar: t.cssVariable,
+      prefix: short.slice(0, dash + 1),
+      name: short.slice(dash + 1),
+      description: t.description,
+      values: { light: value("light"), dark: value("dark") },
+    };
+  });
 }
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) {
@@ -73,11 +65,12 @@ export function renderTokens(body: HTMLElement) {
     const row = el("button", "token-row");
     row.type = "button";
     const { light, dark } = token.values;
-    row.title = `var(${token.cssVar})\nDark: ${dark.alias} · ${dark.hex}\nLight: ${light.alias} · ${light.hex}`;
+    row.title = `var(${token.cssVar})\n${token.description}\nDark: ${dark.alias} · ${dark.hex}\nLight: ${light.alias} · ${light.hex}`;
     row.setAttribute(
       "aria-label",
-      `${token.prefix}${token.name}: dark ${dark.alias}, light ${light.alias}. Copy var(${token.cssVar})`,
+      `${token.prefix}${token.name}: ${token.description} Dark ${dark.alias}, light ${light.alias}. Copy var(${token.cssVar})`,
     );
+    row.dataset.token = token.cssVar;
 
     const lead = el("span", "token-row__lead");
     const icon = el("img", "token-row__icon");
@@ -113,5 +106,5 @@ export function renderTokens(body: HTMLElement) {
     list.append(item);
   }
 
-  body.append(list, status);
+  body.append(list, agentLinks([COLOR_TOKENS_FILE]), status);
 }

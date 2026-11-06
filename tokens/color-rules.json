@@ -1,0 +1,52 @@
+{
+  "$comment": "Usage rules for color tokens. Values come from figma-variables.json; this file only says when to use what. Each semantic token's description is composed from its category, group and variant. Published to public/tokens/colors.json and public/llms.txt by `npm run tokens`.",
+  "rules": [
+    "Use semantic tokens (var(--color-bg-*), --color-text-*, --color-icon-*, --color-border-*) in components. Never use primitives or hex values directly.",
+    "Primitives (--color-<family>-<step>) only define what semantic tokens point to; add or change a semantic token in Figma rather than reaching for a primitive.",
+    "Match the category to the property: bg-* for backgrounds, text-* for text, icon-* for icons, border-* for borders and dividers.",
+    "Text and icons placed on a danger, warning or success fill use the matching on* tokens (e.g. --color-text-danger-ondanger on --color-bg-danger).",
+    "Use inverse tokens together: --color-text-inverse / --color-icon-inverse on --color-bg-inverse.",
+    "Interactive states use the -hover and -pressed variants of the same token, never a different hue.",
+    "Dark mode: semantic tokens switch automatically inside [data-theme=\"dark\"]; don't add separate dark styles."
+  ],
+  "primitives": {
+    "description": "Raw color scales from 100 (lightest) to 1000 (darkest). black and white are transparent scales (opacity steps); the others are solid. Some chromatic primitives have different values in dark mode.",
+    "families": {
+      "black": "Black at increasing opacity — overlays, shadows, and neutral text/icon tints on light surfaces.",
+      "white": "White at increasing opacity — overlays and text/icon tints on dark or colored surfaces.",
+      "grey": "Solid neutrals for surfaces, borders and disabled states.",
+      "red": "Danger and error colors.",
+      "orange": "Accent orange (not yet used by any semantic token).",
+      "green": "Success colors.",
+      "yellow": "Warning colors."
+    }
+  },
+  "semantic": {
+    "categories": {
+      "bg": "Background fill",
+      "text": "Text color",
+      "icon": "Icon color",
+      "border": "Border and divider color"
+    },
+    "groups": {
+      "default": "neutral UI",
+      "disabled": "disabled elements",
+      "danger": "destructive actions and errors",
+      "warning": "warnings and caution",
+      "success": "success and confirmation"
+    },
+    "variants": {
+      "default": "the standard state",
+      "hover": "hover state",
+      "pressed": "pressed (active) state",
+      "secondary": "secondary, less prominent",
+      "secondary-hover": "hover state of the secondary variant",
+      "tertiary": "tertiary, least prominent",
+      "tertiary-hover": "hover state of the tertiary variant",
+      "inverse": "on inverse (dark-on-light / light-on-dark) surfaces",
+      "inverse-hover": "hover state on inverse surfaces",
+      "strong": "higher-contrast emphasis"
+    },
+    "onVariant": "placed on a {group} fill (--color-bg-{group})"
+  }
+}

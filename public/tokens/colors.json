@@ -1,0 +1,2629 @@
+{
+  "$description": "A/W Design System colors. Generated from Figma (Foundation – UI 2) by scripts/build-tokens.mjs. $value is light mode; see $extensions['design.aw'].modes for light and dark. Use semantic tokens in components.",
+  "$extensions": {
+    "design.aw": {
+      "rules": [
+        "Use semantic tokens (var(--color-bg-*), --color-text-*, --color-icon-*, --color-border-*) in components. Never use primitives or hex values directly.",
+        "Primitives (--color-<family>-<step>) only define what semantic tokens point to; add or change a semantic token in Figma rather than reaching for a primitive.",
+        "Match the category to the property: bg-* for backgrounds, text-* for text, icon-* for icons, border-* for borders and dividers.",
+        "Text and icons placed on a danger, warning or success fill use the matching on* tokens (e.g. --color-text-danger-ondanger on --color-bg-danger).",
+        "Use inverse tokens together: --color-text-inverse / --color-icon-inverse on --color-bg-inverse.",
+        "Interactive states use the -hover and -pressed variants of the same token, never a different hue.",
+        "Dark mode: semantic tokens switch automatically inside [data-theme=\"dark\"]; don't add separate dark styles."
+      ],
+      "modes": [
+        "light",
+        "dark"
+      ],
+      "defaultMode": "light",
+      "darkModeSelector": "[data-theme=\"dark\"]"
+    }
+  },
+  "primitive": {
+    "$description": "Raw color scales from 100 (lightest) to 1000 (darkest). black and white are transparent scales (opacity steps); the others are solid. Some chromatic primitives have different values in dark mode.",
+    "black": {
+      "100": {
+        "$type": "color",
+        "$value": "#0000000d",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-100",
+            "figmaVariable": "🎨/black/100",
+            "modes": {
+              "light": "#0000000d",
+              "dark": "#0000000d"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#0000001a",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-200",
+            "figmaVariable": "🎨/black/200",
+            "modes": {
+              "light": "#0000001a",
+              "dark": "#0000001a"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#00000033",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-300",
+            "figmaVariable": "🎨/black/300",
+            "modes": {
+              "light": "#00000033",
+              "dark": "#00000033"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#0000004d",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-400",
+            "figmaVariable": "🎨/black/400",
+            "modes": {
+              "light": "#0000004d",
+              "dark": "#0000004d"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#00000080",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-500",
+            "figmaVariable": "🎨/black/500",
+            "modes": {
+              "light": "#00000080",
+              "dark": "#00000080"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#000000cc",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-600",
+            "figmaVariable": "🎨/black/600",
+            "modes": {
+              "light": "#000000cc",
+              "dark": "#000000cc"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#000000d9",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-700",
+            "figmaVariable": "🎨/black/700",
+            "modes": {
+              "light": "#000000d9",
+              "dark": "#000000d9"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#000000e5",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-800",
+            "figmaVariable": "🎨/black/800",
+            "modes": {
+              "light": "#000000e5",
+              "dark": "#000000e5"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#000000f2",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-900",
+            "figmaVariable": "🎨/black/900",
+            "modes": {
+              "light": "#000000f2",
+              "dark": "#000000f2"
+            }
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#000000",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-black-1000",
+            "figmaVariable": "🎨/black/1000",
+            "modes": {
+              "light": "#000000",
+              "dark": "#000000"
+            }
+          }
+        }
+      },
+      "$description": "Black at increasing opacity — overlays, shadows, and neutral text/icon tints on light surfaces."
+    },
+    "white": {
+      "100": {
+        "$type": "color",
+        "$value": "#ffffff0d",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-100",
+            "figmaVariable": "🎨/white/100",
+            "modes": {
+              "light": "#ffffff0d",
+              "dark": "#ffffff0d"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#ffffff1a",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-200",
+            "figmaVariable": "🎨/white/200",
+            "modes": {
+              "light": "#ffffff1a",
+              "dark": "#ffffff1a"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#ffffff33",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-300",
+            "figmaVariable": "🎨/white/300",
+            "modes": {
+              "light": "#ffffff33",
+              "dark": "#ffffff33"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#ffffff66",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-400",
+            "figmaVariable": "🎨/white/400",
+            "modes": {
+              "light": "#ffffff66",
+              "dark": "#ffffff66"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#ffffffb2",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-500",
+            "figmaVariable": "🎨/white/500",
+            "modes": {
+              "light": "#ffffffb2",
+              "dark": "#ffffffb2"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#ffffffcc",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-600",
+            "figmaVariable": "🎨/white/600",
+            "modes": {
+              "light": "#ffffffcc",
+              "dark": "#ffffffcc"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#ffffffd9",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-700",
+            "figmaVariable": "🎨/white/700",
+            "modes": {
+              "light": "#ffffffd9",
+              "dark": "#ffffffd9"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#ffffffe5",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-800",
+            "figmaVariable": "🎨/white/800",
+            "modes": {
+              "light": "#ffffffe5",
+              "dark": "#ffffffe5"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#fffffff2",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-900",
+            "figmaVariable": "🎨/white/900",
+            "modes": {
+              "light": "#fffffff2",
+              "dark": "#fffffff2"
+            }
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-white-1000",
+            "figmaVariable": "🎨/white/1000",
+            "modes": {
+              "light": "#ffffff",
+              "dark": "#ffffff"
+            }
+          }
+        }
+      },
+      "$description": "White at increasing opacity — overlays and text/icon tints on dark or colored surfaces."
+    },
+    "red": {
+      "100": {
+        "$type": "color",
+        "$value": "#fff5f5",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-100",
+            "figmaVariable": "🎨/red/100",
+            "modes": {
+              "light": "#fff5f5",
+              "dark": "#fee7e7"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#ffe2e0",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-200",
+            "figmaVariable": "🎨/red/200",
+            "modes": {
+              "light": "#ffe2e0",
+              "dark": "#fccdca"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#ffc7c2",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-300",
+            "figmaVariable": "🎨/red/300",
+            "modes": {
+              "light": "#ffc7c2",
+              "dark": "#fbbcb6"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#ffafa3",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-400",
+            "figmaVariable": "🎨/red/400",
+            "modes": {
+              "light": "#ffafa3",
+              "dark": "#fca397"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#f24822",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-500",
+            "figmaVariable": "🎨/red/500",
+            "modes": {
+              "light": "#f24822",
+              "dark": "#e03e1a"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#dc3412",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-600",
+            "figmaVariable": "🎨/red/600",
+            "modes": {
+              "light": "#dc3412",
+              "dark": "#c4381c"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#bd2915",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-700",
+            "figmaVariable": "🎨/red/700",
+            "modes": {
+              "light": "#bd2915",
+              "dark": "#963323"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#9f1f18",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-800",
+            "figmaVariable": "🎨/red/800",
+            "modes": {
+              "light": "#9f1f18",
+              "dark": "#7c2622"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#771208",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-900",
+            "figmaVariable": "🎨/red/900",
+            "modes": {
+              "light": "#771208",
+              "dark": "#54211c"
+            }
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#660e0b",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-red-1000",
+            "figmaVariable": "🎨/red/1000",
+            "modes": {
+              "light": "#660e0b",
+              "dark": "#311817"
+            }
+          }
+        }
+      },
+      "$description": "Danger and error colors."
+    },
+    "orange": {
+      "100": {
+        "$type": "color",
+        "$value": "#fff4e5",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-100",
+            "figmaVariable": "🎨/orange/100",
+            "modes": {
+              "light": "#fff4e5",
+              "dark": "#ffedd7"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#ffe0c2",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-200",
+            "figmaVariable": "🎨/orange/200",
+            "modes": {
+              "light": "#ffe0c2",
+              "dark": "#fdd9b4"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#fcd19c",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-300",
+            "figmaVariable": "🎨/orange/300",
+            "modes": {
+              "light": "#fcd19c",
+              "dark": "#fcc67f"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#ffc470",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-400",
+            "figmaVariable": "🎨/orange/400",
+            "modes": {
+              "light": "#ffc470",
+              "dark": "#fcb34a"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#ffa629",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-500",
+            "figmaVariable": "🎨/orange/500",
+            "modes": {
+              "light": "#ffa629",
+              "dark": "#de7d02"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#fc9e24",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-600",
+            "figmaVariable": "🎨/orange/600",
+            "modes": {
+              "light": "#fc9e24",
+              "dark": "#c86f04"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#f79722",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-700",
+            "figmaVariable": "🎨/orange/700",
+            "modes": {
+              "light": "#f79722",
+              "dark": "#ad5f05"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#dd7c0e",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-800",
+            "figmaVariable": "🎨/orange/800",
+            "modes": {
+              "light": "#dd7c0e",
+              "dark": "#985306"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#ce7012",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-900",
+            "figmaVariable": "🎨/orange/900",
+            "modes": {
+              "light": "#ce7012",
+              "dark": "#673806"
+            }
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#8a480f",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-orange-1000",
+            "figmaVariable": "🎨/orange/1000",
+            "modes": {
+              "light": "#8a480f",
+              "dark": "#371d06"
+            }
+          }
+        }
+      },
+      "$description": "Accent orange (not yet used by any semantic token)."
+    },
+    "green": {
+      "100": {
+        "$type": "color",
+        "$value": "#ebffee",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-100",
+            "figmaVariable": "🎨/green/100",
+            "modes": {
+              "light": "#ebffee",
+              "dark": "#ddfde2"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#cff7d3",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-200",
+            "figmaVariable": "🎨/green/200",
+            "modes": {
+              "light": "#cff7d3",
+              "dark": "#beefc2"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#aff4c6",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-300",
+            "figmaVariable": "🎨/green/300",
+            "modes": {
+              "light": "#aff4c6",
+              "dark": "#a1e8b9"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#85e0a3",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-400",
+            "figmaVariable": "🎨/green/400",
+            "modes": {
+              "light": "#85e0a3",
+              "dark": "#79d297"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#14ae5c",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-500",
+            "figmaVariable": "🎨/green/500",
+            "modes": {
+              "light": "#14ae5c",
+              "dark": "#198f51"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#009951",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-600",
+            "figmaVariable": "🎨/green/600",
+            "modes": {
+              "light": "#009951",
+              "dark": "#078348"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#008043",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-700",
+            "figmaVariable": "🎨/green/700",
+            "modes": {
+              "light": "#008043",
+              "dark": "#0a5c35"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#036838",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-800",
+            "figmaVariable": "🎨/green/800",
+            "modes": {
+              "light": "#036838",
+              "dark": "#0a4c2d"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#024626",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-900",
+            "figmaVariable": "🎨/green/900",
+            "modes": {
+              "light": "#024626",
+              "dark": "#082618"
+            }
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#083a23",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-green-1000",
+            "figmaVariable": "🎨/green/1000",
+            "modes": {
+              "light": "#083a23",
+              "dark": "#0b1e15"
+            }
+          }
+        }
+      },
+      "$description": "Success colors."
+    },
+    "yellow": {
+      "100": {
+        "$type": "color",
+        "$value": "#fffbeb",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-100",
+            "figmaVariable": "🎨/yellow/100",
+            "modes": {
+              "light": "#fffbeb",
+              "dark": "#fdf7dd"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#fff1c2",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-200",
+            "figmaVariable": "🎨/yellow/200",
+            "modes": {
+              "light": "#fff1c2",
+              "dark": "#fbe8ad"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#ffe8a3",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-300",
+            "figmaVariable": "🎨/yellow/300",
+            "modes": {
+              "light": "#ffe8a3",
+              "dark": "#f9df90"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#ffd966",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-400",
+            "figmaVariable": "🎨/yellow/400",
+            "modes": {
+              "light": "#ffd966",
+              "dark": "#ffcd29"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#ffcd29",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-500",
+            "figmaVariable": "🎨/yellow/500",
+            "modes": {
+              "light": "#ffcd29",
+              "dark": "#f3c11b"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#ffc21a",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-600",
+            "figmaVariable": "🎨/yellow/600",
+            "modes": {
+              "light": "#ffc21a",
+              "dark": "#f2b50d"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#fab815",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-700",
+            "figmaVariable": "🎨/yellow/700",
+            "modes": {
+              "light": "#fab815",
+              "dark": "#e4a711"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#eba611",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-800",
+            "figmaVariable": "🎨/yellow/800",
+            "modes": {
+              "light": "#eba611",
+              "dark": "#c58011"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#dd940e",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-900",
+            "figmaVariable": "🎨/yellow/900",
+            "modes": {
+              "light": "#dd940e",
+              "dark": "#925711"
+            }
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#b86200",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-yellow-1000",
+            "figmaVariable": "🎨/yellow/1000",
+            "modes": {
+              "light": "#b86200",
+              "dark": "#71440f"
+            }
+          }
+        }
+      },
+      "$description": "Warning colors."
+    },
+    "grey": {
+      "100": {
+        "$type": "color",
+        "$value": "#f5f5f5",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-100",
+            "figmaVariable": "🎨/grey/100",
+            "modes": {
+              "light": "#f5f5f5",
+              "dark": "#f5f5f5"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#e6e6e6",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-200",
+            "figmaVariable": "🎨/grey/200",
+            "modes": {
+              "light": "#e6e6e6",
+              "dark": "#e6e6e6"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#d9d9d9",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-300",
+            "figmaVariable": "🎨/grey/300",
+            "modes": {
+              "light": "#d9d9d9",
+              "dark": "#d9d9d9"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#b3b3b3",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-400",
+            "figmaVariable": "🎨/grey/400",
+            "modes": {
+              "light": "#b3b3b3",
+              "dark": "#b3b3b3"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#757575",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-500",
+            "figmaVariable": "🎨/grey/500",
+            "modes": {
+              "light": "#757575",
+              "dark": "#757575"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#444444",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-600",
+            "figmaVariable": "🎨/grey/600",
+            "modes": {
+              "light": "#444444",
+              "dark": "#444444"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#383838",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-700",
+            "figmaVariable": "🎨/grey/700",
+            "modes": {
+              "light": "#383838",
+              "dark": "#383838"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#2c2c2c",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-800",
+            "figmaVariable": "🎨/grey/800",
+            "modes": {
+              "light": "#2c2c2c",
+              "dark": "#2c2c2c"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#1e1e1e",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-900",
+            "figmaVariable": "🎨/grey/900",
+            "modes": {
+              "light": "#1e1e1e",
+              "dark": "#1e1e1e"
+            }
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#111111",
+        "$extensions": {
+          "design.aw": {
+            "cssVariable": "--color-grey-1000",
+            "figmaVariable": "🎨/grey/1000",
+            "modes": {
+              "light": "#111111",
+              "dark": "#111111"
+            }
+          }
+        }
+      },
+      "$description": "Solid neutrals for surfaces, borders and disabled states."
+    }
+  },
+  "semantic": {
+    "$description": "Purpose-named tokens that point to primitives per mode. Use these in components.",
+    "bg": {
+      "default": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.white.1000}",
+          "$description": "Background fill for neutral UI — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-default",
+              "figmaVariable": "✦/bg/default/default",
+              "modes": {
+                "light": "{primitive.white.1000}",
+                "dark": "{primitive.grey.1000}"
+              },
+              "resolved": {
+                "light": "#ffffff",
+                "dark": "#111111"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.grey.100}",
+          "$description": "Background fill for neutral UI — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-secondary",
+              "figmaVariable": "✦/bg/default/secondary",
+              "modes": {
+                "light": "{primitive.grey.100}",
+                "dark": "{primitive.grey.900}"
+              },
+              "resolved": {
+                "light": "#f5f5f5",
+                "dark": "#1e1e1e"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.grey.200}",
+          "$description": "Background fill for neutral UI — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-hover",
+              "figmaVariable": "✦/bg/default/hover",
+              "modes": {
+                "light": "{primitive.grey.200}",
+                "dark": "{primitive.grey.800}"
+              },
+              "resolved": {
+                "light": "#e6e6e6",
+                "dark": "#2c2c2c"
+              }
+            }
+          }
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{primitive.grey.100}",
+          "$description": "Background fill for neutral UI — pressed (active) state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-pressed",
+              "figmaVariable": "✦/bg/default/pressed",
+              "modes": {
+                "light": "{primitive.grey.100}",
+                "dark": "{primitive.grey.800}"
+              },
+              "resolved": {
+                "light": "#f5f5f5",
+                "dark": "#2c2c2c"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.grey.200}",
+          "$description": "Background fill for neutral UI — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-tertiary",
+              "figmaVariable": "✦/bg/default/tertiary",
+              "modes": {
+                "light": "{primitive.grey.200}",
+                "dark": "{primitive.grey.900}"
+              },
+              "resolved": {
+                "light": "#e6e6e6",
+                "dark": "#1e1e1e"
+              }
+            }
+          }
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "{primitive.grey.1000}",
+          "$description": "Background fill for neutral UI — on inverse (dark-on-light / light-on-dark) surfaces.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-inverse",
+              "figmaVariable": "✦/bg/default/inverse",
+              "modes": {
+                "light": "{primitive.grey.1000}",
+                "dark": "{primitive.grey.100}"
+              },
+              "resolved": {
+                "light": "#111111",
+                "dark": "#f5f5f5"
+              }
+            }
+          }
+        },
+        "inverse-hover": {
+          "$type": "color",
+          "$value": "{primitive.grey.900}",
+          "$description": "Background fill for neutral UI — hover state on inverse surfaces.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-inverse-hover",
+              "figmaVariable": "✦/bg/default/inverse-hover",
+              "modes": {
+                "light": "{primitive.grey.900}",
+                "dark": "{primitive.grey.300}"
+              },
+              "resolved": {
+                "light": "#1e1e1e",
+                "dark": "#d9d9d9"
+              }
+            }
+          }
+        }
+      },
+      "disabled": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.grey.300}",
+          "$description": "Background fill for disabled elements — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-disabled",
+              "figmaVariable": "✦/bg/disabled/default",
+              "modes": {
+                "light": "{primitive.grey.300}",
+                "dark": "{primitive.grey.500}"
+              },
+              "resolved": {
+                "light": "#d9d9d9",
+                "dark": "#757575"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.grey.400}",
+          "$description": "Background fill for disabled elements — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-disabled-secondary",
+              "figmaVariable": "✦/bg/disabled/secondary",
+              "modes": {
+                "light": "{primitive.grey.400}",
+                "dark": "{primitive.grey.400}"
+              },
+              "resolved": {
+                "light": "#b3b3b3",
+                "dark": "#b3b3b3"
+              }
+            }
+          }
+        }
+      },
+      "danger": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.red.500}",
+          "$description": "Background fill for destructive actions and errors — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-danger",
+              "figmaVariable": "✦/bg/danger/default",
+              "modes": {
+                "light": "{primitive.red.500}",
+                "dark": "{primitive.red.500}"
+              },
+              "resolved": {
+                "light": "#f24822",
+                "dark": "#e03e1a"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Background fill for destructive actions and errors — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-danger-hover",
+              "figmaVariable": "✦/bg/danger/hover",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.600}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#c4381c"
+              }
+            }
+          }
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Background fill for destructive actions and errors — pressed (active) state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-danger-pressed",
+              "figmaVariable": "✦/bg/danger/pressed",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.600}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#c4381c"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.red.700}",
+          "$description": "Background fill for destructive actions and errors — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-danger-secondary",
+              "figmaVariable": "✦/bg/danger/secondary",
+              "modes": {
+                "light": "{primitive.red.700}",
+                "dark": "{primitive.red.700}"
+              },
+              "resolved": {
+                "light": "#bd2915",
+                "dark": "#963323"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.red.200}",
+          "$description": "Background fill for destructive actions and errors — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-danger-tertiary",
+              "figmaVariable": "✦/bg/danger/tertiary",
+              "modes": {
+                "light": "{primitive.red.200}",
+                "dark": "{primitive.red.900}"
+              },
+              "resolved": {
+                "light": "#ffe2e0",
+                "dark": "#54211c"
+              }
+            }
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Background fill for success and confirmation — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-success",
+              "figmaVariable": "✦/bg/success/default",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.500}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#198f51"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.green.500}",
+          "$description": "Background fill for success and confirmation — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-success-hover",
+              "figmaVariable": "✦/bg/success/hover",
+              "modes": {
+                "light": "{primitive.green.500}",
+                "dark": "{primitive.green.600}"
+              },
+              "resolved": {
+                "light": "#14ae5c",
+                "dark": "#078348"
+              }
+            }
+          }
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{primitive.green.500}",
+          "$description": "Background fill for success and confirmation — pressed (active) state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-success-pressed",
+              "figmaVariable": "✦/bg/success/pressed",
+              "modes": {
+                "light": "{primitive.green.500}",
+                "dark": "{primitive.green.600}"
+              },
+              "resolved": {
+                "light": "#14ae5c",
+                "dark": "#078348"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.green.700}",
+          "$description": "Background fill for success and confirmation — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-success-secondary",
+              "figmaVariable": "✦/bg/success/secondary",
+              "modes": {
+                "light": "{primitive.green.700}",
+                "dark": "{primitive.green.700}"
+              },
+              "resolved": {
+                "light": "#008043",
+                "dark": "#0a5c35"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.green.200}",
+          "$description": "Background fill for success and confirmation — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-success-tertiary",
+              "figmaVariable": "✦/bg/success/tertiary",
+              "modes": {
+                "light": "{primitive.green.200}",
+                "dark": "{primitive.green.900}"
+              },
+              "resolved": {
+                "light": "#cff7d3",
+                "dark": "#082618"
+              }
+            }
+          }
+        }
+      },
+      "warning": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.yellow.500}",
+          "$description": "Background fill for warnings and caution — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-warning",
+              "figmaVariable": "✦/bg/warning/default",
+              "modes": {
+                "light": "{primitive.yellow.500}",
+                "dark": "{primitive.yellow.500}"
+              },
+              "resolved": {
+                "light": "#ffcd29",
+                "dark": "#f3c11b"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.yellow.500}",
+          "$description": "Background fill for warnings and caution — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-warning-hover",
+              "figmaVariable": "✦/bg/warning/hover",
+              "modes": {
+                "light": "{primitive.yellow.500}",
+                "dark": "{primitive.yellow.600}"
+              },
+              "resolved": {
+                "light": "#ffcd29",
+                "dark": "#f2b50d"
+              }
+            }
+          }
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{primitive.yellow.600}",
+          "$description": "Background fill for warnings and caution — pressed (active) state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-warning-pressed",
+              "figmaVariable": "✦/bg/warning/pressed",
+              "modes": {
+                "light": "{primitive.yellow.600}",
+                "dark": "{primitive.yellow.600}"
+              },
+              "resolved": {
+                "light": "#ffc21a",
+                "dark": "#f2b50d"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.yellow.700}",
+          "$description": "Background fill for warnings and caution — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-warning-secondary",
+              "figmaVariable": "✦/bg/warning/secondary",
+              "modes": {
+                "light": "{primitive.yellow.700}",
+                "dark": "{primitive.yellow.700}"
+              },
+              "resolved": {
+                "light": "#fab815",
+                "dark": "#e4a711"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.yellow.200}",
+          "$description": "Background fill for warnings and caution — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-warning-tertiary",
+              "figmaVariable": "✦/bg/warning/tertiary",
+              "modes": {
+                "light": "{primitive.yellow.200}",
+                "dark": "{primitive.yellow.900}"
+              },
+              "resolved": {
+                "light": "#fff1c2",
+                "dark": "#925711"
+              }
+            }
+          }
+        }
+      }
+    },
+    "text": {
+      "default": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Text color for neutral UI — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-default",
+              "figmaVariable": "✦/text/default/default",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Text color for neutral UI — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-hover",
+              "figmaVariable": "✦/text/default/hover",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.black.500}",
+          "$description": "Text color for neutral UI — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-secondary",
+              "figmaVariable": "✦/text/default/secondary",
+              "modes": {
+                "light": "{primitive.black.500}",
+                "dark": "{primitive.white.500}"
+              },
+              "resolved": {
+                "light": "#00000080",
+                "dark": "#ffffffb2"
+              }
+            }
+          }
+        },
+        "secondary-hover": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Text color for neutral UI — hover state of the secondary variant.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-secondary-hover",
+              "figmaVariable": "✦/text/default/secondary-hover",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.black.400}",
+          "$description": "Text color for neutral UI — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-tertiary",
+              "figmaVariable": "✦/text/default/tertiary",
+              "modes": {
+                "light": "{primitive.black.400}",
+                "dark": "{primitive.white.400}"
+              },
+              "resolved": {
+                "light": "#0000004d",
+                "dark": "#ffffff66"
+              }
+            }
+          }
+        },
+        "tertiary-hover": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Text color for neutral UI — hover state of the tertiary variant.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-tertiary-hover",
+              "figmaVariable": "✦/text/default/tertiary-hover",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "{primitive.white.1000}",
+          "$description": "Text color for neutral UI — on inverse (dark-on-light / light-on-dark) surfaces.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-inverse",
+              "figmaVariable": "✦/text/default/inverse",
+              "modes": {
+                "light": "{primitive.white.1000}",
+                "dark": "{primitive.black.800}"
+              },
+              "resolved": {
+                "light": "#ffffff",
+                "dark": "#000000e5"
+              }
+            }
+          }
+        }
+      },
+      "danger": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Text color for destructive actions and errors — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-danger",
+              "figmaVariable": "✦/text/danger/default",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.400}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#fca397"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Text color for destructive actions and errors — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-danger-hover",
+              "figmaVariable": "✦/text/danger/hover",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.400}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#fca397"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Text color for destructive actions and errors — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-danger-secondary",
+              "figmaVariable": "✦/text/danger/secondary",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.400}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#fca397"
+              }
+            }
+          }
+        },
+        "ondanger": {
+          "$type": "color",
+          "$value": "{primitive.white.1000}",
+          "$description": "Text color for destructive actions and errors — placed on a danger fill (--color-bg-danger).",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-danger-ondanger",
+              "figmaVariable": "✦/text/danger/ondanger",
+              "modes": {
+                "light": "{primitive.white.1000}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#ffffff",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "ondanger-secondary": {
+          "$type": "color",
+          "$value": "{primitive.white.600}",
+          "$description": "Text color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-danger-ondanger-secondary",
+              "figmaVariable": "✦/text/danger/ondanger-secondary",
+              "modes": {
+                "light": "{primitive.white.600}",
+                "dark": "{primitive.white.600}"
+              },
+              "resolved": {
+                "light": "#ffffffcc",
+                "dark": "#ffffffcc"
+              }
+            }
+          }
+        },
+        "ondanger-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.white.400}",
+          "$description": "Text color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-danger-ondanger-tertiary",
+              "figmaVariable": "✦/text/danger/ondanger-tertiary",
+              "modes": {
+                "light": "{primitive.white.400}",
+                "dark": "{primitive.white.400}"
+              },
+              "resolved": {
+                "light": "#ffffff66",
+                "dark": "#ffffff66"
+              }
+            }
+          }
+        }
+      },
+      "warning": {
+        "onwarning": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Text color for warnings and caution — placed on a warning fill (--color-bg-warning).",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-warning-onwarning",
+              "figmaVariable": "✦/text/warning/onwarning",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.black.800}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#000000e5"
+              }
+            }
+          }
+        },
+        "onwarning-secondary": {
+          "$type": "color",
+          "$value": "{primitive.black.500}",
+          "$description": "Text color for warnings and caution — placed on a warning fill (--color-bg-warning) — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-warning-onwarning-secondary",
+              "figmaVariable": "✦/text/warning/onwarning-secondary",
+              "modes": {
+                "light": "{primitive.black.500}",
+                "dark": "{primitive.black.500}"
+              },
+              "resolved": {
+                "light": "#00000080",
+                "dark": "#00000080"
+              }
+            }
+          }
+        },
+        "onwarning-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.black.400}",
+          "$description": "Text color for warnings and caution — placed on a warning fill (--color-bg-warning) — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-warning-onwarning-tertiary",
+              "figmaVariable": "✦/text/warning/onwarning-tertiary",
+              "modes": {
+                "light": "{primitive.black.400}",
+                "dark": "{primitive.black.400}"
+              },
+              "resolved": {
+                "light": "#0000004d",
+                "dark": "#0000004d"
+              }
+            }
+          }
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.yellow.1000}",
+          "$description": "Text color for warnings and caution — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-warning",
+              "figmaVariable": "✦/text/warning/default",
+              "modes": {
+                "light": "{primitive.yellow.1000}",
+                "dark": "{primitive.yellow.400}"
+              },
+              "resolved": {
+                "light": "#b86200",
+                "dark": "#ffcd29"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.yellow.1000}",
+          "$description": "Text color for warnings and caution — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-warning-secondary",
+              "figmaVariable": "✦/text/warning/secondary",
+              "modes": {
+                "light": "{primitive.yellow.1000}",
+                "dark": "{primitive.yellow.400}"
+              },
+              "resolved": {
+                "light": "#b86200",
+                "dark": "#ffcd29"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.yellow.1000}",
+          "$description": "Text color for warnings and caution — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-warning-tertiary",
+              "figmaVariable": "✦/text/warning/tertiary",
+              "modes": {
+                "light": "{primitive.yellow.1000}",
+                "dark": "{primitive.yellow.400}"
+              },
+              "resolved": {
+                "light": "#b86200",
+                "dark": "#ffcd29"
+              }
+            }
+          }
+        }
+      },
+      "success": {
+        "onwarning": {
+          "$type": "color",
+          "$value": "{primitive.white.1000}",
+          "$description": "Text color for success and confirmation — placed on a success fill (--color-bg-success).",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-success-onwarning",
+              "figmaVariable": "✦/text/success/onwarning",
+              "modes": {
+                "light": "{primitive.white.1000}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#ffffff",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "onwarning-secondary": {
+          "$type": "color",
+          "$value": "{primitive.white.600}",
+          "$description": "Text color for success and confirmation — placed on a success fill (--color-bg-success) — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-success-onwarning-secondary",
+              "figmaVariable": "✦/text/success/onwarning-secondary",
+              "modes": {
+                "light": "{primitive.white.600}",
+                "dark": "{primitive.white.600}"
+              },
+              "resolved": {
+                "light": "#ffffffcc",
+                "dark": "#ffffffcc"
+              }
+            }
+          }
+        },
+        "onwarning-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.white.400}",
+          "$description": "Text color for success and confirmation — placed on a success fill (--color-bg-success) — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-success-onwarning-tertiary",
+              "figmaVariable": "✦/text/success/onwarning-tertiary",
+              "modes": {
+                "light": "{primitive.white.400}",
+                "dark": "{primitive.white.400}"
+              },
+              "resolved": {
+                "light": "#ffffff66",
+                "dark": "#ffffff66"
+              }
+            }
+          }
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Text color for success and confirmation — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-success",
+              "figmaVariable": "✦/text/success/default",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.400}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#79d297"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Text color for success and confirmation — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-success-secondary",
+              "figmaVariable": "✦/text/success/secondary",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.400}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#79d297"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Text color for success and confirmation — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-text-success-tertiary",
+              "figmaVariable": "✦/text/success/tertiary",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.400}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#79d297"
+              }
+            }
+          }
+        }
+      }
+    },
+    "icon": {
+      "default": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Icon color for neutral UI — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-default",
+              "figmaVariable": "✦/icon/default/default",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Icon color for neutral UI — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-hover",
+              "figmaVariable": "✦/icon/default/hover",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.black.500}",
+          "$description": "Icon color for neutral UI — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-secondary",
+              "figmaVariable": "✦/icon/default/secondary",
+              "modes": {
+                "light": "{primitive.black.500}",
+                "dark": "{primitive.white.500}"
+              },
+              "resolved": {
+                "light": "#00000080",
+                "dark": "#ffffffb2"
+              }
+            }
+          }
+        },
+        "secondary-hover": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Icon color for neutral UI — hover state of the secondary variant.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-secondary-hover",
+              "figmaVariable": "✦/icon/default/secondary-hover",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.black.400}",
+          "$description": "Icon color for neutral UI — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-tertiary",
+              "figmaVariable": "✦/icon/default/tertiary",
+              "modes": {
+                "light": "{primitive.black.400}",
+                "dark": "{primitive.white.400}"
+              },
+              "resolved": {
+                "light": "#0000004d",
+                "dark": "#ffffff66"
+              }
+            }
+          }
+        },
+        "tertiary-hover": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Icon color for neutral UI — hover state of the tertiary variant.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-tertiary-hover",
+              "figmaVariable": "✦/icon/default/tertiary-hover",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "{primitive.white.1000}",
+          "$description": "Icon color for neutral UI — on inverse (dark-on-light / light-on-dark) surfaces.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-inverse",
+              "figmaVariable": "✦/icon/default/inverse",
+              "modes": {
+                "light": "{primitive.white.1000}",
+                "dark": "{primitive.black.800}"
+              },
+              "resolved": {
+                "light": "#ffffff",
+                "dark": "#000000e5"
+              }
+            }
+          }
+        }
+      },
+      "danger": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Icon color for destructive actions and errors — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-danger",
+              "figmaVariable": "✦/icon/danger/default",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.400}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#fca397"
+              }
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Icon color for destructive actions and errors — hover state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-danger-hover",
+              "figmaVariable": "✦/icon/danger/hover",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.400}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#fca397"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Icon color for destructive actions and errors — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-danger-secondary",
+              "figmaVariable": "✦/icon/danger/secondary",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.400}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#fca397"
+              }
+            }
+          }
+        },
+        "ondanger": {
+          "$type": "color",
+          "$value": "{primitive.white.1000}",
+          "$description": "Icon color for destructive actions and errors — placed on a danger fill (--color-bg-danger).",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-danger-ondanger",
+              "figmaVariable": "✦/icon/danger/ondanger",
+              "modes": {
+                "light": "{primitive.white.1000}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#ffffff",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "ondanger-secondary": {
+          "$type": "color",
+          "$value": "{primitive.white.600}",
+          "$description": "Icon color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-danger-ondanger-secondary",
+              "figmaVariable": "✦/icon/danger/ondanger-secondary",
+              "modes": {
+                "light": "{primitive.white.600}",
+                "dark": "{primitive.white.600}"
+              },
+              "resolved": {
+                "light": "#ffffffcc",
+                "dark": "#ffffffcc"
+              }
+            }
+          }
+        },
+        "ondanger-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.white.400}",
+          "$description": "Icon color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-danger-ondanger-tertiary",
+              "figmaVariable": "✦/icon/danger/ondanger-tertiary",
+              "modes": {
+                "light": "{primitive.white.400}",
+                "dark": "{primitive.white.400}"
+              },
+              "resolved": {
+                "light": "#ffffff66",
+                "dark": "#ffffff66"
+              }
+            }
+          }
+        }
+      },
+      "warning": {
+        "onwarning": {
+          "$type": "color",
+          "$value": "{primitive.black.800}",
+          "$description": "Icon color for warnings and caution — placed on a warning fill (--color-bg-warning).",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-warning-onwarning",
+              "figmaVariable": "✦/icon/warning/onwarning",
+              "modes": {
+                "light": "{primitive.black.800}",
+                "dark": "{primitive.black.800}"
+              },
+              "resolved": {
+                "light": "#000000e5",
+                "dark": "#000000e5"
+              }
+            }
+          }
+        },
+        "onwarning-secondary": {
+          "$type": "color",
+          "$value": "{primitive.black.500}",
+          "$description": "Icon color for warnings and caution — placed on a warning fill (--color-bg-warning) — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-warning-onwarning-secondary",
+              "figmaVariable": "✦/icon/warning/onwarning-secondary",
+              "modes": {
+                "light": "{primitive.black.500}",
+                "dark": "{primitive.black.500}"
+              },
+              "resolved": {
+                "light": "#00000080",
+                "dark": "#00000080"
+              }
+            }
+          }
+        },
+        "onwarning-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.black.400}",
+          "$description": "Icon color for warnings and caution — placed on a warning fill (--color-bg-warning) — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-warning-onwarning-tertiary",
+              "figmaVariable": "✦/icon/warning/onwarning-tertiary",
+              "modes": {
+                "light": "{primitive.black.400}",
+                "dark": "{primitive.black.400}"
+              },
+              "resolved": {
+                "light": "#0000004d",
+                "dark": "#0000004d"
+              }
+            }
+          }
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.yellow.1000}",
+          "$description": "Icon color for warnings and caution — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-warning",
+              "figmaVariable": "✦/icon/warning/default",
+              "modes": {
+                "light": "{primitive.yellow.1000}",
+                "dark": "{primitive.yellow.400}"
+              },
+              "resolved": {
+                "light": "#b86200",
+                "dark": "#ffcd29"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.yellow.1000}",
+          "$description": "Icon color for warnings and caution — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-warning-secondary",
+              "figmaVariable": "✦/icon/warning/secondary",
+              "modes": {
+                "light": "{primitive.yellow.1000}",
+                "dark": "{primitive.yellow.400}"
+              },
+              "resolved": {
+                "light": "#b86200",
+                "dark": "#ffcd29"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.yellow.1000}",
+          "$description": "Icon color for warnings and caution — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-warning-tertiary",
+              "figmaVariable": "✦/icon/warning/tertiary",
+              "modes": {
+                "light": "{primitive.yellow.1000}",
+                "dark": "{primitive.yellow.400}"
+              },
+              "resolved": {
+                "light": "#b86200",
+                "dark": "#ffcd29"
+              }
+            }
+          }
+        }
+      },
+      "success": {
+        "onwarning": {
+          "$type": "color",
+          "$value": "{primitive.white.1000}",
+          "$description": "Icon color for success and confirmation — placed on a success fill (--color-bg-success).",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-success-onwarning",
+              "figmaVariable": "✦/icon/success/onwarning",
+              "modes": {
+                "light": "{primitive.white.1000}",
+                "dark": "{primitive.white.1000}"
+              },
+              "resolved": {
+                "light": "#ffffff",
+                "dark": "#ffffff"
+              }
+            }
+          }
+        },
+        "onwarning-secondary": {
+          "$type": "color",
+          "$value": "{primitive.white.600}",
+          "$description": "Icon color for success and confirmation — placed on a success fill (--color-bg-success) — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-success-onwarning-secondary",
+              "figmaVariable": "✦/icon/success/onwarning-secondary",
+              "modes": {
+                "light": "{primitive.white.600}",
+                "dark": "{primitive.white.600}"
+              },
+              "resolved": {
+                "light": "#ffffffcc",
+                "dark": "#ffffffcc"
+              }
+            }
+          }
+        },
+        "onwarning-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.white.400}",
+          "$description": "Icon color for success and confirmation — placed on a success fill (--color-bg-success) — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-success-onwarning-tertiary",
+              "figmaVariable": "✦/icon/success/onwarning-tertiary",
+              "modes": {
+                "light": "{primitive.white.400}",
+                "dark": "{primitive.white.400}"
+              },
+              "resolved": {
+                "light": "#ffffff66",
+                "dark": "#ffffff66"
+              }
+            }
+          }
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Icon color for success and confirmation — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-success",
+              "figmaVariable": "✦/icon/success/default",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.400}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#79d297"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Icon color for success and confirmation — secondary, less prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-success-secondary",
+              "figmaVariable": "✦/icon/success/secondary",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.400}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#79d297"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Icon color for success and confirmation — tertiary, least prominent.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-icon-success-tertiary",
+              "figmaVariable": "✦/icon/success/tertiary",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.400}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#79d297"
+              }
+            }
+          }
+        }
+      }
+    },
+    "border": {
+      "default": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.grey.200}",
+          "$description": "Border and divider color for neutral UI — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-default",
+              "figmaVariable": "✦/border/default/default",
+              "modes": {
+                "light": "{primitive.grey.200}",
+                "dark": "{primitive.grey.600}"
+              },
+              "resolved": {
+                "light": "#e6e6e6",
+                "dark": "#444444"
+              }
+            }
+          }
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{primitive.grey.800}",
+          "$description": "Border and divider color for neutral UI — higher-contrast emphasis.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-strong",
+              "figmaVariable": "✦/border/default/strong",
+              "modes": {
+                "light": "{primitive.grey.800}",
+                "dark": "{primitive.white.800}"
+              },
+              "resolved": {
+                "light": "#2c2c2c",
+                "dark": "#ffffffe5"
+              }
+            }
+          }
+        }
+      },
+      "danger": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.red.300}",
+          "$description": "Border and divider color for destructive actions and errors — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-danger",
+              "figmaVariable": "✦/border/danger/default",
+              "modes": {
+                "light": "{primitive.red.300}",
+                "dark": "{primitive.red.700}"
+              },
+              "resolved": {
+                "light": "#ffc7c2",
+                "dark": "#963323"
+              }
+            }
+          }
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{primitive.red.600}",
+          "$description": "Border and divider color for destructive actions and errors — higher-contrast emphasis.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-danger-strong",
+              "figmaVariable": "✦/border/danger/strong",
+              "modes": {
+                "light": "{primitive.red.600}",
+                "dark": "{primitive.red.400}"
+              },
+              "resolved": {
+                "light": "#dc3412",
+                "dark": "#fca397"
+              }
+            }
+          }
+        }
+      },
+      "warning": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.yellow.300}",
+          "$description": "Border and divider color for warnings and caution — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-warning",
+              "figmaVariable": "✦/border/warning/default",
+              "modes": {
+                "light": "{primitive.yellow.300}",
+                "dark": "{primitive.yellow.900}"
+              },
+              "resolved": {
+                "light": "#ffe8a3",
+                "dark": "#925711"
+              }
+            }
+          }
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{primitive.yellow.1000}",
+          "$description": "Border and divider color for warnings and caution — higher-contrast emphasis.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-warning-strong",
+              "figmaVariable": "✦/border/warning/strong",
+              "modes": {
+                "light": "{primitive.yellow.1000}",
+                "dark": "{primitive.yellow.400}"
+              },
+              "resolved": {
+                "light": "#b86200",
+                "dark": "#ffcd29"
+              }
+            }
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.green.300}",
+          "$description": "Border and divider color for success and confirmation — the standard state.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-success",
+              "figmaVariable": "✦/border/success/default",
+              "modes": {
+                "light": "{primitive.green.300}",
+                "dark": "{primitive.green.700}"
+              },
+              "resolved": {
+                "light": "#aff4c6",
+                "dark": "#0a5c35"
+              }
+            }
+          }
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{primitive.green.600}",
+          "$description": "Border and divider color for success and confirmation — higher-contrast emphasis.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-border-success-strong",
+              "figmaVariable": "✦/border/success/strong",
+              "modes": {
+                "light": "{primitive.green.600}",
+                "dark": "{primitive.green.400}"
+              },
+              "resolved": {
+                "light": "#009951",
+                "dark": "#79d297"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

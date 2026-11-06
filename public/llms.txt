@@ -33,92 +33,118 @@ Each class sets font-family, font-size, line-height, font-weight and letter-spac
 
 ## Color
 
-Use semantic tokens (`var(--color-*)`) in components; they switch between light and dark mode under `[data-theme="dark"]`. Primitive scales (black, white, red, orange, green, yellow, grey; steps 100–1000, e.g. `--color-red-500`) are for defining tokens only.
+Rules:
 
-| Semantic token | Light | Dark |
-| --- | --- | --- |
-| `--color-bg-default` | white/1000 | grey/1000 |
-| `--color-bg-secondary` | grey/100 | grey/900 |
-| `--color-bg-hover` | grey/200 | grey/800 |
-| `--color-bg-pressed` | grey/100 | grey/800 |
-| `--color-bg-tertiary` | grey/200 | grey/900 |
-| `--color-bg-inverse` | grey/1000 | grey/100 |
-| `--color-bg-inverse-hover` | grey/900 | grey/300 |
-| `--color-bg-disabled` | grey/300 | grey/500 |
-| `--color-bg-disabled-secondary` | grey/400 | grey/400 |
-| `--color-bg-danger` | red/500 | red/500 |
-| `--color-bg-danger-hover` | red/600 | red/600 |
-| `--color-bg-danger-pressed` | red/600 | red/600 |
-| `--color-bg-danger-secondary` | red/700 | red/700 |
-| `--color-bg-danger-tertiary` | red/200 | red/900 |
-| `--color-bg-success` | green/600 | green/500 |
-| `--color-bg-success-hover` | green/500 | green/600 |
-| `--color-bg-success-pressed` | green/500 | green/600 |
-| `--color-bg-success-secondary` | green/700 | green/700 |
-| `--color-bg-success-tertiary` | green/200 | green/900 |
-| `--color-bg-warning` | yellow/500 | yellow/500 |
-| `--color-bg-warning-hover` | yellow/500 | yellow/600 |
-| `--color-bg-warning-pressed` | yellow/600 | yellow/600 |
-| `--color-bg-warning-secondary` | yellow/700 | yellow/700 |
-| `--color-bg-warning-tertiary` | yellow/200 | yellow/900 |
-| `--color-text-default` | black/800 | white/1000 |
-| `--color-text-hover` | black/800 | white/1000 |
-| `--color-text-secondary` | black/500 | white/500 |
-| `--color-text-secondary-hover` | black/800 | white/1000 |
-| `--color-text-tertiary` | black/400 | white/400 |
-| `--color-text-tertiary-hover` | black/800 | white/1000 |
-| `--color-text-inverse` | white/1000 | black/800 |
-| `--color-text-danger` | red/600 | red/400 |
-| `--color-text-danger-hover` | red/600 | red/400 |
-| `--color-text-danger-secondary` | red/600 | red/400 |
-| `--color-text-danger-ondanger` | white/1000 | white/1000 |
-| `--color-text-danger-ondanger-secondary` | white/600 | white/600 |
-| `--color-text-danger-ondanger-tertiary` | white/400 | white/400 |
-| `--color-text-warning-onwarning` | black/800 | black/800 |
-| `--color-text-warning-onwarning-secondary` | black/500 | black/500 |
-| `--color-text-warning-onwarning-tertiary` | black/400 | black/400 |
-| `--color-text-warning` | yellow/1000 | yellow/400 |
-| `--color-text-warning-secondary` | yellow/1000 | yellow/400 |
-| `--color-text-warning-tertiary` | yellow/1000 | yellow/400 |
-| `--color-text-success-onwarning` | white/1000 | white/1000 |
-| `--color-text-success-onwarning-secondary` | white/600 | white/600 |
-| `--color-text-success-onwarning-tertiary` | white/400 | white/400 |
-| `--color-text-success` | green/600 | green/400 |
-| `--color-text-success-secondary` | green/600 | green/400 |
-| `--color-text-success-tertiary` | green/600 | green/400 |
-| `--color-icon-default` | black/800 | white/1000 |
-| `--color-icon-hover` | black/800 | white/1000 |
-| `--color-icon-secondary` | black/500 | white/500 |
-| `--color-icon-secondary-hover` | black/800 | white/1000 |
-| `--color-icon-tertiary` | black/400 | white/400 |
-| `--color-icon-tertiary-hover` | black/800 | white/1000 |
-| `--color-icon-inverse` | white/1000 | black/800 |
-| `--color-icon-danger` | red/600 | red/400 |
-| `--color-icon-danger-hover` | red/600 | red/400 |
-| `--color-icon-danger-secondary` | red/600 | red/400 |
-| `--color-icon-danger-ondanger` | white/1000 | white/1000 |
-| `--color-icon-danger-ondanger-secondary` | white/600 | white/600 |
-| `--color-icon-danger-ondanger-tertiary` | white/400 | white/400 |
-| `--color-icon-warning-onwarning` | black/800 | black/800 |
-| `--color-icon-warning-onwarning-secondary` | black/500 | black/500 |
-| `--color-icon-warning-onwarning-tertiary` | black/400 | black/400 |
-| `--color-icon-warning` | yellow/1000 | yellow/400 |
-| `--color-icon-warning-secondary` | yellow/1000 | yellow/400 |
-| `--color-icon-warning-tertiary` | yellow/1000 | yellow/400 |
-| `--color-icon-success-onwarning` | white/1000 | white/1000 |
-| `--color-icon-success-onwarning-secondary` | white/600 | white/600 |
-| `--color-icon-success-onwarning-tertiary` | white/400 | white/400 |
-| `--color-icon-success` | green/600 | green/400 |
-| `--color-icon-success-secondary` | green/600 | green/400 |
-| `--color-icon-success-tertiary` | green/600 | green/400 |
-| `--color-border-default` | grey/200 | grey/600 |
-| `--color-border-strong` | grey/800 | white/800 |
-| `--color-border-danger` | red/300 | red/700 |
-| `--color-border-danger-strong` | red/600 | red/400 |
-| `--color-border-warning` | yellow/300 | yellow/900 |
-| `--color-border-warning-strong` | yellow/1000 | yellow/400 |
-| `--color-border-success` | green/300 | green/700 |
-| `--color-border-success-strong` | green/600 | green/400 |
+- Use semantic tokens (var(--color-bg-*), --color-text-*, --color-icon-*, --color-border-*) in components. Never use primitives or hex values directly.
+- Primitives (--color-<family>-<step>) only define what semantic tokens point to; add or change a semantic token in Figma rather than reaching for a primitive.
+- Match the category to the property: bg-* for backgrounds, text-* for text, icon-* for icons, border-* for borders and dividers.
+- Text and icons placed on a danger, warning or success fill use the matching on* tokens (e.g. --color-text-danger-ondanger on --color-bg-danger).
+- Use inverse tokens together: --color-text-inverse / --color-icon-inverse on --color-bg-inverse.
+- Interactive states use the -hover and -pressed variants of the same token, never a different hue.
+- Dark mode: semantic tokens switch automatically inside [data-theme="dark"]; don't add separate dark styles.
+
+### Semantic tokens
+
+Use these in components. Values are `primitive (hex)`; dark mode applies inside `[data-theme="dark"]`.
+
+| CSS variable | Light | Dark | When to use |
+| --- | --- | --- | --- |
+| `--color-bg-default` | white/1000 (#ffffff) | grey/1000 (#111111) | Background fill for neutral UI — the standard state. |
+| `--color-bg-secondary` | grey/100 (#f5f5f5) | grey/900 (#1e1e1e) | Background fill for neutral UI — secondary, less prominent. |
+| `--color-bg-hover` | grey/200 (#e6e6e6) | grey/800 (#2c2c2c) | Background fill for neutral UI — hover state. |
+| `--color-bg-pressed` | grey/100 (#f5f5f5) | grey/800 (#2c2c2c) | Background fill for neutral UI — pressed (active) state. |
+| `--color-bg-tertiary` | grey/200 (#e6e6e6) | grey/900 (#1e1e1e) | Background fill for neutral UI — tertiary, least prominent. |
+| `--color-bg-inverse` | grey/1000 (#111111) | grey/100 (#f5f5f5) | Background fill for neutral UI — on inverse (dark-on-light / light-on-dark) surfaces. |
+| `--color-bg-inverse-hover` | grey/900 (#1e1e1e) | grey/300 (#d9d9d9) | Background fill for neutral UI — hover state on inverse surfaces. |
+| `--color-bg-disabled` | grey/300 (#d9d9d9) | grey/500 (#757575) | Background fill for disabled elements — the standard state. |
+| `--color-bg-disabled-secondary` | grey/400 (#b3b3b3) | grey/400 (#b3b3b3) | Background fill for disabled elements — secondary, less prominent. |
+| `--color-bg-danger` | red/500 (#f24822) | red/500 (#e03e1a) | Background fill for destructive actions and errors — the standard state. |
+| `--color-bg-danger-hover` | red/600 (#dc3412) | red/600 (#c4381c) | Background fill for destructive actions and errors — hover state. |
+| `--color-bg-danger-pressed` | red/600 (#dc3412) | red/600 (#c4381c) | Background fill for destructive actions and errors — pressed (active) state. |
+| `--color-bg-danger-secondary` | red/700 (#bd2915) | red/700 (#963323) | Background fill for destructive actions and errors — secondary, less prominent. |
+| `--color-bg-danger-tertiary` | red/200 (#ffe2e0) | red/900 (#54211c) | Background fill for destructive actions and errors — tertiary, least prominent. |
+| `--color-bg-success` | green/600 (#009951) | green/500 (#198f51) | Background fill for success and confirmation — the standard state. |
+| `--color-bg-success-hover` | green/500 (#14ae5c) | green/600 (#078348) | Background fill for success and confirmation — hover state. |
+| `--color-bg-success-pressed` | green/500 (#14ae5c) | green/600 (#078348) | Background fill for success and confirmation — pressed (active) state. |
+| `--color-bg-success-secondary` | green/700 (#008043) | green/700 (#0a5c35) | Background fill for success and confirmation — secondary, less prominent. |
+| `--color-bg-success-tertiary` | green/200 (#cff7d3) | green/900 (#082618) | Background fill for success and confirmation — tertiary, least prominent. |
+| `--color-bg-warning` | yellow/500 (#ffcd29) | yellow/500 (#f3c11b) | Background fill for warnings and caution — the standard state. |
+| `--color-bg-warning-hover` | yellow/500 (#ffcd29) | yellow/600 (#f2b50d) | Background fill for warnings and caution — hover state. |
+| `--color-bg-warning-pressed` | yellow/600 (#ffc21a) | yellow/600 (#f2b50d) | Background fill for warnings and caution — pressed (active) state. |
+| `--color-bg-warning-secondary` | yellow/700 (#fab815) | yellow/700 (#e4a711) | Background fill for warnings and caution — secondary, less prominent. |
+| `--color-bg-warning-tertiary` | yellow/200 (#fff1c2) | yellow/900 (#925711) | Background fill for warnings and caution — tertiary, least prominent. |
+| `--color-text-default` | black/800 (#000000e5) | white/1000 (#ffffff) | Text color for neutral UI — the standard state. |
+| `--color-text-hover` | black/800 (#000000e5) | white/1000 (#ffffff) | Text color for neutral UI — hover state. |
+| `--color-text-secondary` | black/500 (#00000080) | white/500 (#ffffffb2) | Text color for neutral UI — secondary, less prominent. |
+| `--color-text-secondary-hover` | black/800 (#000000e5) | white/1000 (#ffffff) | Text color for neutral UI — hover state of the secondary variant. |
+| `--color-text-tertiary` | black/400 (#0000004d) | white/400 (#ffffff66) | Text color for neutral UI — tertiary, least prominent. |
+| `--color-text-tertiary-hover` | black/800 (#000000e5) | white/1000 (#ffffff) | Text color for neutral UI — hover state of the tertiary variant. |
+| `--color-text-inverse` | white/1000 (#ffffff) | black/800 (#000000e5) | Text color for neutral UI — on inverse (dark-on-light / light-on-dark) surfaces. |
+| `--color-text-danger` | red/600 (#dc3412) | red/400 (#fca397) | Text color for destructive actions and errors — the standard state. |
+| `--color-text-danger-hover` | red/600 (#dc3412) | red/400 (#fca397) | Text color for destructive actions and errors — hover state. |
+| `--color-text-danger-secondary` | red/600 (#dc3412) | red/400 (#fca397) | Text color for destructive actions and errors — secondary, less prominent. |
+| `--color-text-danger-ondanger` | white/1000 (#ffffff) | white/1000 (#ffffff) | Text color for destructive actions and errors — placed on a danger fill (--color-bg-danger). |
+| `--color-text-danger-ondanger-secondary` | white/600 (#ffffffcc) | white/600 (#ffffffcc) | Text color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — secondary, less prominent. |
+| `--color-text-danger-ondanger-tertiary` | white/400 (#ffffff66) | white/400 (#ffffff66) | Text color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — tertiary, least prominent. |
+| `--color-text-warning-onwarning` | black/800 (#000000e5) | black/800 (#000000e5) | Text color for warnings and caution — placed on a warning fill (--color-bg-warning). |
+| `--color-text-warning-onwarning-secondary` | black/500 (#00000080) | black/500 (#00000080) | Text color for warnings and caution — placed on a warning fill (--color-bg-warning) — secondary, less prominent. |
+| `--color-text-warning-onwarning-tertiary` | black/400 (#0000004d) | black/400 (#0000004d) | Text color for warnings and caution — placed on a warning fill (--color-bg-warning) — tertiary, least prominent. |
+| `--color-text-warning` | yellow/1000 (#b86200) | yellow/400 (#ffcd29) | Text color for warnings and caution — the standard state. |
+| `--color-text-warning-secondary` | yellow/1000 (#b86200) | yellow/400 (#ffcd29) | Text color for warnings and caution — secondary, less prominent. |
+| `--color-text-warning-tertiary` | yellow/1000 (#b86200) | yellow/400 (#ffcd29) | Text color for warnings and caution — tertiary, least prominent. |
+| `--color-text-success-onwarning` | white/1000 (#ffffff) | white/1000 (#ffffff) | Text color for success and confirmation — placed on a success fill (--color-bg-success). |
+| `--color-text-success-onwarning-secondary` | white/600 (#ffffffcc) | white/600 (#ffffffcc) | Text color for success and confirmation — placed on a success fill (--color-bg-success) — secondary, less prominent. |
+| `--color-text-success-onwarning-tertiary` | white/400 (#ffffff66) | white/400 (#ffffff66) | Text color for success and confirmation — placed on a success fill (--color-bg-success) — tertiary, least prominent. |
+| `--color-text-success` | green/600 (#009951) | green/400 (#79d297) | Text color for success and confirmation — the standard state. |
+| `--color-text-success-secondary` | green/600 (#009951) | green/400 (#79d297) | Text color for success and confirmation — secondary, less prominent. |
+| `--color-text-success-tertiary` | green/600 (#009951) | green/400 (#79d297) | Text color for success and confirmation — tertiary, least prominent. |
+| `--color-icon-default` | black/800 (#000000e5) | white/1000 (#ffffff) | Icon color for neutral UI — the standard state. |
+| `--color-icon-hover` | black/800 (#000000e5) | white/1000 (#ffffff) | Icon color for neutral UI — hover state. |
+| `--color-icon-secondary` | black/500 (#00000080) | white/500 (#ffffffb2) | Icon color for neutral UI — secondary, less prominent. |
+| `--color-icon-secondary-hover` | black/800 (#000000e5) | white/1000 (#ffffff) | Icon color for neutral UI — hover state of the secondary variant. |
+| `--color-icon-tertiary` | black/400 (#0000004d) | white/400 (#ffffff66) | Icon color for neutral UI — tertiary, least prominent. |
+| `--color-icon-tertiary-hover` | black/800 (#000000e5) | white/1000 (#ffffff) | Icon color for neutral UI — hover state of the tertiary variant. |
+| `--color-icon-inverse` | white/1000 (#ffffff) | black/800 (#000000e5) | Icon color for neutral UI — on inverse (dark-on-light / light-on-dark) surfaces. |
+| `--color-icon-danger` | red/600 (#dc3412) | red/400 (#fca397) | Icon color for destructive actions and errors — the standard state. |
+| `--color-icon-danger-hover` | red/600 (#dc3412) | red/400 (#fca397) | Icon color for destructive actions and errors — hover state. |
+| `--color-icon-danger-secondary` | red/600 (#dc3412) | red/400 (#fca397) | Icon color for destructive actions and errors — secondary, less prominent. |
+| `--color-icon-danger-ondanger` | white/1000 (#ffffff) | white/1000 (#ffffff) | Icon color for destructive actions and errors — placed on a danger fill (--color-bg-danger). |
+| `--color-icon-danger-ondanger-secondary` | white/600 (#ffffffcc) | white/600 (#ffffffcc) | Icon color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — secondary, less prominent. |
+| `--color-icon-danger-ondanger-tertiary` | white/400 (#ffffff66) | white/400 (#ffffff66) | Icon color for destructive actions and errors — placed on a danger fill (--color-bg-danger) — tertiary, least prominent. |
+| `--color-icon-warning-onwarning` | black/800 (#000000e5) | black/800 (#000000e5) | Icon color for warnings and caution — placed on a warning fill (--color-bg-warning). |
+| `--color-icon-warning-onwarning-secondary` | black/500 (#00000080) | black/500 (#00000080) | Icon color for warnings and caution — placed on a warning fill (--color-bg-warning) — secondary, less prominent. |
+| `--color-icon-warning-onwarning-tertiary` | black/400 (#0000004d) | black/400 (#0000004d) | Icon color for warnings and caution — placed on a warning fill (--color-bg-warning) — tertiary, least prominent. |
+| `--color-icon-warning` | yellow/1000 (#b86200) | yellow/400 (#ffcd29) | Icon color for warnings and caution — the standard state. |
+| `--color-icon-warning-secondary` | yellow/1000 (#b86200) | yellow/400 (#ffcd29) | Icon color for warnings and caution — secondary, less prominent. |
+| `--color-icon-warning-tertiary` | yellow/1000 (#b86200) | yellow/400 (#ffcd29) | Icon color for warnings and caution — tertiary, least prominent. |
+| `--color-icon-success-onwarning` | white/1000 (#ffffff) | white/1000 (#ffffff) | Icon color for success and confirmation — placed on a success fill (--color-bg-success). |
+| `--color-icon-success-onwarning-secondary` | white/600 (#ffffffcc) | white/600 (#ffffffcc) | Icon color for success and confirmation — placed on a success fill (--color-bg-success) — secondary, less prominent. |
+| `--color-icon-success-onwarning-tertiary` | white/400 (#ffffff66) | white/400 (#ffffff66) | Icon color for success and confirmation — placed on a success fill (--color-bg-success) — tertiary, least prominent. |
+| `--color-icon-success` | green/600 (#009951) | green/400 (#79d297) | Icon color for success and confirmation — the standard state. |
+| `--color-icon-success-secondary` | green/600 (#009951) | green/400 (#79d297) | Icon color for success and confirmation — secondary, less prominent. |
+| `--color-icon-success-tertiary` | green/600 (#009951) | green/400 (#79d297) | Icon color for success and confirmation — tertiary, least prominent. |
+| `--color-border-default` | grey/200 (#e6e6e6) | grey/600 (#444444) | Border and divider color for neutral UI — the standard state. |
+| `--color-border-strong` | grey/800 (#2c2c2c) | white/800 (#ffffffe5) | Border and divider color for neutral UI — higher-contrast emphasis. |
+| `--color-border-danger` | red/300 (#ffc7c2) | red/700 (#963323) | Border and divider color for destructive actions and errors — the standard state. |
+| `--color-border-danger-strong` | red/600 (#dc3412) | red/400 (#fca397) | Border and divider color for destructive actions and errors — higher-contrast emphasis. |
+| `--color-border-warning` | yellow/300 (#ffe8a3) | yellow/900 (#925711) | Border and divider color for warnings and caution — the standard state. |
+| `--color-border-warning-strong` | yellow/1000 (#b86200) | yellow/400 (#ffcd29) | Border and divider color for warnings and caution — higher-contrast emphasis. |
+| `--color-border-success` | green/300 (#aff4c6) | green/700 (#0a5c35) | Border and divider color for success and confirmation — the standard state. |
+| `--color-border-success-strong` | green/600 (#009951) | green/400 (#79d297) | Border and divider color for success and confirmation — higher-contrast emphasis. |
+
+### Primitives
+
+Raw color scales from 100 (lightest) to 1000 (darkest). black and white are transparent scales (opacity steps); the others are solid. Some chromatic primitives have different values in dark mode. Values are light (and dark, where they differ).
+
+| Family | CSS variable | Steps | Notes |
+| --- | --- | --- | --- |
+| black | `--color-black-<step>` | 100 #0000000d, 200 #0000001a, 300 #00000033, 400 #0000004d, 500 #00000080, 600 #000000cc, 700 #000000d9, 800 #000000e5, 900 #000000f2, 1000 #000000 | Black at increasing opacity — overlays, shadows, and neutral text/icon tints on light surfaces. |
+| white | `--color-white-<step>` | 100 #ffffff0d, 200 #ffffff1a, 300 #ffffff33, 400 #ffffff66, 500 #ffffffb2, 600 #ffffffcc, 700 #ffffffd9, 800 #ffffffe5, 900 #fffffff2, 1000 #ffffff | White at increasing opacity — overlays and text/icon tints on dark or colored surfaces. |
+| red | `--color-red-<step>` | 100 #fff5f5 / #fee7e7, 200 #ffe2e0 / #fccdca, 300 #ffc7c2 / #fbbcb6, 400 #ffafa3 / #fca397, 500 #f24822 / #e03e1a, 600 #dc3412 / #c4381c, 700 #bd2915 / #963323, 800 #9f1f18 / #7c2622, 900 #771208 / #54211c, 1000 #660e0b / #311817 | Danger and error colors. |
+| orange | `--color-orange-<step>` | 100 #fff4e5 / #ffedd7, 200 #ffe0c2 / #fdd9b4, 300 #fcd19c / #fcc67f, 400 #ffc470 / #fcb34a, 500 #ffa629 / #de7d02, 600 #fc9e24 / #c86f04, 700 #f79722 / #ad5f05, 800 #dd7c0e / #985306, 900 #ce7012 / #673806, 1000 #8a480f / #371d06 | Accent orange (not yet used by any semantic token). |
+| green | `--color-green-<step>` | 100 #ebffee / #ddfde2, 200 #cff7d3 / #beefc2, 300 #aff4c6 / #a1e8b9, 400 #85e0a3 / #79d297, 500 #14ae5c / #198f51, 600 #009951 / #078348, 700 #008043 / #0a5c35, 800 #036838 / #0a4c2d, 900 #024626 / #082618, 1000 #083a23 / #0b1e15 | Success colors. |
+| yellow | `--color-yellow-<step>` | 100 #fffbeb / #fdf7dd, 200 #fff1c2 / #fbe8ad, 300 #ffe8a3 / #f9df90, 400 #ffd966 / #ffcd29, 500 #ffcd29 / #f3c11b, 600 #ffc21a / #f2b50d, 700 #fab815 / #e4a711, 800 #eba611 / #c58011, 900 #dd940e / #925711, 1000 #b86200 / #71440f | Warning colors. |
+| grey | `--color-grey-<step>` | 100 #f5f5f5, 200 #e6e6e6, 300 #d9d9d9, 400 #b3b3b3, 500 #757575, 600 #444444, 700 #383838, 800 #2c2c2c, 900 #1e1e1e, 1000 #111111 | Solid neutrals for surfaces, borders and disabled states. |
 
 ## Spacing and radius
 
@@ -126,5 +152,6 @@ Use semantic tokens (`var(--color-*)`) in components; they switch between light 
 
 ## Files
 
+- [Color tokens (W3C design tokens JSON: primitives + semantic, light/dark, usage rules)](/tokens/colors.json)
 - [Typography tokens (W3C design tokens JSON, with usage rules)](/tokens/typography.json)
 - [Figma variables export (source of truth)](https://github.com/adamw-studio/design-system-A-W/blob/main/tokens/figma-variables.json)
