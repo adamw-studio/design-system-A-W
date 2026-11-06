@@ -4,16 +4,13 @@
  * icon with 4px padding (24px square), no fill until hovered.
  *
  *   <button class="icon-button" type="button" aria-label="Notifications">
- *     <span class="icon-button__icon" style="--icon: url(/icons/app-notification.svg)" aria-hidden="true"></span>
+ *     <svg class="icon" aria-hidden="true"><use href="#icon-bell"></use></svg>
  *   </button>
  *
  * Usage rules: tokens/button-rules.json ("iconButton").
  */
 
 .icon-button {
-  /* Figma "Icon Shell": 16px icon. */
-  --icon-button-icon-size: 16px;
-
   display: inline-flex;
   flex: none;
   align-items: center;
@@ -68,11 +65,8 @@
   pointer-events: none;
 }
 
-/* The icon file is a mask, so it takes the button's color. */
-.icon-button__icon {
-  display: block;
-  width: var(--icon-button-icon-size);
-  height: var(--icon-button-icon-size);
-  background-color: currentColor;
-  mask: var(--icon) center / contain no-repeat;
+/* Figma: a 16px Icon Shell (src/styles/components/icon.css) in the
+   button's icon color. */
+.icon-button .icon {
+  --icon-size: 16px;
 }

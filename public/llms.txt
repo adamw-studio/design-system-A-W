@@ -150,6 +150,78 @@ Raw color scales from 100 (lightest) to 1000 (darkest). black and white are tran
 
 `--radius-full`: 9999px · `--radius-large`: 13px · `--radius-medium`: 6px · `--radius-none`: 0px · `--radius-small`: 2px · `--space-0`: 0px · `--space-1`: 2px · `--space-2`: 4px · `--space-3`: 8px · `--space-4`: 16px · `--space-5`: 24px · `--space-6`: 32px · `--space-7`: 40px
 
+## Icons
+
+The bulk of our icons are contained within a 24px frame, using 1px strokes with rounded caps, and can optionally come in a “small” size geared towards a 12px bounding box.
+
+Library: [Iconoir](https://iconoir.com) (MIT), regular style — 869 icons, in one sprite, `/icons/iconoir.svg` (symbol ids `icon-<name>`). Inline the sprite once per page, then use the Icon Shell: `<svg class="icon icon--24" aria-hidden="true"><use href="#icon-bell"></use></svg>` (styles: src/styles/components/icon.css).
+
+| Size | Class | When to use |
+| --- | --- | --- |
+| 32px | `.icon--32` | Large, standalone moments: empty states, onboarding, feature highlights. |
+| 24px | `.icon--24` (default) | Default. Standalone icons in navigation, toolbars and cards. |
+| 20px | `.icon--20` | List rows and menus next to body-large text. |
+| 16px | `.icon--16` | Inside Buttons and Icon Buttons, inputs and dense UI next to body-medium text. |
+| 12px | `.icon--12` | The “small” size: badges, tags and inline with body-small text. |
+
+Rules:
+
+- Inline the sprite (public/icons/iconoir.svg) once per page — at the top of <body>, or fetch and insert it like src/lib/icon.ts does — then use the Icon Shell: <svg class="icon" aria-hidden="true"><use href="#icon-<name>"></use></svg>. Set the size with icon--32, icon--24 (default), icon--20, icon--16 or icon--12.
+- Only use icons from this catalog. To add one, add it in Figma and to tokens/icons.json, then run npm run tokens.
+- Icons take the current text color; set it with a --color-icon-* token on the icon or its parent, never a hex value.
+- Decorative icons get aria-hidden="true". An icon that is the only content of a control needs an aria-label on the control (see Icon Button).
+- Buttons and Icon Buttons size their icons to 16px automatically.
+
+### Icon names
+
+#### Actions & editing
+
+- Actions: download-square, plus-square, minus-square, xmark-square, redo-circle, undo-circle, share-ios, menu, redo, undo, redo-action, undo-action, menu-scale, warning-triangle, warning-circle, double-check, minus-circle, info-circle, minus, plus, plus-circle, xmark-circle, download-circle, download, share-android, check, check-circle, eye, xmark, refresh-double, refresh, upload, warning-square, upload-square, line-space, wrap-text, question-mark, help-circle, prohibition, refresh-circle, help-square, floppy-disk-arrow-in, floppy-disk-arrow-out, open-in-window, trash, eye-closed, open-in-browser, restart, open-new-window, paste-clipboard, clipboard-check, erase, copy
+- Editor: align-center, align-right, align-left, scissor, scissor-alt, text, text-square, font-question, bold-square, bold, text-magnifying-glass, text-size, text-arrows-up-down, sort-down, sort-up, italic, list, align-justify, underline, underline-square, italic-square, compress-lines, expand-lines, text-box, edit, numbered-list-left, task-list, sort, list-select, edit-pencil, numbered-list-right, strikethrough
+- Layout: corner-top-left, corner-bottom-left, corner-top-right, corner-bottom-right, cell-2x2, view-grid, view-structure-down, view-structure-up, view-columns-2, layout-left, layout-right, grid-xmark, grid-plus, grid-minus, table, table-rows, table-2-columns, view-columns-3
+- Organisation: star, label, bookmark, bookmark-circle, filter, input-search, area-search, star-dashed, star-half-dashed, zoom-in, zoom-out, search, three-stars, filter-alt, pin, pin-slash, binocular
+- Gestures: open-select-hand-gesture, one-finger-select-hand-gesture, drag-hand-gesture, reminder-hand-gesture, spock-hand-gesture, single-tap-gesture, swipe-up-gesture, swipe-down-gesture, swipe-left-gesture, swipe-right-gesture, swipe-two-fingers-up-gesture, swipe-two-fingers-down-gesture, swipe-two-fingers-right-gesture, swipe-two-fingers-left-gesture, peace-hand
+- Shapes: circle, rhombus, pentagon, hexagon, square, minus-hexagon, hexagon-plus, triangle, octagon, heptagon, flare
+
+#### Navigation & places
+
+- Navigation: arrow-left, long-arrow-right-up, nav-arrow-left, long-arrow-left-down, long-arrow-left-up, arrow-right, long-arrow-down-right, long-arrow-down-left, arrow-up, long-arrow-right-down, arrow-down, arrow-separate, long-arrow-up-right, long-arrow-up-left, nav-arrow-down, nav-arrow-up, nav-arrow-right, arrow-enlarge-tag, fast-arrow-right-square, fast-arrow-left-square, fast-arrow-up-square, arrow-union, arrow-separate-vertical, arrow-union-vertical, fast-arrow-down-square, arrow-right-tag, arrow-left-tag, fast-right-circle, fast-left-circle, fast-up-circle, fast-down-circle, arrow-down-circle, arrow-left-circle, arrow-up-circle, arrow-right-circle, more-horiz-circle, more-vert-circle, more-horiz, more-vert, arrow-reduce-tag, arrow-up-tag, arrow-down-tag, sidebar-expand, sidebar-collapse, compass, fast-arrow-down, fast-arrow-left, fast-arrow-right, fast-arrow-up, arrow-down-left-circle, arrow-down-right-square, arrow-up-left-circle, arrow-up-right-square, arrow-up-left-square, arrow-up-right-circle, drag, arrow-down-right-circle, divide, horizontal-merge, horizontal-split, arrow-down-left, arrow-down-right, page-down, page-left, page-right, page-up, divide-three, arrow-down-left-square, path-arrow, vertical-merge, vertical-split, shortcut-square, arrow-up-right, arrow-up-left, filter-list, filter-list-circle
+- Maps: maps-arrow, maps-arrow-diagonal, navigator, navigator-alt, map-pin, map-pin-plus, map-pin-minus, map-pin-xmark, suggestion, position, map, gps, maps-turn-right, maps-turn-left, maps-go-straight, maps-turn-back, maps-arrow-xmark, map-xmark, view-360, airplane, train
+- Weather: temperature-low, temperature-high, snow-flake, cloud, heavy-rain, fog, rain, thunderstorm, snow, sun-light, cloud-sunny, wind, temperature-up, temperature-down, dew-point
+- Buildings: hospital, shop-four-tiles-window, shop-four-tiles, shop-window, shop, building, city, industry, farm, oil-industry, garage, tunnel, elevator, planimetry, house-rooms, neighbourhood, balcony, bathroom, cellar
+
+#### People & communication
+
+- Communication: bubble-star, chat-bubble, bubble-outcome, bubble-income, bubble-download, bubble-upload, bubble-search, chat-plus-in, chat-minus-in, bubble-xmark, bubble-warning, chat-lines, chat-bubble-xmark, chat-bubble-question, chat-bubble-check, chat-bubble-warning, phone-outcome, phone-income, phone-plus, phone-minus, phone-xmark, phone-paused, phone, chat-bubble-translate, chat-bubble-empty, phone-disabled, message-text, message-alert, message, bell, bell-off, multi-bubble, headset-help, mail, mail-open, bell-notification, app-notification, facetime, quote-message, quote, www, globe, internet, podcast, arrow-email-forward, reply-to-message, forward-message, mail-in, mail-out, send-mail, send, send-diagonal, reply, at-sign, at-sign-circle, time-zone
+- Users: user, user-plus, user-xmark, user-square, user-circle, profile-circle, group, user-badge-check, community, user-love, user-star, user-crown
+- Identity: fingerprint, fingerprint-circle, fingerprint-check-circle, fingerprint-xmark-circle, voice, voice-check, voice-xmark, fingerprint-square, voice-square, voice-scan, fingerprint-scan, mobile-fingerprint, iris-scan, scanning, mobile-voice, fingerprint-lock-circle, voice-lock-circle, voice-circle, user-scan, face-id
+- Security: historic-shield, shield, shield-alt, shield-alert, shield-question, shield-xmark, shield-check, key-plus, key-minus, key-back, key-xmark, key, shield-loading, shield-broken, shield-plus-in, shield-minus, shield-search, shield-eye, shield-download, shield-upload, tower, tower-warning, tower-no-access, tower-check, historic-shield-alt, open-vpn, lock, lock-slash, password-check, password-xmark, security-pass, password-cursor, pc-firewall, pc-warning, pc-check, pc-no-entry, ip-address-tag
+- Connectivity: wifi, wifi-off, network, network-reverse, network-right, network-left, data-transfer-both, data-transfer-up, data-transfer-down, data-transfer-warning, data-transfer-check, server-connection, bluetooth, wifi-signal-none, wifi-warning, airplay, private-wifi, wifi-xmark
+
+#### System & devices
+
+- System: battery-empty, battery-warning, battery-25, battery-50, battery-75, battery-full, battery-slash, switch-off, switch-on, cursor-pointer, terminal-tag, mac-dock, cpu, cpu-warning, settings, bin, bin-half, bin-full, bin-plus-in, bin-minus-in, calculator, calendar, log-out, log-in, log-no-access, type, eject, dashboard, dashboard-speed, dashboard-dots, input-field, battery-charging, finder, accessibility, web-window, mac-os-window, web-window-xmark, web-window-energy-consumption, input-output, settings-profiles, off-tag, on-tag, terminal, pc-mouse, mouse-button-left, mouse-button-right, mouse-scroll-wheel, mac-option-key, mac-control-key, lock-square, control-slider, multi-window, multi-mac-os-window, system-restart, system-shut, safari, cookie, half-cookie, accessibility-tech, accessibility-sign, windows, apple-mac, linux, new-tab, search-engine, app-window, energy-usage-window, search-window, window-lock, select-window, window-no-access, secure-window, window-xmark, reload-window, warning-window, window-check, download-data-window, upload-data-window, pause-window, fingerprint-window, favourite-window, heart-arrow-down, apple-shortcuts, square-cursor, key-command, calendar-plus, calendar-minus
+- Devices: chromecast, video-projector, printer, warning-hexagon, smartphone-device, modern-tv, tv-warning, printing-page, tv, computer, hard-drive, wristwatch, modern-tv-4k, display-4k, laptop, laptop-charging, laptop-warning, laptop-fix, tv-fix, megaphone, vr-tag, ar-tag, pen-tablet, pen-tablet-connect-usb, pen-tablet-connect-wifi, pen-connect-wifi, pen-connect-bluetooth, apple-imac-2021-side, apple-imac-2021, floppy-disk
+- Home: drawer, lamp, google-home, home-user, fridge, box, closet, domotic-warning, home, home-alt-slim, home-alt-slim-horiz, home-alt, light-bulb, light-bulb-on, light-bulb-off, home-simple, box-iso, home-simple-door, air-conditioner, washing-machine, wash, dishwasher, dimmer-switch, home-table, desk, sofa, sleeper-chair, two-seater-sofa, director-chair, rounded-mirror, mirror, bed, crib, bed-ready, small-lamp, small-lamp-alt, pillow, home-shield, home-secure, home-sale, home-temperature-in, home-temperature-out
+
+#### Business & information
+
+- Finance: dollar-circle, coin-slash, money-square, dollar, euro, pound, yen, cash, lot-of-cash, credit-card, credit-card-slash, credit-cards, send-dollars, receive-dollars, send-euros, receive-euros, send-pounds, receive-pounds, send-yens, receive-yens, euro-square, yen-square, bank, piggy-bank, apple-wallet, wallet, card-wallet, candlestick-chart, paypal, card-shield, card-lock, card-no-access, mastercard-card, coins-swap, percent-rotate-out, bitcoin-rotate-out, litecoin-rotate-out, dogecoin-rotate-out, ethereum-rotate-out, commodity, card-reader, dogecoin-circle, litecoin-circle, contactless, hand-card, hand-contactless, hand-cash, coins, safe, safe-open, safe-arrow-left, safe-arrow-right, bitcoin-circle, ethereum-circle, suitcase
+- Business: agile, priority-high, priority-up, priority-down, presentation, strategy, okrs, priority-medium
+- Analytics: percentage-circle, percentage-square, percentage, graph-up, graph-down, stats-up-square, stats-down-square, stat-up, stat-down, stats-report, report-columns, reports
+- Database: database, database-check, database-xmark, database-warning, database-search, database-star, database-script, database-script-plus, database-script-minus, database-tag, database-restore, database-export, database-backup, database-stats, database-monitor
+- Cloud: cloud-upload, cloud-download, cloud-xmark, cloud-sync, cloud-desync, cloud-bookmark, cloud-check, google-drive, google-drive-sync, google-drive-check, google-drive-warning, google-one, cloud-square
+- Docs: empty-page, page, journal-page, page-minus-in, page-plus-in, doc-magnifying-glass, page-search, doc-magnifying-glass-in, doc-star-in, doc-star, page-star, multiple-pages-empty, attachment, archive, folder, folder-warning, folder-plus, folder-minus, google-docs, multiple-pages, multiple-pages-plus, multiple-pages-minus, multiple-pages-xmark, page-edit, page-plus, page-minus, submit-document, journal, privacy-policy
+- Activities: open-book, book, math-book, bookmark-book, favourite-book, book-lock, book-stack
+
+#### Media & motion
+
+- Photos & Videos: video-camera, video-camera-off, rotate-camera-right, rotate-camera-left, camera, panorama-reduce, panorama-enlarge, hdr, expand, collapse, enlarge, reduce, hd, fx, fx-tag, media-image, media-image-plus, media-image-xmark, media-image-list, media-video, media-video-plus, flash, auto-flash, flash-off, media-video-xmark, media-video-list, media-image-folder, media-video-folder, hd-display, closed-captions-tag, jpeg-format, png-format, svg-format, avi-format, mpeg-format, gif-format, jpg-format, webp-format, raw-format, tif-format, tiff-format, screenshot
+- Music: music-double-note, compact-disc, music-double-note-plus, album-carousel, shuffle, repeat, repeat-once, album-carousel, album-list, album-open, album, playlist-play, play, forward, pause, skip-prev, skip-next, rewind, music-note, music-note-plus, playlist-plus, headset, headset-bolt, headset-warning, playlist, forward-15-seconds, backward-15-seconds, lullaby
+- Audio: microphone, microphone-mute, microphone-speaking, microphone-plus, microphone-minus, microphone-check, microphone-warning, sound-min, sound-off, sound-high, sound-low
+- Animation / Motion: transition-right, transition-left, transition-up, transition-down, bounce-right, bounce-left, dot-arrow-right, dot-arrow-left, dot-arrow-up, dot-arrow-down, keyframe-plus, keyframe, keyframes, keyframes-plus, keyframes-minus, keyframes-couple, ease-curve-control-points, keyframe-minus-in, keyframe-plus, keyframe-minus, keyframe-position, keyframe-align-center, keyframe-align-horizontal, keyframe-align-vertical, ease-in-out, linear, ease-in, ease-out, ease-in-control-point, ease-out-control-point, keyframe-plus-in
+- Other: square-dashed, maximize, split-square-dashed, split-area, compress, plus-square-dashed, de-compress, minus-square-dashed, copyright, trademark, import, translate, white-flag, dash-flag, timer, clock, alarm, timer-off, language, activity, soap, gas, dialpad, triangle-flag, triangle-flag-two-stripes, triangle-flag-circle, page-flip, link, lifebelt, battery-indicator, file-not-found, half-moon, notes, gift, qr-code, scan-qr-code, link-slash, link-xmark, spark, sparks, circle-spark
+
 ## Components
 
 ### Button
@@ -172,13 +244,13 @@ Rules:
 - Use one primary button per view or panel; pair it with secondary buttons for the other actions.
 - Disable with the disabled attribute on <button> or aria-disabled="true" on links; every variant then shares the same disabled look.
 - Write labels as short verbs (Save, Delete, Continue), not "OK" or "Click here".
-- Icons are 16px <span class="button__icon" style="--icon: url(…)"> before or after the label; they take the label's color. Icon-only buttons need an aria-label.
+- Icons are 16px Icon Shells (<svg class="icon" aria-hidden="true"><use href="#icon-<name>"></use></svg>) before or after the label; the button sizes them and they take the label's color. Icon-only actions use an Icon Button.
 
 ### Icon button
 
 Icon buttons trigger an action with an icon alone, for compact toolbars and actions repeated on every row. They are 24px square, have no fill until hovered, and show an active fill while pressed or switched on.
 
-Markup: `<button class="icon-button" type="button" aria-label="…"><span class="icon-button__icon" style="--icon: url(…)" aria-hidden="true"></span></button>` (styles: src/styles/components/icon-button.css).
+Markup: `<button class="icon-button" type="button" aria-label="…"><svg class="icon" aria-hidden="true"><use href="#icon-bell"></use></svg></button>` (styles: src/styles/components/icon-button.css).
 
 | State | Look |
 | --- | --- |
@@ -189,7 +261,7 @@ Markup: `<button class="icon-button" type="button" aria-label="…"><span class=
 
 Rules:
 
-- Use <button class="icon-button" type="button"> with one 16px <span class="icon-button__icon" style="--icon: url(…)" aria-hidden="true">.
+- Use <button class="icon-button" type="button" aria-label="…"> containing one Icon Shell (<svg class="icon" aria-hidden="true"><use href="#icon-<name>"></use></svg>); the button sizes it to 16px.
 - Always give it an aria-label (and a matching title for a tooltip) — the icon alone has no accessible name.
 - Use only icons whose meaning is clear without a label; otherwise use a Button with an icon and text.
 - For on/off actions (e.g. Bold, Pin), toggle aria-pressed; the Active fill then shows the on state.

@@ -1,22 +1,11 @@
 /*
  * Buttons and Icon Buttons pages — Figma "Foundation – UI 2", nodes 18:3529
- * and 23:5380. The preview panel is the frame "Light" (18:5092 / 23:5389);
- * the Buttons grid follows the component set's spacing (23:5203): 24px
- * between columns, a double gap before Danger, 32px between rows.
+ * and 23:5380. Shared panel, section and list styles: src/styles/docs.css.
  */
 
-.button-preview {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--layout-list-offset);
-  /* The Figma panel centers the set with generous room around it. */
-  padding: calc(2 * var(--space-7)) var(--space-5);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-large);
-}
-
-/* Column 4 is an empty track: with the 24px gap on each side it gives the
-   48px space before Danger. */
+/* Buttons panel: follows the component set's spacing (23:5203): 24px
+   between columns, a double gap before Danger, 32px between rows. Column 4
+   is an empty track: with the 24px gap on each side it gives the 48px. */
 .button-preview__grid {
   display: grid;
   grid-template-columns: repeat(3, auto) 0 repeat(2, auto);
@@ -25,85 +14,13 @@
   justify-items: center;
 }
 
-.button-preview__hint {
-  margin-top: var(--space-3);
-  color: var(--color-text-tertiary);
-  text-align: center;
-  transition: color var(--motion-fast) ease;
-}
-
-.button-preview__hint.is-copied {
-  color: var(--color-text-success);
-}
-
 /* Icon Button panel (Figma 23:5345): states in a row, 10px apart. */
 .icon-button-preview {
   display: flex;
   gap: var(--layout-icon-button-gap);
 }
 
-/* Sections ------------------------------------------------------------------ */
-
-.button-section {
-  margin-top: calc(var(--space-7) + var(--space-4));
-}
-
-.button-section__title {
-  color: var(--color-text-default);
-}
-
-.button-section__intro {
-  max-width: var(--layout-description-width);
-  color: var(--color-text-secondary);
-}
-
-/* Variants: sample button | name, usage, class. The sample column is shared
-   (subgrid) so every description starts at the same x. */
-.button-variants {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: var(--space-5);
-  margin-top: var(--space-4);
-}
-
-.button-variant {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: subgrid;
-  align-items: start;
-  padding: var(--space-4) 0;
-  border-top: 1px solid var(--color-border-default);
-}
-
-.button-variant:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.button-variant__name {
-  color: var(--color-text-default);
-}
-
-.button-variant__usage {
-  max-width: var(--layout-description-width);
-  color: var(--color-text-secondary);
-}
-
-.button-variant__class,
-.button-code {
-  font-family: var(--font-family-mono);
-  font-size: var(--body-medium-strong-font-size);
-  line-height: var(--body-medium-strong-line-height);
-}
-
-.button-variant__class {
-  display: block;
-  margin-top: var(--space-2);
-  color: var(--color-text-tertiary);
-}
-
-/* Icons --------------------------------------------------------------------- */
-
+/* Example rows (icons in buttons, the toggle demo). */
 .button-icons {
   display: flex;
   flex-wrap: wrap;
@@ -111,37 +28,8 @@
   margin-top: var(--space-4);
 }
 
-.button-code {
-  margin: var(--space-4) 0 0;
-  padding: var(--space-4);
-  overflow-x: auto;
-  border-radius: var(--radius-medium);
-  background: var(--color-bg-secondary);
-  color: var(--color-text-secondary);
-}
-
 .icon-button-toggle__label {
   align-self: center;
   font-family: var(--font-family-mono);
   color: var(--color-text-tertiary);
-}
-
-/* Usage rules --------------------------------------------------------------- */
-
-.button-rules {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  max-width: var(--layout-content-width);
-  margin-top: var(--space-4);
-  padding-left: var(--space-5);
-  list-style: disc;
-  color: var(--color-text-secondary);
-}
-
-@media (max-width: 640px) {
-  .button-preview {
-    padding: var(--space-7) var(--space-4);
-    overflow-x: auto;
-  }
 }

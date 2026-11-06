@@ -1,0 +1,43 @@
+/*
+ * Icon Shell — Figma "Foundation – UI 2", node 28:1006: one icon slot in
+ * five sizes (32, 24, 20, 16, 12). The shell sets the size; the icon inside
+ * is swapped by name from the Iconoir sprite (public/icons/iconoir.svg,
+ * built from tokens/icons.json by `npm run tokens`), inlined once per page.
+ *
+ *   <svg class="icon icon--16" aria-hidden="true"><use href="#icon-bell"></use></svg>
+ *
+ * Icons are drawn on a 24px grid with a 1.5px stroke and scale as a whole,
+ * as the Figma variants do. They use the current text color: set it with a
+ * --color-icon-* token.
+ */
+
+.icon {
+  --icon-size: 24px;
+
+  display: inline-block;
+  flex: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  vertical-align: middle;
+  color: inherit;
+}
+
+.icon--32 {
+  --icon-size: 32px;
+}
+
+.icon--24 {
+  --icon-size: 24px;
+}
+
+.icon--20 {
+  --icon-size: 20px;
+}
+
+.icon--16 {
+  --icon-size: 16px;
+}
+
+.icon--12 {
+  --icon-size: 12px;
+}

@@ -2,7 +2,7 @@
  * Button — Figma "Foundation – UI 2", Buttons (node 18:3529),
  * component set 23:5203: variants Primary, Secondary, Tertiary, Danger,
  * Success × states Default, Hover, Disabled, with optional 16px icons
- * before and after the label.
+ * (Icon Shell, icon.css) before and after the label.
  *
  *   <button class="button button--secondary" type="button">Cancel</button>
  *
@@ -17,8 +17,6 @@
   --button-bg-hover: var(--color-bg-inverse-hover);
   --button-bg-pressed: var(--button-bg-hover);
   --button-fg: var(--color-text-inverse);
-  /* Figma "Icon Shell": 16px icon. */
-  --button-icon-size: 16px;
 
   display: inline-flex;
   flex: none;
@@ -125,12 +123,8 @@
 
 /* Icons --------------------------------------------------------------------- */
 
-/* The icon file is used as a mask so it takes the label's color on every
-   variant: <span class="button__icon" style="--icon: url(/icons/x.svg)">. */
-.button__icon {
-  flex: none;
-  width: var(--button-icon-size);
-  height: var(--button-icon-size);
-  background-color: currentColor;
-  mask: var(--icon) center / contain no-repeat;
+/* Figma puts a 16px Icon Shell before/after the label
+   (src/styles/components/icon.css); it takes the label's color. */
+.button .icon {
+  --icon-size: 16px;
 }

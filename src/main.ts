@@ -3,8 +3,10 @@ import { renderPrimitives } from "./pages/primitives";
 import { renderTokens } from "./pages/tokens";
 import { renderTypography, typographyIntro } from "./pages/typography";
 import { buttonsIntro, iconButtonsIntro, renderButtons, renderIconButtons } from "./pages/buttons";
+import { iconsIntro, renderIcons } from "./pages/icons";
+import { loadIconSprite } from "./lib/icon";
 
-type Route = "primitives" | "tokens" | "typography" | "buttons" | "icon-buttons";
+type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons";
 
 /** Section links that open their first page (Colors → Primitives). */
 const REDIRECTS: Record<string, Route> = { colors: "primitives" };
@@ -33,6 +35,11 @@ const pages: Record<Route, Page> = {
     title: "Typography",
     description: typographyIntro,
     render: renderTypography,
+  },
+  icons: {
+    title: "Iconography",
+    description: iconsIntro,
+    render: renderIcons,
   },
   buttons: {
     title: "Buttons",
@@ -126,5 +133,6 @@ document.querySelectorAll<HTMLButtonElement>(".nav__toggle").forEach((toggle) =>
   });
 });
 
+loadIconSprite();
 window.addEventListener("hashchange", render);
 render();

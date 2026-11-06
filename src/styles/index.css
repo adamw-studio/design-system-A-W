@@ -3,5 +3,7 @@
 @import "./tokens/sizing.css";
 @import "./motion.css";
 @import "./layout.css";
+@import "./docs.css";
+@import "./components/icon.css";
 @import "./components/button.css";
 @import "./components/icon-button.css";

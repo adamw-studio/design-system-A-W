@@ -20,6 +20,13 @@
   --layout-description-width: 420px;
   /* Icon Button page: gap between the states in the preview (Figma 23:5345). */
   --layout-icon-button-gap: 10px;
+  /* Icons page (Figma 12:3948): cards are 208px wide in a 928px grid with
+     128px-tall previews. The site keeps every page on the same content
+     column, so cards may shrink to this width to fit three per row. */
+  --layout-icon-card-min-width: 160px;
+  --layout-icon-preview-height: 128px;
+  /* Icon Shell set (Figma 28:1006): 14px between the sizes. */
+  --layout-icon-shell-gap: 14px;
 }
 
 *,
@@ -247,6 +254,9 @@ img {
   margin: var(--layout-gutter) var(--layout-gutter) var(--layout-gutter) 0;
   height: calc(100vh - 2 * var(--layout-gutter));
   overflow: auto;
+  /* With classic (non-overlay) scrollbars, reserve the same gutter on both
+     sides so every page keeps equal left and right margins. */
+  scrollbar-gutter: stable both-edges;
   background: var(--color-bg-default);
   border: 1px solid var(--color-border-default);
   border-radius: var(--layout-radius-panel);

@@ -13,6 +13,8 @@
 import rules from "../../tokens/button-rules.json";
 import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
 import { agentLinks } from "../lib/agent-links";
+import { codeBlock, el, ruleList, section } from "../lib/docs";
+import { icon, iconMarkup } from "../lib/icon";
 import "../styles/pages/buttons.css";
 
 export const buttonsIntro = rules.intro;
@@ -33,14 +35,8 @@ const COLUMNS: Record<string, { column: number; states: State[] }> = {
 };
 const ROWS: State[] = ["default", "hover", "disabled"];
 
-const ICON = "/icons/app-notification.svg";
-
-function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
-}
+/** The icon Figma uses in the button sets. */
+const ICON = "app-notification";
 
 const classesFor = (variant: string) => `button button--${variant}`;
 
@@ -50,26 +46,20 @@ function button(variant: string, label: string, opts: { state?: State; iconLead?
   if (opts.state === "hover") btn.dataset.state = "hover";
   if (opts.state === "disabled") btn.disabled = true;
 
-  const icon = () => {
-    const span = el("span", "button__icon");
-    span.style.setProperty("--icon", `url("${ICON}")`);
-    span.setAttribute("aria-hidden", "true");
-    return span;
-  };
-  if (opts.iconLead) btn.append(icon());
+  if (opts.iconLead) btn.append(icon(ICON));
   btn.append(label);
-  if (opts.iconTrail) btn.append(icon());
+  if (opts.iconTrail) btn.append(icon(ICON));
   return btn;
 }
 
 /** Figma frame "Light": every variant × state, click to copy the classes. */
 function preview(status: HTMLElement) {
-  const panel = el("div", "button-preview");
+  const panel = el("div", "doc-preview");
   const grid = el("div", "button-preview__grid");
   grid.setAttribute("role", "group");
   grid.setAttribute("aria-label", "Button variants and states");
 
-  const hint = el("p", "button-preview__hint text-body-medium");
+  const hint = el("p", "doc-preview__hint text-body-medium");
   const hintText = "Click a button to copy its classes.";
   hint.textContent = hintText;
 
@@ -94,26 +84,15 @@ function preview(status: HTMLElement) {
   return [panel, hint];
 }
 
-function section(title: string, intro?: string) {
-  const wrap = el("section", "button-section");
-  const id = `buttons-${title.toLowerCase()}`;
-  const heading = el("h2", "button-section__title text-heading-medium", title);
-  heading.id = id;
-  wrap.setAttribute("aria-labelledby", id);
-  wrap.append(heading);
-  if (intro) wrap.append(el("p", "button-section__intro text-body-large", intro));
-  return wrap;
-}
-
 function variantRow(variant: Variant) {
-  const row = el("li", "button-variant");
-  const sample = el("div", "button-variant__sample");
+  const row = el("li", "doc-option");
+  const sample = el("div", "doc-option__sample");
   sample.append(button(variant.variant, variant.label));
 
-  const text = el("div", "button-variant__text");
-  const name = el("p", "button-variant__name text-body-large-strong", variant.label);
-  const usage = el("p", "button-variant__usage text-body-large", variant.usage);
-  const cls = el("code", "button-variant__class", `.button--${variant.variant}`);
+  const text = el("div", "doc-option__text");
+  const name = el("p", "doc-option__name text-body-large-strong", variant.label);
+  const usage = el("p", "doc-option__usage text-body-large", variant.usage);
+  const cls = el("code", "doc-option__class", `.button--${variant.variant}`);
   text.append(name, usage, cls);
 
   row.append(sample, text);
@@ -121,22 +100,17 @@ function variantRow(variant: Variant) {
 }
 
 function iconExamples() {
-  const wrap = section("Icons", "Add a 16px icon before or after the label. Icons take the label's color, so they work on every variant.");
+  const wrap = section(
+    "Icons",
+    "Add an Icon Shell before or after the label. The button sizes it to 16px and it takes the label's color, so it works on every variant.",
+  );
   const row = el("div", "button-icons");
   row.append(
     button("primary", "Notify", { iconLead: true }),
     button("secondary", "Notify", { iconTrail: true }),
     button("tertiary", "Notify", { iconLead: true, iconTrail: true }),
   );
-  const code = el("pre", "button-code");
-  code.append(
-    el(
-      "code",
-      undefined,
-      `<button class="button button--primary" type="button">\n  <span class="button__icon" style="--icon: url(/icons/app-notification.svg)" aria-hidden="true"></span>\n  Notify\n</button>`,
-    ),
-  );
-  wrap.append(row, code);
+  wrap.append(row, codeBlock(`<button class="button button--primary" type="button">\n  ${iconMarkup(ICON)}\n  Notify\n</button>`));
   return wrap;
 }
 
@@ -147,21 +121,18 @@ function iconButton(label: string, state: string = "default") {
   btn.title = label;
   if (state === "hover" || state === "active") btn.dataset.state = state;
   if (state === "disabled") btn.disabled = true;
-  const icon = el("span", "icon-button__icon");
-  icon.style.setProperty("--icon", `url("${ICON}")`);
-  icon.setAttribute("aria-hidden", "true");
-  btn.append(icon);
+  btn.append(icon(ICON));
   return btn;
 }
 
 /** Figma frame "Light" (23:5389): the four states in a row. */
 function iconPreview(status: HTMLElement) {
-  const panel = el("div", "button-preview");
+  const panel = el("div", "doc-preview");
   const row = el("div", "icon-button-preview");
   row.setAttribute("role", "group");
   row.setAttribute("aria-label", "Icon button states");
 
-  const hint = el("p", "button-preview__hint text-body-medium");
+  const hint = el("p", "doc-preview__hint text-body-medium");
   const hintText = "Click an icon button to copy its class.";
   hint.textContent = hintText;
 
@@ -178,13 +149,13 @@ function iconPreview(status: HTMLElement) {
 }
 
 function iconStateRow(state: IconState) {
-  const row = el("li", "button-variant");
-  const sample = el("div", "button-variant__sample");
+  const row = el("li", "doc-option");
+  const sample = el("div", "doc-option__sample");
   sample.append(iconButton(`Notifications (${state.label.toLowerCase()})`, state.state));
-  const text = el("div", "button-variant__text");
+  const text = el("div", "doc-option__text");
   text.append(
-    el("p", "button-variant__name text-body-large-strong", state.label),
-    el("p", "button-variant__usage text-body-large", state.usage),
+    el("p", "doc-option__name text-body-large-strong", state.label),
+    el("p", "doc-option__usage text-body-large", state.usage),
   );
   row.append(sample, text);
   return row;
@@ -209,25 +180,20 @@ export function renderIconButtons(body: HTMLElement) {
   const status = createStatusRegion();
 
   const states = section("States");
-  const list = el("ul", "button-variants");
+  const list = el("ul", "doc-options");
   list.append(...rules.iconButton.states.map(iconStateRow));
   states.append(list);
 
   const toggle = section("Toggles", "For on/off actions, set aria-pressed. The Active fill then stays on while the toggle is on. Try it:");
-  const code = el("pre", "button-code");
-  code.append(
-    el(
-      "code",
-      undefined,
-      `<button class="icon-button" type="button" aria-label="Mute notifications" aria-pressed="false">\n  <span class="icon-button__icon" style="--icon: url(/icons/app-notification.svg)" aria-hidden="true"></span>\n</button>`,
+  toggle.append(
+    toggleExample(),
+    codeBlock(
+      `<button class="icon-button" type="button" aria-label="Mute notifications" aria-pressed="false">\n  ${iconMarkup(ICON)}\n</button>`,
     ),
   );
-  toggle.append(toggleExample(), code);
 
   const usage = section("Usage");
-  const ruleList = el("ul", "button-rules text-body-large");
-  ruleList.append(...rules.iconButton.rules.map((r) => el("li", undefined, r)));
-  usage.append(ruleList);
+  usage.append(ruleList(rules.iconButton.rules));
 
   body.append(...iconPreview(status), states, toggle, usage, agentLinks([]), status);
 }
@@ -236,14 +202,12 @@ export function renderButtons(body: HTMLElement) {
   const status = createStatusRegion();
 
   const variants = section("Variants");
-  const list = el("ul", "button-variants");
+  const list = el("ul", "doc-options");
   list.append(...rules.variants.map(variantRow));
   variants.append(list);
 
   const usage = section("Usage");
-  const ruleList = el("ul", "button-rules text-body-large");
-  ruleList.append(...rules.rules.map((r) => el("li", undefined, r)));
-  usage.append(ruleList);
+  usage.append(ruleList(rules.rules));
 
   body.append(...preview(status), variants, iconExamples(), usage, agentLinks([]), status);
 }
