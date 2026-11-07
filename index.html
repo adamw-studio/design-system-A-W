@@ -90,32 +90,36 @@
           <a href="#tags" class="nav__item nav__link text-body-large" data-route="tags">Tags</a>
         </nav>
 
-        <!-- Figma "Design System - Web", node 293:1522 -->
-        <div class="sidebar__footer">
-          <button
-            type="button"
-            class="switch"
-            role="switch"
-            aria-checked="false"
-            aria-label="Dark theme"
-            title="Dark theme"
-            id="theme-switch"
-          >
-            <span class="switch__knob"></span>
-          </button>
-        </div>
       </aside>
 
       <main class="panel">
         <div class="page">
           <header class="page__header">
+            <div class="page__topbar">
+              <p class="page__crumb text-body-large" id="page-crumb"></p>
+              <div class="page__actions" id="page-actions"></div>
+            </div>
             <h1 class="page__title text-heading-large" id="page-title">Colors</h1>
-            <div class="page__actions" id="page-actions"></div>
+            <p class="page__subtitle text-body-large" id="page-subtitle"></p>
+            <div class="doc-rule" aria-hidden="true"></div>
           </header>
           <p class="page__description text-body-large" id="page-description">Add a short description...</p>
           <div class="page__body" id="page-body"></div>
         </div>
       </main>
+    </div>
+
+    <!-- Theme toggle, floating over the content (src/lib/theme.ts) -->
+    <div class="theme-toggle" role="group" aria-label="Theme" id="theme-toggle">
+      <span class="theme-toggle__indicator" aria-hidden="true"></span>
+      <button type="button" class="theme-toggle__option text-body-large" data-theme-value="light" aria-pressed="true">
+        <svg class="icon icon--16" aria-hidden="true"><use href="#icon-sun-light"></use></svg>
+        Light
+      </button>
+      <button type="button" class="theme-toggle__option text-body-large" data-theme-value="dark" aria-pressed="false">
+        <svg class="icon icon--16" aria-hidden="true"><use href="#icon-half-moon"></use></svg>
+        Dark
+      </button>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

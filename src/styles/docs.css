@@ -1,35 +1,57 @@
 /*
- * Documentation building blocks shared by the component pages (Buttons,
- * Icon Buttons, Icons): preview panel, sections, option lists, code blocks
- * and rule lists. Helpers that build them: src/lib/docs.ts.
+ * Documentation building blocks shared by the pages: short rule, stage
+ * (preview panel + notes), sections, option lists, code blocks and rule
+ * lists. Helpers that build them: src/lib/docs.ts. Page-level spacing is in
+ * layout.css (.page, .page__body).
  */
+
+/* Short divider under page and section titles. */
+.doc-rule {
+  flex: none;
+  width: var(--space-6);
+  height: 1px;
+  background: var(--color-border-default);
+}
 
 /* Preview panel — the Figma "Light" frame that holds a component set. */
 .doc-preview {
   display: flex;
   justify-content: center;
-  margin-top: var(--layout-list-offset);
   /* The Figma panel centers the set with generous room around it. */
   padding: calc(2 * var(--space-7)) var(--space-5);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-large);
 }
 
-.doc-preview__hint {
-  margin-top: var(--space-3);
-  color: var(--color-text-tertiary);
-  text-align: center;
+/* Stage: a preview panel with short notes underneath. */
+.doc-stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.doc-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.doc-notes li {
   transition: color var(--motion-fast) ease;
 }
 
-.doc-preview__hint.is-copied {
+.doc-notes li.is-copied {
   color: var(--color-text-success);
 }
 
 /* Sections ------------------------------------------------------------------ */
 
+/* Section: title, short rule, intro, then content — 16px apart. */
 .doc-section {
-  margin-top: calc(var(--space-7) + var(--space-4));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .doc-section__title {
@@ -52,7 +74,6 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   column-gap: var(--space-5);
-  margin-top: var(--space-4);
 }
 
 .doc-option {
@@ -93,7 +114,7 @@
 
 /* Code sample */
 .doc-code {
-  margin: var(--space-4) 0 0;
+  margin: 0;
   padding: var(--space-4);
   overflow-x: auto;
   border-radius: var(--radius-medium);
@@ -101,15 +122,11 @@
   color: var(--color-text-secondary);
 }
 
-/* Usage rules */
+/* Usage rules: plain lines, no bullets. */
 .doc-rules {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  max-width: var(--layout-content-width);
-  margin-top: var(--space-4);
-  padding-left: var(--space-5);
-  list-style: disc;
   color: var(--color-text-secondary);
 }
 

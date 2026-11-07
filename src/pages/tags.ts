@@ -10,11 +10,12 @@
 import rules from "../../tokens/tag-rules.json";
 import { agentLinks } from "../lib/agent-links";
 import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
-import { codeBlock, el, ruleList, section } from "../lib/docs";
+import { codeBlock, el, ruleList, section, stage } from "../lib/docs";
 import { icon, iconMarkup } from "../lib/icon";
 import "../styles/pages/tags.css";
 
 export const tagsIntro = rules.intro;
+export const tagsSubtitle = `${rules.variants.length} variants · strong or outline`;
 
 type Variant = (typeof rules.variants)[number];
 
@@ -36,7 +37,12 @@ function preview(status: HTMLElement) {
   grid.setAttribute("aria-label", "Tag variants, strong and outlined");
 
   const hintText = "Click a tag to copy its classes.";
-  const hint = el("p", "doc-preview__hint text-body-medium", hintText);
+  const { stage: block, notes } = stage(panel, [
+    hintText,
+    "Left: strong (filled). Right: outline, with tag--outline.",
+    "Every tag is 16px tall with 4px of padding at the sides.",
+  ]);
+  const hint = notes[0];
 
   for (const variant of rules.variants) {
     for (const outline of [false, true]) {
@@ -53,7 +59,7 @@ function preview(status: HTMLElement) {
   }
 
   panel.append(grid);
-  return [panel, hint];
+  return block;
 }
 
 function variantRow(variant: Variant) {
@@ -94,5 +100,5 @@ export function renderTags(body: HTMLElement) {
   const usage = section("Usage");
   usage.append(ruleList(rules.rules));
 
-  body.append(...preview(status), variants, iconExamples(), usage, agentLinks([]), status);
+  body.append(preview(status), variants, iconExamples(), usage, agentLinks([]), status);
 }

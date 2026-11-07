@@ -16,13 +16,33 @@ export function section(title: string, intro?: string | (Node | string)[]) {
   const heading = el("h2", "doc-section__title text-heading-medium", title);
   heading.id = id;
   wrap.setAttribute("aria-labelledby", id);
-  wrap.append(heading);
+  wrap.append(heading, rule());
   if (intro) {
     const p = el("p", "doc-section__intro text-body-large");
     p.append(...(typeof intro === "string" ? [intro] : intro));
     wrap.append(p);
   }
   return wrap;
+}
+
+/** The short divider under page and section titles. */
+export function rule() {
+  const line = el("div", "doc-rule");
+  line.setAttribute("aria-hidden", "true");
+  return line;
+}
+
+/**
+ * A preview panel ("stage") with short notes underneath. Returns the note
+ * elements too, so a note can flash feedback (e.g. "Copied …").
+ */
+export function stage(panel: HTMLElement, notes: string[]) {
+  const wrap = el("div", "doc-stage");
+  const list = el("ul", "doc-notes text-body-large");
+  const items = notes.map((note) => el("li", undefined, note));
+  list.append(...items);
+  wrap.append(panel, list);
+  return { stage: wrap, notes: items };
 }
 
 /** A code sample block. */

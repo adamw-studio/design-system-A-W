@@ -47,6 +47,9 @@ function readTokens(): Token[] {
   });
 }
 
+/** "82 tokens · light and dark" */
+export const tokensSubtitle = () => `${readTokens().length} tokens · light and dark`;
+
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) {
   const node = document.createElement(tag);
   if (className) node.className = className;

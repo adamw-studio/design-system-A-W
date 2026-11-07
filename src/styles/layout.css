@@ -12,8 +12,6 @@
   --layout-content-width: 580px;
   /* Content column: title starts 42px below the panel top. */
   --layout-content-top: 42px;
-  /* Pages: gap from the description to a token list (Figma 27–28px). */
-  --layout-list-offset: 28px;
   /* Token rows: inner padding ("padding-6" in the Web file). */
   --layout-row-padding: 6px;
   /* Readable width for usage notes next to specimens. */
@@ -27,6 +25,9 @@
   --layout-icon-preview-height: 128px;
   /* Icon Shell set (Figma 28:1006): 14px between the sizes. */
   --layout-icon-shell-gap: 14px;
+  /* Floating controls (theme toggle). No shadow tokens exist yet; shadows
+     are black in both themes, so they use black primitives. */
+  --layout-shadow-floating: 0 var(--space-2) var(--space-5) var(--color-black-200), 0 1px 2px var(--color-black-200);
   /* Switch set (Figma 44:71): 11px between Off and On. */
   --layout-switch-gap: 11px;
 }
@@ -98,7 +99,7 @@ img {
   min-height: 100vh;
 }
 
-/* Sidebar: header, nav, and a footer pinned to the bottom (theme switch). */
+/* Sidebar: header, then the nav (scrolls on its own if it gets long). */
 .sidebar {
   position: sticky;
   top: 0;
@@ -115,13 +116,6 @@ img {
   overflow-y: auto;
 }
 
-/* Figma 293:1522: 20px above, 12px on the other sides — mirrors the header. */
-.sidebar__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--layout-sidebar-header-gap) var(--layout-gutter) var(--layout-gutter);
-}
 
 .sidebar__header {
   display: flex;
@@ -293,29 +287,68 @@ img {
   border-radius: var(--layout-radius-panel);
 }
 
+/*
+ * Page structure (after kosta.fyi/skills/tactile-design), in the system's
+ * own type and colors:
+ *   top row (where the page sits · actions)
+ *   title, subtitle, short rule
+ *   description
+ *   blocks — stages and sections — 56px apart
+ */
 .page {
+  display: flex;
+  flex-direction: column;
+  /* Header → description → body. */
+  gap: calc(var(--space-5) + var(--space-2));
   width: min(var(--layout-content-width), 100% - 2 * var(--space-5));
   margin: 0 auto;
-  padding: var(--layout-content-top) 0 var(--space-7);
+  /* Bottom: room for the floating theme toggle. */
+  padding: var(--layout-content-top) 0 calc(2 * var(--space-7) + var(--space-4));
 }
 
 .page__header {
   display: flex;
+  flex-direction: column;
+}
+
+.page__topbar {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
+  /* Keeps the row the same height with or without actions. */
+  min-height: var(--space-5);
+  margin-bottom: var(--space-5);
 }
 
-.page__actions:empty {
-  display: none;
+.page__crumb {
+  color: var(--color-text-secondary);
+}
+
+.page__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .page__title {
   color: var(--color-text-default);
 }
 
+.page__subtitle {
+  padding-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
 .page__description {
   color: var(--color-text-secondary);
+}
+
+/* Stages and sections, 56px apart. */
+.page__body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-7) + var(--space-4));
 }
 
 /* Narrow screens: stack the sidebar above the panel */
@@ -338,12 +371,9 @@ img {
   }
 }
 
-/* Footer linking the machine-readable token files (src/lib/agent-links.ts) */
+/* Last section: links to the machine-readable files (src/lib/agent-links.ts) */
 .agent-links {
-  margin-top: var(--space-7);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-default);
-  color: var(--color-text-tertiary);
+  color: var(--color-text-secondary);
 }
 
 .agent-links a {
@@ -362,9 +392,98 @@ img {
   }
 }
 
-/* Theme switch (src/lib/theme.ts): while the colors swap, pause transitions
-   so the whole page changes in one frame — except the switch's own motion. */
-.is-theme-switching *:not(.switch, .switch__knob),
+/* Theme toggle --------------------------------------------------------------
+   A pill floating at the bottom, centered over the content panel: Light and
+   Dark with a highlight that slides to the chosen one. Inverse colors, so it
+   reads as an overlay in both themes. Markup: index.html; logic: theme.ts. */
+.theme-toggle {
+  position: fixed;
+  z-index: 10;
+  bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
+  /* Center of the panel: it spans from the sidebar to one gutter short of
+     the right edge. */
+  left: calc(var(--layout-sidebar-width) + (100vw - var(--layout-sidebar-width) - var(--layout-gutter)) / 2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-inverse);
+  box-shadow: var(--layout-shadow-floating);
+  transform: translateX(-50%);
+}
+
+.theme-toggle__indicator {
+  position: absolute;
+  top: var(--space-2);
+  bottom: var(--space-2);
+  left: var(--space-2);
+  width: calc(50% - var(--space-2));
+  border-radius: var(--radius-full);
+  /* A lighter (or, in dark, darker) step of the pill. */
+  background: color-mix(in srgb, var(--color-text-inverse) 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-text-inverse) 6%, transparent);
+  /* Direct response to a click: strong ease-out, under 300ms. */
+  transition: transform var(--motion-fast) var(--motion-ease-out);
+}
+
+/* Keyed off <html data-theme> (set before first paint), so a saved dark
+   theme shows the right position on load instead of sliding into it. */
+[data-theme="dark"] .theme-toggle__indicator {
+  transform: translateX(100%);
+}
+
+.theme-toggle__option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-full);
+  background: none;
+  color: color-mix(in srgb, var(--color-text-inverse) 60%, transparent);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color var(--motion-hover) ease,
+    transform var(--motion-press) var(--motion-ease-out);
+}
+
+.theme-toggle__option[aria-pressed="true"] {
+  color: var(--color-text-inverse);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle__option:hover {
+    color: var(--color-text-inverse);
+  }
+}
+
+.theme-toggle__option:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+.theme-toggle__option:focus-visible {
+  outline-color: var(--color-text-inverse);
+  outline-offset: 0;
+}
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    left: 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle__indicator {
+    transition: none;
+  }
+}
+
+/* While the colors swap (src/lib/theme.ts), pause transitions so the whole
+   page changes in one frame — except the toggle's sliding highlight. */
+.is-theme-switching *:not(.theme-toggle__indicator),
 .is-theme-switching *::before,
 .is-theme-switching *::after {
   transition: none !important;

@@ -23,6 +23,8 @@ const SHELL_ICON = "app-notification";
 
 const ICON_COUNT = new Set(catalog.categories.flatMap((c) => c.groups.flatMap((g) => g.icons))).size;
 
+export const iconsSubtitle = `${ICON_COUNT} icons · ${catalog.library.name}`;
+
 /** Figma layer names that differ from the Iconoir name, searchable too. */
 const FIGMA_NAMES = catalog.figmaNames as Record<string, string>;
 
@@ -61,7 +63,7 @@ function librarySection() {
   return section("Library", [
     "Our icons come from ",
     link,
-    ` (${catalog.library.license}), in its ${catalog.library.style} style. The ${ICON_COUNT} icons below are bundled into one sprite, ${ICON_SPRITE}, by npm run tokens. Inline it once per page and point icons at #icon-<name>.`,
+    ` (${catalog.library.license}), in its ${catalog.library.style} style. The ${ICON_COUNT} icons below are bundled into one sprite, ${ICON_SPRITE}, by npm run tokens. Inline it once per page and point icons at #icon-<name>. Click any icon below to copy its markup.`,
   ]);
 }
 
@@ -103,7 +105,6 @@ function catalogSection(status: HTMLElement) {
   count.setAttribute("aria-live", "polite");
   toolbar.append(field, count);
 
-  const hint = el("p", "icon-catalog__hint text-body-medium", "Click an icon to copy its markup.");
   const empty = el("p", "icon-catalog__empty text-body-large");
   empty.hidden = true;
 
@@ -149,7 +150,7 @@ function catalogSection(status: HTMLElement) {
   input.addEventListener("input", filter);
   filter();
 
-  wrap.append(toolbar, hint, ...categories.map((c) => c.sec), empty);
+  wrap.append(toolbar, ...categories.map((c) => c.sec), empty);
   return wrap;
 }
 

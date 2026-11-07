@@ -16,6 +16,12 @@ import "../styles/pages/typography.css";
 
 export const typographyIntro = rules.intro;
 
+/** "7 styles · 10 classes" */
+export function typographySubtitle() {
+  const styles = typographyStyles(variables, rules);
+  return `${new Set(styles.map((s) => s.style)).size} styles · ${styles.length} classes`;
+}
+
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -78,7 +84,9 @@ export function renderTypography(body: HTMLElement) {
     const specimens = el("div", "type-style__specimens");
     specimens.append(...variants.map((v) => specimen(v, status)));
 
-    section.append(heading, el("p", "type-style__usage text-body-large", variants[0].usage), specimens);
+    const divider = el("div", "doc-rule");
+    divider.setAttribute("aria-hidden", "true");
+    section.append(heading, divider, el("p", "type-style__usage text-body-large", variants[0].usage), specimens);
     list.append(section);
   }
 

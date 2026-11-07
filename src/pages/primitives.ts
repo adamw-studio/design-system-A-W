@@ -43,6 +43,13 @@ function readFamilies(): Map<string, Shade[]> {
   return new Map(ordered.map((f) => [f, families.get(f)!]));
 }
 
+/** "7 families · 70 colors" */
+export function primitivesSubtitle() {
+  const families = readFamilies();
+  const count = [...families.values()].reduce((n, shades) => n + shades.length, 0);
+  return `${families.size} families · ${count} colors`;
+}
+
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) {
   const node = document.createElement(tag);
   if (className) node.className = className;

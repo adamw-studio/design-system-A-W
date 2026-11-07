@@ -13,12 +13,14 @@
 import rules from "../../tokens/button-rules.json";
 import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
 import { agentLinks } from "../lib/agent-links";
-import { codeBlock, el, ruleList, section } from "../lib/docs";
+import { codeBlock, el, ruleList, section, stage } from "../lib/docs";
 import { icon, iconMarkup } from "../lib/icon";
 import "../styles/pages/buttons.css";
 
 export const buttonsIntro = rules.intro;
 export const iconButtonsIntro = rules.iconButton.intro;
+export const buttonsSubtitle = `${rules.variants.length} variants · default, hover, disabled`;
+export const iconButtonsSubtitle = `${rules.iconButton.states.length} states · 16px icon`;
 
 type Variant = (typeof rules.variants)[number];
 type State = "default" | "hover" | "disabled";
@@ -59,9 +61,13 @@ function preview(status: HTMLElement) {
   grid.setAttribute("role", "group");
   grid.setAttribute("aria-label", "Button variants and states");
 
-  const hint = el("p", "doc-preview__hint text-body-medium");
   const hintText = "Click a button to copy its classes.";
-  hint.textContent = hintText;
+  const { stage: block, notes } = stage(panel, [
+    hintText,
+    "Rows: default, hover and disabled. Danger and Success have no disabled state in Figma.",
+    "Pressed buttons shrink to 97%.",
+  ]);
+  const hint = notes[0];
 
   for (const variant of rules.variants) {
     const { column, states } = COLUMNS[variant.variant];
@@ -81,7 +87,7 @@ function preview(status: HTMLElement) {
   }
 
   panel.append(grid);
-  return [panel, hint];
+  return block;
 }
 
 function variantRow(variant: Variant) {
@@ -132,9 +138,13 @@ function iconPreview(status: HTMLElement) {
   row.setAttribute("role", "group");
   row.setAttribute("aria-label", "Icon button states");
 
-  const hint = el("p", "doc-preview__hint text-body-medium");
   const hintText = "Click an icon button to copy its class.";
-  hint.textContent = hintText;
+  const { stage: block, notes } = stage(panel, [
+    hintText,
+    "States: default, hover, active and disabled.",
+    "The icon is a 16px Icon Shell in --color-icon-default.",
+  ]);
+  const hint = notes[0];
 
   for (const state of rules.iconButton.states) {
     const btn = iconButton(`Notifications (${state.label.toLowerCase()})`, state.state);
@@ -145,7 +155,7 @@ function iconPreview(status: HTMLElement) {
   }
 
   panel.append(row);
-  return [panel, hint];
+  return block;
 }
 
 function iconStateRow(state: IconState) {
@@ -195,7 +205,7 @@ export function renderIconButtons(body: HTMLElement) {
   const usage = section("Usage");
   usage.append(ruleList(rules.iconButton.rules));
 
-  body.append(...iconPreview(status), states, toggle, usage, agentLinks([]), status);
+  body.append(iconPreview(status), states, toggle, usage, agentLinks([]), status);
 }
 
 export function renderButtons(body: HTMLElement) {
@@ -209,5 +219,5 @@ export function renderButtons(body: HTMLElement) {
   const usage = section("Usage");
   usage.append(ruleList(rules.rules));
 
-  body.append(...preview(status), variants, iconExamples(), usage, agentLinks([]), status);
+  body.append(preview(status), variants, iconExamples(), usage, agentLinks([]), status);
 }

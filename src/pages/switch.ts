@@ -9,10 +9,11 @@
  */
 import rules from "../../tokens/switch-rules.json";
 import { agentLinks } from "../lib/agent-links";
-import { codeBlock, el, ruleList, section } from "../lib/docs";
+import { codeBlock, el, ruleList, section, stage } from "../lib/docs";
 import "../styles/pages/switch.css";
 
 export const switchIntro = rules.intro;
+export const switchSubtitle = `${rules.states.length} states · takes effect immediately`;
 
 /** A live switch: clicking flips aria-checked (and calls onChange). */
 function switchEl(checked: boolean, label?: string, onChange?: (on: boolean) => void) {
@@ -38,8 +39,10 @@ function preview() {
   row.setAttribute("aria-label", "Switch states");
   row.append(switchEl(false, "Example switch (starts off)"), switchEl(true, "Example switch (starts on)"));
   panel.append(row);
-  const hint = el("p", "doc-preview__hint text-body-medium", "Click to try them: a switch takes effect immediately.");
-  return [panel, hint];
+  return stage(panel, [
+    "Click to try them: a switch takes effect immediately.",
+    "Off sits on --color-bg-hover, On on --color-bg-inverse; the knob slides 16px.",
+  ]).stage;
 }
 
 function stateRow(state: (typeof rules.states)[number]) {
@@ -91,5 +94,5 @@ export function renderSwitch(body: HTMLElement) {
   const usage = section("Usage");
   usage.append(ruleList(rules.rules));
 
-  body.append(...preview(), states, labels, usage, agentLinks([]));
+  body.append(preview(), states, labels, usage, agentLinks([]));
 }

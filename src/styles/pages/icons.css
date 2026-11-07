@@ -20,10 +20,6 @@
   color: var(--color-text-tertiary);
 }
 
-.doc-preview + .doc-options {
-  margin-top: var(--space-6);
-}
-
 /* Size list: samples sit in a 32px-wide column so the text lines up. */
 .icon-size-sample {
   display: flex;
@@ -34,8 +30,11 @@
 
 /* Catalog ------------------------------------------------------------------- */
 
+/* Search bar, then one block per category. */
 .icon-catalog {
-  margin-top: calc(var(--space-7) + var(--space-4));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
 }
 
 /* Search bar stays at the top of the panel while scrolling the grid. */
@@ -82,26 +81,21 @@
   color: var(--color-text-tertiary);
 }
 
-.icon-toolbar__count,
-.icon-catalog__hint {
+.icon-toolbar__count {
   color: var(--color-text-tertiary);
 }
 
 .icon-catalog__empty {
-  margin-top: var(--space-6);
   color: var(--color-text-secondary);
 }
 
-.icon-category.doc-section {
-  margin-top: var(--space-7);
+/* Category: title, short rule, then its groups 24px apart. */
+.icon-category {
+  gap: var(--space-5);
 }
 
 /* Group heading: Figma's 18px secondary label (_doc.description/heading),
    set with a system heading style. */
-.icon-group {
-  margin-top: var(--space-5);
-}
-
 .icon-group__title {
   color: var(--color-text-secondary);
 }
