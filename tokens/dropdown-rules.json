@@ -1,0 +1,35 @@
+{
+  "$comment": "When and how to use the Dropdown. The component is src/styles/components/dropdown.css, built from Figma \"Foundation – UI 2\" (Dropdown, node 45:314; component set 45:421). Shown on the Dropdown page and published to public/llms.txt by `npm run tokens`.",
+  "intro": "Dropdowns let people pick one option from a list without taking up room on the page. They are 24px tall, with an optional 12px icon in front, and come with or without a stroke.",
+  "states": [
+    {
+      "state": "default",
+      "label": "Default",
+      "usage": "1px --color-border-default stroke on --color-bg-default, value in --color-text-default."
+    },
+    {
+      "state": "borderless",
+      "label": "Borderless",
+      "usage": "No stroke (Figma Stroke=False), for toolbars and dense rows. Add dropdown--borderless."
+    },
+    {
+      "state": "focused",
+      "label": "Focused",
+      "usage": "Keeps the stroke and adds a soft 1.4px --color-bg-secondary ring — for keyboard and pointer focus and while the list is open. It replaces the default focus outline."
+    },
+    {
+      "state": "disabled",
+      "label": "Disabled",
+      "usage": "Value and chevron in --color-bg-disabled-secondary. Set disabled on the select."
+    }
+  ],
+  "rules": [
+    "Use <div class=\"dropdown\"> around a <select class=\"dropdown__select\"> and the chevron <svg class=\"icon dropdown__chevron\" aria-hidden=\"true\"><use href=\"#icon-nav-arrow-down\"></use></svg>. Call enhanceDropdown() (src/lib/dropdown.ts) to open the options in a Menu; without it the native list opens.",
+    "Use a dropdown to pick one of four or more options. For two or three, show them all; for on/off, use a Switch.",
+    "Every dropdown needs a name: a visible <label for> or an aria-label on the select.",
+    "Order options so people can scan them (by frequency or alphabetically) and preselect the most common one.",
+    "Use dropdown--borderless only where many controls sit together, like toolbars; keep the stroke in forms.",
+    "An optional icon before the value hints at what the list holds: add dropdown--icon and <svg class=\"icon dropdown__icon\" aria-hidden=\"true\">. The dropdown sizes icons to 12px.",
+    "Disable with the disabled attribute on the select."
+  ]
+}

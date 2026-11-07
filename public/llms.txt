@@ -266,6 +266,51 @@ Rules:
 - Use only icons whose meaning is clear without a label; otherwise use a Button with an icon and text.
 - For on/off actions (e.g. Bold, Pin), toggle aria-pressed; the Active fill then shows the on state.
 
+### Dropdown
+
+Dropdowns let people pick one option from a list without taking up room on the page. They are 24px tall, with an optional 12px icon in front, and come with or without a stroke.
+
+Markup: `<div class="dropdown"><select class="dropdown__select" aria-label="…">…</select><svg class="icon dropdown__chevron" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg></div>` (styles: src/styles/components/dropdown.css). enhanceDropdown() (src/lib/dropdown.ts) opens the options in an animated Menu; the select stays as the form value.
+
+| State | Look |
+| --- | --- |
+| Default | 1px --color-border-default stroke on --color-bg-default, value in --color-text-default. |
+| Borderless | No stroke (Figma Stroke=False), for toolbars and dense rows. Add dropdown--borderless. |
+| Focused | Keeps the stroke and adds a soft 1.4px --color-bg-secondary ring — for keyboard and pointer focus and while the list is open. It replaces the default focus outline. |
+| Disabled | Value and chevron in --color-bg-disabled-secondary. Set disabled on the select. |
+
+Rules:
+
+- Use <div class="dropdown"> around a <select class="dropdown__select"> and the chevron <svg class="icon dropdown__chevron" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>. Call enhanceDropdown() (src/lib/dropdown.ts) to open the options in a Menu; without it the native list opens.
+- Use a dropdown to pick one of four or more options. For two or three, show them all; for on/off, use a Switch.
+- Every dropdown needs a name: a visible <label for> or an aria-label on the select.
+- Order options so people can scan them (by frequency or alphabetically) and preselect the most common one.
+- Use dropdown--borderless only where many controls sit together, like toolbars; keep the stroke in forms.
+- An optional icon before the value hints at what the list holds: add dropdown--icon and <svg class="icon dropdown__icon" aria-hidden="true">. The dropdown sizes icons to 12px.
+- Disable with the disabled attribute on the select.
+
+### Menu
+
+Menus list actions or options in a panel that opens from a button or a dropdown. Items are 24px tall, with an optional 12px icon before the label and an arrow after it when they open a submenu.
+
+Markup and behaviour: `createMenu(items, options)` in src/lib/menu.ts (styles: src/styles/components/menu.css); debounce helper in src/lib/debounce.ts.
+
+| Item state | Look |
+| --- | --- |
+| Default | No fill, label in --color-text-default, icons in --color-icon-secondary (lead) and --color-icon-default (arrow). |
+| Hover | --color-bg-hover fill, for the pointer and for keyboard focus alike, and on an item whose submenu is open. |
+| Disabled | --color-bg-secondary fill, label and icons in --color-bg-disabled-secondary. Set aria-disabled="true". |
+
+Rules:
+
+- Use createMenu() (src/lib/menu.ts) for the markup and behaviour: <div class="menu" role="menu"> with <div class="menu__item" role="menuitem" tabindex="-1">. Add menu--floating for a menu that opens over content.
+- Use a Menu for actions, and a Dropdown (which opens a Menu as a listbox) for picking a value.
+- Keep labels short and on one line. Give every item a lead icon, or none.
+- An arrow after the label means the item opens a submenu. Keep to one level of submenus.
+- Submenus open when the pointer rests on their item for 300ms. The wait is a debounce: it restarts every time the pointer moves to another item, so passing over items doesn't flicker submenus open and shut. A click or Arrow Right opens them at once.
+- Floating menus scale in from their trigger over 200ms with a strong ease-out and close faster (120ms). Opened from the keyboard, they appear instantly.
+- Keep disabled items visible to show an action exists but isn't available now; use aria-disabled="true", not removal.
+
 ### Switch
 
 Represent a physical toggle to turn a setting “on” or “off”. Unlike checkboxes, toggling a switch takes immediate effect without a need for additional confirmation steps (“save”).

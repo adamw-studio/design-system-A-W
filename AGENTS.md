@@ -10,6 +10,8 @@ A Vite + TypeScript site that documents the A/W design system. Every design toke
 - `tokens/typography-rules.json` — when to use each text style. Edit this to change typography guidance.
 - `tokens/color-rules.json` — color rules, plus the wording each semantic token's description is built from (category + group + variant).
 - `tokens/button-rules.json` — when to use each button variant (shown on the Buttons page and in `llms.txt`).
+- `tokens/menu-rules.json` — when and how to use the Menu (Menu page and `llms.txt`).
+- `tokens/dropdown-rules.json` — when and how to use the Dropdown (Dropdown page and `llms.txt`).
 - `tokens/tag-rules.json` — when to use each Tag variant (Tags page and `llms.txt`).
 - `tokens/switch-rules.json` — when and how to use the Switch (Switch page and `llms.txt`).
 - `tokens/icons.json` — the icon catalog from Figma (Iconography), with Iconoir names, sizes and rules. Icons come from the [Iconoir](https://iconoir.com) package (`node_modules/iconoir`, a devDependency).
@@ -52,6 +54,10 @@ Read `public/llms.txt` for the full, current token tables. The essentials:
 **Buttons** — `<button class="button button--primary" type="button">` (variants `primary`, `secondary`, `tertiary`, `danger`, `success`), from `src/styles/components/button.css`. States (hover, pressed, focus, disabled) are built in; when to use each variant is in `tokens/button-rules.json` and `public/llms.txt`. Icon-only actions use `<button class="icon-button" aria-label="…">` from `src/styles/components/icon-button.css`. Don't restyle buttons per page.
 
 **Switch** — `<button class="switch" type="button" role="switch" aria-checked="false" aria-label="…"><span class="switch__knob"></span></button>` from `src/styles/components/switch.css` (Figma Foundation, Switch 44:71). It takes effect immediately; toggle `aria-checked` in code. Rules: `tokens/switch-rules.json`.
+
+**Dropdown** — a native `<select class="dropdown__select">` inside `<div class="dropdown">` with a chevron icon (`dropdown--icon` for a lead icon, `dropdown--borderless` for Figma's Stroke=False, `dropdown--block` for full width), from `src/styles/components/dropdown.css`. Rules: `tokens/dropdown-rules.json`.
+
+**Menu** — `createMenu(items, options)` from `src/lib/menu.ts` (styles `src/styles/components/menu.css`; `menu--floating` for menus over content). Submenus open on a 300ms debounce (`src/lib/debounce.ts`); floating menus animate in 200ms / out 120ms and open instantly from the keyboard. The Dropdown opens its options in a Menu (`enhanceDropdown()` in `src/lib/dropdown.ts`). Rules: `tokens/menu-rules.json`.
 
 **Tags** — `<span class="tag tag--success">Paid</span>` (variants `default`, `inverted`, `danger`, `success`, `warning`; add `tag--outline` for Figma's Strong=False) from `src/styles/components/tag.css`. Rules: `tokens/tag-rules.json`.
 

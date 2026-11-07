@@ -11,12 +11,14 @@ import {
   renderIconButtons,
 } from "./pages/buttons";
 import { iconsIntro, iconsSubtitle, renderIcons } from "./pages/icons";
+import { dropdownIntro, dropdownSubtitle, renderDropdown } from "./pages/dropdown";
+import { menuIntro, menuSubtitle, renderMenu } from "./pages/menu";
 import { renderSwitch, switchIntro, switchSubtitle } from "./pages/switch";
 import { renderTags, tagsIntro, tagsSubtitle } from "./pages/tags";
 import { icon, loadIconSprite } from "./lib/icon";
 import { initThemeToggle } from "./lib/theme";
 
-type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons" | "switch" | "tags";
+type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons" | "dropdown" | "menu" | "switch" | "tags";
 
 /** Section links that open their first page (Colors → Primitives). */
 const REDIRECTS: Record<string, Route> = { colors: "primitives" };
@@ -87,6 +89,22 @@ const pages: Record<Route, Page> = {
     title: "Icon Button",
     description: iconButtonsIntro,
     render: renderIconButtons,
+  },
+  dropdown: {
+    crumb: ["Components"],
+    subtitle: dropdownSubtitle,
+    figma: `${FIGMA_UI}45-314`,
+    title: "Dropdown",
+    description: dropdownIntro,
+    render: renderDropdown,
+  },
+  menu: {
+    crumb: ["Components"],
+    subtitle: menuSubtitle,
+    figma: `${FIGMA_UI}46-588`,
+    title: "Menu",
+    description: menuIntro,
+    render: renderMenu,
   },
   switch: {
     crumb: ["Components"],

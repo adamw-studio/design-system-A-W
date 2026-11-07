@@ -1,0 +1,30 @@
+{
+  "$comment": "When and how to use the Menu. The component is src/styles/components/menu.css with behaviour in src/lib/menu.ts, built from Figma \"Foundation – UI 2\" (Menu item, node 46:492; Menus, node 46:588). Shown on the Menu page and published to public/llms.txt by `npm run tokens`.",
+  "intro": "Menus list actions or options in a panel that opens from a button or a dropdown. Items are 24px tall, with an optional 12px icon before the label and an arrow after it when they open a submenu.",
+  "itemStates": [
+    {
+      "state": "default",
+      "label": "Default",
+      "usage": "No fill, label in --color-text-default, icons in --color-icon-secondary (lead) and --color-icon-default (arrow)."
+    },
+    {
+      "state": "hover",
+      "label": "Hover",
+      "usage": "--color-bg-hover fill, for the pointer and for keyboard focus alike, and on an item whose submenu is open."
+    },
+    {
+      "state": "disabled",
+      "label": "Disabled",
+      "usage": "--color-bg-secondary fill, label and icons in --color-bg-disabled-secondary. Set aria-disabled=\"true\"."
+    }
+  ],
+  "rules": [
+    "Use createMenu() (src/lib/menu.ts) for the markup and behaviour: <div class=\"menu\" role=\"menu\"> with <div class=\"menu__item\" role=\"menuitem\" tabindex=\"-1\">. Add menu--floating for a menu that opens over content.",
+    "Use a Menu for actions, and a Dropdown (which opens a Menu as a listbox) for picking a value.",
+    "Keep labels short and on one line. Give every item a lead icon, or none.",
+    "An arrow after the label means the item opens a submenu. Keep to one level of submenus.",
+    "Submenus open when the pointer rests on their item for 300ms. The wait is a debounce: it restarts every time the pointer moves to another item, so passing over items doesn't flicker submenus open and shut. A click or Arrow Right opens them at once.",
+    "Floating menus scale in from their trigger over 200ms with a strong ease-out and close faster (120ms). Opened from the keyboard, they appear instantly.",
+    "Keep disabled items visible to show an action exists but isn't available now; use aria-disabled=\"true\", not removal."
+  ]
+}

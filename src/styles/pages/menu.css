@@ -1,0 +1,38 @@
+/*
+ * Menu page — Figma "Foundation – UI 2", nodes 46:588 (Menus) and 46:492
+ * (Menu item). Shared panel, section and list styles: src/styles/docs.css.
+ */
+
+/* Figma's menu (46:645): 159px wide. */
+.menu-stage {
+  width: var(--layout-menu-width);
+}
+
+/* Item set (46:587): items 159px wide, 16px apart. */
+.menu-item-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: var(--layout-menu-width);
+}
+
+.menu-item-option .menu__item {
+  width: var(--layout-menu-width);
+}
+
+.menu-item-sample {
+  cursor: default;
+}
+
+/* Floating menu demo: the menu opens under the button, from its corner. */
+.menu-anchor {
+  position: relative;
+  align-self: flex-start;
+}
+
+.menu-anchor .menu--floating {
+  --menu-origin: top left;
+
+  top: calc(100% + var(--space-2));
+  left: 0;
+}

@@ -1,0 +1,153 @@
+/*
+ * Dropdown — Figma "Foundation – UI 2", Dropdown (node 45:314), component
+ * set 45:421: states Default, Focused, Disabled × Stroke true/false, with an
+ * optional 12px icon before the value and a 12px chevron after it.
+ *
+ * The markup is a native <select>, which works on its own. With
+ * src/lib/dropdown.ts, a trigger button (.dropdown__trigger, same look)
+ * replaces it and opens the options in a floating Menu (menu.css) with an
+ * open/close animation; the select stays, hidden, as the value for forms.
+ * The icons sit on top of the control and let clicks through.
+ *
+ *   <div class="dropdown">
+ *     <select class="dropdown__select" aria-label="Sort by">…</select>
+ *     <svg class="icon dropdown__chevron" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
+ *   </div>
+ *
+ * Add a lead icon with dropdown--icon and <svg class="icon dropdown__icon">;
+ * drop the stroke with dropdown--borderless (Figma Stroke=False).
+ * Usage rules: tokens/dropdown-rules.json.
+ */
+
+.dropdown {
+  /* Figma: 12px icons, 1.4px focus ring. */
+  --dropdown-icon-size: 12px;
+  --dropdown-focus-ring: 1.4px;
+  /* Space the value leaves for an icon: the icon plus the 4px gap. */
+  --dropdown-icon-room: calc(var(--dropdown-icon-size) + var(--space-2));
+
+  position: relative;
+  display: inline-flex;
+  min-width: 0;
+  color: var(--color-text-default);
+}
+
+.dropdown__select,
+.dropdown__trigger {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  /* Figma: 24px tall = the 16px line height + 4px above and below. */
+  height: calc(var(--body-medium-strong-line-height) + 2 * var(--space-2));
+  margin: 0;
+  padding: 0 calc(var(--space-3) + var(--dropdown-icon-room)) 0 var(--space-3);
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-medium);
+  background: var(--color-bg-default);
+  color: inherit;
+  appearance: none;
+  cursor: pointer;
+
+  /* Figma: body/medium/regular (= .text-body-medium). */
+  font-family: var(--body-medium-strong-font-family);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--body-medium-strong-letter-spacing);
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  transition:
+    box-shadow var(--motion-hover) ease,
+    border-color var(--motion-hover) ease;
+}
+
+/* Enhanced: the select stays in the page for forms, hidden. */
+.dropdown__select[hidden] {
+  display: none;
+}
+
+.dropdown__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown--icon :is(.dropdown__select, .dropdown__trigger) {
+  padding-left: calc(var(--space-3) + var(--dropdown-icon-room));
+}
+
+/* Figma Stroke=False: no border; the value and chevron sit on the page. */
+.dropdown--borderless :is(.dropdown__select, .dropdown__trigger) {
+  border-color: transparent;
+}
+
+/* Figma Focused: the stroke plus a soft 1.4px ring in ✦/bg/default/secondary
+   — for keyboard focus, pointer focus and while the list is open. It
+   replaces the site's default focus outline. */
+:is(.dropdown__select, .dropdown__trigger):focus,
+.dropdown__trigger[aria-expanded="true"],
+.dropdown[data-state="focused"] :is(.dropdown__select, .dropdown__trigger) {
+  border-color: var(--color-border-default);
+  box-shadow: 0 0 0 var(--dropdown-focus-ring) var(--color-bg-secondary);
+  outline: none;
+}
+
+/* Icons: on top of the select, clicks pass through to it. */
+.dropdown__icon,
+.dropdown__chevron {
+  position: absolute;
+  top: 50%;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.dropdown .icon {
+  --icon-size: var(--dropdown-icon-size);
+}
+
+.dropdown__icon {
+  left: var(--space-3);
+  color: var(--color-icon-secondary);
+}
+
+.dropdown__chevron {
+  right: var(--space-3);
+  color: var(--color-icon-default);
+}
+
+/* Figma Disabled: value and chevron in ✦/bg/disabled/secondary. */
+.dropdown__select:disabled,
+.dropdown__trigger:disabled {
+  color: var(--color-bg-disabled-secondary);
+  cursor: default;
+}
+
+.dropdown:has(:is(.dropdown__select, .dropdown__trigger):disabled) :is(.dropdown__icon, .dropdown__chevron) {
+  color: var(--color-bg-disabled-secondary);
+}
+
+/* The list (a floating Menu, menu.css): under the trigger and at least as
+   wide, scaling from it. data-side="top" when there's no room below. */
+.dropdown .menu--floating {
+  --menu-origin: top center;
+
+  top: calc(100% + var(--space-2));
+  left: 0;
+  min-width: 100%;
+}
+
+.dropdown .menu--floating[data-side="top"] {
+  --menu-origin: bottom center;
+
+  top: auto;
+  bottom: calc(100% + var(--space-2));
+}
+
+/* Full-width variant for forms. */
+.dropdown--block {
+  display: flex;
+  width: 100%;
+}

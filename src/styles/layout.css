@@ -28,6 +28,11 @@
   /* Floating controls (theme toggle). No shadow tokens exist yet; shadows
      are black in both themes, so they use black primitives. */
   --layout-shadow-floating: 0 var(--space-2) var(--space-5) var(--color-black-200), 0 1px 2px var(--color-black-200);
+  /* Menu (Figma 46:645): 159px wide. */
+  --layout-menu-width: 159px;
+  /* Dropdown set (Figma 45:421): 117px wide, 11px apart. */
+  --layout-dropdown-width: 117px;
+  --layout-dropdown-gap: 11px;
   /* Switch set (Figma 44:71): 11px between Off and On. */
   --layout-switch-gap: 11px;
 }

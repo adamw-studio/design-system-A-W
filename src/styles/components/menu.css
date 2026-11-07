@@ -1,0 +1,156 @@
+/*
+ * Menu — Figma "Foundation – UI 2":
+ *   Menu item (node 46:492, set 46:587): Default, Hover, Disabled; optional
+ *     12px icon before the label and after it (nav-arrow-right = submenu).
+ *   Menus (node 46:588, frame 46:645): items 4px apart in a bordered panel.
+ *
+ *   <div class="menu" role="menu">
+ *     <div class="menu__item" role="menuitem" tabindex="-1">
+ *       <span class="menu__label"><span class="menu__text">Rename</span></span>
+ *     </div>
+ *   </div>
+ *
+ * Behaviour (keyboard, submenus opened with a 300ms debounce, type-ahead,
+ * open/close animation): src/lib/menu.ts. Rules: tokens/menu-rules.json.
+ */
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: var(--layout-menu-width);
+  /* Figma draws the 1px stroke inside the 8px padding; CSS borders take
+     space, so the padding gives that pixel back (items stay 143px wide in
+     a 159px menu, as in Figma). */
+  padding: calc(var(--space-3) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-large);
+  background: var(--color-bg-default);
+  color: var(--color-text-default);
+}
+
+/* Menu item ------------------------------------------------------------------ */
+
+.menu__item {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  /* Figma: 24px tall = the 16px line height + 4px above and below. */
+  height: calc(var(--body-medium-strong-line-height) + 2 * var(--space-2));
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-medium);
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Figma: body/medium/regular (= .text-body-medium). */
+  font-family: var(--body-medium-strong-font-family);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--body-medium-strong-letter-spacing);
+  white-space: nowrap;
+}
+
+.menu__label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.menu__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu__item .icon {
+  /* Figma: 12px icons (also for items shown on their own). */
+  --icon-size: 12px;
+}
+
+/* Lead icon: ✦/icon/default/secondary; trailing (submenu arrow, check):
+   ✦/icon/default/default. */
+.menu__icon {
+  color: var(--color-icon-secondary);
+}
+
+.menu__trail {
+  color: var(--color-icon-default);
+}
+
+/* Hover — pointer or keyboard (data-active), an open submenu's parent, or
+   pinned for documentation (data-state). No transition: highlights follow
+   the pointer dozens of times a minute and must keep up with it. */
+.menu__item[data-active],
+.menu__item[aria-expanded="true"],
+.menu__item[data-state="hover"] {
+  background: var(--color-bg-hover);
+}
+
+/* Figma Disabled: ✦/bg/default/secondary fill, text and icons in
+   ✦/bg/disabled/secondary. */
+.menu__item[aria-disabled="true"] {
+  background: var(--color-bg-secondary);
+  color: var(--color-bg-disabled-secondary);
+  cursor: default;
+}
+
+.menu__item[aria-disabled="true"] :is(.menu__icon, .menu__trail) {
+  color: var(--color-bg-disabled-secondary);
+}
+
+/* Floating menus (dropdown lists, submenus) -----------------------------------
+   Not in Figma, which shows menus flat. A floating menu sits over content,
+   so it gets the floating shadow and an open/close animation:
+   - scales from the trigger (transform-origin set per side), never from 0;
+   - opens in 200ms with a strong ease-out, closes faster (120ms);
+   - opens instantly when triggered from the keyboard (data-instant);
+   - transitions, not keyframes, so a quick reopen reverses smoothly. */
+
+.menu--floating {
+  position: absolute;
+  z-index: 20;
+  box-shadow: var(--layout-shadow-floating);
+  transform-origin: var(--menu-origin, top left);
+  transition:
+    opacity var(--motion-fast) var(--motion-ease-out),
+    transform var(--motion-fast) var(--motion-ease-out);
+}
+
+.menu--floating[data-state="closed"] {
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+  transition-duration: var(--motion-press);
+}
+
+.menu--floating[data-instant] {
+  transition-duration: 0ms;
+}
+
+/* Submenu: beside its item, top item aligned with the parent item. */
+.menu--sub {
+  --menu-origin: top left;
+
+  top: calc(-1 * var(--space-3));
+  left: calc(100% + var(--space-3) + var(--space-1));
+}
+
+.menu--sub[data-side="left"] {
+  --menu-origin: top right;
+
+  right: calc(100% + var(--space-3) + var(--space-1));
+  left: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu--floating[data-state="closed"] {
+    transform: none;
+  }
+}
