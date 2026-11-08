@@ -39,6 +39,14 @@ function swapText(label: HTMLElement, text: string) {
   );
 }
 
+/** Stops a pending flashLabel restore, e.g. because the label now shows
+    something else and the old text must not come back over it. */
+export function cancelFlash(label: HTMLElement) {
+  window.clearTimeout(timers.get(label));
+  timers.delete(label);
+  label.classList.remove("is-copied");
+}
+
 /** Briefly swaps a label's text (e.g. to "Copied"), then restores it. */
 export function flashLabel(label: HTMLElement, text: string, original: string, ms = 1200) {
   swapText(label, text);

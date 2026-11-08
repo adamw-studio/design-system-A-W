@@ -1,5 +1,5 @@
 import "./styles/index.css";
-import { primitivesSubtitle, renderPrimitives } from "./pages/primitives";
+import { primitivesIntro, renderPrimitives } from "./pages/primitives";
 import { renderTokens, tokensSubtitle } from "./pages/tokens";
 import { renderTypography, typographyIntro, typographySubtitle } from "./pages/typography";
 import {
@@ -72,12 +72,10 @@ const pages: Record<Route, Page> = {
     render: renderGrid,
   },
   primitives: {
-    crumb: ["Foundations", "Colors"],
-    subtitle: primitivesSubtitle(),
-    figma: `${FIGMA_WEB}289-1053`,
-    title: "Primitives",
-    description:
-      "The raw color palette. Components should use semantic tokens, which point to these values. Click a swatch to copy its CSS variable.",
+    crumb: ["Primitives"],
+    title: "Colors",
+    layout: "article",
+    description: primitivesIntro,
     render: renderPrimitives,
   },
   tokens: {

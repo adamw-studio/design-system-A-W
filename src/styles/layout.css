@@ -32,6 +32,10 @@
   /* Floating controls (theme toggle). No shadow tokens exist yet; shadows
      are black in both themes, so they use black primitives. */
   --layout-shadow-floating: 0 var(--space-2) var(--space-5) var(--color-black-200), 0 1px 2px var(--color-black-200);
+  /* Primitives (Figma 305:2400): a 181px strip of shades; the current one
+     takes 282 of the 580px column. */
+  --layout-palette-strip-height: 181px;
+  --layout-palette-open: calc(282 / 580 * 100%);
   /* Menu (Figma 46:645): 159px wide. */
   --layout-menu-width: 159px;
   /* Dropdown set (Figma 45:421): 117px wide, 11px apart. */
@@ -520,8 +524,22 @@ img {
   color: var(--color-text-tertiary);
 }
 
-.page[data-layout="article"] :is(.page__actions, .page__subtitle, .page__header > .doc-rule, .page__description) {
+.page[data-layout="article"] :is(.page__actions, .page__subtitle, .page__header > .doc-rule) {
   display: none;
+}
+
+/* With a description (Primitives, Figma 305:2400) it sits right under the
+   title, and the content starts 46px below it. */
+.page[data-layout="article"] .page__description {
+  margin-top: calc(-1 * (var(--space-6) - var(--space-1)));
+}
+
+.page[data-layout="article"] .page__description:empty {
+  display: none;
+}
+
+.page[data-layout="article"]:has(.page__description:not(:empty)) .page__body {
+  margin-top: var(--space-4);
 }
 
 .page[data-layout="article"] .page__body {
