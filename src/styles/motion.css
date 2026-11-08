@@ -13,8 +13,8 @@
   --motion-press: 120ms; /* :active press feedback */
   --motion-hover: 150ms; /* hover color / border changes */
   --motion-fast: 200ms; /* small reveals, chevrons, copy feedback */
-  --motion-enter: 260ms; /* page content entering */
-  --motion-stagger: 40ms; /* delay between staggered items */
+  --motion-enter: 200ms; /* page content entering */
+  --motion-stagger: 30ms; /* delay between staggered items */
 
   /* Press scale: subtle for compact controls, subtler still for wide rows
      (the same scale reads as much larger movement on a 580px row). */
@@ -22,11 +22,14 @@
   --motion-press-scale-wide: 0.99;
 }
 
-/* Page content entering after a route change (src/main.ts sets --i). */
+/* Page content entering after a route change (src/main.ts sets --i).
+   People switch pages dozens of times in a session, so it stays small:
+   4px of travel, 200ms, 30ms apart, capped at 6 steps — everything is in
+   place within ~380ms, and nothing waits longer than 180ms to start. */
 @keyframes motion-enter {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(4px);
   }
 }
 
@@ -38,7 +41,7 @@
 
 .motion-enter {
   animation: motion-enter var(--motion-enter) var(--motion-ease-out) both;
-  animation-delay: calc(min(var(--i, 0), 8) * var(--motion-stagger));
+  animation-delay: calc(min(var(--i, 0), 6) * var(--motion-stagger));
 }
 
 /* Reduced motion: keep fades (they aid comprehension), drop movement. */

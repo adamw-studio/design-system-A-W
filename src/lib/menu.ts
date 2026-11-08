@@ -127,12 +127,12 @@ export function createMenu(items: MenuItemSpec[], options: MenuOptions = {}, par
     if (focus) item.focus({ preventScroll: false });
   }
 
-  function closeSubmenus(except?: HTMLElement) {
+  function closeSubmenus(except?: HTMLElement, opts: { instant?: boolean } = {}) {
     for (const item of itemEls) {
       if (item === except) continue;
       const sub = submenus.get(item);
       if (sub?.isOpen()) {
-        sub.close();
+        sub.close(opts);
         item.setAttribute("aria-expanded", "false");
       }
     }
@@ -141,13 +141,16 @@ export function createMenu(items: MenuItemSpec[], options: MenuOptions = {}, par
   function openSubmenu(item: HTMLElement, opts: { instant?: boolean; focus?: "first" | "none" } = {}) {
     const sub = submenus.get(item);
     if (!sub || item.getAttribute("aria-disabled") === "true") return;
-    closeSubmenus(item);
+    // Like tooltips: once a submenu is showing, moving to a sibling's swaps
+    // them instantly — the 300ms wait already happened, don't add a fade.
+    const switching = itemEls.some((other) => other !== item && submenus.get(other)?.isOpen());
+    closeSubmenus(item, { instant: switching });
     if (!sub.isOpen()) {
       // Flip to the left if there's no room on the right.
       const bounds = el.closest(".panel")?.getBoundingClientRect() ?? { right: window.innerWidth };
       const room = bounds.right - el.getBoundingClientRect().right;
       sub.el.dataset.side = room < sub.el.offsetWidth + 16 || room < 180 ? "left" : "right";
-      sub.open({ instant: opts.instant, focus: opts.focus ?? "none" });
+      sub.open({ instant: opts.instant || switching, focus: opts.focus ?? "none" });
       item.setAttribute("aria-expanded", "true");
     } else if (opts.focus === "first") {
       sub.open({ instant: true, focus: "first" });
