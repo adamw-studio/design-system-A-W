@@ -15,11 +15,18 @@ import { dropdownIntro, dropdownSubtitle, renderDropdown } from "./pages/dropdow
 import { menuIntro, menuSubtitle, renderMenu } from "./pages/menu";
 import { renderSwitch, switchIntro, switchSubtitle } from "./pages/switch";
 import { renderTags, tagsIntro, tagsSubtitle } from "./pages/tags";
+import { overviewTitle, renderOverview } from "./pages/overview";
+import { elevationIntro, elevationSubtitle, renderElevation } from "./pages/elevation";
+import { gridIntro, gridSubtitle, renderGrid } from "./pages/grid";
 import { icon, loadIconSprite } from "./lib/icon";
 import { initThemeToggle } from "./lib/theme";
 import { initSidebarResize } from "./lib/sidebar-resize";
 
-type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons" | "dropdown" | "menu" | "switch" | "tags";
+type Route =
+  | "overview"
+  | "elevation"
+  | "grid"
+  | "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons" | "dropdown" | "menu" | "switch" | "tags";
 
 /** Section links that open their first page (Colors → Primitives). */
 const REDIRECTS: Record<string, Route> = { colors: "primitives" };
@@ -32,15 +39,38 @@ interface Page {
   crumb: string[];
   title: string;
   /** Short facts under the title, e.g. "5 variants". */
-  subtitle: string;
-  description: string;
-  /** The Figma frame the page implements (opened from the header). */
-  figma: string;
+  subtitle?: string;
+  description?: string;
+  /** "article": a small label and the title only (Overview, Figma 302:2166). */
+  layout?: "article";
+  /** The Figma frame the page implements (opened from the header), if any. */
+  figma?: string;
   /** Optional page body; receives the content area and the header actions slot. */
   render?: (body: HTMLElement, actions: HTMLElement) => void;
 }
 
 const pages: Record<Route, Page> = {
+  overview: {
+    crumb: ["Overview"],
+    title: overviewTitle,
+    layout: "article",
+    render: renderOverview,
+  },
+  elevation: {
+    crumb: ["Foundations"],
+    subtitle: elevationSubtitle,
+    title: "Elevation",
+    description: elevationIntro,
+    render: renderElevation,
+  },
+  grid: {
+    crumb: ["Foundations"],
+    subtitle: gridSubtitle(),
+    figma: `${FIGMA_WEB}281-279`,
+    title: "Grid",
+    description: gridIntro,
+    render: renderGrid,
+  },
   primitives: {
     crumb: ["Foundations", "Colors"],
     subtitle: primitivesSubtitle(),
@@ -125,12 +155,13 @@ const pages: Record<Route, Page> = {
   },
 };
 
-const DEFAULT_ROUTE: Route = "primitives";
+const DEFAULT_ROUTE: Route = "overview";
 
 const crumbEl = document.querySelector<HTMLElement>("#page-crumb")!;
 const titleEl = document.querySelector<HTMLElement>("#page-title")!;
 const subtitleEl = document.querySelector<HTMLElement>("#page-subtitle")!;
 const headerEl = document.querySelector<HTMLElement>(".page__header")!;
+const pageEl = document.querySelector<HTMLElement>(".page")!;
 const descriptionEl = document.querySelector<HTMLElement>("#page-description")!;
 const bodyEl = document.querySelector<HTMLElement>("#page-body")!;
 const actionsEl = document.querySelector<HTMLElement>("#page-actions")!;
@@ -168,13 +199,13 @@ function playEnter() {
 }
 
 /** Header action: an Icon Button that opens the page's Figma frame. */
-function figmaLink(page: Page) {
+function figmaLink(href: string, title: string) {
   const link = document.createElement("a");
   link.className = "icon-button";
-  link.href = page.figma;
+  link.href = href;
   link.target = "_blank";
   link.rel = "noopener";
-  link.setAttribute("aria-label", `Open ${page.title} in Figma`);
+  link.setAttribute("aria-label", `Open ${title} in Figma`);
   link.title = "Open in Figma";
   link.append(icon("open-new-window"));
   return link;
@@ -186,12 +217,14 @@ function render() {
 
   crumbEl.textContent = page.crumb.join(" / ");
   titleEl.textContent = page.title;
-  subtitleEl.textContent = page.subtitle;
-  descriptionEl.textContent = page.description;
+  subtitleEl.textContent = page.subtitle ?? "";
+  descriptionEl.textContent = page.description ?? "";
+  if (page.layout) pageEl.dataset.layout = page.layout;
+  else delete pageEl.dataset.layout;
   document.title = `${page.title} – Design System A/W`;
 
   bodyEl.replaceChildren();
-  actionsEl.replaceChildren(figmaLink(page));
+  actionsEl.replaceChildren(...(page.figma ? [figmaLink(page.figma, page.title)] : []));
   page.render?.(bodyEl, actionsEl);
   document.querySelector(".panel")?.scrollTo(0, 0);
   playEnter();
@@ -205,26 +238,47 @@ function render() {
   });
 }
 
-// Clicking a section (e.g. Colors) opens its first page; make sure the
-// section is expanded so the highlighted page is visible.
-document.querySelectorAll<HTMLElement>(".nav__group").forEach((group) => {
-  group.querySelector(".nav__item--parent .nav__link")?.addEventListener("click", () => {
-    group.dataset.expanded = "true";
-    group.querySelector(".nav__toggle")?.setAttribute("aria-expanded", "true");
+/* Nav sections (Foundation, Components) and groups (Colors, Buttons) ------- */
+
+const nav = document.querySelector<HTMLElement>(".nav")!;
+
+function setExpanded(container: HTMLElement, expanded: boolean) {
+  container.dataset.expanded = String(expanded);
+  container
+    .querySelector(":scope > .nav__section-toggle, :scope > .nav__item--parent > .nav__toggle")
+    ?.setAttribute("aria-expanded", String(expanded));
+}
+
+nav.querySelectorAll<HTMLButtonElement>(".nav__toggle, .nav__section-toggle").forEach((toggle) => {
+  toggle.addEventListener("click", () => {
+    const container = toggle.closest<HTMLElement>("[data-expanded]");
+    if (container) setExpanded(container, container.dataset.expanded !== "true");
   });
 });
 
-document.querySelectorAll<HTMLButtonElement>(".nav__toggle").forEach((toggle) => {
-  toggle.addEventListener("click", () => {
-    const group = toggle.closest<HTMLElement>(".nav__group");
-    const expanded = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!expanded));
-    if (group) group.dataset.expanded = String(!expanded);
-  });
+// Clicking a group's name (e.g. Colors) opens its first page and the group.
+nav.querySelectorAll<HTMLElement>(".nav__group").forEach((group) => {
+  group.querySelector(".nav__item--parent .nav__link")?.addEventListener("click", () => setExpanded(group, true));
 });
+
+/** Open every section and group around the current page's link. */
+function revealActive() {
+  let node = nav.querySelector<HTMLElement>(".nav__item.is-active")?.parentElement?.closest<HTMLElement>("[data-expanded]");
+  while (node) {
+    setExpanded(node, true);
+    node = node.parentElement?.closest<HTMLElement>("[data-expanded]");
+  }
+}
 
 loadIconSprite();
 initThemeToggle(document.querySelector<HTMLElement>("#theme-toggle")!);
 initSidebarResize(document.querySelector<HTMLElement>("#sidebar-resizer")!);
-window.addEventListener("hashchange", render);
+window.addEventListener("hashchange", () => {
+  render();
+  revealActive();
+});
+// First paint: open the current page's section without animating it.
+nav.dataset.instant = "";
 render();
+revealActive();
+requestAnimationFrame(() => requestAnimationFrame(() => delete nav.dataset.instant));

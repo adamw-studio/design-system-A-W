@@ -146,13 +146,28 @@ img {
   mask: url("/icons/logo.svg") center / contain no-repeat;
 }
 
-/* Nav */
+/* Nav — Figma "Design System - Web", node 302:2196 -----------------------------
+   Overview, then collapsible sections (Foundation, Components) whose items
+   may themselves be groups (Colors, Buttons). Items are 30px rows 2px apart;
+   section labels are tertiary text with 8px above and 4px below. */
 .nav,
-.nav__group,
+.nav__section-items,
 .nav__sublist {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+}
+
+/* The 2px above a section's (or group's) first row lives inside the part
+   that collapses, so a closed section or group adds no gap at all. */
+.nav__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav__section-items > :first-child,
+.nav__sublist > :first-child {
+  margin-top: var(--space-1);
 }
 
 .nav {
@@ -163,9 +178,45 @@ img {
   padding-left: var(--space-3);
 }
 
-/* Collapsible section: animates its row from 0fr to 1fr so the height follows
-   the content. visibility keeps collapsed links out of the tab order, and
-   transitions with the rows so they stay visible while sliding shut. */
+/* Section label: a button that collapses its section. */
+.nav__section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  border: 0;
+  border-radius: var(--layout-radius-item);
+  background: none;
+  color: var(--color-text-tertiary);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--motion-hover) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav__section-toggle:hover {
+    color: var(--color-text-secondary);
+  }
+}
+
+/* Chevron: up while open, down while closed (Figma's nav-arrow-up /
+   nav-arrow-down), turning between the two. */
+.nav__chevron {
+  flex: none;
+  color: var(--color-icon-secondary);
+  transition: transform var(--motion-fast) var(--motion-ease-out);
+}
+
+[aria-expanded="true"] > .nav__chevron {
+  transform: rotate(180deg);
+}
+
+/* Collapsible sections and groups: the row animates from 0fr to 1fr so the
+   height follows the content. visibility keeps collapsed links out of the
+   tab order, and transitions with the rows so they stay visible while
+   sliding shut. */
 .nav__collapse {
   display: grid;
   grid-template-rows: 1fr;
@@ -174,19 +225,30 @@ img {
     visibility var(--motion-fast);
 }
 
-.nav__collapse > .nav__sublist {
+.nav__collapse > * {
   min-height: 0;
   overflow: hidden;
   transition: opacity var(--motion-fast) var(--motion-ease-out);
 }
 
-.nav__group[data-expanded="false"] .nav__collapse {
+[data-expanded="false"] > .nav__collapse {
   grid-template-rows: 0fr;
   visibility: hidden;
 }
 
-.nav__group[data-expanded="false"] .nav__sublist {
+[data-expanded="false"] > .nav__collapse > * {
   opacity: 0;
+}
+
+/* First paint: open the current page's section without animating. */
+.nav[data-instant] *,
+.nav[data-instant] *::before {
+  transition: none !important;
+}
+
+/* Focus rings sit inside the rows: the collapsing wrappers clip overflow. */
+.nav :is(.nav__link, .nav__toggle, .nav__section-toggle):focus-visible {
+  outline-offset: -2px;
 }
 
 .nav__item {
@@ -267,15 +329,6 @@ img {
 .nav__toggle:active {
   background: var(--color-bg-pressed);
   transform: scale(var(--motion-press-scale));
-}
-
-.nav__toggle .icon {
-  color: var(--color-icon-secondary);
-  transition: transform var(--motion-fast) var(--motion-ease-out);
-}
-
-.nav__toggle[aria-expanded="false"] .icon {
-  transform: rotate(-90deg);
 }
 
 /* Sidebar resize handle (src/lib/sidebar-resize.ts) --------------------------
@@ -449,6 +502,30 @@ img {
 
 .page__description {
   color: var(--color-text-secondary);
+}
+
+/* Article pages (Overview, Figma 302:2166): a small tertiary label right
+   above the title and nothing else in the header; the text starts 30px
+   below the title, and sections are 24px apart. Same column as every page. */
+.page[data-layout="article"] {
+  gap: calc(var(--space-6) - var(--space-1));
+}
+
+.page[data-layout="article"] .page__topbar {
+  min-height: 0;
+  margin-bottom: 0;
+}
+
+.page[data-layout="article"] .page__crumb {
+  color: var(--color-text-tertiary);
+}
+
+.page[data-layout="article"] :is(.page__actions, .page__subtitle, .page__header > .doc-rule, .page__description) {
+  display: none;
+}
+
+.page[data-layout="article"] .page__body {
+  gap: var(--space-5);
 }
 
 /* Stages and sections, 56px apart. */

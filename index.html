@@ -34,66 +34,100 @@
     <div class="app">
       <aside class="sidebar" id="sidebar">
         <div class="sidebar__header">
-          <a href="#primitives" class="sidebar__logo" aria-label="A/W Design System home">
+          <a href="#overview" class="sidebar__logo" aria-label="A/W Design System home">
             <span class="sidebar__logo-mark" aria-hidden="true"></span>
           </a>
         </div>
 
+        <!-- Figma "Design System - Web", node 302:2196 -->
         <nav class="nav" aria-label="Design system">
-          <div class="nav__group" data-expanded="true">
-            <div class="nav__item nav__item--parent">
-              <a href="#primitives" class="nav__link text-body-large">Colors</a>
-              <button
-                type="button"
-                class="nav__toggle"
-                aria-expanded="true"
-                aria-controls="nav-colors"
-                aria-label="Toggle Colors section"
-              >
-                <svg class="icon icon--16" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
-              </button>
-            </div>
-            <div class="nav__collapse" id="nav-colors">
-              <ul class="nav__sublist">
-                <li>
-                  <a href="#primitives" class="nav__item nav__link text-body-large" data-route="primitives">Primitives</a>
-                </li>
-                <li>
-                  <a href="#tokens" class="nav__item nav__link text-body-large" data-route="tokens">Tokens</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <a href="#typography" class="nav__item nav__link text-body-large" data-route="typography">Typography</a>
-          <a href="#icons" class="nav__item nav__link text-body-large" data-route="icons">Icons</a>
-          <div class="nav__group" data-expanded="true">
-            <div class="nav__item nav__item--parent">
-              <a href="#buttons" class="nav__link text-body-large">Buttons</a>
-              <button
-                type="button"
-                class="nav__toggle"
-                aria-expanded="true"
-                aria-controls="nav-buttons"
-                aria-label="Toggle Buttons section"
-              >
-                <svg class="icon icon--16" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
-              </button>
-            </div>
-            <div class="nav__collapse" id="nav-buttons">
-              <ul class="nav__sublist">
-                <li>
-                  <a href="#buttons" class="nav__item nav__link text-body-large" data-route="buttons">Buttons</a>
-                </li>
-                <li>
-                  <a href="#icon-buttons" class="nav__item nav__link text-body-large" data-route="icon-buttons">Icon Buttons</a>
-                </li>
-              </ul>
+          <a href="#overview" class="nav__item nav__link text-body-large" data-route="overview">Overview</a>
+          <div class="nav__section" data-expanded="true">
+            <button
+              type="button"
+              class="nav__section-toggle text-body-large"
+              aria-expanded="true"
+              aria-controls="nav-foundation"
+            >
+              Foundation
+              <svg class="icon icon--16 nav__chevron" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
+            </button>
+            <div class="nav__collapse" id="nav-foundation">
+              <div class="nav__section-items">
+              <div class="nav__group" data-expanded="false">
+                <div class="nav__item nav__item--parent">
+                  <a href="#primitives" class="nav__link text-body-large">Colors</a>
+                  <button
+                    type="button"
+                    class="nav__toggle"
+                    aria-expanded="false"
+                    aria-controls="nav-colors"
+                    aria-label="Colors pages"
+                  >
+                    <svg class="icon icon--16 nav__chevron" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
+                  </button>
+                </div>
+                <div class="nav__collapse" id="nav-colors">
+                  <ul class="nav__sublist">
+                    <li>
+                      <a href="#primitives" class="nav__item nav__link text-body-large" data-route="primitives">Primitives</a>
+                    </li>
+                    <li>
+                      <a href="#tokens" class="nav__item nav__link text-body-large" data-route="tokens">Tokens</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a href="#typography" class="nav__item nav__link text-body-large" data-route="typography">Typography</a>
+              <a href="#elevation" class="nav__item nav__link text-body-large" data-route="elevation">Elevation</a>
+              <a href="#icons" class="nav__item nav__link text-body-large" data-route="icons">Icons</a>
+              <a href="#grid" class="nav__item nav__link text-body-large" data-route="grid">Grid</a>
+              </div>
             </div>
           </div>
-          <a href="#dropdown" class="nav__item nav__link text-body-large" data-route="dropdown">Dropdown</a>
-          <a href="#menu" class="nav__item nav__link text-body-large" data-route="menu">Menu</a>
-          <a href="#switch" class="nav__item nav__link text-body-large" data-route="switch">Switch</a>
-          <a href="#tags" class="nav__item nav__link text-body-large" data-route="tags">Tags</a>
+          <div class="nav__section" data-expanded="true">
+            <button
+              type="button"
+              class="nav__section-toggle text-body-large"
+              aria-expanded="true"
+              aria-controls="nav-components"
+            >
+              Components
+              <svg class="icon icon--16 nav__chevron" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
+            </button>
+            <div class="nav__collapse" id="nav-components">
+              <div class="nav__section-items">
+              <div class="nav__group" data-expanded="false">
+                <div class="nav__item nav__item--parent">
+                  <a href="#buttons" class="nav__link text-body-large">Buttons</a>
+                  <button
+                    type="button"
+                    class="nav__toggle"
+                    aria-expanded="false"
+                    aria-controls="nav-buttons"
+                    aria-label="Buttons pages"
+                  >
+                    <svg class="icon icon--16 nav__chevron" aria-hidden="true"><use href="#icon-nav-arrow-down"></use></svg>
+                  </button>
+                </div>
+                <div class="nav__collapse" id="nav-buttons">
+                  <ul class="nav__sublist">
+                    <li>
+                      <a href="#buttons" class="nav__item nav__link text-body-large" data-route="buttons">Buttons</a>
+                    </li>
+                    <li>
+                      <a href="#icon-buttons" class="nav__item nav__link text-body-large" data-route="icon-buttons">Icon Buttons</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a href="#dropdown" class="nav__item nav__link text-body-large" data-route="dropdown">Dropdown</a>
+              <a href="#menu" class="nav__item nav__link text-body-large" data-route="menu">Menu</a>
+              <a href="#switch" class="nav__item nav__link text-body-large" data-route="switch">Switch</a>
+              <a href="#tags" class="nav__item nav__link text-body-large" data-route="tags">Tags</a>
+              </div>
+            </div>
+          </div>
         </nav>
 
       </aside>

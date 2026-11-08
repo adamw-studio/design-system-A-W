@@ -1,0 +1,56 @@
+/*
+ * Grid page. Shared building blocks: src/styles/docs.css.
+ */
+
+/* Spacing scale: token name, a bar as wide as the step, its value. */
+.grid-spacing {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  gap: var(--space-3) var(--space-4);
+  align-items: center;
+  width: 100%;
+}
+
+.grid-spacing__row {
+  display: contents;
+}
+
+.grid-spacing__name,
+.grid-radius__name {
+  font-family: var(--font-family-mono);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+  color: var(--color-text-default);
+}
+
+.grid-spacing__bar {
+  height: var(--space-4);
+  border-radius: var(--radius-small);
+  background: var(--color-bg-inverse);
+}
+
+.grid-spacing__value,
+.grid-radius__value {
+  color: var(--color-text-tertiary);
+}
+
+/* Radius scale: a square per radius. */
+.grid-radius {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.grid-radius__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.grid-radius__shape {
+  width: calc(2 * var(--space-6));
+  height: calc(2 * var(--space-6));
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg-secondary);
+}

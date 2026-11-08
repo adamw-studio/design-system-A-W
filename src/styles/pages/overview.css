@@ -1,0 +1,56 @@
+/*
+ * Overview page — Figma "Design System - Web", node 302:2166. Sections are
+ * 24px apart (the article layout in layout.css); in each, the heading, then
+ * 4px below it the paragraphs, 12px apart.
+ */
+
+.overview-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.overview-section__title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--body-large-strong-line-height);
+  color: var(--color-text-default);
+}
+
+.overview-section__text {
+  position: relative;
+}
+
+.overview-section__body {
+  display: flex;
+  flex-direction: column;
+  /* Figma: 12px between paragraphs. */
+  gap: calc(var(--space-3) + var(--space-2));
+  color: var(--color-text-secondary);
+}
+
+/* Hand-drawn stroke under the heading (Figma vectors 303:2298–2308): 9px
+   tall, starting 9px before the text and 15px below the top of the line.
+   The file is drawn vertically, so the mark is turned -90° like in Figma. */
+.overview-underline {
+  --underline-height: 9px;
+
+  position: absolute;
+  top: calc(var(--space-4) - 1px);
+  left: calc(-1 * (var(--space-3) + 1px));
+  width: var(--underline-width);
+  height: var(--underline-height);
+  pointer-events: none;
+}
+
+.overview-underline__mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--underline-height);
+  height: var(--underline-width);
+  background-color: var(--color-border-default);
+  mask: var(--underline-mask) center / 100% 100% no-repeat;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
