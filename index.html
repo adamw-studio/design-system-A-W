@@ -145,6 +145,8 @@
       ></div>
 
       <main class="panel">
+        <!-- Frosted edges while there's more to scroll (Figma 309:3325); src/lib/scroll-fade.ts -->
+        <div class="panel__edge panel__edge--top" aria-hidden="true"></div>
         <div class="page">
           <header class="page__header">
             <div class="page__topbar">
@@ -158,6 +160,7 @@
           <p class="page__description text-body-large" id="page-description">Add a short description...</p>
           <div class="page__body" id="page-body"></div>
         </div>
+        <div class="panel__edge panel__edge--bottom" aria-hidden="true"></div>
       </main>
     </div>
 

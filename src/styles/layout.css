@@ -36,6 +36,8 @@
      takes 282 of the 580px column. */
   --layout-palette-strip-height: 181px;
   --layout-palette-open: calc(282 / 580 * 100%);
+  /* Frosted scroll edges on the panel (Figma 309:3325): 48px tall. */
+  --layout-panel-edge: 48px;
   /* Menu (Figma 46:645): 159px wide. */
   --layout-menu-width: 159px;
   /* Dropdown set (Figma 45:421): 117px wide, 11px apart. */
@@ -506,6 +508,70 @@ img {
 
 .page__description {
   color: var(--color-text-secondary);
+}
+
+/* Frosted scroll edges (Figma 309:3325; src/lib/scroll-fade.ts) ---------------
+   A 48px band at the top and bottom of the panel that frosts the content
+   scrolling under it: a 2px blur under a 60% wash of the page color (Figma:
+   white at 60%; --color-bg-default here, so it follows the theme).
+
+   It's progressive, so there's no visible line where it starts. Two layers
+   fade out toward the content (--edge-dir points from the panel edge in):
+     · ::before — a 1px blur and the 60% wash, fading across all 48px;
+     · ::after  — the full 2px blur, only in the outer two-thirds.
+   The band itself stays a plain container: a mask, blur or opacity on it
+   would make it a backdrop root, and the layers would blur nothing. So the
+   layers carry the fade-in too.
+
+   Sticky inside the scrolling panel, with negative margins so it takes no
+   space; the panel's rounded corners clip it. Each band shows only while
+   there's content past it, and lets clicks through. */
+.panel__edge {
+  position: sticky;
+  z-index: 4;
+  height: var(--layout-panel-edge);
+  pointer-events: none;
+}
+
+.panel__edge::before,
+.panel__edge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--motion-fast) ease;
+}
+
+.panel__edge::before {
+  background: color-mix(in srgb, var(--color-bg-default) 60%, transparent);
+  backdrop-filter: blur(1px);
+  mask-image: linear-gradient(var(--edge-dir), #000, transparent);
+}
+
+.panel__edge::after {
+  backdrop-filter: blur(2px);
+  mask-image: linear-gradient(var(--edge-dir), #000 33%, transparent 66%);
+}
+
+.panel__edge--top {
+  --edge-dir: to bottom;
+
+  top: 0;
+  margin-bottom: calc(-1 * var(--layout-panel-edge));
+}
+
+.panel__edge--bottom {
+  --edge-dir: to top;
+
+  bottom: 0;
+  margin-top: calc(-1 * var(--layout-panel-edge));
+}
+
+.panel[data-scroll-top="true"] .panel__edge--top::before,
+.panel[data-scroll-top="true"] .panel__edge--top::after,
+.panel[data-scroll-bottom="true"] .panel__edge--bottom::before,
+.panel[data-scroll-bottom="true"] .panel__edge--bottom::after {
+  opacity: 1;
 }
 
 /* Article pages (Overview, Figma 302:2166): a small tertiary label right

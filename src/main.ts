@@ -21,6 +21,7 @@ import { gridIntro, gridSubtitle, renderGrid } from "./pages/grid";
 import { icon, loadIconSprite } from "./lib/icon";
 import { initThemeToggle } from "./lib/theme";
 import { initSidebarResize } from "./lib/sidebar-resize";
+import { initScrollFades } from "./lib/scroll-fade";
 
 type Route =
   | "overview"
@@ -271,6 +272,7 @@ function revealActive() {
 loadIconSprite();
 initThemeToggle(document.querySelector<HTMLElement>("#theme-toggle")!);
 initSidebarResize(document.querySelector<HTMLElement>("#sidebar-resizer")!);
+initScrollFades(document.querySelector<HTMLElement>(".panel")!);
 window.addEventListener("hashchange", () => {
   render();
   revealActive();
