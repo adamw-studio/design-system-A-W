@@ -5,6 +5,10 @@
  */
 :root {
   --layout-sidebar-width: 292px;
+  /* Resizable sidebar (src/lib/sidebar-resize.ts): 292px from Figma is the
+     default; these bound how far it can be dragged. */
+  --layout-sidebar-min: 200px;
+  --layout-sidebar-max: 400px;
   --layout-gutter: 12px;
   --layout-sidebar-header-gap: 20px;
   --layout-radius-item: 8px;
@@ -274,6 +278,104 @@ img {
   transform: rotate(-90deg);
 }
 
+/* Sidebar resize handle (src/lib/sidebar-resize.ts) --------------------------
+   A zero-width flex item on the edge between the sidebar and the panel. The
+   12px hit area runs the full height of the edge; a short rounded grip,
+   centered in the gap beside the panel, shows where it is:
+   - hover: it fades and grows in after the pointer rests for 150ms, so
+     passing over the edge doesn't flash it;
+   - dragging: shown at once;
+   - keyboard focus: shown in --color-text-default as the focus indicator. */
+.sidebar-resizer {
+  position: relative;
+  z-index: 5;
+  flex: 0 0 0;
+  width: 0;
+  outline: none;
+  touch-action: none;
+}
+
+.sidebar-resizer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(-1 * (var(--space-3) + var(--space-2)) / 2);
+  width: calc(var(--space-3) + var(--space-2));
+  cursor: col-resize;
+}
+
+/* The grip: 4 × 48px, centered in the gutter left of the panel border. */
+.sidebar-resizer::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(-1 * (var(--layout-gutter) + var(--space-2)) / 2);
+  width: var(--space-2);
+  height: calc(var(--space-6) + var(--space-4));
+  border-radius: var(--radius-full);
+  background: var(--color-border-default);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) scaleY(0.6);
+  /* Leaving: quicker than arriving (the system is just tidying up). */
+  transition:
+    opacity var(--motion-press) var(--motion-ease-out),
+    transform var(--motion-press) var(--motion-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sidebar-resizer:hover::after {
+    opacity: 1;
+    transform: translateY(-50%);
+    transition-duration: var(--motion-fast);
+    transition-delay: var(--motion-hover);
+  }
+}
+
+.is-resizing-sidebar .sidebar-resizer::after,
+.sidebar-resizer:focus-visible::after {
+  opacity: 1;
+  transform: translateY(-50%);
+  transition-duration: var(--motion-fast);
+  transition-delay: 0ms;
+}
+
+.sidebar-resizer:focus-visible::after {
+  background: var(--color-text-default);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-resizer::after {
+    transform: translateY(-50%);
+  }
+}
+
+/* While dragging: the resize cursor everywhere, no text selection. */
+.is-resizing-sidebar,
+.is-resizing-sidebar * {
+  cursor: col-resize !important;
+  user-select: none;
+}
+
+/* Released past a limit: ease back to it. */
+.is-sidebar-settling .sidebar {
+  transition:
+    flex-basis var(--motion-fast) var(--motion-ease-out),
+    width var(--motion-fast) var(--motion-ease-out);
+}
+
+.is-sidebar-settling .theme-toggle {
+  transition: left var(--motion-fast) var(--motion-ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-sidebar-settling .sidebar,
+  .is-sidebar-settling .theme-toggle {
+    transition: none;
+  }
+}
+
 /* Content panel */
 .panel {
   /* Containing block for absolutely positioned children (e.g. .visually-hidden
@@ -367,6 +469,11 @@ img {
     flex-basis: auto;
     width: 100%;
     height: auto;
+  }
+
+  /* Stacked layout: nothing to resize. */
+  .sidebar-resizer {
+    display: none;
   }
 
   .panel {

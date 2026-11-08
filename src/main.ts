@@ -17,6 +17,7 @@ import { renderSwitch, switchIntro, switchSubtitle } from "./pages/switch";
 import { renderTags, tagsIntro, tagsSubtitle } from "./pages/tags";
 import { icon, loadIconSprite } from "./lib/icon";
 import { initThemeToggle } from "./lib/theme";
+import { initSidebarResize } from "./lib/sidebar-resize";
 
 type Route = "primitives" | "tokens" | "typography" | "icons" | "buttons" | "icon-buttons" | "dropdown" | "menu" | "switch" | "tags";
 
@@ -147,7 +148,7 @@ function currentRoute(): Route {
 
 /**
  * Fades the new page in: title, description, then the first rows of the
- * page's list, 40ms apart (styles/motion.css caps the stagger at 8 steps,
+ * page's list, 30ms apart (styles/motion.css caps the stagger at 6 steps,
  * so long lists like Tokens don't keep the page waiting).
  */
 function playEnter() {
@@ -224,5 +225,6 @@ document.querySelectorAll<HTMLButtonElement>(".nav__toggle").forEach((toggle) =>
 
 loadIconSprite();
 initThemeToggle(document.querySelector<HTMLElement>("#theme-toggle")!);
+initSidebarResize(document.querySelector<HTMLElement>("#sidebar-resizer")!);
 window.addEventListener("hashchange", render);
 render();

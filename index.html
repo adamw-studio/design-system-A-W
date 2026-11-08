@@ -15,7 +15,8 @@
     <link rel="alternate" type="application/design-tokens+json" href="/tokens/colors.json" title="Color design tokens" />
     <link rel="alternate" type="application/design-tokens+json" href="/tokens/typography.json" title="Typography design tokens" />
     <title>Design System – A/W</title>
-    <!-- Apply the saved (or system) theme before first paint; see src/lib/theme.ts. -->
+    <!-- Apply the saved (or system) theme and sidebar width before first paint;
+         see src/lib/theme.ts and src/lib/sidebar-resize.ts. -->
     <script>
       try {
         var theme = localStorage.getItem("aw-theme");
@@ -23,12 +24,15 @@
           theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         }
         document.documentElement.dataset.theme = theme;
+        // Saved sidebar width (src/lib/sidebar-resize.ts clamps it on load).
+        var width = parseFloat(localStorage.getItem("aw-sidebar-width"));
+        if (width > 0) document.documentElement.style.setProperty("--layout-sidebar-width", width + "px");
       } catch (e) {}
     </script>
   </head>
   <body>
     <div class="app">
-      <aside class="sidebar">
+      <aside class="sidebar" id="sidebar">
         <div class="sidebar__header">
           <a href="#primitives" class="sidebar__logo" aria-label="A/W Design System home">
             <span class="sidebar__logo-mark" aria-hidden="true"></span>
@@ -93,6 +97,18 @@
         </nav>
 
       </aside>
+
+      <!-- Drag (or arrow keys) to resize the sidebar; src/lib/sidebar-resize.ts -->
+      <div
+        class="sidebar-resizer"
+        id="sidebar-resizer"
+        role="separator"
+        aria-orientation="vertical"
+        aria-controls="sidebar"
+        aria-label="Resize sidebar"
+        title="Drag to resize · double-click to reset"
+        tabindex="0"
+      ></div>
 
       <main class="panel">
         <div class="page">
