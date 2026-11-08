@@ -355,15 +355,49 @@ ${icons.categories
 
 ${buttonRules.intro}
 
-Markup: \`<button class="button button--<variant>" type="button">Label</button>\` (styles: src/styles/components/button.css). Hover, pressed, focus and disabled states are built in.
+Markup: \`<button class="button button--<variant>" type="button">Label</button>\` (styles: src/styles/components/button.css). Hover, pressed and disabled are built in; focus is not (see Accessibility).
 
-| Class | When to use |
+Use a button when:
+
+${buttonRules.overview.useWhen.map((r) => `- ${r}`).join("\n")}
+
+Use something else when:
+
+${buttonRules.overview.useInstead.map((r) => `- ${r.component}: ${r.when}`).join("\n")}
+
+| Class | When to use | Example | Fill / hover / pressed / label tokens |
+| --- | --- | --- | --- |
+${buttonRules.variants
+  .map((v) => `| \`.button--${v.variant}\` | ${v.usage} | ${v.example} | ${[v.tokens.fill, v.tokens.hover, v.tokens.pressed, v.tokens.label].join(" / ")} |`)
+  .join("\n")}
+
+| State | What changes |
 | --- | --- |
-${buttonRules.variants.map((v) => `| \`.button--${v.variant}\` | ${v.usage} |`).join("\n")}
+${buttonRules.states.map((s) => `| ${s.label} | ${s.usage} |`).join("\n")}
 
 Rules:
 
 ${buttonRules.rules.map((r) => `- ${r}`).join("\n")}
+
+Do / don't:
+
+${buttonRules.guidance.map((g) => `- ${g.topic}. Do: ${g.do} Don't: ${g.dont}`).join("\n")}
+
+Accessibility:
+
+${buttonRules.accessibility.map((a) => `- ${a.topic}: ${a.text}`).join("\n")}
+
+The component handles:
+
+${buttonRules.reference.component.map((r) => `- ${r}`).join("\n")}
+
+Your app handles:
+
+${buttonRules.reference.app.map((r) => `- ${r}`).join("\n")}
+
+Known limitations:
+
+${buttonRules.reference.limitations.map((r) => `- ${r}`).join("\n")}
 
 ### Icon button
 

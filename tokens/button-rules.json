@@ -1,39 +1,278 @@
 {
   "$comment": "When to use each button variant. The component itself is src/styles/components/button.css, built from Figma \"Foundation – UI 2\" (Buttons, node 18:3529; component set 23:5203). Also covers Icon Button (node 23:5380; component set 23:5345, src/styles/components/icon-button.css) under \"iconButton\". Shown on the Buttons and Icon Buttons pages and published to public/llms.txt by `npm run tokens`.",
-  "intro": "Buttons let users initiate an action, acknowledge something, make a choice, or navigate. By default, our buttons are 24px tall, come in two styles (primary and secondary), and can optionally include an icon in front and in back.",
-  "rules": [
-    "Use a <button class=\"button button--<variant>\"> for actions and an <a class=\"button button--<variant>\"> for navigation; never style a <div> as a button.",
-    "Use one primary button per view or panel; pair it with secondary buttons for the other actions.",
-    "Disable with the disabled attribute on <button> or aria-disabled=\"true\" on links; every variant then shares the same disabled look.",
-    "Write labels as short verbs (Save, Delete, Continue), not \"OK\" or \"Click here\".",
-    "Icons are 16px Icon Shells (<svg class=\"icon\" aria-hidden=\"true\"><use href=\"#icon-<name>\"></use></svg>) before or after the label; the button sizes them and they take the label's color. Icon-only actions use an Icon Button."
-  ],
+  "intro": "Buttons start an action: saving a form, confirming a step, opening a flow. They're 24px tall, come in five variants, and can carry a 16px icon before or after the label.",
+  "overview": {
+    "useWhen": [
+      "Something happens when it's pressed: save, send, create, confirm, delete.",
+      "A form or dialog needs a clear next step (one primary) and a way out (secondary).",
+      "A short, labelled command in a toolbar (tertiary)."
+    ],
+    "useInstead": [
+      {
+        "component": "Icon Button",
+        "route": "icon-buttons",
+        "when": "The action is clear from an icon alone, in tight toolbars or on every row."
+      },
+      {
+        "component": "Switch",
+        "route": "switch",
+        "when": "Turning a setting on or off that applies immediately."
+      },
+      {
+        "component": "Dropdown",
+        "route": "dropdown",
+        "when": "Choosing one value from a list."
+      },
+      {
+        "component": "Menu",
+        "route": "menu",
+        "when": "Offering several actions behind one trigger."
+      },
+      {
+        "component": "Tags",
+        "route": "tags",
+        "when": "Showing a status. Tags aren't interactive."
+      },
+      {
+        "component": "A text link",
+        "route": null,
+        "when": "Navigating inside running text."
+      }
+    ]
+  },
   "variants": [
     {
       "variant": "primary",
       "label": "Primary",
-      "usage": "The main action in a view, e.g. Save or Continue. Use one per view or panel."
+      "usage": "The main action in a view, e.g. Save or Continue. Use one per view or panel.",
+      "example": "Save changes",
+      "tokens": {
+        "fill": "--color-bg-inverse",
+        "hover": "--color-bg-inverse-hover",
+        "pressed": "--color-bg-inverse-hover",
+        "label": "--color-text-inverse"
+      }
     },
     {
       "variant": "secondary",
       "label": "Secondary",
-      "usage": "Supporting actions next to a primary button, e.g. Cancel or Back."
+      "usage": "Supporting actions next to a primary button, e.g. Cancel or Back.",
+      "example": "Cancel",
+      "tokens": {
+        "fill": "--color-bg-secondary",
+        "hover": "--color-bg-hover",
+        "pressed": "--color-bg-hover",
+        "label": "--color-text-default"
+      }
     },
     {
       "variant": "tertiary",
       "label": "Tertiary",
-      "usage": "Low-emphasis actions in toolbars, lists and dense UI, where a fill would add noise."
+      "usage": "Low-emphasis actions in toolbars, lists and dense UI, where a fill would add noise.",
+      "example": "Edit",
+      "tokens": {
+        "fill": "none",
+        "hover": "none",
+        "pressed": "none",
+        "label": "--color-text-default"
+      }
     },
     {
       "variant": "danger",
       "label": "Danger",
-      "usage": "Destructive actions that can't easily be undone, e.g. Delete. Confirm before acting."
+      "usage": "Destructive actions that can't easily be undone, e.g. Delete. Confirm before acting.",
+      "example": "Delete project",
+      "tokens": {
+        "fill": "--color-bg-danger",
+        "hover": "--color-bg-danger-hover",
+        "pressed": "--color-bg-danger-pressed",
+        "label": "--color-text-danger-ondanger"
+      }
     },
     {
       "variant": "success",
       "label": "Success",
-      "usage": "Positive, confirming actions, e.g. Approve or Publish."
+      "usage": "Positive, confirming actions, e.g. Approve or Publish.",
+      "example": "Approve",
+      "tokens": {
+        "fill": "--color-bg-success",
+        "hover": "--color-bg-success-hover",
+        "pressed": "--color-bg-success-pressed",
+        "label": "--color-text-success-onwarning"
+      }
     }
+  ],
+  "states": [
+    {
+      "state": "default",
+      "label": "Default",
+      "usage": "The variant's fill and label colors."
+    },
+    {
+      "state": "hover",
+      "label": "Hover",
+      "usage": "One step darker fill (the variant's -hover token). Pointer devices only; Tertiary doesn't change."
+    },
+    {
+      "state": "pressed",
+      "label": "Pressed",
+      "usage": "The -pressed fill and a 97% scale while held (no scale with reduced motion)."
+    },
+    {
+      "state": "focus",
+      "label": "Focus",
+      "usage": "No style of its own: this site draws a 2px --color-text-default outline, 2px out, on :focus-visible. Your app must provide one."
+    },
+    {
+      "state": "disabled",
+      "label": "Disabled",
+      "usage": "No fill, label in --color-bg-disabled-secondary, the same for every variant. Set disabled (or aria-disabled=\"true\" on links)."
+    }
+  ],
+  "examples": [
+    {
+      "id": "form",
+      "title": "Save or cancel a form",
+      "why": "One primary for the expected next step, a secondary to back out. The primary goes last, where the eye ends up."
+    },
+    {
+      "id": "destructive",
+      "title": "Confirm a destructive action",
+      "why": "Danger replaces the primary, so there's still one filled button. The label repeats the action instead of a generic OK."
+    },
+    {
+      "id": "toolbar",
+      "title": "Toolbar",
+      "why": "Tertiary keeps repeated commands quiet; the single primary is the one thing people come to do."
+    },
+    {
+      "id": "review",
+      "title": "Approve a request",
+      "why": "Success for a positive, confirming action, next to a secondary for the alternative."
+    }
+  ],
+  "guidance": [
+    {
+      "topic": "Hierarchy",
+      "do": "One primary per view or panel; everything else secondary or tertiary.",
+      "dont": "Two primaries side by side: people can't tell which one is the main path."
+    },
+    {
+      "topic": "Labels",
+      "do": "Say what happens, verb first: Delete project, Save changes.",
+      "dont": "Vague labels like OK, Yes or Click here, which make people reread the dialog."
+    },
+    {
+      "topic": "Icons",
+      "do": "An icon that reinforces the label, usually before it; arrows and chevrons after it.",
+      "dont": "Decorative icons on both sides, or an icon that means something else."
+    },
+    {
+      "topic": "Placement",
+      "do": "Group related buttons together, right-aligned in footers, with the primary last.",
+      "dont": "Primary first and the alternative pushed to the far edge, where it reads as unrelated."
+    }
+  ],
+  "accessibility": [
+    {
+      "topic": "Keyboard",
+      "text": "Tab reaches every enabled button. Enter and Space activate a <button>; Enter activates a link. All native — no script needed."
+    },
+    {
+      "topic": "Accessible name",
+      "text": "The visible label is the name. Icons are decorative (aria-hidden=\"true\"). For an icon with no label, use an Icon Button with an aria-label."
+    },
+    {
+      "topic": "Focus",
+      "text": "The component has no focus style of its own. This site's global :focus-visible outline (2px --color-text-default, 2px offset) is what you see here; your app must provide one."
+    },
+    {
+      "topic": "Disabled",
+      "text": "disabled removes a <button> from the tab order and blocks clicks, but doesn't say why — explain nearby, or keep it enabled and validate. On links, aria-disabled=\"true\" only blocks the pointer: remove the href too, or Enter still follows it."
+    },
+    {
+      "topic": "Semantics",
+      "text": "<button type=\"button\"> for actions (a button in a form defaults to submit), type=\"submit\" for the form's main action, <a href> for navigation. Never a <div> or <span>."
+    },
+    {
+      "topic": "Contrast",
+      "text": "Danger and Success labels fall short of 4.5:1 for their 11px text (about 3.7:1 in light mode, 2.9:1 on Success hover). The disabled label is 2.1:1 in light mode, which WCAG allows for disabled controls, but about 9:1 in dark mode, so disabled can look enabled there."
+    },
+    {
+      "topic": "Target size",
+      "text": "24px tall, which meets the WCAG 2.2 minimum target size (24 × 24px) as long as the label is at least one character wide."
+    }
+  ],
+  "reference": {
+    "classes": [
+      {
+        "name": ".button",
+        "purpose": "Base class: size, type, radius, states. On its own it looks like Primary."
+      },
+      {
+        "name": ".button--primary | --secondary | --tertiary | --danger | --success",
+        "purpose": "The variant. Use exactly one."
+      },
+      {
+        "name": ".icon (inside .button)",
+        "purpose": "An Icon Shell; the button sizes it to 16px and colors it like the label."
+      }
+    ],
+    "options": [
+      {
+        "name": "Variant",
+        "values": "primary, secondary, tertiary, danger, success",
+        "how": "A modifier class."
+      },
+      {
+        "name": "Label",
+        "values": "Short text",
+        "how": "The button's text content. Doesn't wrap."
+      },
+      {
+        "name": "Leading / trailing icon",
+        "values": "Any icon in the catalog",
+        "how": "An Icon Shell before or after the label."
+      },
+      {
+        "name": "Element",
+        "values": "button, a",
+        "how": "<button type=\"button\"> for actions, <a href> for navigation."
+      },
+      {
+        "name": "Disabled",
+        "values": "on, off",
+        "how": "disabled on <button>; aria-disabled=\"true\" (and no href) on <a>."
+      }
+    ],
+    "component": [
+      "Fill and label colors for each variant, in light and dark.",
+      "Hover (pointer devices only), the pressed fill and 97% press scale.",
+      "The shared disabled look and blocked pointer clicks on aria-disabled links.",
+      "Icon size (16px) and color, the 24px height, and a label that doesn't wrap.",
+      "No press scale with reduced motion."
+    ],
+    "app": [
+      "The element and its type attribute, and what happens on click.",
+      "A visible :focus-visible style.",
+      "Blocking keyboard activation of aria-disabled elements, and explaining why something is disabled.",
+      "Confirming destructive actions before running them.",
+      "Spacing between buttons (there's no button group), and loading or busy states."
+    ],
+    "limitations": [
+      "One size (24px). No small or large variants.",
+      "No loading state, no full-width option and no button group.",
+      "Tertiary has no hover change in Figma, so it gives no hover feedback.",
+      "Figma has no disabled design for Danger and Success; they use the shared disabled look.",
+      "The --button-* custom properties inside button.css are internal, not part of the API."
+    ]
+  },
+  "rules": [
+    "Use a <button class=\"button button--<variant>\"> for actions and an <a class=\"button button--<variant>\"> for navigation; never style a <div> as a button.",
+    "Use one primary button per view or panel; pair it with secondary buttons for the other actions.",
+    "Disable with the disabled attribute on <button>, or aria-disabled=\"true\" and no href on links; every variant then shares the same disabled look.",
+    "Write labels as short verbs (Save, Delete, Continue), not \"OK\" or \"Click here\".",
+    "Icons are 16px Icon Shells (<svg class=\"icon\" aria-hidden=\"true\"><use href=\"#icon-<name>\"></use></svg>) before or after the label; the button sizes them and they take the label's color. Icon-only actions use an Icon Button."
   ],
   "iconButton": {
     "intro": "Icon buttons trigger an action with an icon alone, for compact toolbars and actions repeated on every row. They are 24px square, have no fill until hovered, and show an active fill while pressed or switched on.",

@@ -23,7 +23,11 @@ export function enhanceDropdown(wrap: HTMLElement) {
   const id = `dropdown-${++uid}`;
 
   // Name: the visible <label for>, else the select's aria-label.
-  const visibleLabel = select.id ? document.querySelector<HTMLLabelElement>(`label[for="${select.id}"]`) : null;
+  // Look next to the dropdown first, so it also works before it's in the page.
+  const labelFor = `label[for="${select.id}"]`;
+  const visibleLabel = select.id
+    ? (wrap.parentElement?.querySelector<HTMLLabelElement>(labelFor) ?? document.querySelector<HTMLLabelElement>(labelFor))
+    : null;
   const labelText = visibleLabel?.textContent?.trim() ?? select.getAttribute("aria-label") ?? "";
 
   const trigger = document.createElement("button");

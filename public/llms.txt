@@ -226,25 +226,89 @@ Rules:
 
 ### Button
 
-Buttons let users initiate an action, acknowledge something, make a choice, or navigate. By default, our buttons are 24px tall, come in two styles (primary and secondary), and can optionally include an icon in front and in back.
+Buttons start an action: saving a form, confirming a step, opening a flow. They're 24px tall, come in five variants, and can carry a 16px icon before or after the label.
 
-Markup: `<button class="button button--<variant>" type="button">Label</button>` (styles: src/styles/components/button.css). Hover, pressed, focus and disabled states are built in.
+Markup: `<button class="button button--<variant>" type="button">Label</button>` (styles: src/styles/components/button.css). Hover, pressed and disabled are built in; focus is not (see Accessibility).
 
-| Class | When to use |
+Use a button when:
+
+- Something happens when it's pressed: save, send, create, confirm, delete.
+- A form or dialog needs a clear next step (one primary) and a way out (secondary).
+- A short, labelled command in a toolbar (tertiary).
+
+Use something else when:
+
+- Icon Button: The action is clear from an icon alone, in tight toolbars or on every row.
+- Switch: Turning a setting on or off that applies immediately.
+- Dropdown: Choosing one value from a list.
+- Menu: Offering several actions behind one trigger.
+- Tags: Showing a status. Tags aren't interactive.
+- A text link: Navigating inside running text.
+
+| Class | When to use | Example | Fill / hover / pressed / label tokens |
+| --- | --- | --- | --- |
+| `.button--primary` | The main action in a view, e.g. Save or Continue. Use one per view or panel. | Save changes | --color-bg-inverse / --color-bg-inverse-hover / --color-bg-inverse-hover / --color-text-inverse |
+| `.button--secondary` | Supporting actions next to a primary button, e.g. Cancel or Back. | Cancel | --color-bg-secondary / --color-bg-hover / --color-bg-hover / --color-text-default |
+| `.button--tertiary` | Low-emphasis actions in toolbars, lists and dense UI, where a fill would add noise. | Edit | none / none / none / --color-text-default |
+| `.button--danger` | Destructive actions that can't easily be undone, e.g. Delete. Confirm before acting. | Delete project | --color-bg-danger / --color-bg-danger-hover / --color-bg-danger-pressed / --color-text-danger-ondanger |
+| `.button--success` | Positive, confirming actions, e.g. Approve or Publish. | Approve | --color-bg-success / --color-bg-success-hover / --color-bg-success-pressed / --color-text-success-onwarning |
+
+| State | What changes |
 | --- | --- |
-| `.button--primary` | The main action in a view, e.g. Save or Continue. Use one per view or panel. |
-| `.button--secondary` | Supporting actions next to a primary button, e.g. Cancel or Back. |
-| `.button--tertiary` | Low-emphasis actions in toolbars, lists and dense UI, where a fill would add noise. |
-| `.button--danger` | Destructive actions that can't easily be undone, e.g. Delete. Confirm before acting. |
-| `.button--success` | Positive, confirming actions, e.g. Approve or Publish. |
+| Default | The variant's fill and label colors. |
+| Hover | One step darker fill (the variant's -hover token). Pointer devices only; Tertiary doesn't change. |
+| Pressed | The -pressed fill and a 97% scale while held (no scale with reduced motion). |
+| Focus | No style of its own: this site draws a 2px --color-text-default outline, 2px out, on :focus-visible. Your app must provide one. |
+| Disabled | No fill, label in --color-bg-disabled-secondary, the same for every variant. Set disabled (or aria-disabled="true" on links). |
 
 Rules:
 
 - Use a <button class="button button--<variant>"> for actions and an <a class="button button--<variant>"> for navigation; never style a <div> as a button.
 - Use one primary button per view or panel; pair it with secondary buttons for the other actions.
-- Disable with the disabled attribute on <button> or aria-disabled="true" on links; every variant then shares the same disabled look.
+- Disable with the disabled attribute on <button>, or aria-disabled="true" and no href on links; every variant then shares the same disabled look.
 - Write labels as short verbs (Save, Delete, Continue), not "OK" or "Click here".
 - Icons are 16px Icon Shells (<svg class="icon" aria-hidden="true"><use href="#icon-<name>"></use></svg>) before or after the label; the button sizes them and they take the label's color. Icon-only actions use an Icon Button.
+
+Do / don't:
+
+- Hierarchy. Do: One primary per view or panel; everything else secondary or tertiary. Don't: Two primaries side by side: people can't tell which one is the main path.
+- Labels. Do: Say what happens, verb first: Delete project, Save changes. Don't: Vague labels like OK, Yes or Click here, which make people reread the dialog.
+- Icons. Do: An icon that reinforces the label, usually before it; arrows and chevrons after it. Don't: Decorative icons on both sides, or an icon that means something else.
+- Placement. Do: Group related buttons together, right-aligned in footers, with the primary last. Don't: Primary first and the alternative pushed to the far edge, where it reads as unrelated.
+
+Accessibility:
+
+- Keyboard: Tab reaches every enabled button. Enter and Space activate a <button>; Enter activates a link. All native — no script needed.
+- Accessible name: The visible label is the name. Icons are decorative (aria-hidden="true"). For an icon with no label, use an Icon Button with an aria-label.
+- Focus: The component has no focus style of its own. This site's global :focus-visible outline (2px --color-text-default, 2px offset) is what you see here; your app must provide one.
+- Disabled: disabled removes a <button> from the tab order and blocks clicks, but doesn't say why — explain nearby, or keep it enabled and validate. On links, aria-disabled="true" only blocks the pointer: remove the href too, or Enter still follows it.
+- Semantics: <button type="button"> for actions (a button in a form defaults to submit), type="submit" for the form's main action, <a href> for navigation. Never a <div> or <span>.
+- Contrast: Danger and Success labels fall short of 4.5:1 for their 11px text (about 3.7:1 in light mode, 2.9:1 on Success hover). The disabled label is 2.1:1 in light mode, which WCAG allows for disabled controls, but about 9:1 in dark mode, so disabled can look enabled there.
+- Target size: 24px tall, which meets the WCAG 2.2 minimum target size (24 × 24px) as long as the label is at least one character wide.
+
+The component handles:
+
+- Fill and label colors for each variant, in light and dark.
+- Hover (pointer devices only), the pressed fill and 97% press scale.
+- The shared disabled look and blocked pointer clicks on aria-disabled links.
+- Icon size (16px) and color, the 24px height, and a label that doesn't wrap.
+- No press scale with reduced motion.
+
+Your app handles:
+
+- The element and its type attribute, and what happens on click.
+- A visible :focus-visible style.
+- Blocking keyboard activation of aria-disabled elements, and explaining why something is disabled.
+- Confirming destructive actions before running them.
+- Spacing between buttons (there's no button group), and loading or busy states.
+
+Known limitations:
+
+- One size (24px). No small or large variants.
+- No loading state, no full-width option and no button group.
+- Tertiary has no hover change in Figma, so it gives no hover feedback.
+- Figma has no disabled design for Danger and Success; they use the shared disabled look.
+- The --button-* custom properties inside button.css are internal, not part of the API.
 
 ### Icon button
 

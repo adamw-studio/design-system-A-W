@@ -130,9 +130,305 @@
   color: var(--color-text-secondary);
 }
 
+/* An optional lead-in word for a rule (e.g. "Keyboard."). */
+.doc-rules__topic {
+  color: var(--color-text-default);
+}
+
+/* A stack of disclosures (they draw their own dividers). */
+.doc-disclosures {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inline code in text and tables */
+.doc-inline-code {
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-small);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-default);
+  font-family: var(--font-family-mono);
+  font-size: var(--body-medium-strong-font-size);
+  line-height: var(--body-medium-strong-line-height);
+}
+
+.doc-subheading {
+  color: var(--color-text-default);
+}
+
+/* Two columns that stack on narrow screens */
+.doc-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+/* Static preview -------------------------------------------------------------
+   Fixed illustrations: inert, with a visible badge and a dashed border, so
+   they read differently from the solid-bordered, live playground. They sit
+   on the page background so components keep their real contrast (a grey
+   fill would swallow, e.g., the Secondary button). */
+.doc-static {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4) var(--space-5);
+  border: 1px dashed var(--color-border-default);
+  border-radius: var(--radius-large);
+  background: var(--color-bg-default);
+  /* Wide illustrations scroll here: the inert body can't be scrolled. */
+  overflow-x: auto;
+}
+
+.doc-static__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-width: 0;
+}
+
+/* Example: a composition on a surface, then its title and why. */
+.doc-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.doc-example__surface .doc-static__body {
+  justify-content: center;
+}
+
+.doc-example__title {
+  color: var(--color-text-default);
+}
+
+.doc-example__why {
+  color: var(--color-text-secondary);
+}
+
+/* Do / don't ------------------------------------------------------------------ */
+.doc-dodont {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.doc-dodont__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.doc-dodont__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.doc-dodont__card .doc-static__body {
+  min-height: calc(2 * var(--space-6));
+}
+
+/* The badge says Do / Don't; the border color reinforces it. */
+.doc-dodont__card--do .doc-static {
+  border-color: var(--color-border-success);
+}
+
+.doc-dodont__card--dont .doc-static {
+  border-color: var(--color-border-danger);
+}
+
+.doc-dodont__card--do .doc-static__badge {
+  border-color: var(--color-border-success);
+  color: var(--color-text-success);
+}
+
+.doc-dodont__card--dont .doc-static__badge {
+  border-color: var(--color-border-danger);
+  color: var(--color-text-danger);
+}
+
+.doc-dodont__text {
+  color: var(--color-text-secondary);
+}
+
+.doc-dodont__verdict {
+  color: var(--color-text-default);
+}
+
+/* Tables ---------------------------------------------------------------------- */
+.doc-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-large);
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--color-text-secondary);
+}
+
+.doc-table th,
+.doc-table td {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border-default);
+  text-align: left;
+  vertical-align: top;
+}
+
+.doc-table thead th {
+  border-top: 0;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-default);
+  font-weight: inherit;
+}
+
+.doc-table tbody th {
+  color: var(--color-text-default);
+  font-weight: inherit;
+  white-space: nowrap;
+}
+
+/* Disclosure (long implementation details) ------------------------------------ */
+.doc-disclosure {
+  border-top: 1px solid var(--color-border-default);
+}
+
+.doc-disclosure:last-of-type {
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.doc-disclosure__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  color: var(--color-text-default);
+  cursor: pointer;
+  list-style: none;
+}
+
+.doc-disclosure__summary::-webkit-details-marker {
+  display: none;
+}
+
+.doc-disclosure__chevron {
+  color: var(--color-icon-secondary);
+  transition: transform var(--motion-fast) var(--motion-ease-out);
+}
+
+.doc-disclosure[open] .doc-disclosure__chevron {
+  transform: rotate(90deg);
+}
+
+.doc-disclosure__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+}
+
+/* Opening: the content settles in (same 4px / fade as page content)
+   instead of popping. Closing is instant — nothing to look at. */
+.doc-disclosure[open] .doc-disclosure__body {
+  animation: motion-enter var(--motion-fast) var(--motion-ease-out);
+}
+
+/* Playground ------------------------------------------------------------------
+   Bordered like the Figma preview panel; the live preview on top, then the
+   controls, actions and the markup they produce. */
+.doc-playground {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-large);
+}
+
+.doc-playground__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+}
+
+.doc-playground__hint {
+  color: var(--color-text-tertiary);
+}
+
+.doc-playground__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(4 * var(--space-6));
+  padding: var(--space-6) var(--space-5);
+  overflow-x: auto;
+}
+
+.doc-playground__controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-5);
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border-default);
+}
+
+.doc-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* Switch fields: label and switch on one line, like a settings row. */
+.doc-field--switch {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: end;
+  min-height: calc(var(--body-medium-strong-line-height) + 2 * var(--space-2));
+}
+
+.doc-field__label {
+  color: var(--color-text-secondary);
+}
+
+.doc-playground__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+.doc-playground__code {
+  margin: 0 var(--space-4) var(--space-4);
+  white-space: pre;
+}
+
 @media (max-width: 640px) {
   .doc-preview {
     padding: var(--space-7) var(--space-4);
     overflow-x: auto;
+  }
+
+  .doc-columns,
+  .doc-dodont__pair,
+  .doc-playground__controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc-disclosure__chevron {
+    transition: none;
+  }
+
+  .doc-disclosure[open] .doc-disclosure__body {
+    animation-name: motion-fade-in;
   }
 }
