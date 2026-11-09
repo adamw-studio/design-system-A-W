@@ -32,10 +32,12 @@
   /* Floating controls (theme toggle). No shadow tokens exist yet; shadows
      are black in both themes, so they use black primitives. */
   --layout-shadow-floating: 0 var(--space-2) var(--space-5) var(--color-black-200), 0 1px 2px var(--color-black-200);
-  /* Primitives (Figma 310:3840): 282px cards, two to the 580px column (one
-     below 240px each); a 60px strip of shades, the current one square. */
-  --layout-palette-card-min: 240px;
+  /* Color cards (Primitives 310:3840, Tokens 310:4035): 282px, two to the
+     580px column (one below 240px each). Primitives: a 60px strip of
+     shades, the current one square. Tokens: a 60px-wide preview. */
+  --layout-color-card-min: 240px;
   --layout-palette-strip-height: 60px;
+  --layout-token-preview-width: 60px;
   /* Frosted scroll edges on the panel (Figma 309:3325): 48px tall. */
   --layout-panel-edge: 48px;
   /* Menu (Figma 46:645): 159px wide. */

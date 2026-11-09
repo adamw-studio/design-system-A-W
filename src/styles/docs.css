@@ -432,3 +432,67 @@
     animation-name: motion-fade-in;
   }
 }
+
+/* Color cards ------------------------------------------------------------------- */
+/* Primitives and Tokens (Figma 310:3840, 310:4035): 282px cards, two to the
+   580px column, 16px apart. Each has a header row (8px / 4px padding, a rule
+   under it) with the Figma name, a value shown while previewing, and a 20px
+   chip; then a 12px-padded body the page fills. */
+
+.color-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-color-card-min)), 1fr));
+  gap: var(--space-4);
+}
+
+.color-card {
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-small);
+}
+
+.color-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border-default);
+  color: var(--color-text-secondary);
+}
+
+.color-card__name {
+  font: inherit;
+  white-space: nowrap;
+}
+
+.color-card__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+/* What's under the pointer or focus; empty at rest. */
+.color-card__value {
+  overflow: hidden;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.color-card__value.is-copied {
+  color: var(--color-text-success);
+}
+
+.color-card__chip {
+  flex: none;
+  width: calc(var(--space-4) + var(--space-2));
+  height: calc(var(--space-4) + var(--space-2));
+  border: 1px solid var(--color-border-default);
+  background: var(--chip);
+}
+
+.color-card__body {
+  padding: calc(var(--space-3) + var(--space-2));
+}

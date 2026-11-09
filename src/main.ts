@@ -1,6 +1,6 @@
 import "./styles/index.css";
 import { primitivesIntro, renderPrimitives } from "./pages/primitives";
-import { renderTokens, tokensSubtitle } from "./pages/tokens";
+import { renderTokens, tokensIntro } from "./pages/tokens";
 import { renderTypography, typographyIntro, typographySubtitle } from "./pages/typography";
 import {
   buttonsIntro,
@@ -80,12 +80,10 @@ const pages: Record<Route, Page> = {
     render: renderPrimitives,
   },
   tokens: {
-    crumb: ["Foundations", "Colors"],
-    subtitle: tokensSubtitle(),
-    figma: `${FIGMA_WEB}289-1313`,
+    crumb: ["Colors"],
     title: "Tokens",
-    description:
-      "Semantic color tokens give each primitive a purpose, with a value for light and dark mode. Use these in components. Click a row to copy its CSS variable.",
+    layout: "article",
+    description: tokensIntro,
     render: renderTokens,
   },
   typography: {

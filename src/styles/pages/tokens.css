@@ -1,120 +1,124 @@
 /*
- * Semantic Tokens page — Figma "Design System - Web", node 289:1313
- * ("_Token/Token" rows).
+ * Semantic Tokens page — after Figma "Design System - Web", node 310:4035.
+ * The card frame is the shared color card (docs.css); inside it, one 30px
+ * line per token (Figma's row: 22px text, 4px padding): a 60px sample, the
+ * variant, and its primitive. Samples stack into one column of colors.
+ * Behaviour: src/pages/tokens.ts.
  */
 
-.token-list {
+.token-lines {
   display: flex;
   flex-direction: column;
 }
 
-.token-row {
+.token-line {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: stretch;
   gap: var(--space-4);
   width: 100%;
-  padding: var(--layout-row-padding);
+  padding: 0;
   border: 0;
-  border-radius: var(--layout-radius-item);
+  border-radius: 0;
   background: none;
-  color: inherit;
+  color: var(--color-text-default);
   font: inherit;
   text-align: left;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition:
-    background-color var(--motion-hover) ease,
-    transform var(--motion-press) var(--motion-ease-out);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .token-row:hover {
-    background: var(--color-bg-hover);
-  }
-}
-
-.token-row:active {
-  background: var(--color-bg-pressed);
-  transform: scale(var(--motion-press-scale-wide));
-}
-
-.token-row:focus-visible {
-  outline-offset: 0;
-}
-
-.token-row__lead {
+/* The sample: a 60px tile as tall as the line. */
+.token-line__sample {
   display: flex;
+  flex: 0 0 var(--layout-token-preview-width);
   align-items: center;
-  gap: var(--space-3);
-  min-width: 0;
+  justify-content: center;
+  background: var(--ground, none);
 }
 
-.token-row__icon {
-  flex: 0 0 auto;
-  color: var(--color-icon-secondary);
-}
-
-.token-row__name {
+.token-line__text {
   display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: var(--space-4);
   min-width: 0;
+  /* One line tall: an alias with no room beside the name wraps out of view. */
+  height: calc(var(--body-large-strong-line-height) + 2 * var(--space-2));
+  overflow: hidden;
+}
+
+.token-line__name,
+.token-line__alias {
+  padding-block: var(--space-2);
   white-space: nowrap;
 }
 
-.token-row__prefix {
-  color: var(--color-text-default);
-}
-
-/* Figma binds the name to ✦/bg/disabled/default. */
-.token-row__rest {
-  overflow: hidden;
-  color: var(--color-bg-disabled);
-  text-overflow: ellipsis;
-}
-
-/* "Copied" confirmation: always laid out (so the row never reflows) and
-   revealed with a short blur-in; it leaves faster than it arrives. */
-.token-row__copied {
+.token-line__name.is-copied {
   color: var(--color-text-success);
-  opacity: 0;
-  filter: blur(2px);
-  transform: translateX(calc(-1 * var(--space-2)));
-  transition:
-    opacity 150ms ease,
-    filter 150ms ease,
-    transform 150ms ease;
 }
 
-.token-row.is-copied .token-row__copied {
-  opacity: 1;
-  filter: blur(0);
-  transform: none;
-  transition-duration: var(--motion-fast);
-  transition-timing-function: var(--motion-ease-out);
+.token-line__alias {
+  color: var(--color-text-tertiary);
+  transition: color var(--motion-hover) ease;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .token-row__copied {
-    transform: none;
+@media (hover: hover) and (pointer: fine) {
+  .token-line:hover .token-line__alias {
+    color: var(--color-text-secondary);
   }
 }
 
-/* Dark, Light — 20px, 4px apart. */
-.token-row__swatches {
-  /* Resolved here, in the page's theme, before each swatch switches to its
-     own: the hairline contrasts with the page, not the swatch. */
-  --swatch-hairline: var(--color-border-default);
-
-  display: flex;
-  flex: 0 0 auto;
-  gap: var(--space-2);
+/* Press feedback on the name, so the samples stay flush. */
+.token-line__name {
+  transform-origin: left center;
+  transition: transform var(--motion-press) var(--motion-ease-out);
 }
 
-.token-swatch {
-  display: block;
-  width: 20px;
-  height: 20px;
-  background: linear-gradient(var(--token), var(--token)), var(--color-bg-default);
-  /* Hairline so values matching the page (e.g. white) stay visible. */
-  box-shadow: inset 0 0 0 1px var(--swatch-hairline);
+.token-line:active .token-line__name {
+  transform: scale(var(--motion-press-scale));
+}
+
+/* Focus ring inside the line: the card clips anything outside. */
+.token-line:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline-offset: -2px;
+}
+
+/* By category --------------------------------------------------------------------- */
+
+/* bg: filled with the token. One faint outline around the whole strip (not
+   between fills) keeps fills that match the card (bg/default) visible. */
+.token-card[data-category="bg"] .token-line__sample {
+  background: var(--token);
+}
+
+.token-card[data-category="bg"] .token-lines {
+  position: relative;
+}
+
+.token-card[data-category="bg"] .token-lines::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-3) + var(--space-2));
+  left: calc(var(--space-3) + var(--space-2));
+  width: var(--layout-token-preview-width);
+  height: calc(100% - 2 * (var(--space-3) + var(--space-2)));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border-default) 50%, transparent);
+  pointer-events: none;
+}
+
+/* text / icon: drawn in the token, on the fill it's meant for. */
+.token-card:is([data-category="text"], [data-category="icon"]) .token-line__sample {
+  color: var(--token);
+}
+
+/* border: outlined with the token, lines 4px apart so outlines don't merge. */
+.token-card[data-category="border"] .token-line__sample {
+  box-shadow: inset 0 0 0 1px var(--token);
+}
+
+.token-card[data-category="border"] .token-lines {
+  gap: var(--space-2);
 }

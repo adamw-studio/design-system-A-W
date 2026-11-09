@@ -1,95 +1,32 @@
 /*
  * Color Primitives page — Figma "Design System - Web", node 310:3840.
- * Cards in two columns, 16px apart. Each card: a header row (8px / 4px
- * padding, a rule under it) with the family name and a 20px chip, then 12px
- * around a 60px strip of ten shades whose current one is a 60px square.
+ * The card frame is the shared color card (docs.css); inside it, a 60px
+ * strip of ten shades whose current one is a 60px square.
  * Behaviour: src/pages/primitives.ts.
  */
-
-.palette-list {
-  display: grid;
-  /* Two 282px columns in the 580px content column; one when narrower. */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-palette-card-min)), 1fr));
-  gap: var(--space-4);
-}
-
-.palette {
-  overflow: hidden;
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-small);
-}
-
-/* Header ------------------------------------------------------------------------ */
-
-.palette__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-2) var(--space-3);
-  border-bottom: 1px solid var(--color-border-default);
-  color: var(--color-text-secondary);
-}
-
-.palette__name {
-  font: inherit;
-  white-space: nowrap;
-}
-
-.palette__info {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-width: 0;
-}
-
-/* Step · HEX of the shade under the pointer or focus; empty at rest. */
-.palette__value {
-  overflow: hidden;
-  color: var(--color-text-tertiary);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.palette__value.is-copied {
-  color: var(--color-text-success);
-}
-
-/* 20px chip of the family's 500 shade, or of the previewed one. */
-.palette__chip {
-  flex: none;
-  width: calc(var(--space-4) + var(--space-2));
-  height: calc(var(--space-4) + var(--space-2));
-  border: 1px solid var(--color-border-default);
-  background: var(--chip);
-}
 
 /* The translucent families need a fixed ground in either theme: white
    shades on the darkest grey (Figma: bg/default/inverse, which turns light
    in dark mode), black shades on white. */
-.palette[data-family="white"] .palette__chip,
-.palette[data-family="white"] .palette__body {
+.palette[data-family="white"] .color-card__chip,
+.palette[data-family="white"] .color-card__body {
   background-color: var(--color-grey-1000);
 }
 
-.palette[data-family="white"] .palette__chip {
+.palette[data-family="white"] .color-card__chip {
   background-image: linear-gradient(var(--chip), var(--chip));
 }
 
-.palette[data-family="black"] .palette__chip,
-.palette[data-family="black"] .palette__body {
+.palette[data-family="black"] .color-card__chip,
+.palette[data-family="black"] .color-card__body {
   background-color: var(--color-white-1000);
 }
 
-.palette[data-family="black"] .palette__chip {
+.palette[data-family="black"] .color-card__chip {
   background-image: linear-gradient(var(--chip), var(--chip));
 }
 
 /* Strip ------------------------------------------------------------------------- */
-
-.palette__body {
-  padding: calc(var(--space-3) + var(--space-2));
-}
 
 .palette__strip {
   display: flex;

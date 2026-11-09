@@ -70,27 +70,27 @@ function formatHex(css: string) {
 
 function paletteCard(family: string, shades: Shade[], status: HTMLElement) {
   const name = capitalize(family);
-  const card = el("section", "palette");
+  const card = el("section", "color-card palette");
   card.dataset.family = family;
   const nameId = `palette-${family}`;
   card.setAttribute("aria-labelledby", nameId);
 
-  const header = el("div", "palette__header text-body-large");
-  const heading = el("h2", "palette__name");
+  const header = el("div", "color-card__header text-body-large");
+  const heading = el("h2", "color-card__name");
   heading.id = nameId;
   heading.setAttribute("aria-label", name);
-  heading.append(el("span", "palette__emoji", PRIMITIVE_PREFIX.replace("/", "")), ` /${family}`);
-  const info = el("span", "palette__info");
-  const value = el("span", "palette__value");
+  heading.append(el("span", "color-card__emoji", PRIMITIVE_PREFIX.replace("/", "")), ` /${family}`);
+  const info = el("span", "color-card__info");
+  const value = el("span", "color-card__value");
   value.setAttribute("aria-hidden", "true"); // the swatch labels carry it
-  const chip = el("span", "palette__chip");
+  const chip = el("span", "color-card__chip");
   const chipShade = shades.find((s) => s.step === CHIP_STEP) ?? shades[Math.floor(shades.length / 2)];
   const restChip = `var(${chipShade.cssVar})`;
   chip.style.setProperty("--chip", restChip);
   info.append(value, chip);
   header.append(heading, info);
 
-  const body = el("div", "palette__body");
+  const body = el("div", "color-card__body");
   const strip = el("div", "palette__strip");
   strip.setAttribute("role", "group");
   strip.setAttribute("aria-label", `${name} shades`);
@@ -179,7 +179,7 @@ function paletteCard(family: string, shades: Shade[], status: HTMLElement) {
 }
 
 export function renderPrimitives(body: HTMLElement) {
-  const list = el("div", "palette-list");
+  const list = el("div", "color-cards");
   const status = createStatusRegion();
   const cards = [...readFamilies()].map(([family, shades]) => paletteCard(family, shades, status));
   list.append(...cards.map((c) => c.card));
