@@ -116,6 +116,10 @@
 .menu--floating {
   position: absolute;
   z-index: 20;
+  /* The elevation's edge ring outlines it, so no border of its own (the
+     padding takes the border's pixel back: same 159px menu). */
+  padding: var(--space-3);
+  border: 0;
   box-shadow: var(--elevation-floating);
   transform-origin: var(--menu-origin, top left);
   transition:
