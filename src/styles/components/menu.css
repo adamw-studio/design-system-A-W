@@ -107,7 +107,7 @@
 
 /* Floating menus (dropdown lists, submenus) -----------------------------------
    Not in Figma, which shows menus flat. A floating menu sits over content,
-   so it gets the floating shadow and an open/close animation:
+   so it gets --elevation-floating (elevation.css) and an open/close animation:
    - scales from the trigger (transform-origin set per side), never from 0;
    - opens in 200ms with a strong ease-out, closes faster (120ms);
    - opens instantly when triggered from the keyboard (data-instant);
@@ -116,7 +116,7 @@
 .menu--floating {
   position: absolute;
   z-index: 20;
-  box-shadow: var(--layout-shadow-floating);
+  box-shadow: var(--elevation-floating);
   transform-origin: var(--menu-origin, top left);
   transition:
     opacity var(--motion-fast) var(--motion-ease-out),

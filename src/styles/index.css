@@ -2,6 +2,7 @@
 @import "./tokens/typography.css";
 @import "./tokens/sizing.css";
 @import "./motion.css";
+@import "./elevation.css";
 @import "./layout.css";
 @import "./docs.css";
 @import "./components/icon.css";

@@ -1,40 +1,44 @@
 /*
  * Elevation page. Shared building blocks: src/styles/docs.css.
- * The illustration nests the three levels the site uses: ground (page),
- * surface (panel), floating (shadowed layer).
+ * The illustration shows the four levels (flat, raised, floating, overlay)
+ * as tiles, once in each theme: every row sets its own data-theme, so the
+ * colors and --elevation-* values resolve for that theme.
  */
 
-.elevation-demo__ground {
+.elevation-demo {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   width: 100%;
-  padding: var(--space-4);
-  border-radius: var(--radius-large);
-  background: var(--color-bg-secondary);
-}
-
-.elevation-demo__surface {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-4);
   padding: var(--space-4) var(--space-4) var(--space-6);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--layout-radius-panel);
-  background: var(--color-bg-default);
-}
-
-.elevation-demo__floating {
-  align-self: center;
-  padding: var(--space-3) var(--space-5);
-  border: 1px solid var(--color-border-default);
   border-radius: var(--radius-large);
   background: var(--color-bg-default);
-  box-shadow: var(--layout-shadow-floating);
   color: var(--color-text-default);
 }
 
-.elevation-demo__label {
+.elevation-demo + .elevation-demo {
+  margin-top: var(--space-3);
+}
+
+.elevation-demo__theme {
   color: var(--color-text-tertiary);
+}
+
+.elevation-demo__tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 96px), 1fr));
+  gap: var(--space-5);
+}
+
+.elevation-demo__tile {
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 4 / 3;
+  padding: var(--space-3);
+  border-radius: var(--radius-large);
+  background: var(--color-bg-default);
+}
+
+.elevation-demo__tile--flat {
+  border: 1px solid var(--color-border-default);
 }

@@ -29,9 +29,6 @@
   --layout-icon-preview-height: 128px;
   /* Icon Shell set (Figma 28:1006): 14px between the sizes. */
   --layout-icon-shell-gap: 14px;
-  /* Floating controls (theme toggle). No shadow tokens exist yet; shadows
-     are black in both themes, so they use black primitives. */
-  --layout-shadow-floating: 0 var(--space-2) var(--space-5) var(--color-black-200), 0 1px 2px var(--color-black-200);
   /* Color cards (Primitives 310:3840, Tokens 310:4035): 282px, two to the
      580px column (one below 240px each). Primitives: a 60px strip of
      shades, the current one square. Tokens: a 60px-wide preview. */
@@ -702,7 +699,7 @@ img {
   padding: var(--space-2);
   border-radius: var(--radius-full);
   background: var(--color-bg-inverse);
-  box-shadow: var(--layout-shadow-floating);
+  box-shadow: var(--elevation-floating);
   transform: translateX(-50%);
 }
 

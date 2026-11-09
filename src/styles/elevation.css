@@ -1,0 +1,70 @@
+/*
+ * Elevation for the site. Figma has no elevation or shadow variables, so,
+ * like motion.css, these are site-only constants: --elevation-*.
+ *
+ * Three levels above the flat page, each one shape for both themes:
+ *   raised    resting cards and controls that sit just above a surface
+ *   floating  menus, dropdown lists, the theme toggle
+ *   overlay   modals, sheets, toasts (none exist yet)
+ *
+ * Every level is built the same way:
+ * - an edge: a 1px ring that outlines the layer, so it reads even where the
+ *   shadow can't (a dark layer on a dark page);
+ * - a highlight: a 1px inset line along the top, as if lit from above
+ *   (dark theme only: in light, the shadow does that job);
+ * - a tint (dark theme only): the surface gets lighter the higher it sits,
+ *   2% white per level, since shadows barely show on a near-black page. It's
+ *   an inset shadow spread over the whole box, which paints above the
+ *   background and below the content, so it needs no extra markup;
+ * - a smooth shadow: 3–4 stacked layers whose offset and blur double each
+ *   step while opacity drops, which falls off softly like a real shadow
+ *   instead of one hard-edged blur.
+ *
+ * The theme tunes it, not the shapes: dark mode multiplies the shadow's
+ * opacity (black on a near-black page needs about 3× to be seen), swaps the
+ * dark edge for a light one and turns on the highlight and the tint.
+ * Declared on every [data-theme] so a nested theme gets its own values.
+ */
+:root,
+[data-theme] {
+  --elevation-shadow-color: var(--color-black-1000);
+  --elevation-strength: 1;
+  --elevation-edge: color-mix(in srgb, var(--color-black-1000) 6%, transparent);
+  --elevation-highlight: transparent;
+  --elevation-tint: 0%;
+}
+
+[data-theme="dark"] {
+  --elevation-strength: 3;
+  --elevation-edge: color-mix(in srgb, var(--color-white-1000) 10%, transparent);
+  --elevation-highlight: color-mix(in srgb, var(--color-white-1000) 6%, transparent);
+  --elevation-tint: 2%;
+}
+
+:root,
+[data-theme] {
+  /* Shadow layers are `n`% black times the theme's strength; the tint is
+     the theme's step times the level. */
+  --elevation-raised:
+    inset 0 0 0 100vmax color-mix(in srgb, var(--color-white-1000) calc(var(--elevation-tint) * 1), transparent),
+    inset 0 1px 0 var(--elevation-highlight),
+    0 0 0 1px var(--elevation-edge),
+    0 1px 1px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 3%), transparent),
+    0 2px 4px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 3%), transparent);
+
+  --elevation-floating:
+    inset 0 0 0 100vmax color-mix(in srgb, var(--color-white-1000) calc(var(--elevation-tint) * 2), transparent),
+    inset 0 1px 0 var(--elevation-highlight),
+    0 0 0 1px var(--elevation-edge),
+    0 1px 2px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 3%), transparent),
+    0 4px 8px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 4%), transparent),
+    0 12px 24px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 5%), transparent);
+
+  --elevation-overlay:
+    inset 0 0 0 100vmax color-mix(in srgb, var(--color-white-1000) calc(var(--elevation-tint) * 3), transparent),
+    inset 0 1px 0 var(--elevation-highlight),
+    0 0 0 1px var(--elevation-edge),
+    0 2px 4px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 3%), transparent),
+    0 8px 16px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 5%), transparent),
+    0 24px 48px color-mix(in srgb, var(--elevation-shadow-color) calc(var(--elevation-strength) * 8%), transparent);
+}
