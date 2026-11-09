@@ -646,9 +646,28 @@ img {
   }
 }
 
-/* Last section: links to the machine-readable files (src/lib/agent-links.ts) */
+/* Last block: links to the machine-readable files (src/lib/agent-links.ts,
+   Figma 310:4345). A bordered box, 8px padding, 6px between the title row
+   and the text. Figma's shadow is left out by request. */
 .agent-links {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-2) + var(--space-1));
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-medium);
   color: var(--color-text-secondary);
+}
+
+.agent-links__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-icon-default);
+}
+
+.agent-links__title {
+  color: var(--color-text-default);
 }
 
 .agent-links a {
