@@ -29,6 +29,14 @@
           "alias": "🎨/grey/800"
         }
       ],
+      "✦/bg/default/hover-light": [
+        {
+          "alias": "🎨/grey/100"
+        },
+        {
+          "alias": "🎨/grey/900"
+        }
+      ],
       "✦/bg/default/pressed": [
         {
           "alias": "🎨/grey/100"

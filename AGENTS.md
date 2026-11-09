@@ -17,7 +17,7 @@ A Vite + TypeScript site that documents the A/W design system. Every design toke
 - `tokens/icons.json` — the icon catalog from Figma (Iconography), with Iconoir names, sizes and rules. Icons come from the [Iconoir](https://iconoir.com) package (`node_modules/iconoir`, a devDependency).
 - `npm run tokens` (`scripts/build-tokens.mjs`) generates, from those files:
   - `src/styles/tokens/{color,typography,sizing}.css` — CSS custom properties and `.text-*` classes
-  - `public/tokens/colors.json` — W3C design tokens: 70 primitives and 82 semantic tokens, light/dark values, usage descriptions
+  - `public/tokens/colors.json` — W3C design tokens: 70 primitives and 83 semantic tokens, light/dark values, usage descriptions
   - `public/tokens/typography.json` — W3C design tokens with usage rules
   - `public/llms.txt` — LLM-readable summary of all tokens (served at `/llms.txt`)
   - `public/icons/iconoir.svg` — sprite with just the catalog's icons

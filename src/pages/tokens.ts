@@ -48,7 +48,7 @@ const CATEGORIES = ["bg", "text", "icon", "border"];
 const GROUPS = ["default", "danger", "warning", "success", "disabled"];
 /** Lines after default, as in Figma; then the rest in Figma's order, with
  * the "on…" variants (for text on a colored fill) last. */
-const LEADING = ["default", "hover", "pressed"];
+const LEADING = ["default", "hover", "hover-light", "pressed"];
 const SAMPLE_ICON = "bell";
 
 function readGroups(): Map<string, Token[]> {

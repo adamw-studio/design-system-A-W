@@ -85,12 +85,13 @@
 }
 
 /* Hover — pointer or keyboard (data-active), an open submenu's parent, or
-   pinned for documentation (data-state). No transition: highlights follow
-   the pointer dozens of times a minute and must keep up with it. */
+   pinned for documentation (data-state). The light hover: in a stack of
+   items, -hover reads too strong. No transition: highlights follow the
+   pointer dozens of times a minute and must keep up with it. */
 .menu__item[data-active],
 .menu__item[aria-expanded="true"],
 .menu__item[data-state="hover"] {
-  background: var(--color-bg-hover);
+  background: var(--color-bg-hover-light);
 }
 
 /* Figma Disabled: ✦/bg/default/secondary fill, text and icons in

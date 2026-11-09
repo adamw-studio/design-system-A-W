@@ -84,6 +84,7 @@
   --color-bg-default: var(--color-white-1000);
   --color-bg-secondary: var(--color-grey-100);
   --color-bg-hover: var(--color-grey-200);
+  --color-bg-hover-light: var(--color-grey-100);
   --color-bg-pressed: var(--color-grey-100);
   --color-bg-tertiary: var(--color-grey-200);
   --color-bg-inverse: var(--color-grey-1000);
@@ -215,6 +216,7 @@
   --color-bg-default: var(--color-grey-1000);
   --color-bg-secondary: var(--color-grey-900);
   --color-bg-hover: var(--color-grey-800);
+  --color-bg-hover-light: var(--color-grey-900);
   --color-bg-pressed: var(--color-grey-800);
   --color-bg-tertiary: var(--color-grey-900);
   --color-bg-inverse: var(--color-grey-100);

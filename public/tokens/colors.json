@@ -1084,6 +1084,25 @@
             }
           }
         },
+        "hover-light": {
+          "$type": "color",
+          "$value": "{primitive.grey.100}",
+          "$description": "Background fill for neutral UI — a lighter hover state, the same fill as secondary — for dense lists like menu items, where -hover reads too strong.",
+          "$extensions": {
+            "design.aw": {
+              "cssVariable": "--color-bg-hover-light",
+              "figmaVariable": "✦/bg/default/hover-light",
+              "modes": {
+                "light": "{primitive.grey.100}",
+                "dark": "{primitive.grey.900}"
+              },
+              "resolved": {
+                "light": "#f5f5f5",
+                "dark": "#1e1e1e"
+              }
+            }
+          }
+        },
         "pressed": {
           "$type": "color",
           "$value": "{primitive.grey.100}",

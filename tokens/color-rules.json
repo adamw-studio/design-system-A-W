@@ -38,6 +38,7 @@
     "variants": {
       "default": "the standard state",
       "hover": "hover state",
+      "hover-light": "a lighter hover state, the same fill as secondary — for dense lists like menu items, where -hover reads too strong",
       "pressed": "pressed (active) state",
       "secondary": "secondary, less prominent",
       "secondary-hover": "hover state of the secondary variant",

@@ -10,7 +10,7 @@
     {
       "state": "hover",
       "label": "Hover",
-      "usage": "--color-bg-hover fill, for the pointer and for keyboard focus alike, and on an item whose submenu is open."
+      "usage": "--color-bg-hover-light fill (lighter than --color-bg-hover, which reads too strong in a list), for the pointer and for keyboard focus alike, and on an item whose submenu is open."
     },
     {
       "state": "disabled",
