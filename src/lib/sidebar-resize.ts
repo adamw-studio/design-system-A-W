@@ -2,10 +2,9 @@
  * Resizable sidebar: drag the edge between the sidebar and the content panel
  * (the .sidebar-resizer handle in index.html).
  *
- * - The width lives in --layout-sidebar-width on <html>, so the sidebar, the
- *   panel and the floating theme toggle (centered over the panel) all follow.
- *   While dragging, though, each frame writes the sidebar's (and toggle's)
- *   own inline styles instead: changing a variable on <html> restyles the
+ * - The width lives in --layout-sidebar-width on <html>, so the sidebar and
+ *   the panel follow. While dragging, though, each frame writes the
+ *   sidebar's own inline styles instead: changing a variable on <html> restyles the
  *   whole page (15ms a frame on the Icons page, vs ~1ms). The variable is
  *   set once, on release.
  * - It stays between --layout-sidebar-min and --layout-sidebar-max
@@ -49,7 +48,6 @@ export function initSidebarResize(handle: HTMLElement) {
 
   let width = clamp(readPx("--layout-sidebar-width") || DEFAULT);
   const sidebar = document.getElementById("sidebar");
-  const toggle = document.querySelector<HTMLElement>(".theme-toggle");
 
   function paint(w: number) {
     root.style.setProperty("--layout-sidebar-width", `${w}px`);
@@ -58,12 +56,10 @@ export function initSidebarResize(handle: HTMLElement) {
   /** Per-frame drag preview: only the elements that move. */
   function paintDrag(w: number) {
     if (sidebar) sidebar.style.flexBasis = sidebar.style.width = `${w}px`;
-    if (toggle) toggle.style.left = `calc(${w}px + (100vw - ${w}px - var(--layout-gutter)) / 2)`;
   }
 
   function clearDrag() {
     if (sidebar) sidebar.style.flexBasis = sidebar.style.width = "";
-    if (toggle) toggle.style.left = "";
   }
 
   function commit(w: number, opts: { settle?: boolean } = {}) {

@@ -25,7 +25,7 @@
 
 .grid-spacing__bar {
   height: var(--space-4);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-xss);
   background: var(--color-bg-inverse);
 }
 

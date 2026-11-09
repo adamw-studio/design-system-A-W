@@ -3,8 +3,9 @@
  * like motion.css, these are site-only constants: --elevation-*.
  *
  * Three levels above the flat page, each one shape for both themes:
- *   raised    resting cards and controls that sit just above a surface
- *   floating  menus, dropdown lists, the theme toggle
+ *   raised    resting cards and controls that sit just above a surface,
+ *             like the bottom-right corner controls and their panel
+ *   floating  menus, dropdown lists
  *   overlay   modals, sheets, toasts (none exist yet)
  *
  * Every level is built the same way:

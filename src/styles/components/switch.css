@@ -45,7 +45,7 @@
   left: calc((var(--switch-height) - var(--switch-knob)) / 2);
   width: var(--switch-knob);
   height: var(--switch-knob);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
   background: var(--color-bg-default);
   /* Direct response to a click: strong ease-out, under 300ms. */
   transition:

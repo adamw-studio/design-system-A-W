@@ -1141,13 +1141,19 @@
       "Spacers/spacer-0": [
         0
       ],
-      "Radius/radius-small": [
+      "Radius/radius-xss": [
         2
       ],
-      "Radius/radius-medium": [
+      "Radius/radius-xs": [
+        4
+      ],
+      "Radius/radius-s": [
         6
       ],
-      "Radius/radius-large": [
+      "Radius/radius-m": [
+        8
+      ],
+      "Radius/radius-l": [
         13
       ],
       "Radius/radius-none": [

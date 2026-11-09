@@ -17,7 +17,7 @@
   display: inline-flex;
   padding: 0;
   border: 0;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-s);
   background: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

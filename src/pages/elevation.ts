@@ -21,8 +21,8 @@ interface Level {
 
 const LEVELS: Level[] = [
   { name: "Flat", token: null, use: "The page, panels, cards and anything sitting in the layout. Set apart by color and a border, not a shadow." },
-  { name: "Raised", token: "--elevation-raised", use: "A card or control that sits just above its surface: draggable items, a selected card." },
-  { name: "Floating", token: "--elevation-floating", use: "Layers over content that are tied to a trigger: dropdown lists, menus, submenus, the theme toggle." },
+  { name: "Raised", token: "--elevation-raised", use: "A card or control that sits just above its surface: the Theme switch and globe button in the corner and their panel, draggable items, a selected card." },
+  { name: "Floating", token: "--elevation-floating", use: "Layers over content that are tied to a trigger: dropdown lists, menus, submenus." },
   { name: "Overlay", token: "--elevation-overlay", use: "Layers over the whole page: modals, sheets, toasts. Nothing uses it yet." },
 ];
 
@@ -82,7 +82,7 @@ export function renderElevation(body: HTMLElement) {
     ]),
     codeBlock(`.menu--floating {
   background: var(--color-bg-default);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
   box-shadow: var(--elevation-floating);
 }`),
   );

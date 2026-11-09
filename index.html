@@ -165,16 +165,23 @@
     </div>
 
     <!-- Theme toggle, floating over the content (src/lib/theme.ts) -->
-    <div class="theme-toggle" role="group" aria-label="Theme" id="theme-toggle">
-      <span class="theme-toggle__indicator" aria-hidden="true"></span>
-      <button type="button" class="theme-toggle__option text-body-large" data-theme-value="light" aria-pressed="true">
-        <svg class="icon icon--16" aria-hidden="true"><use href="#icon-sun-light"></use></svg>
-        Light
-      </button>
-      <button type="button" class="theme-toggle__option text-body-large" data-theme-value="dark" aria-pressed="false">
-        <svg class="icon icon--16" aria-hidden="true"><use href="#icon-half-moon"></use></svg>
-        Dark
-      </button>
+    <!-- Bottom-right corner (Figma 313:4406 / 313:4597): the Theme switch
+         and a button that opens the "For AI agents & tools" panel above them.
+         The panel comes after the controls so Tab reaches it next; CSS
+         stacks it on top. Logic: src/lib/theme.ts, src/lib/agent-links.ts. -->
+    <div class="corner" id="corner">
+      <div class="corner__controls">
+        <label class="corner__control corner__theme">
+          <span class="text-body-medium-strong">Theme</span>
+          <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Dark theme" id="theme-switch">
+            <span class="switch__knob"></span>
+          </button>
+        </label>
+        <button class="corner__control corner__button" type="button" id="agent-toggle" aria-expanded="false" aria-controls="agent-panel" aria-label="For AI agents &amp; tools" title="For AI agents &amp; tools">
+          <svg class="icon icon--16" aria-hidden="true"><use href="#icon-internet"></use></svg>
+        </button>
+      </div>
+      <aside class="corner__panel agent-links" id="agent-panel" aria-labelledby="agent-links-title" inert></aside>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

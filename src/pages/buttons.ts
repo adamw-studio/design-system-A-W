@@ -481,7 +481,7 @@ function referenceSection() {
         ["Text style", code(".text-body-medium (--body-medium-strong-*)")],
         ["Padding", code("--space-2 / --space-3")],
         ["Gap between icon and label", code("--space-2")],
-        ["Corner radius", code("--radius-medium")],
+        ["Corner radius", code("--radius-s")],
         ["Hover and press timing", code("--motion-hover / --motion-press / --motion-press-scale")],
       ],
     ),

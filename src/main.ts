@@ -19,7 +19,8 @@ import { overviewTitle, renderOverview } from "./pages/overview";
 import { elevationIntro, elevationSubtitle, renderElevation } from "./pages/elevation";
 import { gridIntro, gridSubtitle, renderGrid } from "./pages/grid";
 import { icon, loadIconSprite } from "./lib/icon";
-import { initThemeToggle } from "./lib/theme";
+import { initThemeSwitch } from "./lib/theme";
+import { initAgentPanel, setAgentLinks } from "./lib/agent-links";
 import { initSidebarResize } from "./lib/sidebar-resize";
 import { initScrollFades } from "./lib/scroll-fade";
 
@@ -221,6 +222,7 @@ function render() {
   document.title = `${page.title} – Design System A/W`;
 
   bodyEl.replaceChildren();
+  setAgentLinks([]); // pages with their own files set them in render()
   actionsEl.replaceChildren(...(page.figma ? [figmaLink(page.figma, page.title)] : []));
   page.render?.(bodyEl, actionsEl);
   document.querySelector(".panel")?.scrollTo(0, 0);
@@ -268,7 +270,8 @@ function revealActive() {
 }
 
 loadIconSprite();
-initThemeToggle(document.querySelector<HTMLElement>("#theme-toggle")!);
+initThemeSwitch(document.querySelector<HTMLButtonElement>("#theme-switch")!);
+initAgentPanel(document.querySelector<HTMLButtonElement>("#agent-toggle")!, document.querySelector<HTMLElement>("#corner")!);
 initSidebarResize(document.querySelector<HTMLElement>("#sidebar-resizer")!);
 initScrollFades(document.querySelector<HTMLElement>(".panel")!);
 window.addEventListener("hashchange", () => {

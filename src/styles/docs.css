@@ -20,7 +20,7 @@
   /* The Figma panel centers the set with generous room around it. */
   padding: calc(2 * var(--space-7)) var(--space-5);
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
 }
 
 /* Stage: a preview panel with short notes underneath. */
@@ -117,7 +117,7 @@
   margin: 0;
   padding: var(--space-4);
   overflow-x: auto;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-s);
   background: var(--color-bg-secondary);
   color: var(--color-text-secondary);
 }
@@ -144,7 +144,7 @@
 /* Inline code in text and tables */
 .doc-inline-code {
   padding: 0 var(--space-1);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-xss);
   background: var(--color-bg-secondary);
   color: var(--color-text-default);
   font-family: var(--font-family-mono);
@@ -175,7 +175,7 @@
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4) var(--space-5);
   border: 1px dashed var(--color-border-default);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
   background: var(--color-bg-default);
   /* Wide illustrations scroll here: the inert body can't be scrolled. */
   overflow-x: auto;
@@ -264,7 +264,7 @@
 .doc-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
 }
 
 .doc-table {
@@ -346,7 +346,7 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
 }
 
 .doc-playground__bar {
@@ -448,7 +448,7 @@
 .color-card {
   overflow: hidden;
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-xss);
 }
 
 .color-card__header {

@@ -11,7 +11,7 @@
   gap: var(--space-3);
   width: 100%;
   padding: var(--space-4) var(--space-4) var(--space-6);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
   background: var(--color-bg-default);
   color: var(--color-text-default);
 }
@@ -35,7 +35,7 @@
   align-items: flex-end;
   aspect-ratio: 4 / 3;
   padding: var(--space-3);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-l);
   background: var(--color-bg-default);
 }
 

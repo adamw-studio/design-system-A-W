@@ -5,10 +5,12 @@
 
 :root {
   --radius-full: 9999px;
-  --radius-large: 13px;
-  --radius-medium: 6px;
+  --radius-l: 13px;
+  --radius-m: 8px;
   --radius-none: 0px;
-  --radius-small: 2px;
+  --radius-s: 6px;
+  --radius-xs: 4px;
+  --radius-xss: 2px;
   --space-0: 0px;
   --space-1: 2px;
   --space-2: 4px;

@@ -26,7 +26,7 @@
   /* 4px + 16px line height + 4px = Figma's 24px height. */
   padding: var(--space-2) var(--space-3);
   border: 0;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-s);
   background: var(--button-bg);
   color: var(--button-fg);
 

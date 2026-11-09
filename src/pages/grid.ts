@@ -13,7 +13,7 @@ export const gridIntro =
   "The layout every page sits on: a sidebar, a content panel, and one centered content column, spaced with the spacing scale and rounded with the radius scale.";
 
 const SPACE = ["--space-0", "--space-1", "--space-2", "--space-3", "--space-4", "--space-5", "--space-6", "--space-7"];
-const RADIUS = ["--radius-none", "--radius-small", "--radius-medium", "--radius-large", "--radius-full"];
+const RADIUS = ["--radius-none", "--radius-xss", "--radius-xs", "--radius-s", "--radius-m", "--radius-l", "--radius-full"];
 
 const cssValue = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 

@@ -11,9 +11,11 @@
   --layout-sidebar-max: 400px;
   --layout-gutter: 12px;
   --layout-sidebar-header-gap: 20px;
-  --layout-radius-item: 8px;
   --layout-radius-panel: 10px;
   --layout-content-width: 580px;
+  /* The "For AI agents & tools" panel in the bottom-right corner (Figma
+     313:4597). */
+  --layout-agent-panel-width: 282px;
   /* Content column: title starts 42px below the panel top. */
   --layout-content-top: 42px;
   /* Token rows: inner padding ("padding-6" in the Web file). */
@@ -139,7 +141,7 @@ img {
 
 .sidebar__logo {
   display: block;
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-xss);
 }
 
 /* The logo file is a mask so it follows the theme (black at 90% = icon/default). */
@@ -191,7 +193,7 @@ img {
   width: 100%;
   padding: var(--space-3) var(--space-3) var(--space-2);
   border: 0;
-  border-radius: var(--layout-radius-item);
+  border-radius: var(--radius-m);
   background: none;
   color: var(--color-text-tertiary);
   text-align: left;
@@ -259,7 +261,7 @@ img {
 .nav__item {
   display: flex;
   align-items: center;
-  border-radius: var(--layout-radius-item);
+  border-radius: var(--radius-m);
   color: var(--color-text-secondary);
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -295,7 +297,7 @@ img {
   display: block;
   padding: var(--space-2) var(--space-3);
   text-decoration: none;
-  border-radius: var(--layout-radius-item);
+  border-radius: var(--radius-m);
   white-space: nowrap;
 }
 
@@ -317,7 +319,7 @@ img {
   padding: var(--space-2);
   border: 0;
   background: none;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-s);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -423,13 +425,8 @@ img {
     width var(--motion-fast) var(--motion-ease-out);
 }
 
-.is-sidebar-settling .theme-toggle {
-  transition: left var(--motion-fast) var(--motion-ease-out);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .is-sidebar-settling .sidebar,
-  .is-sidebar-settling .theme-toggle {
+  .is-sidebar-settling .sidebar {
     transition: none;
   }
 }
@@ -467,7 +464,7 @@ img {
   gap: calc(var(--space-5) + var(--space-2));
   width: min(var(--layout-content-width), 100% - 2 * var(--space-5));
   margin: 0 auto;
-  /* Bottom: room for the floating theme toggle. */
+  /* Bottom: room to scroll the last block clear of the corner controls. */
   padding: var(--layout-content-top) 0 calc(2 * var(--space-7) + var(--space-4));
 }
 
@@ -643,16 +640,121 @@ img {
   }
 }
 
-/* Last block: links to the machine-readable files (src/lib/agent-links.ts,
-   Figma 310:4345). A bordered box, 8px padding, 6px between the title row
-   and the text. Figma's shadow is left out by request. */
+/* Bottom-right corner ------------------------------------------------------------
+   Figma 313:4406 (closed) and 313:4597 (open). The Theme switch and the
+   globe button sit in the corner of the content panel, 8px apart, as raised
+   24px controls (8px / 4px padding, radius-m); the globe opens the "For AI
+   agents & tools" panel 12px above them. Markup: index.html; logic:
+   src/lib/theme.ts and src/lib/agent-links.ts. */
+.corner {
+  position: fixed;
+  z-index: 10;
+  right: calc(var(--layout-gutter) + var(--space-4));
+  bottom: calc(var(--layout-gutter) + var(--space-4) + env(safe-area-inset-bottom));
+  display: flex;
+  /* The panel follows the controls in the DOM (so Tab reaches it next) but
+     stacks above them. */
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: calc(var(--space-3) + var(--space-2));
+  /* Only the controls and the open panel take clicks. */
+  pointer-events: none;
+}
+
+.corner__controls {
+  display: flex;
+  gap: var(--space-3);
+  pointer-events: auto;
+}
+
+.corner__control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-m);
+  background: var(--color-bg-default);
+  box-shadow: var(--elevation-raised);
+  color: var(--color-text-default);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.corner__theme {
+  cursor: pointer;
+}
+
+.corner__button {
+  color: var(--color-icon-default);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-hover) ease,
+    transform var(--motion-press) var(--motion-ease-out);
+}
+
+/* Hover and open (Figma 313:4540): the light hover fill. */
+.corner__button[aria-expanded="true"] {
+  background: var(--color-bg-hover-light);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .corner__button:hover {
+    background: var(--color-bg-hover-light);
+  }
+}
+
+.corner__button:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+/* The panel: 282px (Figma), 8px padding, radius-l, raised. Closed, it's
+   invisible and inert; it scales in from the button's corner (never from
+   0), 200ms with a strong ease-out, and closes faster (120ms). From the
+   keyboard it opens and closes instantly (data-instant). */
+.corner__panel {
+  width: min(var(--layout-agent-panel-width), 100vw - 2 * (var(--layout-gutter) + var(--space-4)));
+  padding: var(--space-3);
+  border-radius: var(--radius-l);
+  background: var(--color-bg-default);
+  box-shadow: var(--elevation-raised);
+  opacity: 0;
+  transform: translateY(var(--space-2)) scale(0.97);
+  transform-origin: bottom right;
+  visibility: hidden;
+  transition:
+    opacity var(--motion-press) var(--motion-ease-out),
+    transform var(--motion-press) var(--motion-ease-out),
+    visibility 0s linear var(--motion-press);
+}
+
+.corner[data-open] .corner__panel {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity var(--motion-fast) var(--motion-ease-out),
+    transform var(--motion-fast) var(--motion-ease-out),
+    visibility 0s;
+}
+
+.corner .corner__panel[data-instant],
+.corner[data-open] .corner__panel[data-instant] {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corner__panel {
+    transform: none;
+  }
+}
+
+/* Panel content: links to the machine-readable files of the current page
+   (src/lib/agent-links.ts). Icon and title, then 6px below the text. */
 .agent-links {
   display: flex;
   flex-direction: column;
   gap: calc(var(--space-2) + var(--space-1));
-  padding: var(--space-3);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-medium);
   color: var(--color-text-secondary);
 }
 
@@ -683,98 +785,9 @@ img {
   }
 }
 
-/* Theme toggle --------------------------------------------------------------
-   A pill floating at the bottom, centered over the content panel: Light and
-   Dark with a highlight that slides to the chosen one. Inverse colors, so it
-   reads as an overlay in both themes. Markup: index.html; logic: theme.ts. */
-.theme-toggle {
-  position: fixed;
-  z-index: 10;
-  bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
-  /* Center of the panel: it spans from the sidebar to one gutter short of
-     the right edge. */
-  left: calc(var(--layout-sidebar-width) + (100vw - var(--layout-sidebar-width) - var(--layout-gutter)) / 2);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: var(--space-2);
-  border-radius: var(--radius-full);
-  background: var(--color-bg-inverse);
-  box-shadow: var(--elevation-floating);
-  transform: translateX(-50%);
-}
-
-.theme-toggle__indicator {
-  position: absolute;
-  top: var(--space-2);
-  bottom: var(--space-2);
-  left: var(--space-2);
-  width: calc(50% - var(--space-2));
-  border-radius: var(--radius-full);
-  /* A lighter (or, in dark, darker) step of the pill. */
-  background: color-mix(in srgb, var(--color-text-inverse) 14%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-text-inverse) 6%, transparent);
-  /* Direct response to a click: strong ease-out, under 300ms. */
-  transition: transform var(--motion-fast) var(--motion-ease-out);
-}
-
-/* Keyed off <html data-theme> (set before first paint), so a saved dark
-   theme shows the right position on load instead of sliding into it. */
-[data-theme="dark"] .theme-toggle__indicator {
-  transform: translateX(100%);
-}
-
-.theme-toggle__option {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-3);
-  border: 0;
-  border-radius: var(--radius-full);
-  background: none;
-  color: color-mix(in srgb, var(--color-text-inverse) 60%, transparent);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition:
-    color var(--motion-hover) ease,
-    transform var(--motion-press) var(--motion-ease-out);
-}
-
-.theme-toggle__option[aria-pressed="true"] {
-  color: var(--color-text-inverse);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .theme-toggle__option:hover {
-    color: var(--color-text-inverse);
-  }
-}
-
-.theme-toggle__option:active {
-  transform: scale(var(--motion-press-scale));
-}
-
-.theme-toggle__option:focus-visible {
-  outline-color: var(--color-text-inverse);
-  outline-offset: 0;
-}
-
-@media (max-width: 768px) {
-  .theme-toggle {
-    left: 50%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .theme-toggle__indicator {
-    transition: none;
-  }
-}
-
 /* While the colors swap (src/lib/theme.ts), pause transitions so the whole
-   page changes in one frame — except the toggle's sliding highlight. */
-.is-theme-switching *:not(.theme-toggle__indicator),
+   page changes in one frame — except the Theme switch's knob. */
+.is-theme-switching *:not(#theme-switch .switch__knob),
 .is-theme-switching *::before,
 .is-theme-switching *::after {
   transition: none !important;

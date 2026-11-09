@@ -4,7 +4,8 @@
  * nothing else needs dark styles.
  *
  * An inline script in index.html applies the saved (or system) theme before
- * the first paint; this module wires up the floating Light / Dark toggle.
+ * the first paint; this module wires up the Theme switch in the bottom-right
+ * corner (on = dark).
  */
 export type Theme = "light" | "dark";
 
@@ -28,7 +29,7 @@ export function currentTheme(): Theme {
 /**
  * Applies a theme in one frame. Transitions are paused while the colors
  * swap, so every element changes at once instead of each hover/color
- * transition fading at its own pace. The toggle's highlight keeps its motion.
+ * transition fading at its own pace. The Theme switch's knob keeps its motion.
  */
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
@@ -38,31 +39,24 @@ function applyTheme(theme: Theme) {
 }
 
 /**
- * Connects the floating Light / Dark toggle: buttons with data-theme-value
- * and aria-pressed inside a group. The highlight follows <html data-theme>
- * in CSS (.theme-toggle in layout.css).
+ * Connects the Theme switch (a .switch with role="switch"): checked means
+ * dark. It reflects <html data-theme>, so a saved dark theme shows as on
+ * from the first frame the script runs.
  */
-export function initThemeToggle(group: HTMLElement) {
-  const options = Array.from(group.querySelectorAll<HTMLButtonElement>("[data-theme-value]"));
-  const sync = () => {
-    const theme = currentTheme();
-    for (const option of options) option.setAttribute("aria-pressed", String(option.dataset.themeValue === theme));
-  };
+export function initThemeSwitch(control: HTMLButtonElement) {
+  const sync = () => control.setAttribute("aria-checked", String(currentTheme() === "dark"));
   sync();
 
-  for (const option of options) {
-    option.addEventListener("click", () => {
-      const next = option.dataset.themeValue as Theme;
-      if (next === currentTheme()) return;
-      applyTheme(next);
-      try {
-        localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // Private mode etc.: the choice just won't persist.
-      }
-      sync();
-    });
-  }
+  control.addEventListener("click", () => {
+    const next: Theme = currentTheme() === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // Private mode etc.: the choice just won't persist.
+    }
+    sync();
+  });
 
   // Follow the system setting until the user picks a theme here.
   systemDark.addEventListener("change", (event) => {
