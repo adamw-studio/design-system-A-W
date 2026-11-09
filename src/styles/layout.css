@@ -32,10 +32,10 @@
   /* Floating controls (theme toggle). No shadow tokens exist yet; shadows
      are black in both themes, so they use black primitives. */
   --layout-shadow-floating: 0 var(--space-2) var(--space-5) var(--color-black-200), 0 1px 2px var(--color-black-200);
-  /* Primitives (Figma 305:2400): a 181px strip of shades; the current one
-     takes 282 of the 580px column. */
-  --layout-palette-strip-height: 181px;
-  --layout-palette-open: calc(282 / 580 * 100%);
+  /* Primitives (Figma 310:3840): 282px cards, two to the 580px column (one
+     below 240px each); a 60px strip of shades, the current one square. */
+  --layout-palette-card-min: 240px;
+  --layout-palette-strip-height: 60px;
   /* Frosted scroll edges on the panel (Figma 309:3325): 48px tall. */
   --layout-panel-edge: 48px;
   /* Menu (Figma 46:645): 159px wide. */
@@ -594,8 +594,8 @@ img {
   display: none;
 }
 
-/* With a description (Primitives, Figma 305:2400) it sits right under the
-   title, and the content starts 46px below it. */
+/* With a description (Primitives, Figma 310:3840) it sits right under the
+   title, and the content starts 39px below it. */
 .page[data-layout="article"] .page__description {
   margin-top: calc(-1 * (var(--space-6) - var(--space-1)));
 }
@@ -605,7 +605,7 @@ img {
 }
 
 .page[data-layout="article"]:has(.page__description:not(:empty)) .page__body {
-  margin-top: var(--space-4);
+  margin-top: calc(var(--space-3) + 1px);
 }
 
 .page[data-layout="article"] .page__body {

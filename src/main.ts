@@ -73,8 +73,8 @@ const pages: Record<Route, Page> = {
     render: renderGrid,
   },
   primitives: {
-    crumb: ["Primitives"],
-    title: "Colors",
+    crumb: ["Colors"],
+    title: "Primitives",
     layout: "article",
     description: primitivesIntro,
     render: renderPrimitives,

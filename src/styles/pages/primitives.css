@@ -1,48 +1,99 @@
 /*
- * Color Primitives page — Figma "Design System - Web", node 305:2400.
- * One block per family: heading row, a 181px strip of ten shades with the
- * current one widened to 282 of 580px, then the HEX / RGB rows. Blocks are
- * 16px apart; inside, 4px between rows. Behaviour: src/pages/primitives.ts.
+ * Color Primitives page — Figma "Design System - Web", node 310:3840.
+ * Cards in two columns, 16px apart. Each card: a header row (8px / 4px
+ * padding, a rule under it) with the family name and a 20px chip, then 12px
+ * around a 60px strip of ten shades whose current one is a 60px square.
+ * Behaviour: src/pages/primitives.ts.
  */
 
 .palette-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* Two 282px columns in the 580px content column; one when narrower. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-palette-card-min)), 1fr));
   gap: var(--space-4);
 }
 
 .palette {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-small);
 }
 
-/* Heading row: family name · current step. */
+/* Header ------------------------------------------------------------------------ */
+
 .palette__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--color-text-default);
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border-default);
+  color: var(--color-text-secondary);
 }
 
 .palette__name {
   font: inherit;
+  white-space: nowrap;
 }
 
-.palette__step.is-copied {
+.palette__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+/* Step · HEX of the shade under the pointer or focus; empty at rest. */
+.palette__value {
+  overflow: hidden;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.palette__value.is-copied {
   color: var(--color-text-success);
+}
+
+/* 20px chip of the family's 500 shade, or of the previewed one. */
+.palette__chip {
+  flex: none;
+  width: calc(var(--space-4) + var(--space-2));
+  height: calc(var(--space-4) + var(--space-2));
+  border: 1px solid var(--color-border-default);
+  background: var(--chip);
+}
+
+/* The translucent families need a fixed ground in either theme: white
+   shades on the darkest grey (Figma: bg/default/inverse, which turns light
+   in dark mode), black shades on white. */
+.palette[data-family="white"] .palette__chip,
+.palette[data-family="white"] .palette__body {
+  background-color: var(--color-grey-1000);
+}
+
+.palette[data-family="white"] .palette__chip {
+  background-image: linear-gradient(var(--chip), var(--chip));
+}
+
+.palette[data-family="black"] .palette__chip,
+.palette[data-family="black"] .palette__body {
+  background-color: var(--color-white-1000);
+}
+
+.palette[data-family="black"] .palette__chip {
+  background-image: linear-gradient(var(--chip), var(--chip));
 }
 
 /* Strip ------------------------------------------------------------------------- */
 
+.palette__body {
+  padding: calc(var(--space-3) + var(--space-2));
+}
+
 .palette__strip {
   display: flex;
   height: var(--layout-palette-strip-height);
-}
-
-/* The white family is white at varying opacity: it needs a dark ground. */
-.palette[data-family="white"] .palette__strip {
-  background: var(--color-grey-1000);
 }
 
 .palette__swatch {
@@ -62,9 +113,9 @@
     flex-basis var(--motion-fast) var(--motion-ease-out);
 }
 
-/* The current shade: 282 of 580px, as in Figma. */
+/* The current shade: a square as tall as the strip, as in Figma. */
 .palette__swatch[aria-pressed="true"] {
-  flex: 0 0 var(--layout-palette-open);
+  flex: 0 0 var(--layout-palette-strip-height);
 }
 
 /* Keyboard focus: a white and a black ring inside the shade, visible on any
@@ -81,51 +132,4 @@
   .palette__swatch {
     transition: none;
   }
-}
-
-/* Values ------------------------------------------------------------------------ */
-
-.palette__values {
-  display: flex;
-  flex-direction: column;
-  color: var(--color-text-secondary);
-}
-
-/* "HEX ··· FFCD29": the value copies on click. */
-.palette__row {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.palette__row[hidden] {
-  display: none;
-}
-
-.palette__val {
-  border-radius: var(--radius-small);
-  transition:
-    color var(--motion-hover) ease,
-    background-color var(--motion-hover) ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .palette__row:hover .palette__val {
-    color: var(--color-text-default);
-  }
-}
-
-.palette__row:focus-visible {
-  outline-offset: 0;
-}
-
-.palette__val.is-copied {
-  color: var(--color-text-success);
 }
