@@ -22,6 +22,9 @@
   --layout-row-padding: 6px;
   /* Readable width for usage notes next to specimens. */
   --layout-description-width: 420px;
+  /* Soft focus ring around text-entry fields (the Icons search), as on the
+     Dropdown (--dropdown-focus-ring, Figma 45:314). */
+  --layout-focus-ring: 1.4px;
   /* The Icons page's floating glass search. */
   --layout-search-width: 320px;
   /* Option rows' preview tile (Figma 317:5234). */
@@ -595,7 +598,8 @@ img {
 }
 
 /* Index pill ---------------------------------------------------------------------
-   A 32px inverse pill in the bottom-left corner of the content panel,
+   A 32px pill in the bottom-left corner of the content panel, in the same
+   colors as the corner controls opposite (bg-default, raised),
    opposite the corner controls and on the same 16px inset, shown once the
    page header has scrolled away (src/lib/page-index.ts): a reading-progress
    ring, "Index ▾" (opens a Menu of the page's sections, upward) and the
@@ -621,9 +625,9 @@ img {
   height: var(--space-6);
   padding: var(--space-2);
   border-radius: var(--radius-full);
-  background: var(--color-bg-inverse);
-  box-shadow: var(--elevation-floating);
-  color: var(--color-text-inverse);
+  background: var(--color-bg-default);
+  box-shadow: var(--elevation-raised);
+  color: var(--color-text-default);
   /* Hidden until the header scrolls away: it rises 4px and fades in,
      200ms ease-out; leaving is faster (120ms). Never from scale 0. */
   opacity: 0;
@@ -664,14 +668,15 @@ img {
     transform var(--motion-press) var(--motion-ease-out);
 }
 
+/* Hover and open: the light hover fill, as on the globe button. */
 @media (hover: hover) and (pointer: fine) {
   .page-index__trigger:hover {
-    background: color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
+    background: var(--color-bg-hover-light);
   }
 }
 
 .page-index__trigger[aria-expanded="true"] {
-  background: color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
+  background: var(--color-bg-hover-light);
 }
 
 .page-index__trigger:active {
@@ -679,11 +684,10 @@ img {
 }
 
 .page-index__trigger:focus-visible {
-  outline-color: var(--color-text-inverse);
   outline-offset: 0;
 }
 
-/* Reading progress: a 16px ring, the read part in the pill's text color. */
+/* Reading progress: a 16px ring, the read part in the default icon color. */
 .page-index__ring {
   flex: none;
   width: var(--space-4);
@@ -697,11 +701,11 @@ img {
 }
 
 .page-index__ring-track {
-  stroke: color-mix(in srgb, var(--color-text-inverse) 25%, transparent);
+  stroke: var(--color-border-default);
 }
 
 .page-index__ring-bar {
-  stroke: currentColor;
+  stroke: var(--color-icon-default);
   stroke-linecap: round;
 }
 
@@ -715,12 +719,13 @@ img {
   transform: none;
 }
 
-/* Percentage chip: a lighter step of the pill; digits don't shift. */
+/* Percentage chip: the secondary fill; digits don't shift. */
 .page-index__percent {
   min-width: calc(var(--space-6) + var(--space-2));
   padding: 0 var(--space-3);
   border-radius: var(--radius-full);
-  background: color-mix(in srgb, var(--color-text-inverse) 14%, transparent);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
   line-height: var(--space-5);
   font-variant-numeric: tabular-nums;
   text-align: center;

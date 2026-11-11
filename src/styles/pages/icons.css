@@ -37,15 +37,10 @@
   gap: var(--space-7);
 }
 
-/* Search: a glass pill that stays at the top of the panel, above its
-   frosted edge, while the grid scrolls under it (reference: frosted-glass
-   controls). The bar has no fill of its own; the field is the glass:
-   - a translucent wash of the page color (72%: what's behind shows as
-     shapes and color, not readable text), blurring and saturating it
-     (16px: soft, and cheap enough for one element);
-   - a sheen fading down from the top, as if lit from above;
-   - a light rim (inside) and the raised elevation (outside), so it reads
-     against the page and the icons in both themes. */
+/* Search: stays at the top of the panel, above its frosted edge, while the
+   grid scrolls under it. Flat, like the system's other fields (Dropdown):
+   --color-bg-default fill, a 1px --color-border-default stroke, no shadow;
+   focused, a soft --color-bg-secondary ring around the stroke. */
 .icon-toolbar {
   position: sticky;
   /* Above the panel's frosted top edge (z-index 4). */
@@ -56,35 +51,24 @@
   pointer-events: none;
 }
 
-/* A compact, centered pill rather than a full-width bar. */
+/* A compact, centered field rather than a full-width bar. */
 .icon-search {
   display: flex;
   flex: 0 1 var(--layout-search-width);
   align-items: center;
   gap: var(--space-3);
-  /* 32px tall. */
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-full);
-  background-color: color-mix(in srgb, var(--color-bg-default) 72%, transparent);
-  background-image: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--color-white-1000) 22%, transparent),
-    transparent 70%
-  );
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--color-white-1000) 30%, transparent),
-    var(--elevation-raised);
+  /* 32px tall with the stroke. */
+  padding: calc(var(--space-3) - 1px) var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-m);
+  background: var(--color-bg-default);
   color: var(--color-icon-secondary);
-  backdrop-filter: blur(16px) saturate(1.8);
   pointer-events: auto;
   transition: box-shadow var(--motion-hover) ease;
 }
 
-/* Focused: the rim darkens to the strong border. */
 .icon-search:focus-within {
-  box-shadow:
-    inset 0 0 0 1px var(--color-border-strong),
-    var(--elevation-raised);
+  box-shadow: 0 0 0 var(--layout-focus-ring) var(--color-bg-secondary);
 }
 
 .icon-search__input {
