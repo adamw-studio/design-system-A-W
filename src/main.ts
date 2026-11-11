@@ -1,26 +1,25 @@
 import "./styles/index.css";
 import { primitivesIntro, renderPrimitives } from "./pages/primitives";
 import { renderTokens, tokensIntro } from "./pages/tokens";
-import { renderTypography, typographyIntro, typographySubtitle } from "./pages/typography";
+import { renderTypography, typographyIntro } from "./pages/typography";
 import {
   buttonsIntro,
-  buttonsSubtitle,
   iconButtonsIntro,
-  iconButtonsSubtitle,
   renderButtons,
   renderIconButtons,
 } from "./pages/buttons";
-import { iconsIntro, iconsSubtitle, renderIcons } from "./pages/icons";
-import { dropdownIntro, dropdownSubtitle, renderDropdown } from "./pages/dropdown";
-import { menuIntro, menuSubtitle, renderMenu } from "./pages/menu";
-import { renderSwitch, switchIntro, switchSubtitle } from "./pages/switch";
-import { renderTags, tagsIntro, tagsSubtitle } from "./pages/tags";
+import { iconsIntro, renderIcons } from "./pages/icons";
+import { dropdownIntro, renderDropdown } from "./pages/dropdown";
+import { menuIntro, renderMenu } from "./pages/menu";
+import { renderSwitch, switchIntro } from "./pages/switch";
+import { renderTags, tagsIntro } from "./pages/tags";
 import { overviewTitle, renderOverview } from "./pages/overview";
-import { elevationIntro, elevationSubtitle, renderElevation } from "./pages/elevation";
-import { gridIntro, gridSubtitle, renderGrid } from "./pages/grid";
-import { icon, loadIconSprite } from "./lib/icon";
+import { elevationIntro, renderElevation } from "./pages/elevation";
+import { gridIntro, renderGrid } from "./pages/grid";
+import { loadIconSprite } from "./lib/icon";
 import { initThemeSwitch } from "./lib/theme";
 import { initAgentPanel, setAgentLinks } from "./lib/agent-links";
+import { initPageIndex } from "./lib/page-index";
 import { initSidebarResize } from "./lib/sidebar-resize";
 import { initScrollFades } from "./lib/scroll-fade";
 
@@ -33,22 +32,16 @@ type Route =
 /** Section links that open their first page (Colors → Primitives). */
 const REDIRECTS: Record<string, Route> = { colors: "primitives" };
 
-const FIGMA_WEB = "https://www.figma.com/design/YuW1ykk7CA0ATa8dGi5JRZ/Design-System---Web?node-id=";
-const FIGMA_UI = "https://www.figma.com/design/kbpJA5WJuwYrHwFLbLKCG4/Foundation---UI-2?node-id=";
 
 interface Page {
   /** Where the page sits in the site, shown above the title. */
   crumb: string[];
   title: string;
-  /** Short facts under the title, e.g. "5 variants". */
-  subtitle?: string;
   description?: string;
-  /** "article": a small label and the title only (Overview, Figma 302:2166). */
+  /** "article": running content, blocks 24px apart (Overview, Figma 302:2166). */
   layout?: "article";
-  /** The Figma frame the page implements (opened from the header), if any. */
-  figma?: string;
-  /** Optional page body; receives the content area and the header actions slot. */
-  render?: (body: HTMLElement, actions: HTMLElement) => void;
+  /** Optional page body; receives the content area. */
+  render?: (body: HTMLElement) => void;
 }
 
 const pages: Record<Route, Page> = {
@@ -60,15 +53,12 @@ const pages: Record<Route, Page> = {
   },
   elevation: {
     crumb: ["Foundations"],
-    subtitle: elevationSubtitle,
     title: "Elevation",
     description: elevationIntro,
     render: renderElevation,
   },
   grid: {
     crumb: ["Foundations"],
-    subtitle: gridSubtitle(),
-    figma: `${FIGMA_WEB}281-279`,
     title: "Grid",
     description: gridIntro,
     render: renderGrid,
@@ -89,64 +79,48 @@ const pages: Record<Route, Page> = {
   },
   typography: {
     crumb: ["Foundations"],
-    subtitle: typographySubtitle(),
-    figma: `${FIGMA_UI}6-182`,
     title: "Typography",
     description: typographyIntro,
     render: renderTypography,
   },
   icons: {
     crumb: ["Foundations"],
-    subtitle: iconsSubtitle,
-    figma: `${FIGMA_UI}12-3948`,
     title: "Iconography",
     description: iconsIntro,
     render: renderIcons,
   },
   buttons: {
     crumb: ["Components", "Buttons"],
-    subtitle: buttonsSubtitle,
-    figma: `${FIGMA_UI}18-3529`,
     title: "Buttons",
     description: buttonsIntro,
     render: renderButtons,
   },
   "icon-buttons": {
     crumb: ["Components", "Buttons"],
-    subtitle: iconButtonsSubtitle,
-    figma: `${FIGMA_UI}23-5380`,
     title: "Icon Button",
     description: iconButtonsIntro,
     render: renderIconButtons,
   },
   dropdown: {
     crumb: ["Components"],
-    subtitle: dropdownSubtitle,
-    figma: `${FIGMA_UI}45-314`,
     title: "Dropdown",
     description: dropdownIntro,
     render: renderDropdown,
   },
   menu: {
     crumb: ["Components"],
-    subtitle: menuSubtitle,
-    figma: `${FIGMA_UI}46-588`,
     title: "Menu",
     description: menuIntro,
     render: renderMenu,
   },
   switch: {
     crumb: ["Components"],
-    subtitle: switchSubtitle,
-    figma: `${FIGMA_UI}42-20`,
     title: "Switch",
     description: switchIntro,
     render: renderSwitch,
   },
   tags: {
     crumb: ["Components"],
-    subtitle: tagsSubtitle,
-    figma: `${FIGMA_UI}45-14`,
     title: "Tags",
     description: tagsIntro,
     render: renderTags,
@@ -157,13 +131,12 @@ const DEFAULT_ROUTE: Route = "overview";
 
 const crumbEl = document.querySelector<HTMLElement>("#page-crumb")!;
 const titleEl = document.querySelector<HTMLElement>("#page-title")!;
-const subtitleEl = document.querySelector<HTMLElement>("#page-subtitle")!;
 const headerEl = document.querySelector<HTMLElement>(".page__header")!;
 const pageEl = document.querySelector<HTMLElement>(".page")!;
 const descriptionEl = document.querySelector<HTMLElement>("#page-description")!;
 const bodyEl = document.querySelector<HTMLElement>("#page-body")!;
-const actionsEl = document.querySelector<HTMLElement>("#page-actions")!;
 const navItems = document.querySelectorAll<HTMLElement>(".nav__item[data-route]");
+const pageIndex = initPageIndex(document.querySelector<HTMLElement>(".panel")!, bodyEl, headerEl);
 
 function currentRoute(): Route {
   const hash = window.location.hash.slice(1);
@@ -176,7 +149,7 @@ function currentRoute(): Route {
 }
 
 /**
- * Fades the new page in: title, description, then the first rows of the
+ * Fades the new page in: the header, then the first rows of the
  * page's list, 30ms apart (styles/motion.css caps the stagger at 6 steps,
  * so long lists like Tokens don't keep the page waiting).
  */
@@ -184,7 +157,6 @@ function playEnter() {
   const [list, ...rest] = Array.from(bodyEl.children) as HTMLElement[];
   const items = [
     headerEl,
-    descriptionEl,
     ...(list?.children.length ? (Array.from(list.children) as HTMLElement[]) : list ? [list] : []),
     ...rest,
   ];
@@ -196,26 +168,14 @@ function playEnter() {
   items.forEach((item) => item.classList.add("motion-enter"));
 }
 
-/** Header action: an Icon Button that opens the page's Figma frame. */
-function figmaLink(href: string, title: string) {
-  const link = document.createElement("a");
-  link.className = "icon-button";
-  link.href = href;
-  link.target = "_blank";
-  link.rel = "noopener";
-  link.setAttribute("aria-label", `Open ${title} in Figma`);
-  link.title = "Open in Figma";
-  link.append(icon("open-new-window"));
-  return link;
-}
-
 function render() {
   const route = currentRoute();
   const page = pages[route];
 
-  crumbEl.textContent = page.crumb.join(" / ");
+  // The label above the title is where the page sits: its sidebar group or
+  // section (the last crumb).
+  crumbEl.textContent = page.crumb[page.crumb.length - 1];
   titleEl.textContent = page.title;
-  subtitleEl.textContent = page.subtitle ?? "";
   descriptionEl.textContent = page.description ?? "";
   if (page.layout) pageEl.dataset.layout = page.layout;
   else delete pageEl.dataset.layout;
@@ -223,9 +183,9 @@ function render() {
 
   bodyEl.replaceChildren();
   setAgentLinks([]); // pages with their own files set them in render()
-  actionsEl.replaceChildren(...(page.figma ? [figmaLink(page.figma, page.title)] : []));
-  page.render?.(bodyEl, actionsEl);
+  page.render?.(bodyEl);
   document.querySelector(".panel")?.scrollTo(0, 0);
+  pageIndex.setup();
   playEnter();
 
   navItems.forEach((item) => {

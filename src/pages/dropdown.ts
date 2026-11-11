@@ -16,8 +16,6 @@ import { icon, iconMarkup } from "../lib/icon";
 import "../styles/pages/dropdown.css";
 
 export const dropdownIntro = rules.intro;
-export const dropdownSubtitle = `${rules.states.length} states · opens a Menu`;
-
 type State = (typeof rules.states)[number];
 
 const OPTIONS = ["Value", "Draft", "In review", "Published", "Archived"];
@@ -84,7 +82,7 @@ function stateRow(state: State) {
   sample.append(dropdown(SAMPLES[state.state]));
   const text = el("div");
   text.append(
-    el("p", "doc-option__name text-body-large-strong", state.label),
+    el("p", "doc-option__name text-heading-small", state.label),
     el("p", "doc-option__usage text-body-large", state.usage),
   );
   row.append(sample, text);

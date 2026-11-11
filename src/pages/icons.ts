@@ -12,7 +12,7 @@
 import catalog from "../../tokens/icons.json";
 import { agentLinks } from "../lib/agent-links";
 import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
-import { codeBlock, el, ruleList, section } from "../lib/docs";
+import { codeBlock, el, optionText, ruleList, section } from "../lib/docs";
 import { icon, iconMarkup, ICON_SPRITE, type IconSize } from "../lib/icon";
 import "../styles/pages/icons.css";
 
@@ -22,8 +22,6 @@ export const iconsIntro = catalog.intro;
 const SHELL_ICON = "app-notification";
 
 const ICON_COUNT = new Set(catalog.categories.flatMap((c) => c.groups.flatMap((g) => g.icons))).size;
-
-export const iconsSubtitle = `${ICON_COUNT} icons · ${catalog.library.name}`;
 
 /** Figma layer names that differ from the Iconoir name, searchable too. */
 const FIGMA_NAMES = catalog.figmaNames as Record<string, string>;
@@ -45,12 +43,7 @@ function sizeRow({ size, usage }: (typeof catalog.sizes)[number]) {
   const row = el("li", "doc-option");
   const sample = el("div", "doc-option__sample icon-size-sample");
   sample.append(icon(SHELL_ICON, size as IconSize));
-  const text = el("div");
-  text.append(
-    el("p", "doc-option__name text-body-large-strong", `${size}px${size === 24 ? " (default)" : ""}`),
-    el("p", "doc-option__usage text-body-large", usage),
-    el("code", "doc-option__class", `.icon--${size}`),
-  );
+  const text = optionText(`${size}px${size === 24 ? " (default)" : ""}`, usage, `.icon--${size}`);
   row.append(sample, text);
   return row;
 }
@@ -100,10 +93,11 @@ function catalogSection(status: HTMLElement) {
   input.placeholder = `Search ${ICON_COUNT} icons`;
   input.setAttribute("aria-label", "Search icons");
   input.autocomplete = "off";
-  field.append(icon("search", 16), input);
-  const count = el("p", "icon-toolbar__count text-body-medium");
+  // The count sits inside the field, so nothing floats over the grid.
+  const count = el("span", "icon-search__count text-body-medium");
   count.setAttribute("aria-live", "polite");
-  toolbar.append(field, count);
+  field.append(icon("search", 16), input, count);
+  toolbar.append(field);
 
   const empty = el("p", "icon-catalog__empty text-body-large");
   empty.hidden = true;

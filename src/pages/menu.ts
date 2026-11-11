@@ -19,8 +19,6 @@ import { createMenu, type MenuItemSpec } from "../lib/menu";
 import "../styles/pages/menu.css";
 
 export const menuIntro = rules.intro;
-export const menuSubtitle = `${rules.itemStates.length} item states · submenus after 300ms`;
-
 /** Figma's menu (46:645): three items, each with a submenu. */
 const FIGMA_MENU: MenuItemSpec[] = [
   { label: "Move to", submenu: [{ label: "Inbox" }, { label: "Archive" }, { label: "Trash" }] },
@@ -79,7 +77,7 @@ function itemSection() {
     sample.append(item);
     const text = el("div");
     text.append(
-      el("p", "doc-option__name text-body-large-strong", s.label),
+      el("p", "doc-option__name text-heading-small", s.label),
       el("p", "doc-option__usage text-body-large", s.usage),
     );
     row.append(sample, text);

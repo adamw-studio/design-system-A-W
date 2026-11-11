@@ -22,6 +22,11 @@
   --layout-row-padding: 6px;
   /* Readable width for usage notes next to specimens. */
   --layout-description-width: 420px;
+  /* The Icons page's floating glass search. */
+  --layout-search-width: 320px;
+  /* Option rows' preview tile (Figma 317:5234). */
+  --layout-option-tile-width: 133px;
+  --layout-option-tile-height: 66px;
   /* Icon Button page: gap between the states in the preview (Figma 23:5345). */
   --layout-icon-button-gap: 10px;
   /* Icons page (Figma 12:3948): cards are 208px wide in a 928px grid with
@@ -147,6 +152,7 @@ img {
 /* The logo file is a mask so it follows the theme (black at 90% = icon/default). */
 .sidebar__logo-mark {
   display: block;
+  flex: none;
   width: var(--space-5);
   height: var(--space-5);
   background-color: var(--color-icon-default);
@@ -450,18 +456,16 @@ img {
 }
 
 /*
- * Page structure (after kosta.fyi/skills/tactile-design), in the system's
- * own type and colors:
- *   top row (where the page sits · actions)
- *   title, subtitle, short rule
- *   description
- *   blocks — stages and sections — 56px apart
+ * Page structure (Figma 317:5234), the same on every page:
+ *   header — a small label (where the page sits), the title, and the
+ *            description right under it
+ *   body   — 30px below: blocks (sections, stages), 44px apart
  */
 .page {
   display: flex;
   flex-direction: column;
-  /* Header → description → body. */
-  gap: calc(var(--space-5) + var(--space-2));
+  /* Header → body. */
+  gap: calc(var(--space-6) - var(--space-1));
   width: min(var(--layout-content-width), 100% - 2 * var(--space-5));
   margin: 0 auto;
   /* Bottom: room to scroll the last block clear of the corner controls. */
@@ -473,37 +477,20 @@ img {
   flex-direction: column;
 }
 
-.page__topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  /* Keeps the row the same height with or without actions. */
-  min-height: var(--space-5);
-  margin-bottom: var(--space-5);
-}
-
 .page__crumb {
-  color: var(--color-text-secondary);
-}
-
-.page__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
+  color: var(--color-text-tertiary);
 }
 
 .page__title {
   color: var(--color-text-default);
 }
 
-.page__subtitle {
-  padding-bottom: var(--space-4);
+.page__description {
   color: var(--color-text-secondary);
 }
 
-.page__description {
-  color: var(--color-text-secondary);
+.page__description:empty {
+  display: none;
 }
 
 /* Frosted scroll edges (Figma 309:3325; src/lib/scroll-fade.ts) ---------------
@@ -570,49 +557,16 @@ img {
   opacity: 1;
 }
 
-/* Article pages (Overview, Figma 302:2166): a small tertiary label right
-   above the title and nothing else in the header; the text starts 30px
-   below the title, and sections are 24px apart. Same column as every page. */
-.page[data-layout="article"] {
-  gap: calc(var(--space-6) - var(--space-1));
-}
-
-.page[data-layout="article"] .page__topbar {
-  min-height: 0;
-  margin-bottom: 0;
-}
-
-.page[data-layout="article"] .page__crumb {
-  color: var(--color-text-tertiary);
-}
-
-.page[data-layout="article"] :is(.page__actions, .page__subtitle, .page__header > .doc-rule) {
-  display: none;
-}
-
-/* With a description (Primitives, Figma 310:3840) it sits right under the
-   title, and the content starts 39px below it. */
-.page[data-layout="article"] .page__description {
-  margin-top: calc(-1 * (var(--space-6) - var(--space-1)));
-}
-
-.page[data-layout="article"] .page__description:empty {
-  display: none;
-}
-
-.page[data-layout="article"]:has(.page__description:not(:empty)) .page__body {
-  margin-top: calc(var(--space-3) + 1px);
+/* Blocks: 44px apart (Figma 317:5234). Article pages (Overview, Figma
+   302:2166) are running prose, so their sections sit closer: 24px. */
+.page__body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-7) + var(--space-2));
 }
 
 .page[data-layout="article"] .page__body {
   gap: var(--space-5);
-}
-
-/* Stages and sections, 56px apart. */
-.page__body {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--space-7) + var(--space-4));
 }
 
 /* Narrow screens: stack the sidebar above the panel */
@@ -637,6 +591,159 @@ img {
     margin: 0 var(--layout-gutter) var(--layout-gutter);
     height: auto;
     min-height: 60vh;
+  }
+}
+
+/* Index pill ---------------------------------------------------------------------
+   A 32px inverse pill in the bottom-left corner of the content panel,
+   opposite the corner controls and on the same 16px inset, shown once the
+   page header has scrolled away (src/lib/page-index.ts): a reading-progress
+   ring, "Index ▾" (opens a Menu of the page's sections, upward) and the
+   percentage read. It lives in a sticky, zero-height anchor at the end of
+   the panel, so it takes no room and follows the panel's left edge. */
+.page-index-anchor {
+  position: sticky;
+  z-index: 5;
+  /* Insets are inside the panel's 1px border; the corner controls measure
+     from its outer edge. One pixel less lines the two up. */
+  bottom: calc(var(--space-4) - 1px);
+  height: 0;
+  pointer-events: none;
+}
+
+.page-index {
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--space-4) - 1px);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--space-6);
+  padding: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-inverse);
+  box-shadow: var(--elevation-floating);
+  color: var(--color-text-inverse);
+  /* Hidden until the header scrolls away: it rises 4px and fades in,
+     200ms ease-out; leaving is faster (120ms). Never from scale 0. */
+  opacity: 0;
+  transform: translateY(var(--space-2)) scale(0.97);
+  transform-origin: bottom left;
+  transition:
+    opacity var(--motion-press) var(--motion-ease-out),
+    transform var(--motion-press) var(--motion-ease-out);
+}
+
+.page-index[hidden] {
+  display: none;
+}
+
+.page-index[data-visible] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity var(--motion-fast) var(--motion-ease-out),
+    transform var(--motion-fast) var(--motion-ease-out);
+}
+
+.page-index__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 100%;
+  padding: 0 var(--space-3) 0 var(--space-1);
+  border: 0;
+  border-radius: var(--radius-full);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--motion-hover) ease,
+    transform var(--motion-press) var(--motion-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .page-index__trigger:hover {
+    background: color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
+  }
+}
+
+.page-index__trigger[aria-expanded="true"] {
+  background: color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
+}
+
+.page-index__trigger:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+.page-index__trigger:focus-visible {
+  outline-color: var(--color-text-inverse);
+  outline-offset: 0;
+}
+
+/* Reading progress: a 16px ring, the read part in the pill's text color. */
+.page-index__ring {
+  flex: none;
+  width: var(--space-4);
+  height: var(--space-4);
+  transform: rotate(-90deg);
+}
+
+.page-index__ring circle {
+  fill: none;
+  stroke-width: 2;
+}
+
+.page-index__ring-track {
+  stroke: color-mix(in srgb, var(--color-text-inverse) 25%, transparent);
+}
+
+.page-index__ring-bar {
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+
+/* Points up, where the menu opens; flips down while it's open. */
+.page-index__chevron {
+  transform: rotate(180deg);
+  transition: transform var(--motion-fast) var(--motion-ease-out);
+}
+
+.page-index__trigger[aria-expanded="true"] .page-index__chevron {
+  transform: none;
+}
+
+/* Percentage chip: a lighter step of the pill; digits don't shift. */
+.page-index__percent {
+  min-width: calc(var(--space-6) + var(--space-2));
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--color-text-inverse) 14%, transparent);
+  line-height: var(--space-5);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+/* The section menu opens above the pill, from its bottom-left corner. */
+.page-index__menu {
+  --menu-origin: bottom left;
+
+  bottom: calc(100% + var(--space-3));
+  left: 0;
+}
+
+/* Jumped-to sections land clear of the frosted top edge (and the Icons
+   page's sticky search). */
+.page__body :is(.doc-section, .type-style, .overview-section) {
+  scroll-margin-top: calc(2 * var(--space-4) + var(--space-6));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-index,
+  .page-index[data-visible] {
+    transform: none;
   }
 }
 

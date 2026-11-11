@@ -11,8 +11,6 @@ import "../styles/pages/elevation.css";
 
 export const elevationIntro =
   "Elevation tells layers apart: the page, things resting on it, and things floating above. Three levels of soft, layered shadow, tuned to read in both light and dark mode.";
-export const elevationSubtitle = "3 levels · light and dark";
-
 interface Level {
   name: string;
   token: string | null;

@@ -13,8 +13,6 @@ import { codeBlock, el, ruleList, section, stage } from "../lib/docs";
 import "../styles/pages/switch.css";
 
 export const switchIntro = rules.intro;
-export const switchSubtitle = `${rules.states.length} states · takes effect immediately`;
-
 /** A live switch: clicking flips aria-checked (and calls onChange). */
 function switchEl(checked: boolean, label?: string, onChange?: (on: boolean) => void) {
   const btn = el("button", "switch");
@@ -51,7 +49,7 @@ function stateRow(state: (typeof rules.states)[number]) {
   sample.append(switchEl(state.state === "on", `${state.label} state`));
   const text = el("div");
   text.append(
-    el("p", "doc-option__name text-body-large-strong", state.label),
+    el("p", "doc-option__name text-heading-small", state.label),
     el("p", "doc-option__usage text-body-large", state.usage),
   );
   row.append(sample, text);

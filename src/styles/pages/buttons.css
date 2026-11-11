@@ -25,15 +25,6 @@
 
 /* Buttons page ---------------------------------------------------------------- */
 
-.button-overview__link,
-.button-overview__name {
-  color: var(--color-text-default);
-}
-
-.button-overview__link {
-  text-underline-offset: 2px;
-}
-
 /* Variant list: center the 24px button on the first text line. */
 .button-variant-sample {
   display: flex;

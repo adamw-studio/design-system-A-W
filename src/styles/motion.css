@@ -40,7 +40,11 @@
 }
 
 .motion-enter {
-  animation: motion-enter var(--motion-enter) var(--motion-ease-out) both;
+  /* backwards, not both: the start state holds through the stagger delay,
+     and nothing stays applied once it ends. A held end transform (even an
+     identity matrix) would make every block its own stacking context, so a
+     sticky child couldn't rise above the panel's frosted edges. */
+  animation: motion-enter var(--motion-enter) var(--motion-ease-out) backwards;
   animation-delay: calc(min(var(--i, 0), 6) * var(--motion-stagger));
 }
 

@@ -17,8 +17,6 @@ const RADIUS = ["--radius-none", "--radius-xss", "--radius-xs", "--radius-s", "-
 
 const cssValue = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-export const gridSubtitle = () => `${SPACE.length} spacing steps · ${RADIUS.length} radii · ${cssValue("--layout-content-width")} column`;
-
 function layoutSection() {
   const wrap = section("Page layout", "From the Figma layout frame. The content column is the same on every page, so margins always match.");
   const sidebar = `${cssValue("--layout-sidebar-width")} (drag between ${cssValue("--layout-sidebar-min")} and ${cssValue("--layout-sidebar-max")})`;

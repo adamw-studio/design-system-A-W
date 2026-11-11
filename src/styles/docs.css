@@ -1,17 +1,9 @@
 /*
- * Documentation building blocks shared by the pages: short rule, stage
- * (preview panel + notes), sections, option lists, code blocks and rule
+ * Documentation building blocks shared by the pages: stage (preview panel
+ * + notes), sections, do / don't lists, option lists, code blocks and rule
  * lists. Helpers that build them: src/lib/docs.ts. Page-level spacing is in
  * layout.css (.page, .page__body).
  */
-
-/* Short divider under page and section titles. */
-.doc-rule {
-  flex: none;
-  width: var(--space-6);
-  height: 1px;
-  background: var(--color-border-default);
-}
 
 /* Preview panel — the Figma "Light" frame that holds a component set. */
 .doc-preview {
@@ -47,11 +39,18 @@
 
 /* Sections ------------------------------------------------------------------ */
 
-/* Section: title, short rule, intro, then content — 16px apart. */
+/* Section (Figma 317:5234): a header (title, intro right under it), the
+   content 24px below, and 16px between content blocks. */
 .doc-section {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+}
+
+.doc-section__header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-3);
 }
 
 .doc-section__title {
@@ -59,7 +58,6 @@
 }
 
 .doc-section__intro {
-  max-width: var(--layout-description-width);
   color: var(--color-text-secondary);
 }
 
@@ -68,26 +66,87 @@
   text-underline-offset: 2px;
 }
 
-/* Options: sample | name, usage, class. The sample column is shared
-   (subgrid) so every description starts at the same x. */
+/* Do / Don't (Figma 317:5234): a strong title, then one line per point —
+   a 16px icon (green check, red cross) 8px before the text, inset 8px.
+   4px between lines, 10px between the two lists. */
+.doc-usage {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-3) + var(--space-1));
+}
+
+.doc-usage__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.doc-usage__title {
+  color: var(--color-text-default);
+}
+
+.doc-usage__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.doc-usage__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 0 var(--space-3);
+}
+
+/* Centered on the first line of text (22px line, 16px icon). */
+.doc-usage__icon {
+  flex: none;
+  margin-top: calc((var(--body-large-strong-line-height) - 16px) / 2);
+}
+
+.doc-usage__group--do .doc-usage__icon {
+  color: var(--color-icon-success);
+}
+
+.doc-usage__group--dont .doc-usage__icon {
+  color: var(--color-icon-danger);
+}
+
+.doc-usage__text a {
+  color: var(--color-text-default);
+  text-underline-offset: 2px;
+}
+
+/* Options (Figma 317:5234): a preview tile — the item centered in a 133 ×
+   66px bordered tile — then, 16px over, the name (heading-small) and usage,
+   centered beside it. 12px between rows. The tile column is shared
+   (subgrid), so every description starts at the same x even when a sample
+   needs a wider tile. */
 .doc-options {
   display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: var(--space-5);
+  grid-template-columns: minmax(var(--layout-option-tile-width), max-content) 1fr;
+  column-gap: var(--space-4);
+  row-gap: calc(var(--space-3) + var(--space-2));
 }
 
 .doc-option {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: subgrid;
-  align-items: start;
-  padding: var(--space-4) 0;
-  border-top: 1px solid var(--color-border-default);
+  align-items: center;
 }
 
-.doc-option:first-child {
-  border-top: 0;
-  padding-top: 0;
+/* Over each page's own sample class (which only lays out its content). */
+.doc-options .doc-option__sample {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--layout-option-tile-height);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-m);
+  background: var(--color-bg-default);
 }
 
 .doc-option__name {
@@ -106,10 +165,11 @@
   line-height: var(--body-medium-strong-line-height);
 }
 
+/* The class sits on the name's line, after it. */
 .doc-option__class {
-  display: block;
-  margin-top: var(--space-2);
+  margin-left: var(--space-3);
   color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-default);
 }
 
 /* Code sample */

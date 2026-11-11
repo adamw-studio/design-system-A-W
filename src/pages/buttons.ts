@@ -1,6 +1,6 @@
 /**
  * Buttons page — Figma "Foundation – UI 2", node 18:3529 (component set
- * 23:5203). The documentation pilot: overview, playground, variants, states
+ * 23:5203). The documentation pilot: do / don't, variants, states
  * (Figma's default / hover / disabled plus pressed and focus), examples,
  * do/don't, accessibility and an implementation reference. See the
  * "Buttons page" block below.
@@ -20,25 +20,22 @@ import {
   columns,
   disclosure,
   doDont,
+  doDontList,
   el,
+  optionText,
   example,
-  playground,
   ruleList,
   section,
   stage,
   staticPreview,
   subheading,
   table,
-  type PlaygroundValues,
 } from "../lib/docs";
 import { icon, iconMarkup } from "../lib/icon";
 import "../styles/pages/buttons.css";
 
 export const buttonsIntro = rules.intro;
 export const iconButtonsIntro = rules.iconButton.intro;
-export const buttonsSubtitle = `${rules.variants.length} variants · ${rules.states.length} states · optional icons`;
-export const iconButtonsSubtitle = `${rules.iconButton.states.length} states · 16px icon`;
-
 type IconState = (typeof rules.iconButton.states)[number];
 
 /** The icon Figma uses in the button sets. */
@@ -90,7 +87,7 @@ function iconStateRow(state: IconState) {
   sample.append(iconButton(`Notifications (${state.label.toLowerCase()})`, state.state));
   const text = el("div", "doc-option__text");
   text.append(
-    el("p", "doc-option__name text-body-large-strong", state.label),
+    el("p", "doc-option__name text-heading-small", state.label),
     el("p", "doc-option__usage text-body-large", state.usage),
   );
   row.append(sample, text);
@@ -138,18 +135,16 @@ export function renderIconButtons(body: HTMLElement) {
 /* ============================================================================
  * Buttons page (documentation pilot)
  *
- * Essentials first — overview, playground, variants, states — then examples,
+ * Essentials first — do / don't, variants, states — then examples,
  * do/don't, accessibility, and the implementation reference behind
  * disclosures. All reusable wording comes from tokens/button-rules.json
  * (also published to llms.txt); this file only arranges it and builds the
- * illustrations. Only the playground is interactive: every other preview is
- * a static illustration (staticPreview) with the same information in text.
+ * illustrations. Previews are static illustrations (staticPreview) with the
+ * same information in text.
  * ========================================================================== */
 
 type Variant = (typeof rules.variants)[number];
 type PinnedState = "default" | "hover" | "pressed" | "focus" | "disabled";
-
-const variantLabel = (variant: string) => rules.variants.find((v) => v.variant === variant)?.label ?? variant;
 
 /** A real .button for illustrations: variant, label, optional icons. */
 function demoButton(variant: string, label: string, opts: { lead?: string; trail?: string; state?: PinnedState } = {}) {
@@ -184,94 +179,24 @@ function card(title: string, text: string, footer: HTMLElement) {
   return wrap;
 }
 
-/* 1. Overview ------------------------------------------------------------------ */
+/* 1. When to use it ------------------------------------------------------------- */
 
-function overviewSection() {
-  const wrap = section("Overview");
-  const use = el("div");
-  use.append(subheading("Use a button when"), ruleList(rules.overview.useWhen));
-
-  const instead = el("div");
-  const list = el("ul", "doc-rules text-body-large");
-  for (const alt of rules.overview.useInstead) {
-    const item = el("li");
-    const name = alt.route ? el("a", "button-overview__link", alt.component) : el("span", "button-overview__name", alt.component);
-    if (alt.route && name instanceof HTMLAnchorElement) name.href = `#${alt.route}`;
-    item.append(name, ` — ${alt.when}`);
-    list.append(item);
-  }
-  instead.append(subheading("Use something else when"), list);
-  wrap.append(columns(use, instead));
-  return wrap;
-}
-
-/* 2. Playground ---------------------------------------------------------------- */
-
-const LABELS = ["Save changes", "Continue", "Cancel", "Delete project", "Approve", "Download report", "Save and continue to checkout"];
-const LEAD_ICONS = ["none", "plus", "download", "trash", "check", "edit-pencil"];
-const TRAIL_ICONS = ["none", "nav-arrow-down", "arrow-right", "open-new-window"];
-
-const iconOption = (name: string) => ({ value: name, label: name === "none" ? "None" : name });
-
-function buttonMarkup(values: PlaygroundValues) {
-  const variant = String(values.variant);
-  const label = String(values.label);
-  const lead = values.lead !== "none" ? `\n  ${iconMarkup(String(values.lead))}` : "";
-  const trail = values.trail !== "none" ? `\n  ${iconMarkup(String(values.trail))}` : "";
-  const cls = classesFor(variant);
-  const inner = `${lead}\n  ${label}${trail}\n`;
-  if (values.element === "a") {
-    // A disabled link has no href (so Enter can't follow it) and says so.
-    const attrs = values.disabled ? ' aria-disabled="true"' : ' href="/reports"';
-    return `<a class="${cls}"${attrs}>${inner}</a>`;
-  }
-  return `<button class="${cls}" type="button"${values.disabled ? " disabled" : ""}>${inner}</button>`;
-}
-
-function playgroundSection() {
-  const wrap = section("Playground", "Every option the component supports. The preview is a real button: hover it, press it, Tab to it.");
-  wrap.append(
-    playground({
-      name: "Button playground",
-      controls: [
-        {
-          id: "variant",
-          label: "Variant",
-          kind: "select",
-          initial: "primary",
-          options: rules.variants.map((v) => ({ value: v.variant, label: v.label })),
-        },
-        { id: "label", label: "Label", kind: "select", initial: LABELS[0], options: LABELS.map((l) => ({ value: l, label: l })) },
-        { id: "lead", label: "Leading icon", kind: "select", initial: "none", options: LEAD_ICONS.map(iconOption) },
-        { id: "trail", label: "Trailing icon", kind: "select", initial: "none", options: TRAIL_ICONS.map(iconOption) },
-        {
-          id: "element",
-          label: "Element",
-          kind: "select",
-          initial: "button",
-          options: [
-            { value: "button", label: "<button> — an action" },
-            { value: "a", label: "<a> — navigation" },
-          ],
-        },
-        { id: "disabled", label: "Disabled", kind: "switch", initial: false },
-      ],
-      markup: buttonMarkup,
-      describe: (v) =>
-        [
-          `${variantLabel(String(v.variant))} ${v.element === "a" ? "link" : "button"}, ${v.label}`,
-          v.lead !== "none" ? `leading icon ${v.lead}` : "",
-          v.trail !== "none" ? `trailing icon ${v.trail}` : "",
-          v.disabled ? "disabled" : "",
-        ]
-          .filter(Boolean)
-          .join(", "),
+/** Do / Don't, right under the page header (Figma 317:5234). Each "don't"
+    names the component to use instead. */
+function usageBlock() {
+  return doDontList({
+    do: rules.overview.useWhen.map((text) => [text]),
+    dont: rules.overview.useInstead.map((alt) => {
+      const name = alt.route ? el("a", undefined, alt.component) : el("span", undefined, alt.component);
+      if (name instanceof HTMLAnchorElement) name.href = `#${alt.route}`;
+      // Component names keep their capital; "a text link" doesn't.
+      const label = alt.route ? name : el("span", undefined, alt.component[0].toLowerCase() + alt.component.slice(1));
+      return [`${alt.when} Use `, label, "."];
     }),
-  );
-  return wrap;
+  });
 }
 
-/* 3. Variants and states ------------------------------------------------------------ */
+/* 2. Variants and states ------------------------------------------------------------ */
 
 function variantRow(variant: Variant) {
   const row = el("li", "doc-option");
@@ -279,18 +204,13 @@ function variantRow(variant: Variant) {
   sample.setAttribute("aria-hidden", "true");
   sample.inert = true;
   sample.append(demoButton(variant.variant, variant.example));
-  const text = el("div");
-  text.append(
-    el("p", "doc-option__name text-body-large-strong", variant.label),
-    el("p", "doc-option__usage text-body-large", variant.usage),
-    el("code", "doc-option__class", `.button--${variant.variant}`),
-  );
+  const text = optionText(variant.label, variant.usage, `.button--${variant.variant}`);
   row.append(sample, text);
   return row;
 }
 
 function variantsSection() {
-  const wrap = section("Variants", "One modifier class each. The previews here are static; try them in the playground.");
+  const wrap = section("Variants", "One modifier class each.");
   const list = el("ul", "doc-options");
   list.append(...rules.variants.map(variantRow));
   wrap.append(list);
@@ -319,7 +239,7 @@ function statesSection() {
   return wrap;
 }
 
-/* 4. Practical examples ------------------------------------------------------------- */
+/* 3. Practical examples ------------------------------------------------------------- */
 
 function examplesSection() {
   const wrap = section("Examples", "Common combinations, and why each uses the variants it does.");
@@ -374,7 +294,7 @@ function examplesSection() {
   return wrap;
 }
 
-/* 5. Usage guidance ----------------------------------------------------------------- */
+/* 4. Usage guidance ----------------------------------------------------------------- */
 
 function guidanceSection() {
   const wrap = section("Usage guidance");
@@ -408,7 +328,7 @@ function guidanceSection() {
   return wrap;
 }
 
-/* 6. Accessibility ------------------------------------------------------------------ */
+/* 5. Accessibility ------------------------------------------------------------------ */
 
 function accessibilitySection() {
   const wrap = section("Accessibility");
@@ -422,7 +342,7 @@ function accessibilitySection() {
   return wrap;
 }
 
-/* 7. Implementation reference ----------------------------------------------------------- */
+/* 6. Implementation reference ----------------------------------------------------------- */
 
 function referenceSection() {
   const ref = rules.reference;
@@ -513,8 +433,7 @@ function referenceSection() {
 
 export function renderButtons(body: HTMLElement) {
   body.append(
-    overviewSection(),
-    playgroundSection(),
+    usageBlock(),
     variantsSection(),
     statesSection(),
     examplesSection(),

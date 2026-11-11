@@ -12,27 +12,25 @@ export function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: st
   return node;
 }
 
-/** A page section with a heading-medium title and an optional intro. */
+/**
+ * A page section (Figma 317:5234): a header — heading-medium title with an
+ * optional intro right under it — then the content.
+ */
 export function section(title: string, intro?: string | (Node | string)[]) {
   const wrap = el("section", "doc-section");
   const id = `section-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+  const header = el("div", "doc-section__header");
   const heading = el("h2", "doc-section__title text-heading-medium", title);
   heading.id = id;
   wrap.setAttribute("aria-labelledby", id);
-  wrap.append(heading, rule());
+  header.append(heading);
   if (intro) {
     const p = el("p", "doc-section__intro text-body-large");
     p.append(...(typeof intro === "string" ? [intro] : intro));
-    wrap.append(p);
+    header.append(p);
   }
+  wrap.append(header);
   return wrap;
-}
-
-/** The short divider under page and section titles. */
-export function rule() {
-  const line = el("div", "doc-rule");
-  line.setAttribute("aria-hidden", "true");
-  return line;
 }
 
 /**
@@ -60,6 +58,47 @@ export function ruleList(rules: string[]) {
   const list = el("ul", "doc-rules text-body-large");
   list.append(...rules.map((r) => el("li", undefined, r)));
   return list;
+}
+
+/**
+ * When to use something and when not to (Figma 317:5234): a "Do" list with a
+ * green check and a "Don't" list with a red cross, one line per point.
+ */
+export function doDontList(lists: { do: (string | Node)[][]; dont: (string | Node)[][] }) {
+  const wrap = el("div", "doc-usage");
+  for (const kind of ["do", "dont"] as const) {
+    const group = el("div", `doc-usage__group doc-usage__group--${kind}`);
+    const title = el("p", "doc-usage__title text-body-large-strong", kind === "do" ? "Do" : "Don’t");
+    const list = el("ul", "doc-usage__list text-body-large");
+    title.id = `doc-usage-${kind}-${++usageId}`;
+    list.setAttribute("aria-labelledby", title.id);
+    for (const content of lists[kind]) {
+      const item = el("li", "doc-usage__item");
+      const mark = icon(kind === "do" ? "security-pass" : "xmark-circle", 16);
+      mark.classList.add("doc-usage__icon");
+      const text = el("span", "doc-usage__text");
+      text.append(...content);
+      item.append(mark, text);
+      list.append(item);
+    }
+    group.append(title, list);
+    wrap.append(group);
+  }
+  return wrap;
+}
+
+let usageId = 0;
+
+/**
+ * The text beside an option's preview tile: the name (with its class, if
+ * any, on the same line) and the usage under it.
+ */
+export function optionText(name: string, usage: string, className?: string) {
+  const text = el("div", "doc-option__text");
+  const title = el("p", "doc-option__name text-heading-small", name);
+  if (className) title.append(el("code", "doc-option__class", className));
+  text.append(title, el("p", "doc-option__usage text-body-large", usage));
+  return text;
 }
 
 /** Inline code, e.g. a class or token name in running text or a table. */

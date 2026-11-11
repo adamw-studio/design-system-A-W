@@ -148,23 +148,19 @@
         <!-- Frosted edges while there's more to scroll (Figma 309:3325); src/lib/scroll-fade.ts -->
         <div class="panel__edge panel__edge--top" aria-hidden="true"></div>
         <div class="page">
+          <!-- Header (Figma 317:5234): a small label, the title and the
+               description right under it. -->
           <header class="page__header">
-            <div class="page__topbar">
-              <p class="page__crumb text-body-large" id="page-crumb"></p>
-              <div class="page__actions" id="page-actions"></div>
-            </div>
+            <p class="page__crumb text-body-large" id="page-crumb"></p>
             <h1 class="page__title text-heading-large" id="page-title">Colors</h1>
-            <p class="page__subtitle text-body-large" id="page-subtitle"></p>
-            <div class="doc-rule" aria-hidden="true"></div>
+            <p class="page__description text-body-large" id="page-description"></p>
           </header>
-          <p class="page__description text-body-large" id="page-description">Add a short description...</p>
           <div class="page__body" id="page-body"></div>
         </div>
         <div class="panel__edge panel__edge--bottom" aria-hidden="true"></div>
       </main>
     </div>
 
-    <!-- Theme toggle, floating over the content (src/lib/theme.ts) -->
     <!-- Bottom-right corner (Figma 313:4406 / 313:4597): the Theme switch
          and a button that opens the "For AI agents & tools" panel above them.
          The panel comes after the controls so Tab reaches it next; CSS

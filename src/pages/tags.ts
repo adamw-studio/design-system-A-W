@@ -10,13 +10,11 @@
 import rules from "../../tokens/tag-rules.json";
 import { agentLinks } from "../lib/agent-links";
 import { copyToClipboard, createStatusRegion, flashLabel } from "../lib/copy";
-import { codeBlock, el, ruleList, section, stage } from "../lib/docs";
+import { codeBlock, el, optionText, ruleList, section, stage } from "../lib/docs";
 import { icon, iconMarkup } from "../lib/icon";
 import "../styles/pages/tags.css";
 
 export const tagsIntro = rules.intro;
-export const tagsSubtitle = `${rules.variants.length} variants · strong or outline`;
-
 type Variant = (typeof rules.variants)[number];
 
 const classesFor = (variant: string, outline = false) => `tag tag--${variant}${outline ? " tag--outline" : ""}`;
@@ -66,12 +64,7 @@ function variantRow(variant: Variant) {
   const row = el("li", "doc-option");
   const sample = el("div", "doc-option__sample tag-sample");
   sample.append(tag(variant.variant, variant.label), tag(variant.variant, variant.label, { outline: true }));
-  const text = el("div");
-  text.append(
-    el("p", "doc-option__name text-body-large-strong", variant.label),
-    el("p", "doc-option__usage text-body-large", variant.usage),
-    el("code", "doc-option__class", `.tag--${variant.variant}`),
-  );
+  const text = optionText(variant.label, variant.usage, `.tag--${variant.variant}`);
   row.append(sample, text);
   return row;
 }
